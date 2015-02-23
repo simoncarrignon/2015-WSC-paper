@@ -1,26 +1,74 @@
-%        File: 20150216ModelDescription.tex
-%     Created: lun. févr. 16 11:00  2015 C
-% Last Change: lun. févr. 16 11:00  2015 C
-%
-\documentclass[a4paper]{article}
+\input{wsc15style.tex}     % download from author kit.  Style files for wsc formatting. Don't remove this line - required for generating the final paper!
+
+\documentclass{wscpaperproc}
+\usepackage{latexsym}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{mathptmx}
 
 
-%%%%lualatex on
-%\usepackage{fontspec}
+%****************************************************************************
+%% AUTHOR: You may want to use some of these packages. (Optional)
+%\usepackage{amsmath}
+%\usepackage{amsfonts}
+%\usepackage{amssymb}
+%\usepackage{amsbsy}
+%\usepackage{amsthm}
 
-\usepackage{natbib}
+\usepackage{xcolor}
 
-\title{Draft Model}
-\author{Simon}
+
+\newcommand{\memo}[2]{\textcolor{#1}{#2}}
+\newcommand{\added}[2]{\textcolor{#1}{#2}}
+%\renewcommand{\memo}[2]{} % uncomment in the final version
+%\renewcommand{\added}[2]{#2} % uncomment in the final version
+\newcommand{\todo}[1]{\memo{red}{TODO: #1\\}}
+\newcommand{\simon}[1]{\memo{green}{Simon: #1\\}}
+\newcommand{\jm}[1]{\memo{blue}{JM: #1\\}}
+\newcommand{\new}[1]{\added{orange}{#1}}
+
 \begin{document}
+
+
+\WSCpagesetup{Montanier, Carrignon, and Zerr}
+
+\title{Model to study co-evolution of trade an culture}
+
+\author{Jean-Marc Montanier\\ [12pt]
+Barcelona Supercomputing Center\\
+Carrer de Jordi Girona, 29, \\
+08034 Barcelona, Spain\\
+\and
+Simon Carrignon\\ [12pt]
+Barcelona Supercomputing Center\\
+Carrer de Jordi Girona, 29, \\
+08034 Barcelona, Spain\\
+\and
+Fabien Zerr\\ [12pt]
+Alsace, Represent
+}
+
+
+
+
+
+
 \maketitle
 
 
+\section*{ABSTRACT}
+\todo{write an abstract}
+
+In this article our aim is to present a model suitable to test various hypothesis on economic and cultural exchange networks during the Roman Empire. Among the question we want to address is the traditional debate in history of economy on the type of economic market in early empire. We think that agent based modeling is one of the best way to understand complex social mechanism in a wide range of fields of research, from economical market mechanisms to the understanding of cultural goods production and exchange.
+
+Here we present such a model, showing that it reproduces well known economical and cultural mechanism and that, given the appropriate archaeological and historical data, it can be used to test hypothesis on those mechanisms.
+
+
 \section{Introduction}
-In this article our aim is to present a model suitable to test various hypothesis on economic and cultural exchange networks during the Roman Empire. Among the question we want to address is the traditional debate in history of economy on the type of economic market in early empire (a detailed resume can be found in the first article of \cite{polanyi1957tradeandmarketintheearlyempireseconomiesinhistoryandtheory}). Following \cite{epstein1996growingartificialsocietiessocialsciencefromthebottomup,
+In this article our aim is to present a model suitable to test various hypothesis on economic and cultural exchange networks during the Roman Empire. Among the question we want to address is the traditional debate in history of economy on the type of economic market in early empire (a detailed resume can be found in the first article of \cite{polanyi_trade_1957}). Following \cite{epstein_growing_1996,
 lake_trends_2014,
-kohler2000dynamicsinhumanandprimatesocietiesagentbasedmodelingofsocialandspatialprocesses,
-tesfatsion2003agentbasedcomputationaleconomicsmodelingeconomiesascomplexadaptivesystems} we think that agent based modeling is one of the best way to understand complex social mechanism in a wide range of fields of research, from economical market mechanisms to the understanding of cultural goods production and exchange.
+kohler_dynamics_2000,
+tesfatsion_agent-based_2003} we think that agent based modeling is one of the best way to understand complex social mechanism in a wide range of fields of research, from economical market mechanisms to the understanding of cultural goods production and exchange.
 
 Here we present such a model, showing that it reproduces well known economical and cultural mechanism and that, given the appropriate archaeological and historical data, it can be used to test hypothesis on those mechanisms.
 
@@ -78,8 +126,8 @@ Using the network, the agents are able to barter/trade/exchange resources altoge
 \cite{gintis_emergence_2006} in order to be quickly able to compare our results and validate ability of the model to recreate economical behaviors. 
 
 Later it could be used to study other model such as those developed by 
-\cite{rubinstein1985equilibriuminamarketwithsequentialbargaining} and to test more general proposal, as those done by \cite{polanyi1957tradeandmarketintheearlyempireseconomiesinhistoryandtheory,
-polanyi1977thelivelihoodofman} about the early economical mechanisms.
+\cite{rubinstein_equilibrium_1985} and to test more general proposal, as those done by \cite{polanyi_trade_1957,
+polanyi_livelihood_1977} about the early economical mechanisms.
 
 Moreover, and in order to be more realistic, and consistently with the cognitive and agent based approach of the project, we will also test assumptions made by people from \emph{Prospect Theory} as proposed by 
 \cite{kahneman_prospect_1979}, see also
@@ -95,7 +143,7 @@ In the Ginti's model that we are following here, the goal is only to see if a ma
 
 During the barter process, all agents meet all the producers of all goods and choose to exchange a certain amount of the good it produce with a certain amount of the other good depending on their own stock and the value they assign respectively to the resource it produce and the resources needed, in a totally rational way, without any cognitive bias.
 
-\bibliographystyle{apalike}
+\bibliographystyle{wsc}
 \bibliography{wsc.bib}  
 \end{document}
 
