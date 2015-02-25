@@ -57,71 +57,138 @@ Alsace, Represent
 
 
 \section*{ABSTRACT}
-\todo{write an abstract}
 
-In this article our aim is to present a model suitable to test various hypothesis on economic and cultural exchange networks during the Roman Empire. Among the question we want to address is the traditional debate in history of economy on the type of economic market in early empire. We think that agent based modeling is one of the best way to understand complex social mechanism in a wide range of fields of research, from economical market mechanisms to the understanding of cultural goods production and exchange.
+In this article our aim is to present a model suitable to test various hypothesis on economic and cultural co-evolution during the Roman Empire. The ultimate goal is to address debates from history of economy such as the type of economical market found in early empires. Agent based modelling is a good way to understand social self-organisation resulting from a large number of interactions. It is used in a wide range of fields of research, from economical market mechanisms to social dynamics. We therefore apply this type of framework to our study.
 
-Here we present such a model, showing that it reproduces well known economical and cultural mechanism and that, given the appropriate archaeological and historical data, it can be used to test hypothesis on those mechanisms.
+Here we present a model able it reproduces well known economical and cultural mechanism. Moreover this model can be envisioned to test hypothesis on those mechanisms. Given the appropriate match between the simulations and archaeological and historical data, the results of the model can be validated.
 
 
-\section{Introduction}
-In this article our aim is to present a model suitable to test various hypothesis on economic and cultural exchange networks during the Roman Empire. Among the question we want to address is the traditional debate in history of economy on the type of economic market in early empire (a detailed resume can be found in the first article of \cite{polanyi_trade_1957}). Following \cite{epstein_growing_1996,lake_trends_2014,kohler_dynamics_2000,tesfatsion_agent-based_2003} we think that agent based modeling is one of the best way to understand complex social mechanism in a wide range of fields of research, from economical market mechanisms to the understanding of cultural goods production and exchange.
+\section{INTRODUCTION}
 
-Here we present such a model, showing that it reproduces well known economical and cultural mechanism and that, given the appropriate archaeological and historical data, it can be used to test hypothesis on those mechanisms.
+%Roman empire and need of clean tool
+The trade system of the Roman empire is generally considered to be the first complex European trade network. A variety of theories have been proposed to explain the organization and rise of this powerful trade network. However, without the appropriate sources and tools these theories are hard to falsify (garnsey et al 1983, lo cascio 2000). 
 
-\section{General Description} 
-\begin{itemize}
-	\item Resources :\\
-		There is $n$ kind of resources, each one is produced by one or more Agents. Agents can exchange those resources and consume it following their need.
-	\item  Agents :\\
-		M agents with properties:
-		\begin{itemize}
-			\item Price $(p_1,\cdots,p_n)$ : an amount of money that could be use when in exchange of a good.
-			\item Quantity $(q_1,\cdots,q_n)$ : the quantity of each food owned by each agent.
-			\item Subjective value $(u_1,\cdots,u_n)$ : the values that each agent associates with each resource.
-			\item Need $(b_1, \cdots, b_n)$ :  the quantity of each resource that each agent need to ``survive''. In the first experiments it only says the amount of resource that the agent will consume. It can be seen as the ``intrinsic'' value of the good.
-		\end{itemize}
-\end{itemize}
-\section{Good Production}
+%type of question we want to answer to and why we need trade an culture
+Among the question we would like to address is the on-going debate on the type of economic market in early empire~\cite{polanyi_trade_1957}. Two main view can be found in this debate. The first view state that the economical network of the Roman empire has evolve in a very different manner than our current trade network. The trade network is then perceived as qualitatively and quantitatively different. The second view state that the economical network of the Roman empire constitute a proto-version of our current trade network. The difference is then only quantitative but certainly not qualitative. We are specifically interested in the changes occurring in the production, trade and consumption of food. This can reflect the organization of the trade and cultural network. Moreover, this aspect has produced numerous historical records that we can now analyse.
+
+%What is agent-based modeling and what can it do
+Within the EPNet project~\cite{remesal_epnet_2014} we aim to create tools so that theories on the evolution of the trade network of the Roman empire can falsified . To do so we need tools that allow us to obtain the qualitative result of a specific theory. This qualitative result can then be compared to historical data and help to move forward. Following~\cite{epstein_growing_1996,lake_trends_2014,kohler_dynamics_2000,tesfatsion_agent-based_2003,epstein_why_2008} we consider Agent Based Modelling (ABM) to be a good way to test express theories in a falsifiable form. Within these models the social self-organisation of a society results from the interactions of a large number of agents. The behaviour of these agents is encoded so as to reflect the theory under test. It has been already used in a wide range of fields of research, from economical market mechanisms to the understanding of cultural goods production and exchange.
+
+%What we want to bring to ABM with our work
+The aim of this paper is to use ABM to model the evolution of culture and trade under a unique framework. Importantly we aim to create a framework with a low number of parameters in order to ensure that the dynamics observed are simple to analyse. In order to assess the quality of this framework we attempt to reproduce results previous obtained in other works study either economy or culture. We will then show the capacities of our framework to study the interaction between culture and trade.
+
+%Organisation of the paper
+\todo{write once we are more sure of what we put}
+The paper is organised as follow
+
+\section{PREVIOUS MODELISATIONS OF TRADE AND CULTURE}
+
+This paper will provide a general view to the previous works done on the modelisation of trade, the modelisation of culture and the frameworks attempting to model both. While non-exhaustive this review aim to present the main trends on the previous work done on modelisation.
+
+\subsection{Modelisation of Trade}
+%expected utility: 
+%	Shoemaker:
+%prospective theory:
+%	Camerer : explain 10 economical trends that expected utility can not explain without making special cases. These are explained thanks to 3 effects from prospective theory: loss-aversion, reflection effects, non-linear weightening of probabilities
+%	: loss aversion
+%	: reflection effects
+%	: non-linear weightening of probabilities
+%	Barberis : 
+%ACE: 
+%	tesfatsion: base of ACE -> goal is to simulate complex interactions from large number of agents in decentralised markets. and observe the macroeconomic regularities resulting from that. and feedback look. notably interested in the formation of economic network (extract cites) and the evolution of behavioural norms (extract cites)
+%	gintis: particular work on pair exchage. Observe convergence to clearing prices and "optimal" utility.
+
+
+\subsection{Modelisation of Culture}
+%Review in Henrich "evolution of cultural evolution";  Lycett 2015
+%random copy
+%frequency dependent
+%influence of political structure
+
+\subsection{Modelisation of Trade and Culture}
+%stuff with both in it
+%macmillan et l'autre
+
+
+\section{MODEL DESCRIPTION}
+
+\subsection{Agent-based consumers and traders}
+%tell the story of what is happening
+
 %%%%%
 %%TODO: Find refs
 %%
-\label{production}
-
-
 In the simulation agents produce goods that they will barter (cf section \ref{trade}) and consume (cf section \ref{consumption}). This goods production should reflect the historical good production of the period studied and agent could produce various good in order to barter or sell them using the trade network.
 
-Those production could change during the simulation based on meteorological data or historical knowledge and reflect some complex economical specialisation mechanisms \cite{bentley_specialisation_2005}.
-
-But before integrating historical and meteorological data, and in order to validate the accuracy of the model, we will follow \cite{gintis_emergence_2006}. In its model each agent produces one kind of good in a given and finished quantity which is $n$, the number of different resource available in a simulation, thus allowing him to be able to trade every other goods that it does not produce.
-
-\section{Good Consumption}
-\label{consumption}
-
-
 %%%%%
 %%TODO: Find refs
 %%
+During the simulation the agents ``consume'' the good. This consumption could be vital (if agent do consume certain good they die) or not (as in \cite{macmillan_agent-based_2008}), it could be set as fixed, environmental constraint shared by everyone (the ``intrinsic'' value of things) or could be subject to historical or geographical cultural ``taste'' and variations.
 
-During the simulation the agents ``consume'' the good. This consumption could be vital (if agent do consume certain good they die) or not (as in \cite{macmillan_agent-based_2008}), it could be set as fixed, environmental constraint shared by everyone (the ``intrinsic'' value of things) or could be subject to historical or geographical cultural ``taste'' and variations. Depending on the kind of good agents consume (if they are ``vital'' or not\ldots) it allow us to test a wide range of hypothesis, from purely economical one to cultural consumption assumptions.  In an evolutionary perspective this consumption function could change trough time and is a good way to score the agent fitness and to know which strategies (the list of prices) are the best.
+Using the network, the agents are able to barter/trade/exchange resources altogether. 
+
+
+
+\subsection{Model structure} 
+\begin{itemize}
+	\item Resources :\\
+		There are $n$ kind of resources, each one is produced by one or more Agents. Agents can exchange those resources and consume it following their need.
+	\item  Agents :\\
+		The whole population is defined by a vector of $m$ agents: 
+		$$ population= (a_i, \cdots ,a_m) $$
+		Each agent $i$ is defined by the following vectors:
+		\begin{itemize}
+			\item Price $(p^i_1,\cdots,p^i_n)$ : an amount of money that could be use when in exchange of a good.
+			\item Quantity $(q^i_1,\cdots,q^i_n)$ : the quantity of each food owned by each agent.
+			\item Subjective value $(u^i_1,\cdots,u^i_n)$ : the values that each agent associates with each resource.
+			\item Need $(b^i_1, \cdots, b^i_n)$ :  the quantity of each resource that each agent need to ``survive''. In the first experiments it only says the amount of resource that the agent will consume. It can be seen as the ``intrinsic'' value of the good.
+		\end{itemize}
+\end{itemize}
+
+\todo{find another title}
+\subsection{Effects tested}
+
+\subsubsection{Good Production}\label{production}
+The production methods can vary depending of geographical or historical factors. In order to validate the relevance of the model, we will follow \cite{gintis_emergence_2006}. In its model each agent produces one kind of good in a given and finished quantity which is $n$, the number of different resource available in a simulation, thus allowing him to be able to trade every other goods that it does not produce.
+
+\subsubsection{Good Consumption}\label{consumption}
+Depending on the kind of good agents consume (if they are ``vital'' or not\ldots) it allow us to test a wide range of hypothesis, from purely economical one to cultural consumption assumptions.  In an evolutionary perspective this consumption function could change trough time and is a good way to score the agent fitness and to know which strategies (the list of prices) are the best.
 
 In the current version of the model, and following
 \cite{gintis_emergence_2006} to be sure that we could reproduce the expected mechanism, all the goods are consumed in the same proportion by all the agents during all the simulation. A fixed-for-everyone proportion $b_1,\cdots,b_n$ of each resource $(1, \cdots, n)$ is given at the beginning of the simulation.
 
-\section{Cultural Evolution}
+\subsubsection{Cultural Evolution}
 In our model the ``cultural change'' is seen as the variation during time of the space of belief of all the agents. Pragmatically it's represented by variation in distribution of subjective value vector.
-
-This subjective value is the value that agents ``put'' on each resources. It could be learn using any mechanism of ``social learning'' (as defined by \cite{lycett_cultural_2015}) known in the literature (teaching, different kind of copying mechanisms,\ldots) and/or integrate any cognitive/environmental bias that could be studied (see again \cite{lycett_cultural_2015} for some kind of bias that could be implemented).
 
 In the first experiment we will try simple random copying and frequency-dependent copying as \cite{mesoudi_random_2009} to show the usefulness of the method to study cultural change. 
 
 
-\section{Economical Trading}
-\label{trade}
+\subsubsection{Economical Trading}\label{trade}
+Here again, the idea is to propose a model in which several different bargaining/trading mechanisms can be tested. 
 
-Using the network, the agents are able to barter/trade/exchange resources altogether. Here again, the idea is to propose a model in which several different bargaining/trading mechanisms can be tested. But to begin, we will implement a bargain mechanism already implemented in an Agent Based Model which is the one done by
+But to begin, we will implement a bargain mechanism already implemented in an Agent Based Model which is the one done by
 \cite{gintis_emergence_2006} in order to be quickly able to compare our results and validate ability of the model to recreate economical behaviors. 
 
+In the Ginti's model that we are following here, the goal is only to see if a market equilibrium can be reach in a bartering decentralized economy model. So the cognitive trading abilities of the agents are set at their minimum. 
+
+During the barter process, all agents meet all the producers of all goods and choose to exchange a certain amount of the good it produce with a certain amount of the other good depending on their own stock and the value they assign respectively to the resource it produce and the resources needed, in a totally rational way, without any cognitive bias.
+
+\section{EXPERIMENTAL SETUP}
+
+\section{RESULTS}
+
+\section{FUTURE WORK}
+\subsection{Good Production}
+Those production could change during the simulation based on meteorological data or historical knowledge and reflect some complex economical specialisation mechanisms \cite{bentley_specialisation_2005}.
+
+
+\subsection{Cultural Evolution}
+This subjective value is the value that agents ``put'' on each resources. It could be learn using any mechanism of ``social learning'' (as defined by \cite{lycett_cultural_2015}) known in the literature (teaching, different kind of copying mechanisms,\ldots) and/or integrate any cognitive/environmental bias that could be studied (see again \cite{lycett_cultural_2015} for some kind of bias that could be implemented).
+
+
+\subsection{Good Consumption and economical trading}
+%ACE and prospective trading
+%\subsection{Economical Trading}
 Later it could be used to study other model such as those developed by 
 \cite{rubinstein_equilibrium_1985} and to test more general proposal, as those done by \cite{polanyi_trade_1957,polanyi_livelihood_1977} about the early economical mechanisms.
 
@@ -135,9 +202,11 @@ Top palliate this problem, Prospect Theory put the focus on the study of the hum
 Moreover, we think that this approach fit perfectly with our agent based modeling approach (also called Agent based Computational Economy, ACE, when dealing with economical problems, see
 \cite{tesfatsion_introduction_2001}).
 
-In the Ginti's model that we are following here, the goal is only to see if a market equilibrium can be reach in a bartering decentralized economy model. So the cognitive trading abilities of the agents are set at their minimum. 
 
-During the barter process, all agents meet all the producers of all goods and choose to exchange a certain amount of the good it produce with a certain amount of the other good depending on their own stock and the value they assign respectively to the resource it produce and the resources needed, in a totally rational way, without any cognitive bias.
+\section{CONCLUSION}
+
+
+
 
 \bibliographystyle{wsc}
 \bibliography{wsc.bib}  
