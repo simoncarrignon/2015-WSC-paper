@@ -59,6 +59,7 @@ Alsace, Represent
 
 \section*{ABSTRACT}
 
+\todo{Rewrite later}
 In this article our aim is to present a model suitable to test various hypothesis on economic and cultural co-evolution during the Roman Empire. The ultimate goal is to address debates from history of economy such as the type of economical market found in early empires. Agent based modelling is a good way to understand social self-organisation resulting from a large number of interactions. It is used in a wide range of fields of research, from economical market mechanisms to social dynamics. We therefore apply this type of framework to our study.
 
 Here we present a model able it reproduces well known economical and cultural mechanism. Moreover this model can be envisioned to test hypothesis on those mechanisms. Given the appropriate match between the simulations and archaeological and historical data, the results of the model can be validated.
@@ -67,16 +68,23 @@ Here we present a model able it reproduces well known economical and cultural me
 \section{INTRODUCTION}
 
 %Roman empire and need of clean tool
-The trade system of the Roman empire is generally considered to be the first complex European trade network. A variety of theories have been proposed to explain the organization and rise of this powerful trade network. However, without the appropriate sources and tools these theories are hard to falsify (garnsey et al 1983, lo cascio 2000). 
+\todo{don't we have a more recent and better ref for that ?}
+The trade system of the Roman empire is generally considered to be the first complex European trade network. A variety of theories have been proposed to explain the development of this network as well as its organization. However, the appropriate tools are currently missing to falsify these theories  \cite{garnsey_trade_1983}. 
 
 %type of question we want to answer to and why we need trade an culture
-Among the question we would like to address is the on-going debate on the type of economic market in early empire~\cite{polanyi_trade_1957}. Two main view can be found in this debate. The first view state that the economical network of the Roman empire has evolve in a very different manner than our current trade network. The trade network is then perceived as qualitatively and quantitatively different. The second view state that the economical network of the Roman empire constitute a proto-version of our current trade network. The difference is then only quantitative but certainly not qualitative. We are specifically interested in the changes occurring in the production, trade and consumption of food. This can reflect the organization of the trade and cultural network. Moreover, this aspect has produced numerous historical records that we can now analyse.
+We want notably to address the on-going debate about the characteristics of the economic market in Roman empire~\cite{polanyi_trade_1957}. Two main views are found on this debate. The first view states that the economical network of the Roman empire had characteristics very different than our modern trade network. The trade network of the Roman empire is then perceived to be qualitatively and quantitatively different than our modern trade network. The second view state that the economical network of the Roman empire constitutes a proto-version of our modern trade network. The difference between the two networks is then only quantitative and not qualitative. 
+\jm{not sure that food item is the right word}
+Among all the goods transiting on the Roman network, we will focus on the food items. 
+\jm{i find the justification weak. any ideas ?}
+These are interesting as they reflect the organization of both the trade network and the cultural network. Moreover, the food items were circulating in amphorae which arrived up to us. As a consequence it will be possible to compare the qualitative output of a simulation with the qualitative structure of the historical data.
 
 %What is agent-based modeling and what can it do
-Within the EPNet project~\cite{remesal_epnet_2014} we aim to create tools so that theories on the evolution of the trade network of the Roman empire can falsified . To do so we need tools that allow us to obtain the qualitative result of a specific theory. This qualitative result can then be compared to historical data and help to move forward. Following~\cite{epstein_growing_1996,lake_trends_2014,kohler_dynamics_2000,tesfatsion_agent-based_2003,epstein_why_2008} we consider Agent Based Modelling (ABM) to be a good way to test express theories in a falsifiable form. Within these models the social self-organisation of a society results from the interactions of a large number of agents. The behaviour of these agents is encoded so as to reflect the theory under test. It has been already used in a wide range of fields of research, from economical market mechanisms to the understanding of cultural goods production and exchange.
+\jm{maybe this paragraph should go before ?}
+Within the EPNet project~\cite{remesal_epnet_2014} we aim to create tools able to falsify theories on the characteristics of the trade network of the Roman empire. These tools have to produce the qualitative characteristics resulting from a specific theory. This qualitative result can then be compared to historical data and highlight the differences between the reality and the simulations. Following~\cite{epstein_growing_1996,lake_trends_2014,kohler_dynamics_2000,tesfatsion_agent-based_2003,epstein_why_2008} we consider Agent Based Modelling (ABM) is a good framework to express theories in a falsifiable form. Within these models the social self-organisation of a society results from the interactions of a large number of agents. The behaviour of these agents is encoded so as to reflect the theory under test. It has been already used in a wide range of fields of research, from economical market mechanisms to the understanding of cultural goods production and exchange.
 
 %What we want to bring to ABM with our work
-The aim of this paper is to use ABM to model the evolution of culture and trade under a unique framework. Importantly we aim to create a framework with a low number of parameters in order to ensure that the dynamics observed are simple to analyse. In order to assess the quality of this framework we attempt to reproduce results previous obtained in other works study either economy or culture. We will then show the capacities of our framework to study the interaction between culture and trade.
+\todo{the justification of reproducing previous works should be stronger}
+The aim of this paper is to develop an ABM to model the evolution of culture and trade. Importantly we aim to create a model with a low number of parameters in order to ensure that the dynamics observed are simple to analyse. In order to assess the quality of this model we use it to reproduce qualitatively certain dynamics observed in either economy or culture. We will then show the capacities of our model to study the interaction between culture and trade.
 
 %Organisation of the paper
 \todo{write once we are more sure of what we put}
@@ -84,53 +92,47 @@ The paper is organised as follow
 
 \section{PREVIOUS MODELISATIONS OF TRADE AND CULTURE}
 
-This paper will provide a general view to the previous works done on the modelisation of trade, the modelisation of culture and the frameworks attempting to model both. While non-exhaustive this review aim to present the main trends on the previous work done on modelisation.
+\todo{and/or is ugly, look for another way}
+This section will provide a brief review of the previous approaches to model trade and/or culture. While non-exhaustive, this review presents the mains trends of the previous work done.
 
 \subsection{Modelisation of Trade}
-%expected utility: 
-%	Shoemaker: classic model since second world war. Look at additions made to the model and purposes of the EU model (descriptive, predictive, postdictive and prescriptive). but failed partly at descriptive and predictive because do not take into account pshychological effects.
-%	choice among risk options. maximisation of expected perceived utility accross all the options. Various perception of utility studied. Various modifications of probability also. define rational behaviour behaviour under risk.
-%	descriptive: humans do not see problem as probabilities and do not reason on it
-%	positivistic: can work in some very specific case such as billiard players. but in economy in most cases it does not work
-%	failure of market on different aspects assumptions: noise, bias, irrational behaviour. can be patched up but it's better to look really at something new
-%	has reveal that people precive and solve problems differently, and base of framework to discuss about these topics
-%prospective theory:
-%	Camerer : explain 10 economical trends that expected utility can not explain without making special cases. These are explained thanks to 3 effects from prospective theory: loss-aversion, reflection effects, non-linear weightening of probabilities
-%		: loss aversion, people are much more sensitive to losses than to gains of the same magnitude
-%		: reflection effects (reference dependence), measure of gain and loss from a reference point  people are (could have been present in EU)
-%		: non-linear weightening of probabilities (diminishing sensitivity), bigger difference between 100 and 200 than between 1000 and 1100
-%	Barberis : appear in 1979 and take the lead from EU
-%	Argue that it's hard to know "how" to apply it
-%	on top of the above effects speak also about probability weighting:
-%		just transformation of probability, which is actually in EU. but here applied to cumulative probabilities. leads to overwheighting the tail
-%	point to the difficulty to apply that
-%ACE: 
-%	tesfatsion: base of ACE -> goal is to simulate complex interactions from large number of agents in decentralised markets. and observe the macroeconomic regularities resulting from that. and feedback look. There is notably two fields that they are interested in, that are close to culture. These will particularly interestus
-%    4 formation of economic network (extract cites) cite kirman_evolving_2001 tesfatsion_structure_2001
-% 	 2 the evolution of behavioural norms (extract cites) cite epstein_learning_2001, axelrod_complexity_1997
-%	gintis: particular work on pair exchage. Observe convergence to clearing prices and "optimal" utility.
+
+Multiple approaches have been proposed to model the economical interactions between humans. Among them, this section will review three which constitute major trends and are the most relevant to our study. The approaches are presented in chronological order.
+
+The first approach to be reviewed is the Expected Utility (EU) which became a main trend after the second world war~\cite{schoemaker_expected_1982}. The goal of this model was to propose a first explanation to the economical actions of humans along the following axes: descriptive, predictive, postdictive and prescriptive. More precisely this approach model individuals as agents facing a choice among risky options. Each agent is aware of the probability that an event will happen and the utility (economical reward) associated to that event. Each agent can then maximise its expected utility by choosing the proper actions. By applying this methodology to various economical problems it became clear that humans do not see problems as probabilities and do not directly reason on them. From the perspective of this theory, humans show a collection of irrational behaviours, notably a strong aversion to risk.
+
+In an attempt to overcome the shortcomings of the EU models a new theory was introduced, the prospective theory. This theory conserve an approach close to the EU: individuals are modelled as agents facing risky actions each with a certain probability and utility. However, the agents do not face these problems by maximising the expected utility. They are rather endowed with behaviours composed of three key elements~\cite{camerer_prospect_2004}. First, the ``loss aversion'' element models the fact that individuals are much more sensitive to loss than to gains of the same magnitude. Second, the ``reference dependence'' models the fact that individuals measure their losses and gains with regards to their current possessions. Finally, individuals do not weight linearly the probabilities e.g. an individual will perceive a higher gain between 100 and 200 than between 1000 and 1100. Multiple difficulties have been encountered in applying this approach to practical problems of the real life. These are attributed to the lack of definition of certain elements of the theory and therefore the near impossibility to measure them~\cite{barberis_thirty_2012}.
+
+The two previous approaches address an economical problem as a block which all agents face in a similar fashion. As a consequence, the emerging properties due to the interaction of numerous agents can not be studied. Moreover, these approaches are not suitable to model systems composed of individuals with various characteristics and interests. The Agent-based Computational Economics (ACE) fields propose specifically to model the complex outcomes raising from a large number of interactions in a decentralized market~\cite{tesfatsion_agent-based_2003}. Naturally this approach is interesting for our project based on multi-agent methodology and it constitutes a source of hypothesis to test to characterise the economical network of the Roman empire. More specifically, multiple hypothesis are proposed on the formation of different types of economical networks depending on the economical rules between the agents~\cite{kirman_evolving_2001,tesfatsion_structure_2001}. Another interesting track is the study of the evolution of behavioural norms in an economical network~\cite{epstein_learning_2001,axelrod_complexity_1997}. Finally~\cite{gintis_emergence_2006} has proposed a specific analysis on the emergence of price structure when only pair exchanges are considered. 
+\todo{put the section}
+This latest work constitutes naturally a strong reference and will be explained in further details in section XXX.
 
 
 \subsection{Modelisation of Culture}
-% we also want to understand how culture will change in a setup. One interesting aspect in the changes of culture is to look at it from an evolutionary perspective. Especially useful to analyse variation in archeological records cite Lycett_2015 cite Henrich_evolution_2003. 
-% Then whatever makes the culture (music listened, shapes of pottery ...) is copied by individuals. Each individual is eventually making small variations to it. and others will copy these small variations. What the field is studying then is how the selection mechanism oparate. What does make one prefer one thing from another. In the case of our study three main effects could be studied:
-%
-%variation:essential : o'brien_variation_1990. may occure by copy error Schillinger et al 2014a, but can also happen intentionally ziman_technological_2000
 
-%
-%transmission: This further involve social learning, a topic in itself cite Heyes_social_1994. This mechanism does not necessarily have to be teaching. Can range from stimulus to emulation passing by imitation. 
-%
-%differential replication: how comes that one idea is more reproduced than the others. can be of different type: directional, disruptive or stabilization. thre are a range of biases that have been found in this selection process. Rendell_cognitive_2011 It is this process that will interest us more because it's simplier to test
-%
-%random copy: it is the baseline assumption. actually that is a good one to predict tastes in music. 
-%frequency dependent: that's one where we consider that the most common will get even more common (conformity) or that the less common will be prefered (rarity)
-%model biased - prestige: as the title say it, that's studying how the prestige of one person (kinda the boss) can bias the others in following her/him.
-%
+The second aspect we wish to model is the evolution of the culture in the Roman empire. The evolutionary framework (generally used in Biology) has been proposed to study the changes of culture and found to be suitable,  particularly in the case of historical and archaeological studies~\cite{lycett_cultural_2015,henrich_evolution_2003}.
+
+Within this framework, the individual preferences for cultural traits (such as music taste or shapes of pottery) are copied from one individual to the other. Each individual is then adding some small variations to this cultural trait she just acquired. The individual will in turn continue to spread these cultural traits which will be further adopted by other individuals. Studies are then performed on the three key steps of the framework: the transmission, the variation and the differential replication. Interestingly the study of these elements is not only done thanks to humans but also thanks to other animals.
+
+The transmission mechanisms are the means used to transfer cultural traits from one individuals to another. A large number of social learning schemes can be envisioned~\cite{heyes_social_1994}. Notably, the mechanisms do not necessarily have to be as complex as teaching, since emulation and imitation can be sufficient to pass on certain cultural traits.
+
+The variation mechanisms are at the heart of the creation of the creation of new cultural elements~\cite{obrien_variation_1990}. These may happen due to some errors during the copy process~\cite{schillinger_copying_2014}. In more recent culture we can witness the apparition of mutations with intentionality~\cite{ziman_technological_2003}.
+
+The last element is the one that will interest us the most in this study: the differential replication between different cultural traits. If a cultural trait is found more often than the others in the population it means that something modified the rate at which it is adopted by each agent. 
+%The reproduction rate of ideas in a population can be characterise by different rates: directional, disruptive or stabilisation~\cite{rendell_cognitive_2011}. 
+Multiple processes can be at play behind the reproduction of cultural traits. Among them the three following will interest us due to their simplicity to test in an agent-based modelisation. First is the random copy of one trait from an agent to another agent. 
+\todo{get a ref on that}
+This type of mechanism reproduces well the changes in musical preferences. Second are the the copy based on the frequency at which a cultural trait is observed. If a common trait is reproduced more often then we speak about ``conformity.'' If on the contrary the less common trait is preferred for reproduction we speak of ``rarity''. Finally a trait can be preferred depending on whom is carrying it. Among these preferences the prestige of the individual carrying it can constitute an explanation for the adoption foreign cultural traits in the Roman empire.
 
 
 \subsection{Modelisation of Trade and Culture}
-%stuff with both in it
-%macmillan et bentley
+
+To the best of our knowledge two works have previously proposed frameworks that could be used to model the co-evolution of trade and culture. The model in~\cite{bentley_specialisation_2005} is proposed to study the wealth inequalities in a dynamic network. In this model the agents are in a virtual environment and can produce, consume and trade two products. This model has two major constraints which makes it unfit for the study presented here. First, the products are only for trade purposes and are not used as cultural factors, i.e. some goods can not be accumulated so that the agent show them to others. The cultural aspects appear only through the price associated to each product. Second, only two goods are considered and the system can not scale up to an undetermined number of products without major modifications.
+% Agents can negotiate the rate at which the two products will be traded. The agents have a will (hard-coded in their behaviour) to keep their wealth and number of agents within their trading network above a threshold.
+
+The model proposed in~\cite{macmillan_agent-based_2008} studies the settlement of primitive agricultural societies. In this model agents produce, trade and consume 2 essentials goods and 2 non-essentials goods. This model is interesting since it introduce the notion of non-essential goods which can be used to reflect the culture of a society. However, this framework is constrained as it does not allow the evolution of the trading network. Moreover the behaviour chosen for the agents is rather complex and not justified by observations made in economy or evolution of culture.
+
+The model presented in this work proposes to integrate the most interesting features from~\cite{bentley_specialisation_2005} and~\cite{macmillan_agent-based_2008}.
 
 
 \section{MODEL DESCRIPTION}
