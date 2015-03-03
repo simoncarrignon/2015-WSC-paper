@@ -137,24 +137,18 @@ The model presented in this work proposes to integrate the most interesting feat
 
 \section{MODEL DESCRIPTION}
 
+\todo{find another title}
 \subsection{Agent-based consumers and traders}
 %tell the story of what is happening
 
-%%%%%
-%%TODO: Find refs
-%%
-In the simulation agents produce goods that they will barter (cf section \ref{trade}) and consume (cf section \ref{consumption}). This goods production should reflect the historical good production of the period studied and agent could produce various good in order to barter or sell them using the trade network.
+This model is composed of multiple agents producing goods of a fixed number of types. The agents are endowed with storage abilities for each good that can be produced. On top of	producing the agents have the ability to exchange and consume the goods. The specific rules for production, consumption and trading will vary depending on the hypothesis tested. Nevertheless the structure of the environment and the proceeding of a simulation will be the same for all hypothesis tested in this model.
 
-%%%%%
-%%TODO: Find refs
-%%
-During the simulation the agents ``consume'' the good. This consumption could be vital (if agent do consume certain good they die) or not (as in \cite{macmillan_agent-based_2008}), it could be set as fixed, environmental constraint shared by everyone (the ``intrinsic'' value of things) or could be subject to historical or geographical cultural ``taste'' and variations.
+One time step of the simulation is divided in three phases. In the first phase all agents produce goods. Each agent is assigned one type of good, and it will produce only this type of good at each first phase. In the second phase all agents enter trade with other agents according to their own interest. Each agent has the possibility to choose with which other agent it will trade products. Once two agents agree to trade, the agents decide which products will be exchanged and in which quantities. When an agreement is found, the trade occur and the agents look for other potential partners. Within one trading phase, an agent can meet only one time each other agents. In the third phase all agent consume goods according to their own rules. A unit of a good consumed disappears from the stock of the agent.
 
-Using the network, the agents are able to barter/trade/exchange resources altogether. 
+%In the simulation agents produce goods that they will barter (cf section \ref{trade}) and consume (cf section \ref{consumption}). This goods production should reflect the historical good production of the period studied and agent could produce various good in order to barter or sell them using the trade network.
 
+More formally the model is composed of the following elements
 
-
-\subsection{Model structure} 
 \begin{itemize}
 	\item Resources :\\
 		There are $n$ kind of resources, each one is produced by one or more Agents. Agents can exchange those resources and consume it following their need.
@@ -204,6 +198,9 @@ During the barter process, all agents meet all the producers of all goods and ch
 
 \section{FUTURE WORK}
 \subsection{Good Production}
+
+\todo{speak about good collection from the environment}
+
 Those production could change during the simulation based on meteorological data or historical knowledge and reflect some complex economical specialisation mechanisms \cite{bentley_specialisation_2005}.
 
 
@@ -212,6 +209,9 @@ This subjective value is the value that agents ``put'' on each resources. It cou
 
 
 \subsection{Good Consumption and economical trading}
+
+\todo{speak about death of the agents}
+
 %ACE and prospective trading
 %\subsection{Economical Trading}
 Later it could be used to study other model such as those developed by 
