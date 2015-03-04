@@ -127,6 +127,8 @@ This type of mechanism reproduces well the changes in musical preferences. Secon
 
 \subsection{Modelisation of Trade and Culture}
 
+\todo{speak about the fact that economy looks at convergence and culture looks before}
+
 To the best of our knowledge two works have previously proposed frameworks that could be used to model the co-evolution of trade and culture. The model in~\cite{bentley_specialisation_2005} is proposed to study the wealth inequalities in a dynamic network. In this model the agents are in a virtual environment and can produce, consume and trade two products. This model has two major constraints which makes it unfit for the study presented here. First, the products are only for trade purposes and are not used as cultural factors, i.e. some goods can not be accumulated so that the agent show them to others. The cultural aspects appear only through the price associated to each product. Second, only two goods are considered and the system can not scale up to an undetermined number of products without major modifications.
 % Agents can negotiate the rate at which the two products will be traded. The agents have a will (hard-coded in their behaviour) to keep their wealth and number of agents within their trading network above a threshold.
 
@@ -147,77 +149,63 @@ One time step of the simulation is divided in three phases. In the first phase a
 
 %In the simulation agents produce goods that they will barter (cf section \ref{trade}) and consume (cf section \ref{consumption}). This goods production should reflect the historical good production of the period studied and agent could produce various good in order to barter or sell them using the trade network.
 
-More formally the model is composed of the following elements
+More formally the model is composed as follow. $r$ is the number of ressources present in the environment. The whole population is defined by a vector of $m$ agents: 
+		$$ population = (a_i, \cdots ,a_m) $$
+		
+Each agent $i$ is defined by 4 vectors each of size $r$. The first correspond to the quantity of each good that the agent possesses: $$ quantity = (q^i_1,\cdots,q^i_n) $$
 
-\begin{itemize}
-	\item Resources :\\
-		There are $n$ kind of resources, each one is produced by one or more Agents. Agents can exchange those resources and consume it following their need.
-	\item  Agents :\\
-		The whole population is defined by a vector of $m$ agents: 
-		$$ population= (a_i, \cdots ,a_m) $$
-		Each agent $i$ is defined by the following vectors:
-		\begin{itemize}
-			\item Price $(p^i_1,\cdots,p^i_n)$ : an amount of money that could be use when in exchange of a good.
-			\item Quantity $(q^i_1,\cdots,q^i_n)$ : the quantity of each food owned by each agent.
-			\item Subjective value $(u^i_1,\cdots,u^i_n)$ : the values that each agent associates with each resource.
-			\item Need $(b^i_1, \cdots, b^i_n)$ :  the quantity of each resource that each agent need to ``survive''. In the first experiments it only says the amount of resource that the agent will consume. It can be seen as the ``intrinsic'' value of the good.
-		\end{itemize}
-\end{itemize}
+Each agent makes its own estimate on the price to attribute to a certain good. This price estimate is used for both selling and buying goods :
+$$ price = (p^i_1,\cdots,p^i_n) $$
+ 
+Finally, as mentioned before, each agent will consume a certain quantity of each good. This quantity can be a property of the agent, i.e. each agent consumes a different quantity of each product :
+$$ consumption = (c^i_1, \cdots, c^i_n) $$ 
 
-\todo{find another title}
-\subsection{Effects tested}
+The elments listed above constitute the basic structure of the model. Different behaviours can be used for the agents and world depending on the assumption to test. This scheme allow us to have a model ahieving the two main goals listed in section~\ref{}. First, this model has a simple behaviour and few parameters to analyse. Second, this  model is flexible enough to allow the study of multiple hypothesis while conserving the same units that can therefore be compared between simulations.
 
-\subsubsection{Good Production}\label{production}
-The production methods can vary depending of geographical or historical factors. In order to validate the relevance of the model, we will follow \cite{gintis_emergence_2006}. In its model each agent produces one kind of good in a given and finished quantity which is $n$, the number of different resource available in a simulation, thus allowing him to be able to trade every other goods that it does not produce.
 
-\subsubsection{Good Consumption}\label{consumption}
-Depending on the kind of good agents consume (if they are ``vital'' or not\ldots) it allow us to test a wide range of hypothesis, from purely economical one to cultural consumption assumptions.  In an evolutionary perspective this consumption function could change trough time and is a good way to score the agent fitness and to know which strategies (the list of prices) are the best.
+\subsection{Validation}
 
-In the current version of the model, and following
-\cite{gintis_emergence_2006} to be sure that we could reproduce the expected mechanism, all the goods are consumed in the same proportion by all the agents during all the simulation. A fixed-for-everyone proportion $b_1,\cdots,b_n$ of each resource $(1, \cdots, n)$ is given at the beginning of the simulation.
-
-\subsubsection{Cultural Evolution}
-In our model the ``cultural change'' is seen as the variation during time of the space of belief of all the agents. Pragmatically it's represented by variation in distribution of subjective value vector.
-
-In the first experiment we will try simple random copying and frequency-dependent copying as \cite{mesoudi_random_2009} to show the usefulness of the method to study cultural change. 
-
+In order to validate our model mulitple experiments from the litterature in economy or evolution of culture have been selected to be reproduced. The basis of selection of these experiments is two fold. First, the experiment selected has to be simple and highlight clearly one effect. This restriction is to maintain the clarity of the paper. Second, these effects should consist the basis of our further studies toward understanding the principles of the roman economics. As a consequence the hypothesis tested will constitute valid hypothesis for the study of the economics and culture of the roman empire.
 
 \subsubsection{Economical Trading}\label{trade}
-Here again, the idea is to propose a model in which several different bargaining/trading mechanisms can be tested. 
 
-But to begin, we will implement a bargain mechanism already implemented in an Agent Based Model which is the one done by
-\cite{gintis_emergence_2006} in order to be quickly able to compare our results and validate ability of the model to recreate economical behaviors. 
+The production methods can vary depending of geographical or historical factors. In order to validate the relevance of the model, we will follow \cite{gintis_emergence_2006}. In this model, the goal is to observe the convergence of price to a market equilibrium in a bartering decentralized economy model. In the orignal model it is shown that the prices can converge to the market clearing price.
 
-In the Ginti's model that we are following here, the goal is only to see if a market equilibrium can be reach in a bartering decentralized economy model. So the cognitive trading abilities of the agents are set at their minimum. 
+In this economical model the agents are ranked with regards to the value of their stock. This value is computed as follow ...
+\todo{find the computation}
 
-During the barter process, all agents meet all the producers of all goods and choose to exchange a certain amount of the good it produce with a certain amount of the other good depending on their own stock and the value they assign respectively to the resource it produce and the resources needed, in a totally rational way, without any cognitive bias.
+In this model each agent produces only one type of good. During the trading process, all agents meet each other. Since one agent is producing only one good it will only trade with the agents not producing this good. The procedure to choose the trading partners is detailed in algorithm XXXX.
+\todo{do the algorithm}
+Briefly summarised, for each good that it does not produced, an agent will look for the parter that offer the best trade, i.e. the agent that proposes to exchange the most of the other product for the fewest of the product produced by the agent.
+
+All agents of the simulation have the same constant consumption vector. A fixed-for-everyone proportion $b_1,\cdots,b_n$ of each resource $(1, \cdots, n)$ is given at the beginning of the simulation. At the end of the consumption phase all remaining products are removed from the agents.
+
+At the end of a time step, each agent has the opportunity to update its prices . Following the strategy proposed in the original model the XXX\% agents with the worst economical results adopt the strategy of the XXX\% best agents.
+
+
+\subsubsection{Cultural Evolution}
+
+In our model the ``cultural change'' is represented by the variations in the distribution of prices for each good. In order to validate our model we will try two simple biases: simple random copying and frequency-dependent copying as \cite{mesoudi_random_2009}. The aim is to show that these simple modifications can allow us to obvserve the emergence of different cultures, each modifying the price structure obtained. The price structure obtained will be also compare to the obtained by the the economical model explained at the previous section.
+
+The production, consumption and trade phases described are not modified. However the price update phase is modified as follow. When the random copy behaviour is used each agent has a XXX\% chance to copy a new price from one agent selected randomly. Two frequency dependent behaviour are proposed. The first to be tested is the conformist behaviour with which each agent at each agent will have a XXXX\% chance to select the most common price for each good. The second to be tested is the rarity behaviour with which each agent at each iteration will have a XXX\% chance to select the least common beahviour.
+
+
 
 \section{EXPERIMENTAL SETUP}
 
 \section{RESULTS}
 
-\section{FUTURE WORK}
-\subsection{Good Production}
+\section{CONCLUSION}
 
-\todo{speak about good collection from the environment}
+\section{DISCUSSION}
 
-Those production could change during the simulation based on meteorological data or historical knowledge and reflect some complex economical specialisation mechanisms \cite{bentley_specialisation_2005}.
+In future works numerous, more realistic and complex dynamics can be studied in the same model. First the constraints on the production could be relaxed so that each agent can choose the products it wishes to produce at the current time step. Moreover meterological factors can modify the quality of the production (noisy outcome of the proces) thus making the process more realistic and more complex~\cite{bentley_specialisation_2005}.
 
-
-\subsection{Cultural Evolution}
-This subjective value is the value that agents ``put'' on each resources. It could be learn using any mechanism of ``social learning'' (as defined by \cite{lycett_cultural_2015}) known in the literature (teaching, different kind of copying mechanisms,\ldots) and/or integrate any cognitive/environmental bias that could be studied (see again \cite{lycett_cultural_2015} for some kind of bias that could be implemented).
-
-
-\subsection{Good Consumption and economical trading}
-
-\todo{speak about death of the agents}
+The goods themselves can be of different type: ``vital'' or ``common''. The absence of a ``vital'' good would then lead to the death of the agent. Thus making the need to trade at the best price even stronger for the agent. The ``common'' goods on the other sides would be interesting to observe the evolution of a culture out of the necessity of survival. The mechanisms behind the strong use of a non-essential product can then be studied. Naturally in the study of these questions the consumption function would change trough time for the agent.
 
 %ACE and prospective trading
-%\subsection{Economical Trading}
-Later it could be used to study other model such as those developed by 
-\cite{rubinstein_equilibrium_1985} and to test more general proposal, as those done by \cite{polanyi_trade_1957,polanyi_livelihood_1977} about the early economical mechanisms.
-
-Moreover, and in order to be more realistic, and consistently with the cognitive and agent based approach of the project, we will also test assumptions made by people from \emph{Prospect Theory} as proposed by 
+More complex models can also be envisionned such as those developed by 
+\cite{rubinstein_equilibrium_1985} and to test more general proposal, as those done by \cite{polanyi_trade_1957,polanyi_livelihood_1977} about the early economical mechanisms. Moreover, and in order to be more realistic, and consistently with the cognitive and agent based approach of the project, we will also test assumptions made by people from \emph{Prospect Theory} as proposed by 
 \cite{kahneman_prospect_1979}, see also
 \cite{camerer_prospect_2004}. The idea here is that traditional economical studies use formal mathematical models that suppose people acting as rational agent, which is a presumption that is far from being valid  in every day life. 
 
@@ -228,9 +216,9 @@ Moreover, we think that this approach fit perfectly with our agent based modelin
 \cite{tesfatsion_introduction_2001}).
 
 
-\section{CONCLUSION}
+This subjective value is the value that agents ``put'' on each resources. It could be learn using any mechanism of ``social learning'' (as defined by \cite{lycett_cultural_2015}) known in the literature (teaching, different kind of copying mechanisms,\ldots) and/or integrate any cognitive/environmental bias that could be studied (see again \cite{lycett_cultural_2015} for some kind of bias that could be implemented).
 
-
+In order to test these hypohtesis more advanced agents are naturally envisionned. One possible tracks of investigation is agents endowed with self-adaptation abilities as proposed in Reinforcement Learning or Developmental Learning. Another possibility is to follow the cognitive approaches that propose to model the complexity of the human behaviour in general representations such as BDI and XXXX.
 
 
 \bibliographystyle{wsc}
