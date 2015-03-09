@@ -6,7 +6,7 @@
 \usepackage{caption}
 \usepackage{graphicx}
 \usepackage{mathptmx}
-
+\usepackage[utf8]{inputenc}
 
 %****************************************************************************
 %% AUTHOR: You may want to use some of these packages. (Optional)
@@ -26,6 +26,7 @@
 \newcommand{\todo}[1]{\memo{red}{TODO: #1\\}}
 \newcommand{\simon}[1]{\memo{green}{Simon: #1\\}}
 \newcommand{\jm}[1]{\memo{blue}{JM: #1\\}}
+\newcommand{\xrc}[1]{\memo{orange}{XRC: #1\\}}
 \newcommand{\new}[1]{\added{orange}{#1}}
 
 \begin{document}
@@ -60,7 +61,7 @@ Alsace, Represent
 \section*{ABSTRACT}
 
 \todo{Rewrite later}
-In this article our aim is to present a model suitable to test various hypothesis on economic and cultural co-evolution during the Roman Empire. The ultimate goal is to address debates from history of economy such as the type of economical market found in early empires. Agent based modelling is a good way to understand social self-organisation resulting from a large number of interactions. It is used in a wide range of fields of research, from economical market mechanisms to social dynamics. We therefore apply this type of framework to our study.
+In this article our aim is to present a model suitable to test various hypotheses on economic and cultural co-evolution during the Roman Empire. The ultimate goal is to address debates from history of economy such as the type of economical market found in early empires. Agent based modelling is a good way to understand social self-organisation resulting from a large number of interactions. It is used in a wide range of fields of research, from economical market mechanisms to social dynamics. We therefore apply this type of framework to our study.
 
 Here we present a model able it reproduces well known economical and cultural mechanism. Moreover this model can be envisioned to test hypothesis on those mechanisms. Given the appropriate match between the simulations and archaeological and historical data, the results of the model can be validated.
 
@@ -69,14 +70,21 @@ Here we present a model able it reproduces well known economical and cultural me
 
 %Roman empire and need of clean tool
 \todo{don't we have a more recent and better ref for that ?}
-The trade system of the Roman empire is generally considered to be the first complex European trade network. A variety of theories have been proposed to explain the development of this network as well as its organization. However, the appropriate tools are currently missing to falsify these theories  \cite{garnsey_trade_1983}. 
+\xrc{There is plenty of evidence of previous trade networks (e.g. Sahoglu, 2005 for Bronze Age, Malkin, 2003 for greek identity). Is Rome different than the rest of the Mediterranean...? How?}
+The trade system of the Roman empire is generally considered to be the first complex European trade network. A variety of theories have been proposed to explain the development of this network as well as its organization. However, the appropriate tools are currently missing to falsify these theories \cite{garnsey_trade_1983} \xrc{what theories? why the tools?}. 
 
 %type of question we want to answer to and why we need trade an culture
 We want notably to address the on-going debate about the characteristics of the economic market in Roman empire~\cite{polanyi_trade_1957}. Two main views are found on this debate. The first view states that the economical network of the Roman empire had characteristics very different than our modern trade network. The trade network of the Roman empire is then perceived to be qualitatively and quantitatively different than our modern trade network. The second view state that the economical network of the Roman empire constitutes a proto-version of our modern trade network. The difference between the two networks is then only quantitative and not qualitative. 
+\\
+\xrc{this needs further discussion: at what level they are different, etc. it is mainly defining what is a market economy, and the question is: was the roman trade network a market economy?}
 \jm{not sure that food item is the right word}
+\\
 Among all the goods transiting on the Roman network, we will focus on the food items. 
 \jm{i find the justification weak. any ideas ?}
+\xrc{justification is based on the existence of evidence: the shipment of containers such as amphorae, which are used to transport selected items (olive oil, salsamenta, etc) is one of the best datasets in terms of the archaeological record \cite{bevan_2014}.}
 These are interesting as they reflect the organization of both the trade network and the cultural network. Moreover, the food items were circulating in amphorae which arrived up to us. As a consequence it will be possible to compare the qualitative output of a simulation with the qualitative structure of the historical data.
+
+\xrc{I would switch the line of thought: a) we have hypotheses, b) we need evidence to evaluate them and c) containers are the best existing datasets to do that}
 
 %What is agent-based modeling and what can it do
 \jm{maybe this paragraph should go before ?}
@@ -85,6 +93,17 @@ Within the EPNet project~\cite{remesal_epnet_2014} we aim to create tools able t
 %What we want to bring to ABM with our work
 \todo{the justification of reproducing previous works should be stronger}
 The aim of this paper is to develop an ABM to model the evolution of culture and trade. Importantly we aim to create a model with a low number of parameters in order to ensure that the dynamics observed are simple to analyse. In order to assess the quality of this model we use it to reproduce qualitatively certain dynamics observed in either economy or culture. We will then show the capacities of our model to study the interaction between culture and trade.
+
+\xrc{A potential reviewer would say that you need to specify your research question and needs before justifying the tool}
+
+\xrc{I would propose a different structure for the intro:}
+\begin{enumerate}
+    \item \emph{trade networks are increasingly being recognised as a key process in ancient Mediterranean}
+    \item \emph{this process played a role in the trajectories of cultural change of the different regions, which were interconnected by trade}
+    \item \emph{these two elements (cultural transmission and trade networks) are traditionally been studied as isolated systems}
+    \item \emph{this is wrong because blablabla...}
+    \item \emph{we propose a model of coevolution to explore the deep links between trade and cultural transmission in the ancient Mediterranean}
+\end{enumerate}
 
 %Organisation of the paper
 \todo{write once we are more sure of what we put}
@@ -95,9 +114,12 @@ The paper is organised as follow
 \todo{and/or is ugly, look for another way}
 This section will provide a brief review of the previous approaches to model trade and/or culture. While non-exhaustive, this review presents the mains trends of the previous work done.
 
+\xrc{I would suggest to use modelling instead of modelisation}
 \subsection{Modelisation of Trade}
 
 Multiple approaches have been proposed to model the economical interactions between humans. Among them, this section will review three which constitute major trends and are the most relevant to our study. The approaches are presented in chronological order.
+
+\xrc{I'm not sure if it would be wiser to limit this section to models of ancient trade...otherwise a proper lit. review becomes huge.}
 
 The first approach to be reviewed is the Expected Utility (EU) which became a main trend after the second world war~\cite{schoemaker_expected_1982}. The goal of this model was to propose a first explanation to the economical actions of humans along the following axes: descriptive, predictive, postdictive and prescriptive. More precisely this approach model individuals as agents facing a choice among risky options. Each agent is aware of the probability that an event will happen and the utility (economical reward) associated to that event. Each agent can then maximise its expected utility by choosing the proper actions. By applying this methodology to various economical problems it became clear that humans do not see problems as probabilities and do not directly reason on them. From the perspective of this theory, humans show a collection of irrational behaviours, notably a strong aversion to risk.
 
@@ -110,20 +132,28 @@ This latest work constitutes naturally a strong reference and will be explained 
 
 \subsection{Modelisation of Culture}
 
-The second aspect we wish to model is the evolution of the culture in the Roman empire. The evolutionary framework (generally used in Biology) has been proposed to study the changes of culture and found to be suitable,  particularly in the case of historical and archaeological studies~\cite{lycett_cultural_2015,henrich_evolution_2003}.
+\xrc{models of cultural change, not culture in general?}
+
+\xrc{what is exactly the definition of culture used in the paper? I would suggest this one: \emph{Culture is socially learned information capable of affecting  individual phenotypes. People acquire culture from other  individuals, via teaching or imitation} \cite{richerson1996}}
+
+The second aspect we wish to model is the evolution of the culture in the Roman empire. The evolutionary framework (generally used in Biology) has been proposed to study the changes of culture and found to be suitable,  particularly in the case of historical and archaeological studies~\cite{lycett_cultural_2015,henrich_evolution_2003}\xrc{henrich's paper is not on archaeology or history, better reference \cite{shennan_2008}}.
 
 Within this framework, the individual preferences for cultural traits (such as music taste or shapes of pottery) are copied from one individual to the other. Each individual is then adding some small variations to this cultural trait she just acquired. The individual will in turn continue to spread these cultural traits which will be further adopted by other individuals. Studies are then performed on the three key steps of the framework: the transmission, the variation and the differential replication. Interestingly the study of these elements is not only done thanks to humans but also thanks to other animals.
 
-The transmission mechanisms are the means used to transfer cultural traits from one individuals to another. A large number of social learning schemes can be envisioned~\cite{heyes_social_1994}. Notably, the mechanisms do not necessarily have to be as complex as teaching, since emulation and imitation can be sufficient to pass on certain cultural traits.
+\xrc{I would use social learning instead of cultural transmission}
 
-The variation mechanisms are at the heart of the creation of the creation of new cultural elements~\cite{obrien_variation_1990}. These may happen due to some errors during the copy process~\cite{schillinger_copying_2014}. In more recent culture we can witness the apparition of mutations with intentionality~\cite{ziman_technological_2003}.
+The transmission mechanisms are the means used to transfer cultural traits from one individuals to another. A large number of social learning schemes can be envisioned~\cite{heyes_social_1994} \xrc{a better reference would be \cite{henrich_evolution_2003}}. Notably, the mechanisms do not necessarily have to be as complex as teaching, since emulation and imitation can be sufficient to pass on certain cultural traits.
 
-The last element is the one that will interest us the most in this study: the differential replication between different cultural traits. If a cultural trait is found more often than the others in the population it means that something modified the rate at which it is adopted by each agent. 
+The variation mechanisms are at the heart of the creation of the creation of new cultural elements~\cite{obrien_variation_1990}. These may happen due to some errors during the copy process~\cite{schillinger_copying_2014}. In more recent culture we can witness the apparition of mutations with intentionality~\cite{ziman_technological_2003}\xrc{see also recombination \cite{sole_2013}}.
+
+\xrc{Instead of differential replication I would use \emph{biased selection}}
+The last element is the one that will interest us the most in this study: the differential replication between different cultural traits. If a cultural trait is found more often than the others in the population it means that something modified the rate at which it is adopted by each agent \xrc{beyond drift effects produced by random copy of neutral traits \cite{bentley_2004}}.
 %The reproduction rate of ideas in a population can be characterise by different rates: directional, disruptive or stabilisation~\cite{rendell_cognitive_2011}. 
-Multiple processes can be at play behind the reproduction of cultural traits. Among them the three following will interest us due to their simplicity to test in an agent-based modelisation. First is the random copy of one trait from an agent to another agent. 
-\todo{get a ref on that}
-This type of mechanism reproduces well the changes in musical preferences. Second are the the copy based on the frequency at which a cultural trait is observed. If a common trait is reproduced more often then we speak about ``conformity.'' If on the contrary the less common trait is preferred for reproduction we speak of ``rarity''. Finally a trait can be preferred depending on whom is carrying it. Among these preferences the prestige of the individual carrying it can constitute an explanation for the adoption foreign cultural traits in the Roman empire.
+Multiple processes can be at play behind the reproduction \xrc{selection? transmission? reproduction is too biological} of cultural traits. Among them the three following will interest us due to their simplicity to test in an agent-based modelisation. First is the random copy of one trait from an agent to another agent. 
+\todo{get a ref on that} \xrc{you can use \cite{bentley_2004}}
+This type of mechanism reproduces well the changes in musical preferences \xrc{music here is odd; if an example is used it should be related to the topic of the paper}. Second are the the copy based on the frequency at which a cultural trait is observed. If a common trait is reproduced more often then we speak about ``conformity.'' If on the contrary the less common trait is preferred for reproduction we speak of ``rarity'' \xrc{nope, we speak of anti-conformism}. Finally a trait can be preferred depending on whom is carrying it. Among these preferences the prestige of the individual carrying it can constitute an explanation for the adoption foreign cultural traits in the Roman empire \xrc{this is known as model biased transmission}.
 
+\xrc{Again, I should focus the lit.review on models of cultural change in at least ancient societies, this is too broad.}
 
 \subsection{Modelisation of Trade and Culture}
 
@@ -136,6 +166,9 @@ The model proposed in~\cite{macmillan_agent-based_2008} studies the settlement o
 
 The model presented in this work proposes to integrate the most interesting features from~\cite{bentley_specialisation_2005} and~\cite{macmillan_agent-based_2008}.
 
+\xrc{here a research question should be defined, and some hypotheses, e.g.: \emph{Did trade networks between regions bias cultural change towards anti-conformism?} or \emph{What is the relation between shipment time and cultural change?}}
+
+\xrc{A co-evolutionary model is really difficult to study, so a careful justification needs to be done on why this is here needed}
 
 \section{MODEL DESCRIPTION}
 
@@ -160,10 +193,11 @@ $$ price = (p^i_1,\cdots,p^i_n) $$
 Finally, as mentioned before, each agent will consume a certain quantity of each good. This quantity can be a property of the agent, i.e. each agent consumes a different quantity of each product :
 $$ consumption = (c^i_1, \cdots, c^i_n) $$ 
 
-The elments listed above constitute the basic structure of the model. Different behaviours can be used for the agents and world depending on the assumption to test. This scheme allow us to have a model ahieving the two main goals listed in section~\ref{}. First, this model has a simple behaviour and few parameters to analyse. Second, this  model is flexible enough to allow the study of multiple hypothesis while conserving the same units that can therefore be compared between simulations.
+The elments listed above constitute the basic structure of the model. Different behaviours can be used for the agents and world depending on the assumption to test. This scheme allow us to have a model ahieving the two main goals listed in section~\ref{}. First, this model has a simple behaviour and few parameters to analyse. Second, this model is flexible enough to allow the study of multiple hypothesis while conserving the same units that can therefore be compared between simulations.
 
 
 \subsection{Validation}
+\xrc{Validation is impossible for a theoretical model. Either you use verification if the goal is to check that implementation is correct, or design experiment for defining the experimens that will be used to explore the model.}
 
 In order to validate our model mulitple experiments from the litterature in economy or evolution of culture have been selected to be reproduced. The basis of selection of these experiments is two fold. First, the experiment selected has to be simple and highlight clearly one effect. This restriction is to maintain the clarity of the paper. Second, these effects should consist the basis of our further studies toward understanding the principles of the roman economics. As a consequence the hypothesis tested will constitute valid hypothesis for the study of the economics and culture of the roman empire.
 
