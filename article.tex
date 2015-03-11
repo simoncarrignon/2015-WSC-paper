@@ -36,21 +36,19 @@
 
 \title{Model to study co-evolution of trade an culture}
 
-\author{Jean-Marc Montanier\\ [12pt]
+
+\begin{figure*}[htb]
+{
+\centering
+Jean-Marc Montanier\\
+Simon Carrignon\\ 
+Xavier Rubio\\
+\vspace{12pt}
 Barcelona Supercomputing Center\\
 Carrer de Jordi Girona, 29, \\
 08034 Barcelona, Spain\\
-\and
-Simon Carrignon\\ [12pt]
-Barcelona Supercomputing Center\\
-Carrer de Jordi Girona, 29, \\
-08034 Barcelona, Spain\\
-\and
-Fabien Zerr\\ [12pt]
-Alsace, Represent
 }
-
-
+\end{figure*}
 
 
 
@@ -68,42 +66,36 @@ Here we present a model able it reproduces well known economical and cultural me
 
 \section{INTRODUCTION}
 
-%Roman empire and need of clean tool
-\todo{don't we have a more recent and better ref for that ?}
-\xrc{There is plenty of evidence of previous trade networks (e.g. Sahoglu, 2005 for Bronze Age, Malkin, 2003 for greek identity). Is Rome different than the rest of the Mediterranean...? How?}
-The trade system of the Roman empire is generally considered to be the first complex European trade network. A variety of theories have been proposed to explain the development of this network as well as its organization. However, the appropriate tools are currently missing to falsify these theories \cite{garnsey_trade_1983} \xrc{what theories? why the tools?}. 
+%XRC trade networks are increasingly being recognised as a key process in ancient Mediterranean
+The trade networks are being increasingly recognised as a key process in the structure of ancient Mediterranean societies. Among the recent works studying these networks, brugmans 2010 shows the relation between trade network and the use of table ware in the roman empire. In another example Malkin 2003 show the influence of these trade networks on the emergence of the greek identity between XXX and XXX. 
+%An objective of the research undertaken is to compare these networks between each other and understand their specificities. On top of these comparisons we would also like to determine if these trade networks are comparable to a market economy. 
+The work presented in this paper takes place within the EPNET project~\cite{remesal_epnet_2014} which aims at studying the properties of the trade network of the roman empire.
 
-%type of question we want to answer to and why we need trade an culture
-We want notably to address the on-going debate about the characteristics of the economic market in Roman empire~\cite{polanyi_trade_1957}. Two main views are found on this debate. The first view states that the economical network of the Roman empire had characteristics very different than our modern trade network. The trade network of the Roman empire is then perceived to be qualitatively and quantitatively different than our modern trade network. The second view state that the economical network of the Roman empire constitutes a proto-version of our modern trade network. The difference between the two networks is then only quantitative and not qualitative. 
-\\
-\xrc{this needs further discussion: at what level they are different, etc. it is mainly defining what is a market economy, and the question is: was the roman trade network a market economy?}
-\jm{not sure that food item is the right word}
-\\
-Among all the goods transiting on the Roman network, we will focus on the food items. 
-\jm{i find the justification weak. any ideas ?}
-\xrc{justification is based on the existence of evidence: the shipment of containers such as amphorae, which are used to transport selected items (olive oil, salsamenta, etc) is one of the best datasets in terms of the archaeological record \cite{bevan_2014}.}
-These are interesting as they reflect the organization of both the trade network and the cultural network. Moreover, the food items were circulating in amphorae which arrived up to us. As a consequence it will be possible to compare the qualitative output of a simulation with the qualitative structure of the historical data.
 
-\xrc{I would switch the line of thought: a) we have hypotheses, b) we need evidence to evaluate them and c) containers are the best existing datasets to do that}
+%XRC this process played a role in the trajectories of cultural change of the different regions, which were interconnected by trade
+The trade possibilities between different regions will play a role in changes in their cultures. The influence can comes from two main sources. First, with each trade connection new good can arrive in a province. The arrival of these new goods will change the rate of adoption of other goods CITE. Moreover the arrival of new products can lead to their recombination with previous products and therefore the creation of an new item. Persons are also travelling on these trade networks, each carrying its own culture. Large movements of populations may lead to changes in the cultures. For example, when Roman troops were travelling to a new region, traditional roman products were delivered to that regions such as oil CITE ROMAN DELIVERING OIL.
+
+
+%XRC these two elements (cultural transmission and trade networks) are traditionally been studied as isolated systems.
+Traditionally cultural transmission and trade are studied distinctively.  On the one hand, the transmission of culture is studied purely as learning and transmitting information between persons or animals. The focus is then for example to understand the different transmission, selection and transformation mechanism. This does not take into account the economical constraints of certain behaviours in human societies. On the other hand, the economical behaviours of persons are studied solely with regards to economical values. The questions traditionally answered are relative to the convergence of prices to an optimal value or the possibility for a person to maximise the economical value of its possessions. The influence of the culture surrounding the person and the bias that may result from it are not taken into account.
+
+
+%XRC this is wrong because blablabla...
+As has been stated before the trade of goods is influence the culture by modifying both the goods present in a region and the people consuming these goods. Moreover we can also expect that the different cultures present in a region will influence the trades this region has with others. \jm{include trade pottery} Focusing on either trade or cultural transmission allows to formalize their inner mechanisms and understand their respective dynamics. However, in order to understand the analyse the trading system of a region one must take into account both trading strategy and culture. \jm{find a problem that we can study thanks to that}
+%XRC A potential reviewer would say that you need to specify your research question and needs before justifying the tool
+%Jm   -> take care that it is well justified
+%XRC we propose a model of coevolution to explore the deep links between trade and cultural transmission in the ancient Mediterranean
+%JM we think that agent stuff is a good tool because blah blah
+We propose in this article a framework to study the interaction between cultural transmission and trade. This framework should be able first to reproduce well known dynamics of both cultural transmission and trading. Moreover, to be useful, this framework should be able to show the result of the interaction of these dynamics.
+
 
 %What is agent-based modeling and what can it do
-\jm{maybe this paragraph should go before ?}
-Within the EPNet project~\cite{remesal_epnet_2014} we aim to create tools able to falsify theories on the characteristics of the trade network of the Roman empire. These tools have to produce the qualitative characteristics resulting from a specific theory. This qualitative result can then be compared to historical data and highlight the differences between the reality and the simulations. Following~\cite{epstein_growing_1996,lake_trends_2014,kohler_dynamics_2000,tesfatsion_agent-based_2003,epstein_why_2008} we consider Agent Based Modelling (ABM) is a good framework to express theories in a falsifiable form. Within these models the social self-organisation of a society results from the interactions of a large number of agents. The behaviour of these agents is encoded so as to reflect the theory under test. It has been already used in a wide range of fields of research, from economical market mechanisms to the understanding of cultural goods production and exchange.
-
+The Agent Based Modeling (ABM) methodology~\cite{} has been applied to both the study of cultural transmission and the study of trading~\cite{}. \jm{achievement on each aspect} ABM is therefore a good candidate to produce a framework able to express theories on trade and cultural transmission. Within these models the social self-organisation of a society results from the interactions of a large number of agents. The behaviour of these agents is encoded so as to reflect the theory under test.
 %What we want to bring to ABM with our work
-\todo{the justification of reproducing previous works should be stronger}
 The aim of this paper is to develop an ABM to model the evolution of culture and trade. Importantly we aim to create a model with a low number of parameters in order to ensure that the dynamics observed are simple to analyse. In order to assess the quality of this model we use it to reproduce qualitatively certain dynamics observed in either economy or culture. We will then show the capacities of our model to study the interaction between culture and trade.
 
-\xrc{A potential reviewer would say that you need to specify your research question and needs before justifying the tool}
 
-\xrc{I would propose a different structure for the intro:}
-\begin{enumerate}
-    \item \emph{trade networks are increasingly being recognised as a key process in ancient Mediterranean}
-    \item \emph{this process played a role in the trajectories of cultural change of the different regions, which were interconnected by trade}
-    \item \emph{these two elements (cultural transmission and trade networks) are traditionally been studied as isolated systems}
-    \item \emph{this is wrong because blablabla...}
-    \item \emph{we propose a model of coevolution to explore the deep links between trade and cultural transmission in the ancient Mediterranean}
-\end{enumerate}
+
 
 %Organisation of the paper
 \todo{write once we are more sure of what we put}
@@ -232,6 +224,8 @@ The production, consumption and trade phases described are not modified. However
 \section{CONCLUSION}
 
 \section{DISCUSSION}
+
+%The questions we would like to ultimately study are for example: how does the hierarchical structure changes the adoption of a new product ? How delays and interruptions in the trade network change the culture of a society ?
 
 In future works numerous, more realistic and complex dynamics can be studied in the same model. First the constraints on the production could be relaxed so that each agent can choose the products it wishes to produce at the current time step. Moreover meterological factors can modify the quality of the production (noisy outcome of the proces) thus making the process more realistic and more complex~\cite{bentley_specialisation_2005}.
 
