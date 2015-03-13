@@ -68,16 +68,40 @@ In order to compare the different mechanisms used in the different paper we will
 \begin{table}
 	\centering
 	\begin{tabular}{l|c|c}
-		& Eco\footnote{a} & Rand \\\hline
+		& Rand & Gintis \\\hline
 		$\mu$ &A & B \\
-		$\mu +\alpha$ & B & C \\
+		$\mu +\alpha$ & C & D \\
 	\end{tabular}
 	\caption{Experimental Setup}
 	\label{tab:exp}
 \end{table}
 
 
+First we check how those different mechanisms impact the power law distribution.
 
+\begin{figure}[hbp]
+	\begin{center}
+		\includegraphics[width=6cm]{img/powerABCD.png}
+	\end{center}
+	\caption{power law for each exp define in table \ref{tab:exp} after 2000 step}
+	\label{fig:powerABCD}
+\end{figure}
+
+As expected depending on the selection process the repartition follow a power law (random selection) or a exponential law).
+
+Next let's have a look which combination lead to the right economical processes.
+
+\begin{table}
+	\centering
+	\begin{tabular}{l c c}
+		& Random Transmission & Gintis Transmission \\
+		FRI & \raisebox{-.5\height}{\includegraphics[width=5cm]{img/sdEvolEXP2.png}}&\raisebox{-.5\height}{\includegraphics[width=5cm]{img/sdEvolEXP2.png}} \\
+		GRI & \raisebox{-.5\height}{\includegraphics[width=5cm]{img/sdEvolEXP3.png}}&\raisebox{-.5\height}{\includegraphics[width=5cm]{img/sdEvolEXP4.png}}
+
+	\end{tabular}
+	\caption{Evolution of SD. FRI : Fully Random Innovation, GRI: Gintis Random Innovation}
+	\label{tab:sdevol}
+\end{table}
 
 \section{Other reflexion}
 \subsection{Discrete and finite inovation space}
