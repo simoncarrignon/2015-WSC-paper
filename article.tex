@@ -167,10 +167,25 @@ The only mandatory elements are a set of agents each possessing a fixed number o
 More formally the model is composed as follow. $r$ is the number of resources present in the environment. The whole population is defined by a vector of $m$ agents: 
 $$ population = (a_i, \cdots ,a_m) $$
 		
-Each agent $i$ is defined by 4 vectors each of size $r$. The first correspond to the quantity of each good that the agent possesses: $$ quantity = (q^i_1,\cdots,q^i_n) $$
+Each agent $i$ is defined by 2 vectors each of size $r$. The first correspond to the quantity of each good that the agent possesses: $$ quantity = (q^i_1,\cdots,q^i_r) $$
 
 Each agent makes its own estimate on the price to attribute to a certain good. This price estimate is used for both selling and buying goods :
-$$ values = (v^i_1,\cdots,p^i_n) $$
+$$ values = (v^i_1,\cdots,p^i_r) $$
+
+This scheme allow us to have a model achieving the two main goals listed in section~\ref{}. First, this model is flexible enough to allow the study of multiple hypothesis while conserving the same units that can therefore be compared between simulations. Second, few parameters are present in the model which makes it easier to analyse and reuse by other researchers.
+
+
+\subsection{Experiment design}
+
+In order to validate our model a first result from the literature on the evolutionary transmission is reproduced. We then tackle the inclusion of simple trade mechanisms in order to show the possibility to implement them and the possibility to compare the results obtained in both economy and cultural transmission.
+
+\subsubsection{Cultural Evolution}
+
+In our model the ``cultural change'' is represented by the variations in the distribution of prices for each good. In order to validate our model we will try two simple biases: simple random copying and frequency-dependent copying as \cite{mesoudi_random_2009}. The aim is to show that these simple modifications can allow us to observe the emergence of different cultures, each modifying the price structure obtained. The price structure obtained will be also compare to the obtained by the the economical model explained at the previous section.
+
+The production, consumption and trade phases described are not modified. However the price update phase is modified as follow. When the random copy behaviour is used each agent has a XXX\% chance to copy a new price from one agent selected randomly. Two frequency dependent behaviour are proposed. The first to be tested is the conformist behaviour with which each agent at each agent will have a XXXX\% chance to select the most common price for each good. The second to be tested is the rarity behaviour with which each agent at each iteration will have a XXX\% chance to select the least common beahviour.
+
+\subsubsection{Economical Trading}\label{trade}
 
 On top of producing the agents have the ability to exchange and consume the goods. 
 On the one side, the structure of the environment and the proceeding of a simulation will be the same for all hypothesis tested in this model. The specific rules for production, consumption and trading vary depending on the hypothesis tested. Nevertheless 
@@ -183,16 +198,6 @@ One time step of the simulation is divided in three phases. In the first phase a
  
 Finally, as mentioned before, each agent will consume a certain quantity of each good. This quantity can be a property of the agent, i.e. each agent consumes a different quantity of each product :
 $$ consumption = (c^i_1, \cdots, c^i_n) $$ 
-
-The elements listed above constitute the basic structure of the model. Different behaviours can be used for the agents and world depending on the assumption to test. This scheme allow us to have a model achieving the two main goals listed in section~\ref{}. First, this model has a simple behaviour and few parameters to analyse. Second, this model is flexible enough to allow the study of multiple hypothesis while conserving the same units that can therefore be compared between simulations.
-
-
-\subsection{Validation}
-\xrc{Validation is impossible for a theoretical model. Either you use verification if the goal is to check that implementation is correct, or design experiment for defining the experiments that will be used to explore the model.}
-
-In order to validate our model mulitple experiments from the litterature in economy or evolution of culture have been selected to be reproduced. The basis of selection of these experiments is two fold. First, the experiment selected has to be simple and highlight clearly one effect. This restriction is to maintain the clarity of the paper. Second, these effects should consist the basis of our further studies toward understanding the principles of the roman economics. As a consequence the hypothesis tested will constitute valid hypothesis for the study of the economics and culture of the roman empire.
-
-\subsubsection{Economical Trading}\label{trade}
 
 The production methods can vary depending of geographical or historical factors. In order to validate the relevance of the model, we will follow \cite{gintis_emergence_2006}. In this model, the goal is to observe the convergence of price to a market equilibrium in a bartering decentralized economy model. In the orignal model it is shown that the prices can converge to the market clearing price.
 
@@ -208,11 +213,7 @@ All agents of the simulation have the same constant consumption vector. A fixed-
 At the end of a time step, each agent has the opportunity to update its prices . Following the strategy proposed in the original model the XXX\% agents with the worst economical results adopt the strategy of the XXX\% best agents.
 
 
-\subsubsection{Cultural Evolution}
 
-In our model the ``cultural change'' is represented by the variations in the distribution of prices for each good. In order to validate our model we will try two simple biases: simple random copying and frequency-dependent copying as \cite{mesoudi_random_2009}. The aim is to show that these simple modifications can allow us to obvserve the emergence of different cultures, each modifying the price structure obtained. The price structure obtained will be also compare to the obtained by the the economical model explained at the previous section.
-
-The production, consumption and trade phases described are not modified. However the price update phase is modified as follow. When the random copy behaviour is used each agent has a XXX\% chance to copy a new price from one agent selected randomly. Two frequency dependent behaviour are proposed. The first to be tested is the conformist behaviour with which each agent at each agent will have a XXXX\% chance to select the most common price for each good. The second to be tested is the rarity behaviour with which each agent at each iteration will have a XXX\% chance to select the least common beahviour.
 
 
 
