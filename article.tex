@@ -8,6 +8,7 @@
 \usepackage{mathptmx}
 \usepackage[utf8]{inputenc}
 
+
 %****************************************************************************
 %% AUTHOR: You may want to use some of these packages. (Optional)
 %\usepackage{amsmath}
@@ -15,6 +16,20 @@
 %\usepackage{amssymb}
 %\usepackage{amsbsy}
 %\usepackage{amsthm}
+
+\usepackage{algorithm,algorithmicx,algpseudocode}
+\algnewcommand\And{\textbf{and}}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
 
 \usepackage{xcolor}
     \usepackage{cite}
@@ -64,7 +79,7 @@ In this article our aim is to present a model suitable to test various hypothese
 Here we present a model able it reproduces well known economical and cultural mechanism. Moreover this model can be envisioned to test hypothesis on those mechanisms. Given the appropriate match between the simulations and archaeological and historical data, the results of the model can be validated.
 
 
-\section{INTRODUCTION}
+\section{INTRODUCTION}\label{sec:intro}
 
 %XRC trade networks are increasingly being recognised as a key process in ancient Mediterranean
 Trades are being increasingly recognised as a key process in the structure of ancient Mediterranean societies. For example, the use of table ware in the Roman empire  has been linked to the trade network~\cite{brughmans_connecting_2010}. Interestingly this trade network has been shown to be a market economy~\cite{temin_market_2001}. The work presented in this paper proposes a framework to further study the relation between trade and culture within the roman empire. This work takes place within the EPNET project~\cite{remesal_epnet_2014}.
@@ -115,30 +130,15 @@ Based on this tool a relatively complex and exact modelisation of the prehispani
 %	pour 2006: etude de l'apparition d'inegalite
 
 
-\subsection{Modelisation of Culture}
+\subsection{Neutral models of cultural change}
 
-\xrc{models of cultural change, not culture in general?}
+The second component of our model is focused on the dynamics of cultural change. They comprise the collection of processes that promote or inhibit the spread of information by social interaction within a population \cite[3]{boyd_origin_2005}. This evolutionary framework is being used by an increasing number of social scientists, fostering the development of transdisciplinary efforts designed to understand cultural evolution \cite{henrich_evolution_2003}. Archaeology has a rich tradition of evolutionary studies \cite{lycett_cultural_2015}, exploring concepts such as gene-culture coevolution \cite{burger_absence_2007}, diffusion processes \cite{fort_synthesis_2012}, phylogenetic analysis of material culture \cite{obrien_cladistics_2001} or detection of rates of change in the archaeological record \cite{premo_cultural_2014}.
 
-\xrc{what is exactly the definition of culture used in the paper? I would suggest this one: \emph{Culture is socially learned information capable of affecting  individual phenotypes. People acquire culture from other individuals, via teaching or imitation} \cite{richerson_principles_1996}}
+A large percentage of these studies focus on the biases that affect the transmission of cultural traits, including the relevance of intrinsic traits and frequency dependance (e.g. conformism and anti-conformism). These analysis are often based in the genetic theory of neutral evolution \cite{neiman_stylistic_1995} and they take neutrality as a null-hypotheses (i.e. variation of traits is strictly explained by its frequency distribution in the population). There exist a large number of works using this model as the starting point to analyse patterns of cultural change in past societies \cite{lipo_neutralitystyle_2001,shennan_ceramic_2001,steele_ceramic_2010,kandler_nonequilibrium_2013,porcic_exploring_2014,crema_approximate_2014}.
 
-The second aspect we wish to model is the evolution of the culture in the Roman empire. The evolutionary framework (generally used in Biology) has been proposed to study the changes of culture and found to be suitable,  particularly in the case of historical and archaeological studies~\cite{lycett_cultural_2015,henrich_evolution_2003}\xrc{henrich's paper is not on archaeology or history, better reference \cite{shennan_evolution_2008}}.
+Unbiased transmission generates a clear pattern of power law distributions that can be replicated with a simple random copying transmission mechanism \cite{bentley_random_2004}. Within this framework, an individual will copy the traits of a randomly chosen individual with a given probability. This copy can potentially introduce some errors in the acquired trait, which account for innovation processes. The individual will in turn continue to spread these cultural traits which will be further adopted by other individuals. This basic model can be enriched by several additional processes both in the innovation \cite{schillinger_copying_2014,sole_evolutionary_2013,ziman_technological_2003} and the transmission \cite{heyes_social_1994,henrich_evolution_2003}.
 
-Within this framework, the individual preferences for cultural traits (such as music taste or shapes of pottery) are copied from one individual to the other. Each individual is then adding some small variations to this cultural trait she just acquired. The individual will in turn continue to spread these cultural traits which will be further adopted by other individuals. Studies are then performed on the three key steps of the framework: the transmission, the variation and the differential replication. Interestingly the study of these elements is not only done thanks to humans but also thanks to other animals.
-
-\xrc{I would use social learning instead of cultural transmission}
-
-The transmission mechanisms are the means used to transfer cultural traits from one individuals to another. A large number of social learning schemes can be envisioned~\cite{heyes_social_1994} \xrc{a better reference would be \cite{henrich_evolution_2003}}. Notably, the mechanisms do not necessarily have to be as complex as teaching, since emulation and imitation can be sufficient to pass on certain cultural traits.
-
-The variation mechanisms are at the heart of the creation of the creation of new cultural elements~\cite{obrien_variation_1990}. These may happen due to some errors during the copy process~\cite{schillinger_copying_2014}. In more recent culture we can witness the apparition of mutations with intentionality~\cite{ziman_technological_2003}\xrc{see also recombination \cite{sole_evolutionary_2013}}.
-
-\xrc{Instead of differential replication I would use \emph{biased selection}}
-The last element is the one that will interest us the most in this study: the differential replication between different cultural traits. If a cultural trait is found more often than the others in the population it means that something modified the rate at which it is adopted by each agent \xrc{beyond drift effects produced by random copy of neutral traits \cite{bentley_random_2004}}.
-%The reproduction rate of ideas in a population can be characterise by different rates: directional, disruptive or stabilisation~\cite{rendell_cognitive_2011}. 
-Multiple processes can be at play behind the reproduction \xrc{selection? transmission? reproduction is too biological} of cultural traits. Among them the three following will interest us due to their simplicity to test in an agent-based modelisation. First is the random copy of one trait from an agent to another agent. 
-\todo{get a ref on that} \xrc{you can use \cite{bentley_random_2004}}
-This type of mechanism reproduces well the changes in musical preferences \xrc{music here is odd; if an example is used it should be related to the topic of the paper}. Second are the the copy based on the frequency at which a cultural trait is observed. If a common trait is reproduced more often then we speak about ``conformity.'' If on the contrary the less common trait is preferred for reproduction we speak of ``rarity'' \xrc{nope, we speak of anti-conformism}. Finally a trait can be preferred depending on whom is carrying it. Among these preferences the prestige of the individual carrying it can constitute an explanation for the adoption foreign cultural traits in the Roman empire \xrc{this is known as model biased transmission}.
-
-\xrc{Again, I should focus the lit.review on models of cultural change in at least ancient societies, this is too broad.}
+In particular, the trade of cultural products within a market system can potentially introduce a dynamics content-related bias linked to the price of the different products. This would also affect the frequency of the product within the population, which in turn would modify its price following a co-evolutionary dynamic.
 
 \subsection{Modelisation of Trade and Culture}
 
@@ -157,74 +157,126 @@ The model presented in this work proposes to integrate the most interesting feat
 
 \section{MODEL DESCRIPTION}
 
-\todo{find another title}
-\subsection{Agent-based consumers and traders}
-%tell the story of what is happening
-
-The only mandatory elements are a set of agents each possessing a fixed number of goods and associate a value to each of these goods. The value can be for example either an interest in the good or the price associated to this good. The agents are also endowed with limited storage abilities for each good that can be produced. 
+In the model presented a set of agents are each in possession of a fixed number of goods and associate a value to each of these goods. Depending on the question studied, the value can reflect the interest of the agent for the good or it can be the price at which the agent evaluate this good. The agents are also endowed with limited storage abilities for each good that can be produced. 
 
 
 More formally the model is composed as follow. $r$ is the number of resources present in the environment. The whole population is defined by a vector of $m$ agents: 
 $$ population = (a_i, \cdots ,a_m) $$
 		
-Each agent $i$ is defined by 4 vectors each of size $r$. The first correspond to the quantity of each good that the agent possesses: $$ quantity = (q^i_1,\cdots,q^i_n) $$
+Each agent $i$ is defined by 2 vectors each of size $r$. The first correspond to the quantity of each good that the agent possesses: $$ quantity = (q^i_1,\cdots,q^i_r) $$
 
 Each agent makes its own estimate on the price to attribute to a certain good. This price estimate is used for both selling and buying goods :
-$$ values = (v^i_1,\cdots,p^i_n) $$
+$$ values = (v^i_1,\cdots,p^i_r) $$
 
-On top of producing the agents have the ability to exchange and consume the goods. 
-On the one side, the structure of the environment and the proceeding of a simulation will be the same for all hypothesis tested in this model. The specific rules for production, consumption and trading vary depending on the hypothesis tested. Nevertheless 
+On top of these elements three processes are included : production, imitation and innovation. The \textit{production} process describe the creation of goods by the agent. In this article each agent is producing only one type of good. The type good produced by an agent is assigned to it at the beginning of the simulation and does not change. Once a good is produced it is added to the quantity vector of the agent. Within the \textit{imitation} process an agent can copy the value vector of another agent. The \textit{innovation} process reflects the possibility for an agent to associate new values for the goods. For this, an agent can select new elements for its value vector independently of the values of other agents. 
 
-One time step of the simulation is divided in three phases. In the first phase all agents produce goods. Each agent is assigned one type of good, and it will produce only this type of good at each first phase. In the second phase all agents enter trade with other agents according to their own interest. Each agent has the possibility to choose with which other agent it will trade products. Once two agents agree to trade, the agents decide which products will be exchanged and in which quantities. When an agreement is found, the trade occur and the agents look for other potential partners. Within one trading phase, an agent can meet only one time each other agents. In the third phase all agent consume goods according to their own rules. A unit of a good consumed disappears from the stock of the agent.
-
-%In the simulation agents produce goods that they will barter (cf section \ref{trade}) and consume (cf section \ref{consumption}). This goods production should reflect the historical good production of the period studied and agent could produce various good in order to barter or sell them using the trade network.
-
-
- 
-Finally, as mentioned before, each agent will consume a certain quantity of each good. This quantity can be a property of the agent, i.e. each agent consumes a different quantity of each product :
-$$ consumption = (c^i_1, \cdots, c^i_n) $$ 
-
-The elements listed above constitute the basic structure of the model. Different behaviours can be used for the agents and world depending on the assumption to test. This scheme allow us to have a model achieving the two main goals listed in section~XXX. First, this model has a simple behaviour and few parameters to analyse. Second, this model is flexible enough to allow the study of multiple hypothesis while conserving the same units that can therefore be compared between simulations.
-
-
-\subsection{Validation}
-\xrc{Validation is impossible for a theoretical model. Either you use verification if the goal is to check that implementation is correct, or design experiment for defining the experiments that will be used to explore the model.}
-
-In order to validate our model mulitple experiments from the litterature in economy or evolution of culture have been selected to be reproduced. The basis of selection of these experiments is two fold. First, the experiment selected has to be simple and highlight clearly one effect. This restriction is to maintain the clarity of the paper. Second, these effects should consist the basis of our further studies toward understanding the principles of the roman economics. As a consequence the hypothesis tested will constitute valid hypothesis for the study of the economics and culture of the roman empire.
-
-\subsubsection{Economical Trading}\label{trade}
-
-The production methods can vary depending of geographical or historical factors. In order to validate the relevance of the model, we will follow \cite{gintis_emergence_2006}. In this model, the goal is to observe the convergence of price to a market equilibrium in a bartering decentralized economy model. In the orignal model it is shown that the prices can converge to the market clearing price.
-
-In this economical model the agents are ranked with regards to the value of their stock. This value is computed as follow ...
-\todo{find the computation}
-
-In this model each agent produces only one type of good. During the trading process, all agents meet each other. Since one agent is producing only one good it will only trade with the agents not producing this good. The procedure to choose the trading partners is detailed in algorithm XXXX.
-\todo{do the algorithm}
-Briefly summarised, for each good that it does not produced, an agent will look for the parter that offer the best trade, i.e. the agent that proposes to exchange the most of the other product for the fewest of the product produced by the agent.
-
-All agents of the simulation have the same constant consumption vector. A fixed-for-everyone proportion $b_1,\cdots,b_n$ of each resource $(1, \cdots, n)$ is given at the beginning of the simulation. At the end of the consumption phase all remaining products are removed from the agents.
-
-At the end of a time step, each agent has the opportunity to update its prices . Following the strategy proposed in the original model the XXX\% agents with the worst economical results adopt the strategy of the XXX\% best agents.
-
-
-\subsubsection{Cultural Evolution}
-
-In our model the ``cultural change'' is represented by the variations in the distribution of prices for each good. In order to validate our model we will try two simple biases: simple random copying and frequency-dependent copying as \cite{mesoudi_random_2009}. The aim is to show that these simple modifications can allow us to obvserve the emergence of different cultures, each modifying the price structure obtained. The price structure obtained will be also compare to the obtained by the the economical model explained at the previous section.
-
-The production, consumption and trade phases described are not modified. However the price update phase is modified as follow. When the random copy behaviour is used each agent has a XXX\% chance to copy a new price from one agent selected randomly. Two frequency dependent behaviour are proposed. The first to be tested is the conformist behaviour with which each agent at each agent will have a XXXX\% chance to select the most common price for each good. The second to be tested is the rarity behaviour with which each agent at each iteration will have a XXX\% chance to select the least common beahviour.
-
+This scheme allow us to have a model achieving the two main goals listed in section~\ref{sec:intro}. First, this model allows us to test various cultural transmission mechanisms as well as trade mechanisms. The experiments presented in this article show examples of implementations for both categories. Moreover, the fact that only three processes are modified allow comparisons between simulations with the same units. In this article the \textit{production} process will remain the same and only the \textit{imitation} and \textit{innovation} processes are changed. Second, few parameters are present in the default model which makes it easier to analyse and reuse by other researchers.
 
 
 \section{EXPERIMENTAL SETUP}
 
-\section{RESULTS}
-\subsection{Random cultural transmission and random innovation process}
-In our model, agent own a set of price they assign to a certain number of resources. Those prices could be seen as the importance, or the ``value''  that each agents believe each good bears. It could be seen as cultural traits that agents can modify or share with other agent. In the first experiment the value of those traits does not impact the agent  behavior neither the way they will modify and share it. 
-\subsubsection{One trait}
+
+In order to validate our model a first result from the literature on the evolutionary transmission is reproduced. We then illustrate the possibility to implement a trade mechanisms. 
+
+\subsection{Cultural Transmission}
+
+In this article the cultural transmission tested is the ``random copy" such as presented in~\cite{mesoudi_random_2009}. The aim is to show that our model is indeed able to reproduce the main trends expected with such copy mechanism. Namely, we should observe a distribution known as the power law, displaying a line in the log-log graph of the proportion of variants with regards to the frequency of variant.
+
+The imitation process is a ``random copy" meaning that with a low probability each agent pick randomly one agent among all and copy it's vector of values. The innovation process is triggered with a low probability and select new elements for the vector of values. These new elements are drawn from a uniform distribution. The imitation and innovation probabilities are presented with other parameters in table~\ref{tab:parameters}
+
+%%A integrer
 Knowing that and following \cite{bentley_random_2004,bentley_specialisation_2005,mesoudi_random_2009}, we think that in our model those prices will behave exactly like any other cultural trait, and that the different version of prices for each good will be found in the population in proportion that follow a power law.
 
 It's indeed what we observe. In the first experiment, in order to compare our result with those of the literature, we use only one price. We check for some of the same $\mu$ value used in \cite{bentley_specialisation_2005,mesoudi_random_2009} that the distribution of the number of variants are the same. 
+
+\subsection{Trading Model}\label{sec:trade}
+%%à integrer
+In the previous experiment the estimate price of good have no impact on the agents choices and behaviors. In a real economical system it's not the case. In order to approximate such a process and to see how our framework could handle economical mechanism we introduce a new cultural transmission mechanism. 
+
+This time agent will not copying randomly the vector of price from one random individual but they will choose among the agent that produce the same good those that seem the most successful. In practice, a fixed proportion of the less successful agents will copy the prices of the more successful agent. 
+
+
+Meanwhile time the innovation mechanism used in the experiment  we follow in the previous section seems not  an adequate economical mechanism. While in a cultural point a view an innovation could be anything new in you space innovation, it's seem little probable than a price will be change to something totally new. 
+
+That why we  introduce a new innovation mechanism which will also occur with a probability of $\mu$ but this time, instead of set a totally new price, it will modify the previous price by adding or subtract to it a small amount randomly choose between $0 .. \beta$.
+
+\paragraph{Imitation}
+To test a simple trading model, two notions are introduced in the imitation mechanism: need and score. The need is a quantity of product that each agent tries to obtain. This quantity is different for each product but the need for a product is the same for all agents:
+$$ need = (n_1, \cdots, n_r) $$ 
+
+The score reflects the ability for an agent to obtain the products it needs, it is formally computed as follow for agent $i$:
+
+$$ \abs{\dfrac{q^i_j - n_j}{ \sqrt{\abs{(q^i_j*q^i_j)-(n_j*n_j)}}}} $$
+
+%%A integrer
+To express this idea of success we define a score that is maximum when you manage to have exactly the needed amount for each good. If you exchange too much or too few of one of the good your score will decreased. The score is computed in such a way that each good count for the same proportion in the final score (i.e.: managing to get only the right amount of a good with a high ``need'' value won't help you to increase your score).
+
+\paragraph{Trading} 
+
+\todo{miss the formula for a possible trade}
+
+On top of producing the agents have the ability to exchange and consume the goods. During the trading phase the value associated to a good by an agent corresponds to the subjective price of the good for this agent. Briefly summarised, for each good that it does not produced, an agent will trade with the first parter that offer an acceptable trade, i.e. the agent that proposes a satisfiable ratio between the other product and the product produced by the agent. In more detail, the trading phase start by the agent looking at a first random agent producing another product. A trade is possible with the other agent if the following condition holds:
+
+$$ hey $$
+
+If a trade is possible the two agents will exchange the agreed quantities. If the trade is not possible, the agent will continue to look at random partners for this good until either a good is find or $TradeThreshold$ agents have been tried. At this point the agent will try to trade with agents producing another good. The process goes on until all goods have been tried. This trading process is described in algorithm~\ref{algo:trade}.
+
+\begin{algorithm}
+\caption{Trading Process}
+\label{algo:trade}
+	\begin{algorithmic}[1]
+	\scriptsize
+		\For{$Good_i \in Goods \And i \neq A_g $}
+			\State $tradeAttempt = 0$
+			\For{$A_i \in Good_i \And tradeAttempt < TradeThreshold $}
+				\If{$acceptableTrade(A_i)$}
+					\State $trade(A_i)$
+				\Else
+					\State $tradeAttempt = tradeAttempt + 1$					
+				\EndIf
+			\EndFor
+		\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+The trading process is performed at every iteration while the imitation and innovation processes are executed only every $CulturalStep$. The idea behind this is to perform the imitation based on a score that reflects the performance of the agent and not only one lucky or unlucky trading round.
+
+\paragraph{Innovation} The innovation process is triggered with a low probability and select new elements for the vector of values. These new elements are drawn from a uniform distribution centred on the current value of each product.
+
+\subsection{Complete model}
+
+The model used in these experiments, including the cultural transmission and trading mechanisms, is described in algorithms~\ref{algo:complete}
+
+\begin{algorithm}
+\caption{Trading Process}
+\label{algo:complete}
+	\begin{algorithmic}[1]
+	\scriptsize
+	\State INITIALIZATION: 
+		\For{$Good_i \in Goods$}
+			\For{$Agents per Goods$}
+				\State $A_i = (g_i,p_i,n_i)$
+			\EndFor
+		\EndFor
+
+	\State SIMULATION:
+		\Loop{$step \in TimeSteps$}
+			\For{$A_i \in Pop$}
+				\State $Production$
+				\State $Trade$				
+				\If{$step CulturalStep$}	
+					\State $Imitation$
+					\State $Inovation$
+				\EndIf
+			\EndFor
+		\EndLoop
+\end{algorithmic}
+\end{algorithm}
+
+
+\section{RESULTS}
+\subsection{Random cultural transmission and random innovation process}
+\subsubsection{One trait}
 
 That is what we can see in the figure \ref{fig:allMutation}.
 
@@ -268,33 +320,25 @@ Those distribution exhibit power law like attribute and we can fit them. The res
 
 \subsubsection{Multiple traits co-evolving randomly}
 \simon{ this part could be resumed to one phrase saying that nothing change and that we check it without showing any result moreover}
-As our aims is to study the evolution of an economy where people exchange different goods, we have checked if the previous results are the same when the agents own not just one price for one good but a vector of price associated to each good available in the environment. If the innovation process assure that all price could be modified in totally independent way, when a cultural transmission occur agents copy the whole vector of price from another agent.  We show in the table~\ref{tab:alphagoods} the mean of $\alpha$ between each resource for different number of resource.
+As our aims is to study the evolution of an economy where people exchange different goods, we have checked if the previous results are the same when the agents own not just one price for one good but a vector of price associated to each good available in the environment. And every thing is OKAY
 
-\begin{table}
-	\centering
-		\begin{tabular}{l|cccc}
-			  & g=1  & g= 2 & g=3 & g=4 \\\hline
-			$\alpha$&\\
-			sd \\
-		\end{tabular}
-	\caption{alpha is the mean alpha between each good for 100 runs }
-	\label{tab:alphagoods}
-\end{table}
+
+%\begin{table}
+%	\centering
+%		\begin{tabular}{l|cccc}
+%			  & g=1  & g= 2 & g=3 & g=4 \\\hline
+%			$\alpha$&\\
+%			sd \\
+%		\end{tabular}
+%	\caption{alpha is the mean alpha between each good for 100 runs }
+%	\label{tab:alphagoods}
+%\end{table}
 
 
 
 
 \subsection{ Economical  process}
 
-In the previous experiment the estimate price of good have no impact on the agents choices and behaviors. In a real economical system it's not the case. In order to approximate such a process and to see how our framework could handle economical mechanism we introduce a new cultural transmission mechanism. 
-
-This time agent will not copying randomly the vector of price from one random individual but they will choose among the agent that produce the same good those that seem the most successful. In practice, a fixed proportion of the less successful agents will copy the prices of the more successful agent. 
-
-To express this idea of success we define a score that is maximum when you manage to have exactly the needed amount for each good. If you exchange too much or too few of one of the good your score will decreased. The score is computed in such a way that each good count for the same proportion in the final score (i.e.: managing to get only the right amount of a good with a high ``need'' value won't help you to increase your score).
-
-Meanwhile time the innovation mechanism used in the experiment  we follow in the previous section seems not  an adequate economical mechanism. While in a cultural point a view an innovation could be anything new in you space innovation, it's seem little probable than a price will be change to something totally new. 
-
-That why we  introduce a new innovation mechanism which will also occur with a probability of $\mu$ but this time, instead of set a totally new price, it will modify the previous price by adding or subtract to it a small amount randomly choose between $0 .. \beta$.
 
 
 In order to study the impact of the introduction of those new mechanism  we summarize it in the table~\ref{tab:exp}. 
