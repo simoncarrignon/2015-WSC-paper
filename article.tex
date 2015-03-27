@@ -16,6 +16,17 @@
 %\usepackage{amsbsy}
 %\usepackage{amsthm}
 
+\usepackage{mathtools}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
 \usepackage{xcolor}
     \usepackage{cite}
 
@@ -64,7 +75,7 @@ In this article our aim is to present a model suitable to test various hypothese
 Here we present a model able it reproduces well known economical and cultural mechanism. Moreover this model can be envisioned to test hypothesis on those mechanisms. Given the appropriate match between the simulations and archaeological and historical data, the results of the model can be validated.
 
 
-\section{INTRODUCTION}
+\section{INTRODUCTION}\label{sec:intro}
 
 %XRC trade networks are increasingly being recognised as a key process in ancient Mediterranean
 Trades are being increasingly recognised as a key process in the structure of ancient Mediterranean societies. For example, the use of table ware in the Roman empire  has been linked to the trade network~\cite{brughmans_connecting_2010}. Interestingly this trade network has been shown to be a market economy~\cite{temin_market_2001}. The work presented in this paper proposes a framework to further study the relation between trade and culture within the roman empire. This work takes place within the EPNET project~\cite{remesal_epnet_2014}.
@@ -157,11 +168,7 @@ The model presented in this work proposes to integrate the most interesting feat
 
 \section{MODEL DESCRIPTION}
 
-\todo{find another title}
-\subsection{Agent-based consumers and traders}
-%tell the story of what is happening
-
-The only mandatory elements are a set of agents each possessing a fixed number of goods and associate a value to each of these goods. The value can be for example either an interest in the good or the price associated to this good. The agents are also endowed with limited storage abilities for each good that can be produced. 
+In the model presented a set of agents are each in possession of a fixed number of goods and associate a value to each of these goods. Depending on the question studied, the value can reflect the interest of the agent for the good or it can be the price at which the agent evaluate this good. The agents are also endowed with limited storage abilities for each good that can be produced. 
 
 
 More formally the model is composed as follow. $r$ is the number of resources present in the environment. The whole population is defined by a vector of $m$ agents: 
@@ -172,32 +179,47 @@ Each agent $i$ is defined by 2 vectors each of size $r$. The first correspond to
 Each agent makes its own estimate on the price to attribute to a certain good. This price estimate is used for both selling and buying goods :
 $$ values = (v^i_1,\cdots,p^i_r) $$
 
-This scheme allow us to have a model achieving the two main goals listed in section~\ref{}. First, this model is flexible enough to allow the study of multiple hypothesis while conserving the same units that can therefore be compared between simulations. Second, few parameters are present in the model which makes it easier to analyse and reuse by other researchers.
+On top of these elements two processes are included : imitation and innovation. The first one reflects the possibility for agents to imitate other agents. For this, an agent can copy the value vector of another agent. The second process reflects the possibility for an agent to associate new values for the goods. For this, an agent can select new elements for its value vector independently of the values of other agents. 
+
+This scheme allow us to have a model achieving the two main goals listed in section~\ref{sec:intro}. First, this model allows us to test various cultural transmission mechanisms as well as trade mechanisms. The experiments presented in this article show examples of implementations for both categories. Moreover, the fact that only two processes are modified allow comparisons between simulations with the same units. Second, few parameters are present in the default model which makes it easier to analyse and reuse by other researchers.
 
 
-\subsection{Experiment design}
+\section{EXPERIMENTAL SETUP}
 
-In order to validate our model a first result from the literature on the evolutionary transmission is reproduced. We then tackle the inclusion of simple trade mechanisms in order to show the possibility to implement them and the possibility to compare the results obtained in both economy and cultural transmission.
 
-\subsubsection{Cultural Evolution}
+In order to validate our model a first result from the literature on the evolutionary transmission is reproduced. We then illustrate the possibility to implement a trade mechanisms.
 
-In our model the ``cultural change'' is represented by the variations in the distribution of prices for each good. In order to validate our model we will try two simple biases: simple random copying and frequency-dependent copying as \cite{mesoudi_random_2009}. The aim is to show that these simple modifications can allow us to observe the emergence of different cultures, each modifying the price structure obtained. The price structure obtained will be also compare to the obtained by the the economical model explained at the previous section.
+\subsection{Cultural Transmission}
 
-The production, consumption and trade phases described are not modified. However the price update phase is modified as follow. When the random copy behaviour is used each agent has a XXX\% chance to copy a new price from one agent selected randomly. Two frequency dependent behaviour are proposed. The first to be tested is the conformist behaviour with which each agent at each agent will have a XXXX\% chance to select the most common price for each good. The second to be tested is the rarity behaviour with which each agent at each iteration will have a XXX\% chance to select the least common beahviour.
+In this article the cultural transmission tested is the ``random copy" such as presented in~\cite{mesoudi_random_2009}. The aim is to show that our model is indeed able to reproduce the main trends expected with such copy mechanism. Namely, we should observe a distribution known as the power law, displaying a line in the log-log graph of the proportion of variants with regards to the frequency of variant.
 
-\subsubsection{Economical Trading}\label{trade}
+The imitation process is a ``random copy" meaning that with a low probability each agent pick randomly one agent among all and copy it's vector of values. The innovation process is triggered with a low probability and select new elements for the vector of values. These new elements are drawn from a uniform distribution. The imitation and innovation probabilities are presented with other parameters in table~\ref{tab:parameters}
+
+
+\subsection{Trading Model}\label{sec:trade}
+
+\paragraph*{Imitation}
+To test a simple trading model, two notions are introduced in the imitation mechanism: need and score. The need is a quantity of product that each agent tries to obtain. This quantity is different for each product but the need for a product is the same for all agents:
+$$ need = (n_1, \cdots, n_r) $$ 
+
+The score reflects the ability for an agent to obtain the products it needs, it is formally computed as follow for agent $i$:
+
+$$ \abs{\dfrac{q^i_j - n_j}{ \sqrt{\abs{(q^i_j*q^i_j)-(n_j*n_j)}}}} $$
+
+
+\paragraph*{Trading}
 
 On top of producing the agents have the ability to exchange and consume the goods. 
 On the one side, the structure of the environment and the proceeding of a simulation will be the same for all hypothesis tested in this model. The specific rules for production, consumption and trading vary depending on the hypothesis tested. Nevertheless 
+
+\paragraph*{Innovation}
 
 One time step of the simulation is divided in three phases. In the first phase all agents produce goods. Each agent is assigned one type of good, and it will produce only this type of good at each first phase. In the second phase all agents enter trade with other agents according to their own interest. Each agent has the possibility to choose with which other agent it will trade products. Once two agents agree to trade, the agents decide which products will be exchanged and in which quantities. When an agreement is found, the trade occur and the agents look for other potential partners. Within one trading phase, an agent can meet only one time each other agents. In the third phase all agent consume goods according to their own rules. A unit of a good consumed disappears from the stock of the agent.
 
 %In the simulation agents produce goods that they will barter (cf section \ref{trade}) and consume (cf section \ref{consumption}). This goods production should reflect the historical good production of the period studied and agent could produce various good in order to barter or sell them using the trade network.
 
 
- 
-Finally, as mentioned before, each agent will consume a certain quantity of each good. This quantity can be a property of the agent, i.e. each agent consumes a different quantity of each product :
-$$ consumption = (c^i_1, \cdots, c^i_n) $$ 
+
 
 The production methods can vary depending of geographical or historical factors. In order to validate the relevance of the model, we will follow \cite{gintis_emergence_2006}. In this model, the goal is to observe the convergence of price to a market equilibrium in a bartering decentralized economy model. In the orignal model it is shown that the prices can converge to the market clearing price.
 
@@ -213,11 +235,6 @@ All agents of the simulation have the same constant consumption vector. A fixed-
 At the end of a time step, each agent has the opportunity to update its prices . Following the strategy proposed in the original model the XXX\% agents with the worst economical results adopt the strategy of the XXX\% best agents.
 
 
-
-
-
-
-\section{EXPERIMENTAL SETUP}
 
 \section{RESULTS}
 
