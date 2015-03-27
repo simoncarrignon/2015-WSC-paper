@@ -184,7 +184,7 @@ One time step of the simulation is divided in three phases. In the first phase a
 Finally, as mentioned before, each agent will consume a certain quantity of each good. This quantity can be a property of the agent, i.e. each agent consumes a different quantity of each product :
 $$ consumption = (c^i_1, \cdots, c^i_n) $$ 
 
-The elements listed above constitute the basic structure of the model. Different behaviours can be used for the agents and world depending on the assumption to test. This scheme allow us to have a model achieving the two main goals listed in section~\ref{}. First, this model has a simple behaviour and few parameters to analyse. Second, this model is flexible enough to allow the study of multiple hypothesis while conserving the same units that can therefore be compared between simulations.
+The elements listed above constitute the basic structure of the model. Different behaviours can be used for the agents and world depending on the assumption to test. This scheme allow us to have a model achieving the two main goals listed in section~XXX. First, this model has a simple behaviour and few parameters to analyse. Second, this model is flexible enough to allow the study of multiple hypothesis while conserving the same units that can therefore be compared between simulations.
 
 
 \subsection{Validation}
@@ -219,6 +219,100 @@ The production, consumption and trade phases described are not modified. However
 \section{EXPERIMENTAL SETUP}
 
 \section{RESULTS}
+\subsection{Random cultural transmission and random innovation process}
+In our model, agent own a set of price they assign to a certain number of resources. Those prices could be seen as the importance, or the ``value''  that each agents believe each good bears. It could be seen as cultural traits that agents can modify or share with other agent. In the first experiment the value of those traits does not impact the agent  behavior neither the way they will modify and share it. 
+\subsubsection{One trait}
+Knowing that and following \cite{bentley_random_2004,bentley_specialisation_2005,mesoudi_random_2009}, we think that in our model those prices will behave exactly like any other cultural trait, and that the different version of prices for each good will be found in the population in proportion that follow a power law.
+
+It's indeed what we observe. In the first experiment, in order to compare our result with those of the literature, we use only one price. We check for some of the same $\mu$ value used in \cite{bentley_specialisation_2005,mesoudi_random_2009} that the distribution of the number of variants are the same. 
+
+That is what we can see in the figure \ref{fig:allMutation}.
+
+Each curves on the figures show the mean for 100 runs. In our experiment one has to take in account that agents modifies their prices or exchange their price only every ten steps. Between, they exchange goods given their own prices. Therefore we choose to run our simulation during 10000 step which correspond the 1000 time steps used by \cite{bentley_random_2004,mesoudi_random_2009}, for $\mu$ the innovation rate $\in {.004,.008,.016,.064}$ and for 250 and 500 agents.
+
+\simon{reference to the R package and the theoreticla ref in the Rpackage?}
+Those distribution exhibit power law like attribute and we can fit them. The result of the alpha fitted with are in the table \ref{tab:mualpha}. The alpha values represent the mean of the fitted alpha for each run computed using RPACKAGE with the standard deviation associated with each mean.
+\begin{figure}[hbp]
+	\begin{center}
+		\includegraphics[width=7cm]{img/allmuRandMaxBentleyValues.pdf}
+	\end{center}
+	\caption{rand()\%RAND\_MAX}
+	\label{fig:allMutation}
+\end{figure}
+
+
+\begin{table}
+	\centering
+	\begin{tabular}{cc}
+		\begin{tabular}{l|cc}
+			$\mu$ & $\alpha$ & SD\\\hline
+			0.004&1.541193&0.031384174\\
+			0.008&1.549726&0.021953251\\
+			0.016&1.568096&0.017025456\\
+			0.064&1.651690&0.006538209\\
+
+		\end{tabular}
+		&
+		\begin{tabular}{l|cc}
+			$\mu$ & $\alpha$ & SD\\\hline
+			0.004&1.539710&0.022515901\\
+			0.008&1.557460&0.017805810\\
+			0.016&1.570036&0.004412181\\
+			0.064&1.651521&0.009988488\\
+		\end{tabular}\\
+		(a) & (b)
+	\end{tabular}
+	\caption{Mean \& SD are done with 100 run for each with 250 agent for (a) and 500 for (b) }
+	\label{tab:mualpha}
+\end{table}
+
+\subsubsection{Multiple traits co-evolving randomly}
+\simon{ this part could be resumed to one phrase saying that nothing change and that we check it without showing any result moreover}
+As our aims is to study the evolution of an economy where people exchange different goods, we have checked if the previous results are the same when the agents own not just one price for one good but a vector of price associated to each good available in the environment. If the innovation process assure that all price could be modified in totally independent way, when a cultural transmission occur agents copy the whole vector of price from another agent.  We show in the table~\ref{tab:alphagoods} the mean of $\alpha$ between each resource for different number of resource.
+
+\begin{table}
+	\centering
+		\begin{tabular}{l|cccc}
+			  & g=1  & g= 2 & g=3 & g=4 \\\hline
+			$\alpha$&\\
+			sd \\
+		\end{tabular}
+	\caption{alpha is the mean alpha between each good for 100 runs }
+	\label{tab:alphagoods}
+\end{table}
+
+
+
+
+\subsection{ Economical  process}
+
+In the previous experiment the estimate price of good have no impact on the agents choices and behaviors. In a real economical system it's not the case. In order to approximate such a process and to see how our framework could handle economical mechanism we introduce a new cultural transmission mechanism. 
+
+This time agent will not copying randomly the vector of price from one random individual but they will choose among the agent that produce the same good those that seem the most successful. In practice, a fixed proportion of the less successful agents will copy the prices of the more successful agent. 
+
+To express this idea of success we define a score that is maximum when you manage to have exactly the needed amount for each good. If you exchange too much or too few of one of the good your score will decreased. The score is computed in such a way that each good count for the same proportion in the final score (i.e.: managing to get only the right amount of a good with a high ``need'' value won't help you to increase your score).
+
+Meanwhile time the innovation mechanism used in the experiment  we follow in the previous section seems not  an adequate economical mechanism. While in a cultural point a view an innovation could be anything new in you space innovation, it's seem little probable than a price will be change to something totally new. 
+
+That why we  introduce a new innovation mechanism which will also occur with a probability of $\mu$ but this time, instead of set a totally new price, it will modify the previous price by adding or subtract to it a small amount randomly choose between $0 .. \beta$.
+
+
+In order to study the impact of the introduction of those new mechanism  we summarize it in the table~\ref{tab:exp}. 
+\begin{table}
+	\centering
+	\begin{tabular}{l|c|c}
+		& Rand & Eco \\\hline
+		$\mu$ &A & B \\
+		$\mu +\alpha$ & C & D \\
+	\end{tabular}
+	\caption{Experimental Setup}
+	\label{tab:exp}
+\end{table}
+
+
+The following  experiments will last longer than the firsts one because this time the exchange mechanisms will have an impact on the evolution of prices in the population. All the next experiments are run during 200000 steps with a innovation rate $\mu=.004$ and $\beta=.001$.
+
+
 
 \section{CONCLUSION}
 
