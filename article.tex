@@ -176,40 +176,29 @@ This scheme allow us to have a model achieving the two main goals listed in sect
 \section{EXPERIMENTAL SETUP}
 
 
-In order to validate our model a first result from the literature on the evolutionary transmission is reproduced. We then illustrate the possibility to implement a trade mechanisms. 
+In order to validate our model a result from the literature on cultural transmission is reproduced. We then illustrate the possibility to implement a trade mechanisms. 
 
 \subsection{Cultural Transmission}
 
-In this article the cultural transmission tested is the ``random copy" such as presented in~\cite{mesoudi_random_2009}. The aim is to show that our model is indeed able to reproduce the main trends expected with such copy mechanism. Namely, we should observe a distribution known as the power law, displaying a line in the log-log graph of the proportion of variants with regards to the frequency of variant.
+In this article the neutral hypothesis is tested which implies that the cultural transmission mechanism is the ``random copy"~\cite{bentley_random_2004,bentley_specialisation_2005,mesoudi_random_2009}. The aim is to show that our model is indeed able to reproduce the main trends expected with such copy mechanism. Namely, we should observe a distribution known as the ``power law'', displaying a line in the log-log graph of the proportion of variants with regards to the frequency of variant.
 
-The imitation process is a ``random copy" meaning that with a low probability each agent pick randomly one agent among all and copy it's vector of values. The innovation process is triggered with a low probability and select new elements for the vector of values. These new elements are drawn from a uniform distribution. The imitation and innovation probabilities are presented with other parameters in table~\ref{tab:parameters}
-
-%%A integrer
-Knowing that and following \cite{bentley_random_2004,bentley_specialisation_2005,mesoudi_random_2009}, we think that in our model those prices will behave exactly like any other cultural trait, and that the different version of prices for each good will be found in the population in proportion that follow a power law.
-
-It's indeed what we observe. In the first experiment, in order to compare our result with those of the literature, we use only one price. We check for some of the same $\mu$ value used in \cite{bentley_specialisation_2005,mesoudi_random_2009} that the distribution of the number of variants are the same. 
+The imitation process of ``random copy" is implemented by a low probability for each agent to pick randomly one agent among all and copy its vector of values. The innovation process is triggered with a low probability and select new elements for the vector of values. These new elements are drawn from a uniform distribution. The imitation and innovation probabilities are presented with other parameters in table~\ref{tab:parameters}.
 
 \subsection{Trading Model}\label{sec:trade}
-%%à integrer
-In the previous experiment the estimate price of good have no impact on the agents choices and behaviors. In a real economical system it's not the case. In order to approximate such a process and to see how our framework could handle economical mechanism we introduce a new cultural transmission mechanism. 
-
-This time agent will not copying randomly the vector of price from one random individual but they will choose among the agent that produce the same good those that seem the most successful. In practice, a fixed proportion of the less successful agents will copy the prices of the more successful agent. 
-
-
-Meanwhile time the innovation mechanism used in the experiment  we follow in the previous section seems not  an adequate economical mechanism. While in a cultural point a view an innovation could be anything new in you space innovation, it's seem little probable than a price will be change to something totally new. 
-
-That why we  introduce a new innovation mechanism which will also occur with a probability of $\mu$ but this time, instead of set a totally new price, it will modify the previous price by adding or subtract to it a small amount randomly choose between $0 .. \beta$.
 
 \paragraph{Imitation}
-To test a simple trading model, two notions are introduced in the imitation mechanism: need and score. The need is a quantity of product that each agent tries to obtain. This quantity is different for each product but the need for a product is the same for all agents:
+In the cultural transmission model the value vector does not impact the imitation process. When trading is involved it is not not the case. In order to model such aspect we introduce a new cultural transmission mechanism taking into account the value vector. This mechanism is based on two new notions: need and score. 
+
+The need is a quantity of product that each agent tries to obtain. This quantity is different for each product but the need for a product is the same for all agents:
 $$ need = (n_1, \cdots, n_r) $$ 
 
-The score reflects the ability for an agent to obtain the products it needs, it is formally computed as follow for agent $i$:
+The score reflects the ability for an agent to obtain the products it needs. It is maximum when the quantity vector of an agent is equal to its need vector and lower in proportion to the distance between the need vector and the quantity vector.  It is formally computed as follow for agent $i$:
 
-$$ \abs{\dfrac{q^i_j - n_j}{ \sqrt{\abs{(q^i_j*q^i_j)-(n_j*n_j)}}}} $$
+$$ 1- \abs{\dfrac{q^i_j - n_j}{ \sqrt{\abs{(q^i_j*q^i_j)-(n_j*n_j)}}}} $$
 
-%%A integrer
-To express this idea of success we define a score that is maximum when you manage to have exactly the needed amount for each good. If you exchange too much or too few of one of the good your score will decreased. The score is computed in such a way that each good count for the same proportion in the final score (i.e.: managing to get only the right amount of a good with a high ``need'' value won't help you to increase your score).
+This function ensures that each good count for the same proportion in the final score (i.e.: managing to get only the right amount of a good with a high ``need'' value will not give a better score to the agent).
+
+The agents will choose the agent from whom the price vector should be copied among the agents that produce the same good and have the highest score. In practice, a fixed proportion of the less successful agents will copy the prices of the most successful agent. 
 
 \paragraph{Trading} 
 
@@ -219,7 +208,7 @@ On top of producing the agents have the ability to exchange and consume the good
 
 $$ hey $$
 
-If a trade is possible the two agents will exchange the agreed quantities. If the trade is not possible, the agent will continue to look at random partners for this good until either a good is find or $TradeThreshold$ agents have been tried. At this point the agent will try to trade with agents producing another good. The process goes on until all goods have been tried. This trading process is described in algorithm~\ref{algo:trade}.
+If a trade is possible the two agents will exchange the agreed quantities. If the trade is not possible, the agent will continue to look at random partners for this good until either a good is found or $TradeThreshold$ agents have been tried. At this point the agent will try to trade with agents producing another good. The process goes on until all goods have been tried. This trading process is described in algorithm~\ref{algo:trade}.
 
 \begin{algorithm}
 \caption{Trading Process}
@@ -241,7 +230,20 @@ If a trade is possible the two agents will exchange the agreed quantities. If th
 
 The trading process is performed at every iteration while the imitation and innovation processes are executed only every $CulturalStep$. The idea behind this is to perform the imitation based on a score that reflects the performance of the agent and not only one lucky or unlucky trading round.
 
-\paragraph{Innovation} The innovation process is triggered with a low probability and select new elements for the vector of values. These new elements are drawn from a uniform distribution centred on the current value of each product.
+\paragraph{Innovation} In a trading environment it seems unlikely that a price will change radically to a very different value. Therefore, a new and more realistic mechanism is proposed. The innovation process is still triggered with a probability $\mu$ 
+but modify the previous price by adding or subtracting a small amount taken randomly from a uniform  distribution between $0 .. \beta$.
+
+
+\paragraph{Expected outcome} 
+
+\todo{complete the equation}
+
+With such a setup it is expected that the prices will converge to a ration allowing each agent to obtain a number of resources equivalent to the needs. There the price of a good should follow the following equation :
+
+$$ hey hey $$
+
+If such a price is reached to score of all agents should be equal to : $$ 10*1*(ngoods-1) $$
+
 
 \subsection{Complete model}
 
@@ -255,7 +257,7 @@ The model used in these experiments, including the cultural transmission and tra
 	\State INITIALIZATION: 
 		\For{$Good_i \in Goods$}
 			\For{$Agents per Goods$}
-				\State $A_i = (g_i,p_i,n_i)$
+				\State $A_i = (g^i,p^i, N)$ \Comment{Initialize the agent for the good it has to produce, a random price and the needs}
 			\EndFor
 		\EndFor
 
@@ -264,9 +266,9 @@ The model used in these experiments, including the cultural transmission and tra
 			\For{$A_i \in Pop$}
 				\State $Production$
 				\State $Trade$				
-				\If{$step CulturalStep$}	
+				\If{$ (step \mod CulturalStep) = 0$}	
 					\State $Imitation$
-					\State $Inovation$
+					\State $Innovation$
 				\EndIf
 			\EndFor
 		\EndLoop
@@ -286,7 +288,7 @@ Each curves on the figures show the mean for 100 runs. In our experiment one has
 Those distribution exhibit power law like distribution in such a way that we can find a power law $formul powerlaw$ that can fit it. The value of the $\alpha$ parameter of the fitted power law are in the table \ref{tab:mualpha}. Those $\alpha$ values are the mean of the $\alpha$ parameter of each power law fitted to each run and computed using with the standard deviation associated with each mean.PACKAGE. The SD are the SD associated each means .
 \begin{figure}[hbp]
 	\begin{center}
-		\includegraphics[width=7cm]{img/allmuRandMaxBentleyValues.pdf}
+%		\includegraphics[width=7cm]{img/allmuRandMaxBentleyValues.pdf}
 	\end{center}
 	\caption{Distribution of frequencies depending on the $\mu$ parameter}
 	\label{fig:allMutation}
