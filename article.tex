@@ -282,13 +282,13 @@ That is what we can see in the figure \ref{fig:allMutation}.
 
 Each curves on the figures show the mean for 100 runs. In our experiment one has to take in account that agents modifies their prices or exchange their price only every ten steps. Between, they exchange goods given their own prices. Therefore we choose to run our simulation during 10000 step which correspond the 1000 time steps used by \cite{bentley_random_2004,mesoudi_random_2009}, for $\mu$ the innovation rate $\in {.004,.008,.016,.064}$ and for 250 and 500 agents.
 
-\simon{reference to the R package and the theoreticla ref in the Rpackage?}
-Those distribution exhibit power law like attribute and we can fit them. The result of the alpha fitted with are in the table \ref{tab:mualpha}. The alpha values represent the mean of the fitted alpha for each run computed using RPACKAGE with the standard deviation associated with each mean.
+\simon{reference to the R package and the theoretical ref in the Rpackage?}
+Those distribution exhibit power law like distribution in such a way that we can find a power law $formul powerlaw$ that can fit it. The value of the $\alpha$ parameter of the fitted power law are in the table \ref{tab:mualpha}. Those $\alpha$ values are the mean of the $\alpha$ parameter of each power law fitted to each run and computed using with the standard deviation associated with each mean.PACKAGE. The SD are the SD associated each means .
 \begin{figure}[hbp]
 	\begin{center}
 		\includegraphics[width=7cm]{img/allmuRandMaxBentleyValues.pdf}
 	\end{center}
-	\caption{rand()\%RAND\_MAX}
+	\caption{Distribution of frequencies depending on the $\mu$ parameter}
 	\label{fig:allMutation}
 \end{figure}
 
@@ -339,9 +339,7 @@ As our aims is to study the evolution of an economy where people exchange differ
 
 \subsection{ Economical  process}
 
-
-
-In order to study the impact of the introduction of those new mechanism  we summarize it in the table~\ref{tab:exp}. 
+In order to study the impact of the introduction of the new mechanism  introduced in XXX we summarize it in the table~\ref{tab:exp}. 
 \begin{table}
 	\centering
 	\begin{tabular}{l|c|c}
@@ -355,6 +353,78 @@ In order to study the impact of the introduction of those new mechanism  we summ
 
 
 The following  experiments will last longer than the firsts one because this time the exchange mechanisms will have an impact on the evolution of prices in the population. All the next experiments are run during 200000 steps with a innovation rate $\mu=.004$ and $\beta=.001$.
+
+In the case A and S as no transmission is done using the score value this one change randomly. In the other cases, we can see that using the different innovation process help the system ton converge as no strange new price will emerge.
+
+all th result are resume in the figure~\ref{tab:scoreEvol}
+
+\begin{table}
+	\centering
+	\begin{tabular}{l c c}
+		& Random Transmission & Eco Transmission \\
+		$\mu$ & \raisebox{-.5\height}{\includegraphics[width=5cm]{img/scoreWrtTimeA.png}}&\raisebox{-.5\height}{\includegraphics[width=5cm]{img/scoreWrtTimeB.png}} \\
+		$\mu + \alpha$& \raisebox{-.5\height}{\includegraphics[width=5cm]{img/scoreWrtTimeC.png}}&\raisebox{-.5\height}{\includegraphics[width=5cm]{img/scoreWrtTimeD.png}}
+
+	\end{tabular}
+	\caption{Evolution of the score in the different setup}
+	\label{tab:scoreEvol}
+\end{table}
+
+Distribution:
+
+In the figure~\ref{fig:4setDi} we look at how the different variants of price are adopted in population. As we can see the economical imitation operator transform the power law in a more exponential law.
+\begin{figure}[htpb]
+	\begin{center}
+		\includegraphics[width=7cm]{img/4SetupDistrib.png}
+	\end{center}
+	\caption{Frequency distribution for the 4 setup}
+	\label{fig:4setDi}
+\end{figure}
+
+
+
+
+Equilibrium:
+
+As told in the section XX we expect that with our slightly different imitation and innovation process that the agent will finish with a good set of price that will allow them to exchange optimally the good they produce with the other goods.
+
+
+To verify that this actually happen we look in the figure~\ref{fig:ratioEvol} at the deviation from optimal price (with is the ratio between the need of the needed good and the produced good).
+\begin{figure}[htp]
+	\begin{center}
+		\includegraphics[width=7cm]{img/ratioEvol.png}
+	\end{center}
+	\caption{Evolution of the difference $\dfrac{p(g_w)}{p(g_p)}-n(g_p)$ where $p(x_i)$ is the price for a good $i$, $n(x_i)$ its need, $g$ the produced good and $w$ the wanted}
+	\label{fig:ratioEvol}
+\end{figure}
+
+
+
+One remarkable thing is that some suboptimal  market are sometimes found as we can see in the example in the figure~\ref{fig:suboptimal}, where we see that the product or of the good blue found a good price for him but price that block the other product or to do well .
+
+
+\begin{figure}[htp]
+	\begin{center}
+		\includegraphics[width=7cm]{img/suboptimal.png}
+	\end{center}
+	\caption{Evolution of the Score for the three types of agents of the simulation}
+	\label{fig:suboptimal}
+\end{figure}
+
+
+
+
+
+
+\begin{figure}[htp]
+	\begin{center}
+		\includegraphics[width=7cm]{img/fitness.png}
+	\end{center}
+	\caption{The fitness depending on price and needs}
+	\label{fig:fit}
+\end{figure}
+
+
 
 
 
