@@ -8,6 +8,7 @@
 \usepackage{mathptmx}
 \usepackage[utf8]{inputenc}
 
+
 %****************************************************************************
 %% AUTHOR: You may want to use some of these packages. (Optional)
 %\usepackage{amsmath}
@@ -15,6 +16,9 @@
 %\usepackage{amssymb}
 %\usepackage{amsbsy}
 %\usepackage{amsthm}
+
+\usepackage{algorithm,algorithmicx,algpseudocode}
+\algnewcommand\And{\textbf{and}}
 
 \usepackage{mathtools}
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}%
@@ -164,15 +168,15 @@ Each agent $i$ is defined by 2 vectors each of size $r$. The first correspond to
 Each agent makes its own estimate on the price to attribute to a certain good. This price estimate is used for both selling and buying goods :
 $$ values = (v^i_1,\cdots,p^i_r) $$
 
-On top of these elements two processes are included : imitation and innovation. The first one reflects the possibility for agents to imitate other agents. For this, an agent can copy the value vector of another agent. The second process reflects the possibility for an agent to associate new values for the goods. For this, an agent can select new elements for its value vector independently of the values of other agents. 
+On top of these elements three processes are included : production, imitation and innovation. The \textit{production} process describe the creation of goods by the agent. In this article each agent is producing only one type of good. The type good produced by an agent is assigned to it at the beginning of the simulation and does not change. Once a good is produced it is added to the quantity vector of the agent. Within the \textit{imitation} process an agent can copy the value vector of another agent. The \textit{innovation} process reflects the possibility for an agent to associate new values for the goods. For this, an agent can select new elements for its value vector independently of the values of other agents. 
 
-This scheme allow us to have a model achieving the two main goals listed in section~\ref{sec:intro}. First, this model allows us to test various cultural transmission mechanisms as well as trade mechanisms. The experiments presented in this article show examples of implementations for both categories. Moreover, the fact that only two processes are modified allow comparisons between simulations with the same units. Second, few parameters are present in the default model which makes it easier to analyse and reuse by other researchers.
+This scheme allow us to have a model achieving the two main goals listed in section~\ref{sec:intro}. First, this model allows us to test various cultural transmission mechanisms as well as trade mechanisms. The experiments presented in this article show examples of implementations for both categories. Moreover, the fact that only three processes are modified allow comparisons between simulations with the same units. In this article the \textit{production} process will remain the same and only the \textit{imitation} and \textit{innovation} processes are changed. Second, few parameters are present in the default model which makes it easier to analyse and reuse by other researchers.
 
 
 \section{EXPERIMENTAL SETUP}
 
 
-In order to validate our model a first result from the literature on the evolutionary transmission is reproduced. We then illustrate the possibility to implement a trade mechanisms.
+In order to validate our model a first result from the literature on the evolutionary transmission is reproduced. We then illustrate the possibility to implement a trade mechanisms. 
 
 \subsection{Cultural Transmission}
 
@@ -183,7 +187,7 @@ The imitation process is a ``random copy" meaning that with a low probability ea
 
 \subsection{Trading Model}\label{sec:trade}
 
-\paragraph*{Imitation}
+\paragraph{Imitation}
 To test a simple trading model, two notions are introduced in the imitation mechanism: need and score. The need is a quantity of product that each agent tries to obtain. This quantity is different for each product but the need for a product is the same for all agents:
 $$ need = (n_1, \cdots, n_r) $$ 
 
@@ -192,33 +196,67 @@ The score reflects the ability for an agent to obtain the products it needs, it 
 $$ \abs{\dfrac{q^i_j - n_j}{ \sqrt{\abs{(q^i_j*q^i_j)-(n_j*n_j)}}}} $$
 
 
-\paragraph*{Trading}
+\paragraph{Trading} 
 
-On top of producing the agents have the ability to exchange and consume the goods. 
-On the one side, the structure of the environment and the proceeding of a simulation will be the same for all hypothesis tested in this model. The specific rules for production, consumption and trading vary depending on the hypothesis tested. Nevertheless 
+\todo{miss the formula for a possible trade}
 
-\paragraph*{Innovation}
+On top of producing the agents have the ability to exchange and consume the goods. During the trading phase the value associated to a good by an agent corresponds to the subjective price of the good for this agent. Briefly summarised, for each good that it does not produced, an agent will trade with the first parter that offer an acceptable trade, i.e. the agent that proposes a satisfiable ratio between the other product and the product produced by the agent. In more detail, the trading phase start by the agent looking at a first random agent producing another product. A trade is possible with the other agent if the following condition holds:
 
-One time step of the simulation is divided in three phases. In the first phase all agents produce goods. Each agent is assigned one type of good, and it will produce only this type of good at each first phase. In the second phase all agents enter trade with other agents according to their own interest. Each agent has the possibility to choose with which other agent it will trade products. Once two agents agree to trade, the agents decide which products will be exchanged and in which quantities. When an agreement is found, the trade occur and the agents look for other potential partners. Within one trading phase, an agent can meet only one time each other agents. In the third phase all agent consume goods according to their own rules. A unit of a good consumed disappears from the stock of the agent.
+$$ hey $$
 
-%In the simulation agents produce goods that they will barter (cf section \ref{trade}) and consume (cf section \ref{consumption}). This goods production should reflect the historical good production of the period studied and agent could produce various good in order to barter or sell them using the trade network.
+If a trade is possible the two agents will exchange the agreed quantities. If the trade is not possible, the agent will continue to look at random partners for this good until either a good is find or $TradeThreshold$ agents have been tried. At this point the agent will try to trade with agents producing another good. The process goes on until all goods have been tried. This trading process is described in algorithm~\ref{algo:trade}.
 
+\begin{algorithm}
+\caption{Trading Process}
+\label{algo:trade}
+	\begin{algorithmic}[1]
+	\scriptsize
+		\For{$Good_i \in Goods \And i \neq A_g $}
+			\State $tradeAttempt = 0$
+			\For{$A_i \in Good_i \And tradeAttempt < TradeThreshold $}
+				\If{$acceptableTrade(A_i)$}
+					\State $trade(A_i)$
+				\Else
+					\State $tradeAttempt = tradeAttempt + 1$					
+				\EndIf
+			\EndFor
+		\EndFor
+\end{algorithmic}
+\end{algorithm}
 
+The trading process is performed at every iteration while the imitation and innovation processes are executed only every $CulturalStep$. The idea behind this is to perform the imitation based on a score that reflects the performance of the agent and not only one lucky or unlucky trading round.
 
+\paragraph{Innovation} The innovation process is triggered with a low probability and select new elements for the vector of values. These new elements are drawn from a uniform distribution centred on the current value of each product.
 
-The production methods can vary depending of geographical or historical factors. In order to validate the relevance of the model, we will follow \cite{gintis_emergence_2006}. In this model, the goal is to observe the convergence of price to a market equilibrium in a bartering decentralized economy model. In the orignal model it is shown that the prices can converge to the market clearing price.
+\subsection{Complete model}
 
-In this economical model the agents are ranked with regards to the value of their stock. This value is computed as follow ...
-\todo{find the computation}
+The model used in these experiments, including the cultural transmission and trading mechanisms, is described in algorithms~\ref{algo:complete}
 
-In this model each agent produces only one type of good. During the trading process, all agents meet each other. Since one agent is producing only one good it will only trade with the agents not producing this good. The procedure to choose the trading partners is detailed in algorithm XXXX.
-\todo{do the algorithm}
-Briefly summarised, for each good that it does not produced, an agent will look for the parter that offer the best trade, i.e. the agent that proposes to exchange the most of the other product for the fewest of the product produced by the agent.
+\begin{algorithm}
+\caption{Trading Process}
+\label{algo:complete}
+	\begin{algorithmic}[1]
+	\scriptsize
+	\State INITIALIZATION: 
+		\For{$Good_i \in Goods$}
+			\For{$Agents per Goods$}
+				\State $A_i = (g_i,p_i,n_i)$
+			\EndFor
+		\EndFor
 
-All agents of the simulation have the same constant consumption vector. A fixed-for-everyone proportion $b_1,\cdots,b_n$ of each resource $(1, \cdots, n)$ is given at the beginning of the simulation. At the end of the consumption phase all remaining products are removed from the agents.
-
-At the end of a time step, each agent has the opportunity to update its prices . Following the strategy proposed in the original model the XXX\% agents with the worst economical results adopt the strategy of the XXX\% best agents.
-
+	\State SIMULATION:
+		\Loop{$step \in TimeSteps$}
+			\For{$A_i \in Pop$}
+				\State $Production$
+				\State $Trade$				
+				\If{$step CulturalStep$}	
+					\State $Imitation$
+					\State $Inovation$
+				\EndIf
+			\EndFor
+		\EndLoop
+\end{algorithmic}
+\end{algorithm}
 
 
 \section{RESULTS}
