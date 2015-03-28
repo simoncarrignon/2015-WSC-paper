@@ -280,6 +280,7 @@ The model used in these experiments, including the cultural transmission and tra
 \subsection{Random cultural transmission and random innovation process}
 \subsubsection{One trait}
 
+
 That is what we can see in the figure \ref{fig:allMutation}.
 
 Each curves on the figures show the mean for 100 runs. In our experiment one has to take in account that agents modifies their prices or exchange their price only every ten steps. Between, they exchange goods given their own prices. Therefore we choose to run our simulation during 10000 step which correspond the 1000 time steps used by \cite{bentley_random_2004,mesoudi_random_2009}, for $\mu$ the innovation rate $\in {.004,.008,.016,.064}$ and for 250 and 500 agents.
@@ -320,24 +321,7 @@ Those distribution exhibit power law like distribution in such a way that we can
 	\label{tab:mualpha}
 \end{table}
 
-\subsubsection{Multiple traits co-evolving randomly}
-\simon{ this part could be resumed to one phrase saying that nothing change and that we check it without showing any result moreover}
-As our aims is to study the evolution of an economy where people exchange different goods, we have checked if the previous results are the same when the agents own not just one price for one good but a vector of price associated to each good available in the environment. And every thing is OKAY
-
-
-%\begin{table}
-%	\centering
-%		\begin{tabular}{l|cccc}
-%			  & g=1  & g= 2 & g=3 & g=4 \\\hline
-%			$\alpha$&\\
-%			sd \\
-%		\end{tabular}
-%	\caption{alpha is the mean alpha between each good for 100 runs }
-%	\label{tab:alphagoods}
-%\end{table}
-
-
-
+As our aims is to study the evolution of an economy where people exchange different goods, we have checked if the previous results are the same when the agents own not just one price for one good but a vector of price associated to each good available in the environment and continue to copy and modify those price in the same random way. In this case the system behave similarly , in the random copy and random innovation,  the price for each good evolves as totally independent traits.
 
 \subsection{ Economical  process}
 
@@ -353,12 +337,11 @@ In order to study the impact of the introduction of the new mechanism  introduce
 	\label{tab:exp}
 \end{table}
 
+The following  experiments will last longer than the firsts one because this time the exchange mechanisms will have an impact on the evolution of prices in the population. All the next experiments are done for 100000 steps with a innovation rate $\mu=.004$ and $\beta=.001$.
 
-The following  experiments will last longer than the firsts one because this time the exchange mechanisms will have an impact on the evolution of prices in the population. All the next experiments are run during 200000 steps with a innovation rate $\mu=.004$ and $\beta=.001$.
 
-In the case A and S as no transmission is done using the score value this one change randomly. In the other cases, we can see that using the different innovation process help the system ton converge as no strange new price will emerge.
-
-all th result are resume in the figure~\ref{tab:scoreEvol}
+We show  in the figure~\ref{tab:scoreEvol} how each setup is able, or not, to evolve in such a way that allow agents to find the good price to exchange with eachother.
+In the case A and S, as the score is not at all used in the transmission process, it evolves randomly. In the other cases where score is used to know which individuals will copy which other, the score goes better. Moreover, we can see that using the different innovation process help the system to converge as no strange new price will randomly appear.
 
 \begin{table}
 	\centering
@@ -374,7 +357,7 @@ all th result are resume in the figure~\ref{tab:scoreEvol}
 
 Distribution:
 
-In the figure~\ref{fig:4setDi} we look at how the different variants of price are adopted in population. As we can see the economical imitation operator transform the power law in a more exponential law.
+In the figure~\ref{fig:4setDi} we look at how the different variants of price are distributed in population. As we can see the economical imitation operator transform the power law in a more exponential law.
 \begin{figure}[htpb]
 	\begin{center}
 		\includegraphics[width=7cm]{img/4SetupDistrib.png}
@@ -384,11 +367,9 @@ In the figure~\ref{fig:4setDi} we look at how the different variants of price ar
 \end{figure}
 
 
-
-
 Equilibrium:
 
-As told in the section XX we expect that with our slightly different imitation and innovation process that the agent will finish with a good set of price that will allow them to exchange optimally the good they produce with the other goods.
+As told in the section XX we expect that with our slightly different imitation and innovation processes that the agent will finished with a set of price for each good that will allow them to exchange optimally the good they produce with the other goods.
 
 
 To verify that this actually happen we look in the figure~\ref{fig:ratioEvol} at the deviation from optimal price (with is the ratio between the need of the needed good and the produced good).
@@ -402,7 +383,7 @@ To verify that this actually happen we look in the figure~\ref{fig:ratioEvol} at
 
 
 
-One remarkable thing is that some suboptimal  market are sometimes found as we can see in the example in the figure~\ref{fig:suboptimal}, where we see that the product or of the good blue found a good price for him but price that block the other product or to do well .
+One remarkable thing is that some suboptimal  market are sometimes found, as we can see in the example in the figure~\ref{fig:suboptimal}, where we see that the product or of the good blue found a good price for him but price that block the other product or to do well .
 
 
 \begin{figure}[htp]
