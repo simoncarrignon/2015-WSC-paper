@@ -18,11 +18,17 @@
 %\usepackage{amsthm}
 
 \usepackage{algorithm,algorithmicx,algpseudocode}
+\usepackage{float}
+
 \algnewcommand\And{\textbf{and}}
 
 \usepackage{mathtools}
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}%
 \DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+
+\newcommand{\specialcell}[2][c]{%
+  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+
 
 \makeatletter
 \let\oldabs\abs
@@ -275,18 +281,23 @@ The model used in these experiments, including the cultural transmission and tra
 \end{algorithmic}
 \end{algorithm}
 
+\todo{to integrate}
+All experiments are performed with Pandora. The code is available at XXXX.
+
+In our experiment one has to take in account that agents modifies their prices or exchange their price only every ten steps. Between, they exchange goods given their own prices. Therefore we choose to run our simulation during 10000 step which correspond the 1000 time steps used by \cite{bentley_random_2004,mesoudi_random_2009}.
+
+With trade, experiments will last longer than the firsts one because this time the exchange mechanisms will have an impact on the evolution of prices in the population. 
+
 
 \section{RESULTS}
 \subsection{Random cultural transmission and random innovation process}
-\subsubsection{One trait}
 
+We first analyse the result obtained in the ``neutral model" as presented in section~\ref{sec:}. The figure~\ref{fig:} presents an analysis of the value vectors obtained across the 100 runs performed with a $\mu$ value equal to XXXX. In this graph it is not the exact values that are analysed but their relative frequencies. The y-axis of the graph shows the frequencies of the variants of the vector values, the x-axis shows how many variant achieves such frequencies and the line represents the average of the frequencies obtained across all runs. Both axes are in a logarithmic scale
 
-That is what we can see in the figure \ref{fig:allMutation}.
+On this graphic one can observe a straight line which shows that a few of the variants are very frequent and a majority of them are not. Please note, that here the specific variant achieving high frequency is not studied, only the number of variants achieving such frequencies is presented. This line corresponds to the ``power law" distribution mentioned in section~\ref{sec:} and is typical of the result obtained under the ``neutral model". 
 
-Each curves on the figures show the mean for 100 runs. In our experiment one has to take in account that agents modifies their prices or exchange their price only every ten steps. Between, they exchange goods given their own prices. Therefore we choose to run our simulation during 10000 step which correspond the 1000 time steps used by \cite{bentley_random_2004,mesoudi_random_2009}, for $\mu$ the innovation rate $\in {.004,.008,.016,.064}$ and for 250 and 500 agents.
+In order to further validate our model, we perform such study under various $\mu$ values as it has been done in previous works. The $\mu$ innovation rates studied vary $\in {.004,.008,.016,.064}$ and two population sizes are studied: 250 and 500 agents. The distribution of variants obtained is shown in figure~\ref{fig:allMutation}.
 
-\simon{reference to the R package and the theoretical ref in the Rpackage?}
-Those distribution exhibit power law like distribution in such a way that we can find a power law $formul powerlaw$ that can fit it. The value of the $\alpha$ parameter of the fitted power law are in the table \ref{tab:mualpha}. Those $\alpha$ values are the mean of the $\alpha$ parameter of each power law fitted to each run and computed using with the standard deviation associated with each mean.PACKAGE. The SD are the SD associated each means .
 \begin{figure}[hbp]
 	\begin{center}
 %		\includegraphics[width=7cm]{img/allmuRandMaxBentleyValues.pdf}
@@ -295,8 +306,10 @@ Those distribution exhibit power law like distribution in such a way that we can
 	\label{fig:allMutation}
 \end{figure}
 
+\jm{yes say the R package}
+Under all parameters tested the value vectors exhibit power law like distribution. It would then be interesting to analyse the shape of such distribution. In order to perform this study a linear regression is used to fit the curve obtained to a function of the form $formul powerlaw$. The mean value of the $\alpha$ parameters obtained and their standard deviation is presented in table~\ref{tab:mualpha}. The computations of the linear regression is done thanks to PACKAGE
 
-\begin{table}
+\begin{table}[h]
 	\centering
 	\begin{tabular}{cc}
 		\begin{tabular}{l|cc}
@@ -321,12 +334,14 @@ Those distribution exhibit power law like distribution in such a way that we can
 	\label{tab:mualpha}
 \end{table}
 
-As our aims is to study the evolution of an economy where people exchange different goods, we have checked if the previous results are the same when the agents own not just one price for one good but a vector of price associated to each good available in the environment and continue to copy and modify those price in the same random way. In this case the system behave similarly , in the random copy and random innovation,  the price for each good evolves as totally independent traits.
+\jm{Simon, do you have a comment on the table ? Like does it fit what is found in other articles ?}
 
 \subsection{ Economical  process}
 
-In order to study the impact of the introduction of the new mechanism  introduced in XXX we summarize it in the table~\ref{tab:exp}. 
-\begin{table}
+In order to study a trading model two new innovation and imitation mechanisms have been introduced as explained in section~\ref{sec:}. These mechanisms are summarized in the table~\ref{tab:exp}. Each couple of innovation/imitation mechanism form one setup that is labelled with one later. Note that the ``neutral model" studied in the previous section corresponds to the setup A. All the runs presented in this section are done for 100000 steps with a innovation rate $\mu=.004$ and $\beta=.001$.
+
+\todo{add innovation and imitation}
+\begin{table}[h]
 	\centering
 	\begin{tabular}{l|c|c}
 		& Rand & Eco \\\hline
@@ -337,28 +352,12 @@ In order to study the impact of the introduction of the new mechanism  introduce
 	\label{tab:exp}
 \end{table}
 
-The following  experiments will last longer than the firsts one because this time the exchange mechanisms will have an impact on the evolution of prices in the population. All the next experiments are done for 100000 steps with a innovation rate $\mu=.004$ and $\beta=.001$.
+\subsubsection{Distribution}
 
 
-We show  in the figure~\ref{tab:scoreEvol} how each setup is able, or not, to evolve in such a way that allow agents to find the good price to exchange with eachother.
-In the case A and S, as the score is not at all used in the transmission process, it evolves randomly. In the other cases where score is used to know which individuals will copy which other, the score goes better. Moreover, we can see that using the different innovation process help the system to converge as no strange new price will randomly appear.
+Our first step is to study the distribution of values in order to compare them to the distribution previous obtained. The distribution of values in the 4 setups is presented in figure~\ref{fig:4setDi}. 
 
-\begin{table}
-	\centering
-	\begin{tabular}{l c c}
-		& Random Transmission & Eco Transmission \\
-		$\mu$ & \raisebox{-.5\height}{\includegraphics[width=5cm]{img/scoreWrtTimeA.png}}&\raisebox{-.5\height}{\includegraphics[width=5cm]{img/scoreWrtTimeB.png}} \\
-		$\mu + \alpha$& \raisebox{-.5\height}{\includegraphics[width=5cm]{img/scoreWrtTimeC.png}}&\raisebox{-.5\height}{\includegraphics[width=5cm]{img/scoreWrtTimeD.png}}
-
-	\end{tabular}
-	\caption{Evolution of the score in the different setup}
-	\label{tab:scoreEvol}
-\end{table}
-
-Distribution:
-
-In the figure~\ref{fig:4setDi} we look at how the different variants of price are distributed in population. As we can see the economical imitation operator transform the power law in a more exponential law.
-\begin{figure}[htpb]
+\begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=7cm]{img/4SetupDistrib.png}
 	\end{center}
@@ -366,14 +365,40 @@ In the figure~\ref{fig:4setDi} we look at how the different variants of price ar
 	\label{fig:4setDi}
 \end{figure}
 
+\todo{update once all graphs are there}
+\jm{is exponential law characteristic of prestige bias ?}
 
-Equilibrium:
-
-As told in the section XX we expect that with our slightly different imitation and innovation processes that the agent will finished with a set of price for each good that will allow them to exchange optimally the good they produce with the other goods.
+The results studied in the previous section is reproduce here in the by the setup A, it is therefore no surprise that this setup follow a power law. We observe that the setup D is also following a power law. However, setups B and C are following an exponential law. We therefore observe that the innovation process has a negligeable influence on the shape distribution. However, the use of a biased imitation process has a major effect on the shape of the distribution.
 
 
-To verify that this actually happen we look in the figure~\ref{fig:ratioEvol} at the deviation from optimal price (with is the ratio between the need of the needed good and the produced good).
-\begin{figure}[htp]
+
+\subsubsection{Score}
+
+We now study the setup in more detail by investigating the ability of the population of agents to find the good price to perform exchanges between each other. This is done by observing the score of all agents in each of the 4 setups. The results obtained are presented in figure~\ref{tab:scoreEvol}.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{l c c}
+		& Random Transmission & Eco Transmission \\
+		$\mu$ & \specialcell{\raisebox{-.5\height}{\includegraphics[width=5cm]{img/scoreWrtTimeA.png}}\\Setup A}&\specialcell{\raisebox{-.5\height}{\includegraphics[width=5cm]{img/scoreWrtTimeB.png}} \\ Setup B} \\
+		$\mu + \alpha$& \specialcell{\raisebox{-.5\height}{\includegraphics[width=5cm]{img/scoreWrtTimeC.png}} \\ Setup C}&\specialcell{\raisebox{-.5\height}{\includegraphics[width=5cm]{img/scoreWrtTimeD.png}} \\ Setup D}
+
+	\end{tabular}
+	\caption{Evolution of the score in the different setup}
+	\label{tab:scoreEvol}
+\end{table}
+
+\todo{simon you have put A and S, I guess it's C and D ?}
+\todo{update explanation with new graphs}
+\todo{get clear names for innovation and imitaiton mechanisms}
+ 
+In the setups A and D, the score evolves randomly. In the two other setups however the score is increasing. Moreover, we observe that the XXXX innovation process used in the setups A and B leads to higher convergences. Since only the ``prestige imitation" takes the score into account it is normal that only this mechanism leads higher scores. The XXXX innovation mechanism leads to lower convergences as it select prices randomly in the complete range available.
+
+\subsubsection{Prices}
+
+We pursue the analysis of the economical aspect by observing the prices reached in setup D. As explained in the section~\ref{sec:} we expect that the trade imitation and innovation processes will produce a convergence toward a set of price for each good that will allow agents to exchange optimally the good they produce with the other goods. To verify this assumption we analyse the prices reached. These are presented in figure~\ref{fig:ratioEvol} as a deviation from the optimal price. Record that the optimal price is the ratio between the need of the needed good and the produced good.
+
+\begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=7cm]{img/ratioEvol.png}
 	\end{center}
@@ -381,10 +406,11 @@ To verify that this actually happen we look in the figure~\ref{fig:ratioEvol} at
 	\label{fig:ratioEvol}
 \end{figure}
 
+We observe that prices are indeed converging to the optimal prices which means that our innovation and imitation process are valid trade mechanisms. Notably, they produce results similar to the ones obtained in~\cite{gintis_emergence_2006}.
 
+\subsubsection{Suboptimal markets}
 
-One remarkable thing is that some suboptimal  market are sometimes found, as we can see in the example in the figure~\ref{fig:suboptimal}, where we see that the product or of the good blue found a good price for him but price that block the other product or to do well .
-
+Finally, a more careful analysis of the price structure reveals the presence of suboptimal markets. In figure~\ref{fig:suboptimal} the price structure of one run of setup C is presented. The x-axis represents the number of iteration, the y-axis the prices. The green boxplot represents the price of good X for an agent producing Y. And the blue boxplot represents the price of good X for agent producince Y 
 
 \begin{figure}[htp]
 	\begin{center}
@@ -394,10 +420,8 @@ One remarkable thing is that some suboptimal  market are sometimes found, as we 
 	\label{fig:suboptimal}
 \end{figure}
 
-
-
-
-
+\jm{stop for this evening}
+where we see that the product or of the good blue found a good price for him but price that block the other product or to do well .
 
 \begin{figure}[htp]
 	\begin{center}
