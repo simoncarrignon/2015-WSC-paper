@@ -204,6 +204,15 @@ $$ 1- \abs{\dfrac{q^i_j - n_j}{ \sqrt{\abs{(q^i_j*q^i_j)-(n_j*n_j)}}}} $$
 
 This function ensures that each good count for the same proportion in the final score (i.e.: managing to get only the right amount of a good with a high ``need'' value will not give a better score to the agent).
 
+
+\begin{figure}[htp]
+	\begin{center}
+		\includegraphics[width=7cm]{img/fitness.png}
+	\end{center}
+	\caption{The fitness depending on price and needs}
+	\label{fig:fit}
+\end{figure}
+
 The agents will choose the agent from whom the price vector should be copied among the agents that produce the same good and have the highest score. In practice, a fixed proportion of the less successful agents will copy the prices of the most successful agent. 
 
 \paragraph{Trading} 
@@ -420,22 +429,11 @@ Finally, a more careful analysis of the price structure reveals the presence of 
 	\label{fig:suboptimal}
 \end{figure}
 
-\jm{stop for this evening}
-where we see that the product or of the good blue found a good price for him but price that block the other product or to do well .
-
-\begin{figure}[htp]
-	\begin{center}
-		\includegraphics[width=7cm]{img/fitness.png}
-	\end{center}
-	\caption{The fitness depending on price and needs}
-	\label{fig:fit}
-\end{figure}
-
-
-
-
+In this graphic we can observe that the product displayed in green is blocked to a non-optimal value until iteration XXXX, and decreasing after. The prices for the blue product, on the other side, decrease steadily until the median reaches the uptimum at iteration XXXX. This illustrate the complexity of finding the right prices in the market. Indeed all prices are strongly linked together and until one has reach its optimum value, the other price can not evolve. 
 
 \section{CONCLUSION}
+
+
 
 \section{DISCUSSION}
 
