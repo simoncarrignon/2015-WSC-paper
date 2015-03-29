@@ -196,7 +196,7 @@ $$ need = (n_1, \cdots, n_r) $$
 
 The score reflects the ability for an agent to obtain the products it needs. It is maximum when the quantity vector of an agent is equal to its need vector and lower in proportion to the distance between the need vector and the quantity vector.  It is formally computed as follow for agent $i$:
 
-$$ 1- \abs{\dfrac{q^i_j - n_j}{ \sqrt{\abs{(q^i_j*q^i_j)-(n_j*n_j)}}}} $$
+$$ 1- \dfrac{\abs{q^i_j - n_j}}{ \sqrt{\abs{(q^i_j)^2-(n_j)^2}}} $$
 
 This function ensures that each good count for the same proportion in the final score (i.e.: managing to get only the right amount of a good with a high ``need'' value will not give a better score to the agent).
 
@@ -217,9 +217,14 @@ The agents will choose the agent from whom the price vector should be copied amo
 
 On top of producing the agents have the ability to exchange and consume the goods. During the trading phase the value associated to a good by an agent corresponds to the subjective price of the good for this agent. Briefly summarised, for each good that it does not produced, an agent will trade with the first parter that offer an acceptable trade, i.e. the agent that proposes a satisfiable ratio between the other product and the product produced by the agent. In more detail, the trading phase start by the agent looking at a first random agent producing another product. A trade is possible with the other agent if the following condition holds:
 
+\begin{itemize}
+	\item Both agents have enough good in their inventory
+	\item The quantitie of each good  fit the will of both agents.
+\end{itemize}
+
 $$ hey $$
 
-If a trade is possible the two agents will exchange the agreed quantities. If the trade is not possible, the agent will continue to look at random partners for this good until either a good is found or $TradeThreshold$ agents have been tried. At this point the agent will try to trade with agents producing another good. The process goes on until all goods have been tried. This trading process is described in algorithm~\ref{algo:trade}.
+If a trade is possible the two agents will exchange the agreed quantities. If the trade is not possible, the agent will continue to look at random partners for this good until either a good is found or $TradeThreshold$ ($\frac{Number of agent}{2}$ agents have been tried. At this point the agent will try to trade with agents producing another good. The process goes on until all goods have been tried. This trading process is described in algorithm~\ref{algo:trade}.
 
 \begin{algorithm}
 \caption{Trading Process}
@@ -249,11 +254,12 @@ but modify the previous price by adding or subtracting a small amount taken rand
 
 \todo{complete the equation}
 
-With such a setup it is expected that the prices will converge to a ration allowing each agent to obtain a number of resources equivalent to the needs. There the price of a good should follow the following equation :
+With such a setup it is expected that the prices will converge to a ratio allowing each agent to obtain a number of resources equivalent to the needs. Knowing that,  the best possible price of a good should follow the equation :
 
-$$ hey hey $$
+$$\frac{V^j_i}{V^j_g} = N_i   $$
+with g the produced good of the agent j and i another good which is not the one which is produced.
 
-If such a price is reached to score of all agents should be equal to : $$ 10*1*(ngoods-1) $$
+If such a price is reached to score of all agents should be equal to : $$ 10\times1\times(ngoods-1) $$
 
 
 \subsection{Complete model}
@@ -341,6 +347,36 @@ Under all parameters tested the value vectors exhibit power law like distributio
 
 \jm{Simon, do you have a comment on the table ? Like does it fit what is found in other articles ?}
 
+\simon{What do you think about puting  the bentley et al resutlts cf table~\ref{tab:Bmualpha} below}
+
+\begin{table}
+	\centering
+	\begin{tabular}{l|cc}
+N=250\\\hline
+$\mu$&$\alpha$&(SD)\\\hline
+0.004&1.50&(0.02) \\
+0.008&1.52&(0.02)\\
+0.016&1.55&(0.03)\\
+0.032&1.59&(0.06)\\
+0.064&1.78&(0.08)\\
+0.128&1.99&(0.04)\\
+	\end{tabular}
+	\begin{tabular}{l|cc}
+N=500\\\hline
+$\mu$&$\alpha$&(SD)\\\hline
+0.004&1.53&(0.03)
+0.008&1.57&(0.01)
+0.016&1.61&(0.04)
+0.032&1.70&(0.05)
+0.064&1.81&(0.10)
+0.128&1.98&(0.02)
+	\end{tabular}
+	\caption{Mean \& SD from \cite{bentley_random_2004} }
+	\label{tab:Bmualpha}
+\end{table}
+
+
+
 \subsection{ Economical  process}
 
 In order to study a trading model two new innovation and imitation mechanisms have been introduced as explained in section~\ref{sec:}. These mechanisms are summarized in the table~\ref{tab:exp}. Each couple of innovation/imitation mechanism form one setup that is labelled with one later. Note that the ``neutral model" studied in the previous section corresponds to the setup A. All the runs presented in this section are done for 100000 steps with a innovation rate $\mu=.004$ and $\beta=.001$.
@@ -349,7 +385,8 @@ In order to study a trading model two new innovation and imitation mechanisms ha
 \begin{table}[h]
 	\centering
 	\begin{tabular}{l|c|c}
-		& Rand & Eco \\\hline
+	 Imitation  Process :& Rand & Eco \\
+	 Mutation Process& & \\\hline
 		$\mu$ &A & B \\
 		$\mu +\alpha$ & C & D \\
 	\end{tabular}
@@ -385,8 +422,8 @@ We now study the setup in more detail by investigating the ability of the popula
 	\centering
 	\begin{tabular}{l c c}
 		& Random Transmission & Eco Transmission \\
-		$\mu$ & \specialcell{\raisebox{-.5\height}{\includegraphics[width=5cm]{img/scoreWrtTimeA.png}}\\Setup A}&\specialcell{\raisebox{-.5\height}{\includegraphics[width=5cm]{img/scoreWrtTimeB.png}} \\ Setup B} \\
-		$\mu + \alpha$& \specialcell{\raisebox{-.5\height}{\includegraphics[width=5cm]{img/scoreWrtTimeC.png}} \\ Setup C}&\specialcell{\raisebox{-.5\height}{\includegraphics[width=5cm]{img/scoreWrtTimeD.png}} \\ Setup D}
+		$\mu$ & \specialcell{\raisebox{-.5\height}{\includegraphics[width=5cm]{img/scoreWrtTimeA.png}}\\Setup A}&\specialcell{\raisebox{-.5\height}{\includegraphics[width=5cm]{img/scoreWrtTimeC.png}} \\ Setup B} \\
+		$\mu + \alpha$& \specialcell{\raisebox{-.5\height}{\includegraphics[width=5cm]{img/scoreWrtTimeB.png}} \\ Setup C}&\specialcell{\raisebox{-.5\height}{\includegraphics[width=5cm]{img/scoreWrtTimeD.png}} \\ Setup D}
 
 	\end{tabular}
 	\caption{Evolution of the score in the different setup}
@@ -394,10 +431,11 @@ We now study the setup in more detail by investigating the ability of the popula
 \end{table}
 
 \todo{simon you have put A and S, I guess it's C and D ?}
+\simon{It's A and C, the setup where their is no selection. But those two graph (A and B) are not good, don't take them in account. }
 \todo{update explanation with new graphs}
 \todo{get clear names for innovation and imitaiton mechanisms}
  
-In the setups A and D, the score evolves randomly. In the two other setups however the score is increasing. Moreover, we observe that the XXXX innovation process used in the setups A and B leads to higher convergences. Since only the ``prestige imitation" takes the score into account it is normal that only this mechanism leads higher scores. The XXXX innovation mechanism leads to lower convergences as it select prices randomly in the complete range available.
+In the setups A and C, the score evolves randomly. In the two other setups however the score is increasing. Moreover, we observe that the XXXX innovation process used in the setups A and B leads to higher convergences. Since only the ``prestige imitation" takes the score into account it is normal that only this mechanism leads higher scores. The XXXX innovation mechanism leads to lower convergences as it select prices randomly in the complete range available.
 
 \subsubsection{Prices}
 
