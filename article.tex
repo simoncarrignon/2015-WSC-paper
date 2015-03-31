@@ -177,11 +177,13 @@ This scheme allow us to have a model achieving the two main goals listed in sect
 \section{EXPERIMENTAL SETUP}
 
 
-In order to validate our model a result from the literature on cultural transmission is reproduced. We then illustrate the possibility to implement a trade mechanisms. 
+In order to validate our model we first reproduced traditional  result often seen in the literature on cultural transmission. After that we show that doing small modification we can transform our model to make it fit processes that are more economically consistent.
 
 \subsection{Cultural Transmission}
 
-In this article the neutral hypothesis is tested which implies that the cultural transmission mechanism is the ``random copy"~\cite{bentley_random_2004,bentley_specialisation_2005,mesoudi_random_2009}. The aim is to show that our model is indeed able to reproduce the main trends expected with such copy mechanism. Namely, we should observe a distribution known as the ``power law'', displaying a line in the log-log graph of the proportion of variants with regards to the frequency of variant.
+In this article the neutral hypothesis is tested which implies that the cultural transmission mechanism is the ``random copy"~\cite{bentley_random_2004,bentley_specialisation_2005,mesoudi_random_2009}. In the literature, people have shown that a lot of cultural phenomene where people copy randomly the cultural traits of other exhibit a particular pattern.
+
+With this mechanism of copy and given enough time  we will find in a fixed size population always the same repartition of the cultural variants. A few that are very frequent and an always bigger number of variant that are always less frequent. This is traduced by a ``power law'' distribution, following the equation $P(v)=C/v^\alpha $ that one could display as a line with a slope $-\alpha$ in the log-log graph of the proportion of variants with regards to the frequency of variant.
 
 The imitation process of ``random copy" is implemented by a low probability for each agent to pick randomly one agent among all and copy its vector of values. The innovation process is triggered with a low probability and select new elements for the vector of values. These new elements are drawn from a uniform distribution. The imitation and innovation probabilities are presented with other parameters in table~\ref{tab:parameters}.
 
@@ -193,11 +195,11 @@ In the cultural transmission model the value vector does not impact the imitatio
 The need is a quantity of product that each agent tries to obtain. This quantity is different for each product but the need for a product is the same for all agents:
 $$ need = (n_1, \cdots, n_r) $$ 
 
-The score reflects the ability for an agent to obtain the products it needs. It is maximum when the quantity vector of an agent is equal to its need vector and lower in proportion to the distance between the need vector and the quantity vector.  It is formally computed as follow for agent $i$:
+The score $S^i$ of agent $i$ reflects the ability for an agent to obtain the products it needs. It is maximum when the quantity vector of an agent is equal to its need vector and lower in proportion to the distance between the need vector and the quantity vector.  It is formally computed as follow for agent $i$:
 
-$$ 1- \dfrac{\abs{q^i_j - n_j}}{ \sqrt{\abs{(q^i_j)^2-(n_j)^2}}} $$
+$$ S^i=1- \dfrac{\abs{q^i_j - n_j}}{ \sqrt{\abs{(q^i_j)^2-(n_j)^2}}} $$
 
-This function ensures that each good count for the same proportion in the final score (i.e.: managing to get only the right amount of a good with a high ``need'' value will not give a better score to the agent).
+This function ensures that each good count for the same proportion in the final score (i.e.: managing to get only the right amount of a good with a high ``need'' value will not give a better score to the agent). This can be seen in the figure~\ref{fig:fit}.
 
 
 \begin{figure}[htp]
@@ -212,7 +214,6 @@ The agents will choose the agent from whom the price vector should be copied amo
 
 \paragraph{Trading} 
 
-\todo{miss the formula for a possible trade}
 
 On top of producing the agents have the ability to exchange and consume the goods. During the trading phase the value associated to a good by an agent corresponds to the subjective price of the good for this agent. Briefly summarised, for each good that it does not produced, an agent will trade with the first parter that offer an acceptable trade, i.e. the agent that proposes a satisfiable ratio between the other product and the product produced by the agent. In more detail, the trading phase start by the agent looking at a first random agent producing another product. A trade is possible with the other agent if the following condition holds:
 
@@ -221,7 +222,21 @@ On top of producing the agents have the ability to exchange and consume the good
 	\item The quantitie of each good  fit the will of both agents.
 \end{itemize}
 
-$$ hey $$
+Let be : $o$ the agent ``offerer'', and $r$ the agent that receive the offer. Both have an inventory $x_i$ of every good where $x_i^o$ is the quantity of good $i$ owned by $o$. $o$ produce the good $g$ and want to trade it in a quantity $q_g^o$ for a quantity $q_k^o$ of the good $k$ produced by $r$. 
+In its side $r$ own also a quantity $q_k^r$ of the good $g$ that it want to trade with quantity $q_k^r$ of its own produced goods.
+
+The exchange take place only if :
+$$ x_g^o >= q_g^o $$
+$$ x_g^r <= q_g^o $$
+$$ x_k^r >= q_k^o $$
+$$q_g^o>=(x_g^r+q_g^r)$$
+$$q_k^o<=q_k^r$$
+$$q_g^o<=q_g^r$$
+
+The given quantity of the produced good ($g$ for $o$) is the estimate value of it ( its price). The requested quantity of the non produced value is simply the ratio between the estimated value of the good requested and the given quantity of the produced good.
+
+In our case, for $o$ : $q_g^o = v_g^o$ and $q_k^o= \frac{v_k^o}{v_g^o} $ and for $r$  : $q_k^o = v_k^o$ and $q_g^o= \frac{v_g^o}{v_k^o} $.
+
 
 If a trade is possible the two agents will exchange the agreed quantities. If the trade is not possible, the agent will continue to look at random partners for this good until either a good is found or $TradeThreshold$ ($\frac{Number of agent}{2}$ agents have been tried. At this point the agent will try to trade with agents producing another good. The process goes on until all goods have been tried. This trading process is described in algorithm~\ref{algo:trade}.
 
@@ -253,12 +268,15 @@ but modify the previous price by adding or subtracting a small amount taken rand
 
 \todo{complete the equation}
 
-With such a setup it is expected that the prices will converge to a ratio allowing each agent to obtain a number of resources equivalent to the needs. Knowing that,  the best possible price of a good should follow the equation :
+With such a setup it is expected that the prices will converge to a ratio allowing each agent to obtain a number of resources equivalent to the needs. Knowing that,  the best possible price of a good should satisfy the equations :
 
-$$\frac{V^j_i}{V^j_g} = N_i   $$
+$$\frac{v^o_k}{v^o_g} = n_k $$
+$$\frac{v^r_g}{v^r_k} = n_g $$
+$$v^r_k = \frac{1}{n_k} $$
+$$v^r_g = \frac{1}{n_g} $$
 with g the produced good of the agent j and i another good which is not the one which is produced.
 
-If such a price is reached to score of all agents should be equal to : $$ 10\times1\times(ngoods-1) $$
+If such a price is reached to score of all agents should be equal to : $$ CulturalStep\times1\times ngoods $$
 
 
 \subsection{Complete model}
@@ -310,10 +328,11 @@ In order to further validate our model, we perform such study under various $\mu
 
 \begin{figure}[hbp]
 	\begin{center}
-%		\includegraphics[width=7cm]{img/allmuRandMaxBentleyValues.pdf}
+		\includegraphics[width=7cm]{img/allmuRandMaxN250.pdf}
+		\includegraphics[width=7cm]{img/allmuRandMaxN500.pdf}
 	\end{center}
-	\caption{Distribution of frequencies depending on the $\mu$ parameter}
-	\label{fig:allMutation}
+	\caption{Distribution of frequencies depending on the $\mu$ parameter with 250 agents (left) and 500 agents (right)}
+	\label{fig:allMutation }
 \end{figure}
 
 \jm{yes say the R package}
@@ -321,58 +340,49 @@ Under all parameters tested the value vectors exhibit power law like distributio
 
 \begin{table}[h]
 	\centering
-	\begin{tabular}{cc}
+	\begin{tabular}{l|cc}
+		Agents Number & Our result & Bentley et al 2004\\\hline
+		N = 250 &
 		\begin{tabular}{l|cc}
 			$\mu$ & $\alpha$ & SD\\\hline
-			0.004&1.541193&0.031384174\\
-			0.008&1.549726&0.021953251\\
-			0.016&1.568096&0.017025456\\
-			0.064&1.651690&0.006538209\\
-
+			0.004&1.53&0.03\\
+			0.008&1.55&0.03\\
+			0.016&1.57&0.02\\
+			0.064&1.66&0.01\\
 		\end{tabular}
 		&
+		\begin{tabular}{cc}
+		$\alpha$&SD\\\hline
+		1.50&0.02 \\
+		1.52&0.02\\
+		1.55&0.03\\
+		1.78&0.08\\
+		\end{tabular} \\
+		N= 500&
 		\begin{tabular}{l|cc}
 			$\mu$ & $\alpha$ & SD\\\hline
-			0.004&1.539710&0.022515901\\
-			0.008&1.557460&0.017805810\\
-			0.016&1.570036&0.004412181\\
-			0.064&1.651521&0.009988488\\
-		\end{tabular}\\
-		(a) & (b)
+			0.004&1.54&0.02\\
+			0.008&1.55&0.01\\
+			0.016&1.57&0.01\\
+			0.064&1.67&0.01\\
+		\end{tabular}
+		&
+		\begin{tabular}{cc}
+			$\alpha$&(SD)\\\hline
+			1.53&0.03\\
+			1.57&0.01\\
+			1.61&0.04\\
+			1.81&0.10\\
+		\end{tabular}
 	\end{tabular}
-	\caption{Mean \& SD are done with 100 run for each with 250 agent for (a) and 500 for (b) }
+	\caption{Mean \& SD are calculate on 100 run.}
 	\label{tab:mualpha}
 \end{table}
 
 \jm{Simon, do you have a comment on the table ? Like does it fit what is found in other articles ?}
 
-\simon{What do you think about puting  the bentley et al resutlts cf table~\ref{tab:Bmualpha} below}
-
-\begin{table}
-	\centering
-	\begin{tabular}{l|cc}
-N=250\\\hline
-$\mu$&$\alpha$&(SD)\\\hline
-0.004&1.50&(0.02) \\
-0.008&1.52&(0.02)\\
-0.016&1.55&(0.03)\\
-0.032&1.59&(0.06)\\
-0.064&1.78&(0.08)\\
-0.128&1.99&(0.04)\\
-	\end{tabular}
-	\begin{tabular}{l|cc}
-N=500\\\hline
-$\mu$&$\alpha$&(SD)\\\hline
-0.004&1.53&(0.03)\\
-0.008&1.57&(0.01)\\
-0.016&1.61&(0.04)\\
-0.032&1.70&(0.05)\\
-0.064&1.81&(0.10)\\
-0.128&1.98&(0.02)\\
-	\end{tabular}
-	\caption{Mean \& SD of $\alpha$ parameter }
-	\label{tab:Bmualpha}
-\end{table}
+\simon{What do you think about puting  the bentley et al resutlts cf table~\ref{tab:Bmualpha} below?\\ 
+By the way, doing t.test on the different value of alpha I have gives me statistically differences between 250 and 500 agents ONLY for $\mu=.064$  }
 
 
 
@@ -383,11 +393,11 @@ In order to study a trading model two new innovation and imitation mechanisms ha
 \todo{add innovation and imitation}
 \begin{table}[h]
 	\centering
-	\begin{tabular}{l|c|c}
-	 Imitation  Process :& Rand & Eco \\
-	 Mutation Process& & \\\hline
-		$\mu$ &A & B \\
-		$\mu +\alpha$ & C & D \\
+	\begin{tabular}{l|cc}
+					&Imitation  Process \\
+		Inovation Mechanism	& Rand & Success \\\hline  
+		Unbounded 		&A & B \\
+		Local Modification	& C & D \\
 	\end{tabular}
 	\caption{Experimental Setup}
 	\label{tab:exp}
@@ -400,11 +410,23 @@ Our first step is to study the distribution of values in order to compare them t
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=7cm]{img/4SetupDistrib.png}
+		\includegraphics[width=7cm]{img/frequenciesABCD.pdf}
 	\end{center}
 	\caption{Frequency distribution for the 4 setup}
 	\label{fig:4setDi}
 \end{figure}
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{lcccc}
+		& A & B & C & D\\
+A & X& \includegraphics[width=5cm]{img/A-B.pdf}&\includegraphics[width=5cm]{img/A-C.pdf}&\includegraphics[width=5cm]{img/A-D.pdf}\\
+B & X& X &\includegraphics[width=5cm]{img/B-C.pdf}&\includegraphics[width=5cm]{img/B-D.pdf}\\
+C & X& X & X &\includegraphics[width=5cm]{img/C-D.pdf}\\
+	\end{tabular}
+	\caption{Experimental Setup}
+	\label{tab:allRes}
+\end{table}
 
 \todo{update once all graphs are there}
 \jm{is exponential law characteristic of prestige bias ?}
@@ -421,11 +443,11 @@ We now study the setup in more detail by investigating the ability of the popula
 	\centering
 	\begin{tabular}{l c c}
 		& Random Transmission & Eco Transmission \\
-		$\mu$ & \specialcell{\raisebox{-.5\height}{\includegraphics[width=5cm]{img/scoreWrtTimeA.png}}\\Setup A}&\specialcell{\raisebox{-.5\height}{\includegraphics[width=5cm]{img/scoreWrtTimeC.png}} \\ Setup B} \\
-		$\mu + \alpha$& \specialcell{\raisebox{-.5\height}{\includegraphics[width=5cm]{img/scoreWrtTimeB.png}} \\ Setup C}&\specialcell{\raisebox{-.5\height}{\includegraphics[width=5cm]{img/scoreWrtTimeD.png}} \\ Setup D}
+		$\mu$ & \specialcell{\raisebox{-.5\height}{\includegraphics[width=5cm]{img/ScoreEvolutionForA-G2N250.pdf}}\\Setup A}&\specialcell{\raisebox{-.5\height}{\includegraphics[width=5cm]{img/ScoreEvolutionForB-G2N250.pdf}} \\ Setup B} \\
+		$\mu + \alpha$& \specialcell{\raisebox{-.5\height}{\includegraphics[width=5cm]{img/ScoreEvolutionForC-G2N250.pdf}} \\ Setup C}&\specialcell{\raisebox{-.5\height}{\includegraphics[width=5cm]{img/ScoreEvolutionForD-G2N250.pdf}} \\ Setup D}
 
 	\end{tabular}
-	\caption{Evolution of the score in the different setup}
+	\caption{Evolution of the score in the different setup for typical run of each setup.}%%
 	\label{tab:scoreEvol}
 \end{table}
 
