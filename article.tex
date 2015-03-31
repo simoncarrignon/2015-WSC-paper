@@ -164,38 +164,37 @@ The model presented in this work aims to offer a framework for the co-evolution 
 
 The model proposed is a Multi-Agent Based model including agents and products. It revolves around the value that agents associate to products through cultural change mechanisms, trade mechanisms or both. Depending on the question studied, the value can reflect the interest of the agent for the good or it can be the price at which the agent evaluate this good. The agents are also endowed with limited storage abilities for each good that can be produced. 
 
-More formally the model is composed of a population $Pop$ of $m$ agents, each defined by 2 vectors of size $r$. The first corresponds to the quantity of each good that the agent $i$ possesses: $$ Q^i = (q^i_1,\cdots,q^i_r) $$
+More formally the model is composed of a population $Pop$ of $m$ agents, each defined by 2 vectors of size $n$. The first corresponds to the quantity of each good that the agent $i$ possesses: $$ Q^i = (q^i_1,\cdots,q^i_n) $$
 
 where $Q^i$ is the total list of possessions of agent $i$, and $q^i_j$ is the number of goods of type $j$ that agent $i$ posses.
 
 The second vector reflects the estimation of the value of a product that an agent $i$ makes.
-$$ V^i = (v^i_1,\cdots,v^i_r) $$
+$$ V^i = (v^i_1,\cdots,v^i_n) $$
 where $V^i$ is the total list of estimated values of agent $i$, and $v^i_j$ is the value that agent $i$ associates to the goods of type $j$.
 
 On top of these elements three processes are included : \textit{production}, \textit{imitation} and \textit{innovation}. The \textit{production} process describe the creation of goods by the agent. Once a good is produced it is added to the quantity vector of the agent. Within the \textit{imitation} process an agent can copy the value vector of another agent. The \textit{innovation} process reflects the possibility for an agent to associate new values for the goods. For this, an agent can select new elements for its value vector independently of the values of other agents. 
 
 This scheme allow us to have a model achieving the two main goals listed in section~\ref{sec:intro}. The first goal is to be able to implement and compare various cultural transmission mechanisms as well as trade mechanisms within the same framework. We argue that this is possible in our framework by modifying only the three key processes i.e. production, imitation and innovation. Moreover, thanks to the use of a unique $V^i$ vector, it is possible to compare the outcomes of different combinations of production, imitation and innovation mechanisms. The second goal is to produce a model composed of a low number of parameter. Our model is composed of only three processes and two vectors which is significantly less complex than previous models.
 
-\todo{check that it's integrated later: In this article each agent is producing only one type of good. The type good produced by an agent is assigned to it at the beginning of the simulation and does not change.}
-
-\todo{check that it's integrated later: 
-In this article the \textit{production} process will remain the same and only the \textit{imitation} and \textit{innovation} processes are changed.}
-
 
 \section{EXPERIMENTAL SETUP}
 
 
-In order to validate our model we first reproduced traditional  result often seen in the literature on cultural transmission. After that we show that doing small modification we can transform our model to make it fit processes that are more economically consistent.
+In order to validate our model we first reproduce traditional results often seen in the literature on cultural transmission. We then show that it is possible to transform it to fit processes that are economically sound.
 
 \subsection{Cultural Transmission}
 
-In this article the neutral hypothesis is tested which implies that the cultural transmission mechanism is the ``random copy"~\cite{bentley_random_2004,bentley_specialisation_2005,mesoudi_random_2009}. In the literature, people have shown that a lot of cultural phenomene where people copy randomly the cultural traits of other exhibit a particular pattern.
+In this article, the cultural transmission mechanism tested is the neutral hypothesis, which has been shown to be followed by multiple cultural phenomenons~\cite{bentley_random_2004,bentley_specialisation_2005,mesoudi_random_2009}. 
+Under this hypothesis, the \emph{imitation} process used is  ``random copy'', which has been implemented as follow: each agent has a low probability to pick randomly one agent among all and copy its vector of values. The \emph{innovation} process, termed ``unbounded'', is triggered with a low probability and draw a new random value to replace an element $v^i_j$. The imitation and innovation probabilities are presented with other parameters in table~\ref{tab:parameters}.
 
-With this mechanism of copy and given enough time  we will find in a fixed size population always the same repartition of the cultural variants. A few that are very frequent and an always bigger number of variant that are always less frequent. This is traduced by a ``power law'' distribution, following the equation $P(v)=C/v^\alpha $ that one could display as a line with a slope $-\alpha$ in the log-log graph of the proportion of variants with regards to the frequency of variant.
-
-The imitation process of ``random copy" is implemented by a low probability for each agent to pick randomly one agent among all and copy its vector of values. The innovation process is triggered with a low probability and select new elements for the vector of values. These new elements are drawn from a uniform distribution. The imitation and innovation probabilities are presented with other parameters in table~\ref{tab:parameters}.
+The neutral hypothesis states that the random copy and the unbounded innovation process used under a fixed population size, leads to a repartition of cultural variants termed ``power law''. This distribution is characterized by a small number of very frequent traits and a large number of very rare traits. This distribution is formalized as: $$P(v)=C/v^\alpha $$
 
 \subsection{Trading Model}\label{sec:trade}
+\paragraph{Production}
+\todo{check that it's integrated later: In this article each agent is producing only one type of good. The type good produced by an agent is assigned to it at the beginning of the simulation and does not change.}
+
+\todo{check that it's integrated later: 
+In this article the \textit{production} process will remain the same and only the \textit{imitation} and \textit{innovation} processes are changed.}
 
 \paragraph{Imitation}
 In the cultural transmission model the value vector does not impact the imitation process. When trading is involved it is not not the case. In order to model such aspect we introduce a new cultural transmission mechanism taking into account the value vector. This mechanism is based on two new notions: need and score. 
@@ -205,6 +204,7 @@ $$ need = (n_1, \cdots, n_r) $$
 
 The score $S^i$ of agent $i$ reflects the ability for an agent to obtain the products it needs. It is maximum when the quantity vector of an agent is equal to its need vector and lower in proportion to the distance between the need vector and the quantity vector.  It is formally computed as follow for agent $i$:
 
+$$ S^{max}=1 \text{ if } q^i_j = n_j \text{ else}$$
 $$ S^i=1- \dfrac{\abs{q^i_j - n_j}}{ \sqrt{\abs{(q^i_j)^2-(n_j)^2}}} $$
 
 This function ensures that each good count for the same proportion in the final score (i.e.: managing to get only the right amount of a good with a high ``need'' value will not give a better score to the agent). This can be seen in the figure~\ref{fig:fit}.
@@ -223,30 +223,33 @@ The agents will choose the agent from whom the price vector should be copied amo
 \paragraph{Trading} 
 
 
-On top of producing the agents have the ability to exchange and consume the goods. During the trading phase the value associated to a good by an agent corresponds to the subjective price of the good for this agent. Briefly summarised, for each good that it does not produced, an agent will trade with the first parter that offer an acceptable trade, i.e. the agent that proposes a satisfiable ratio between the other product and the product produced by the agent. In more detail, the trading phase start by the agent looking at a first random agent producing another product. A trade is possible with the other agent if the following condition holds:
+On top of producing goods, the agents have the ability to exchange them. During the trading phase the value associated to a good by an agent corresponds to the subjective price of the good for this agent. Briefly summarised, for each good that it does not produced, an agent will trade with the first parter that offer an acceptable trade, i.e. the agent that proposes a satisfiable ratio between the other product and the product produced by the agent. In more detail, the trading phase starts by the agent looking at a first random agent producing another product. 
 
-\begin{itemize}
-	\item Both agents have enough good in their inventory
-	\item The quantitie of each good  fit the will of both agents.
-\end{itemize}
+Let $o$ be an agent producing $g$ that proposes a trade and $r$ an agent producing $k$ that receives the offer. As explained earlier, each has a quantity of good $Q^o$ and $Q^r$. On the one side, $o$ wants to exchange a quantity $w_g^o$ of the good $g$ for a quantity $w_k^o$ of the good $k$. On the other side, $r$ wants to exchange a quantity $w_g^r$ of the good $g$ for a quantity $w_k^r$. The quantities $W^o$ and $W^r$ are defined by :  
 
-Let be : $o$ the agent ``offerer'', and $r$ the agent that receive the offer. Both have an inventory $x_i$ of every good where $x_i^o$ is the quantity of good $i$ owned by $o$. $o$ produce the good $g$ and want to trade it in a quantity $q_g^o$ for a quantity $q_k^o$ of the good $k$ produced by $r$. 
-In its side $r$ own also a quantity $q_k^r$ of the good $g$ that it want to trade with quantity $q_k^r$ of its own produced goods.
+ $$ W^o=(w_g^o = v_g^o,w_k^o= \frac{v_k^o}{v_g^o}) $$ 
+ $$ W^r=(w_k^r = v_k^r,w_g^r= \frac{v_g^r}{v_k^r}) $$
 
-The exchange take place only if :
-$$ x_g^o >= q_g^o $$
-$$ x_g^r <= q_g^o $$
-$$ x_k^r >= q_k^o $$
-$$q_g^o>=(x_g^r+q_g^r)$$
-$$q_k^o<=q_k^r$$
-$$q_g^o<=q_g^r$$
-
-The given quantity of the produced good ($g$ for $o$) is the estimate value of it ( its price). The requested quantity of the non produced value is simply the ratio between the estimated value of the good requested and the given quantity of the produced good.
-
-In our case, for $o$ : $q_g^o = v_g^o$ and $q_k^o= \frac{v_k^o}{v_g^o} $ and for $r$  : $q_k^o = v_k^o$ and $q_g^o= \frac{v_g^o}{v_k^o} $.
+ Where $v_j^i$ are the estimated value of the good $j$ by the agente $i$ as defined earlier. 
+The requested quantity of the non produced good is simply the ratio between the estimated value of the good requested and the estimated value of the produced good.
 
 
-If a trade is possible the two agents will exchange the agreed quantities. If the trade is not possible, the agent will continue to look at random partners for this good until either a good is found or $TradeThreshold$ ($\frac{Number of agent}{2}$ agents have been tried. At this point the agent will try to trade with agents producing another good. The process goes on until all goods have been tried. This trading process is described in algorithm~\ref{algo:trade}.
+Once de quantities are defined, the agents declare that the trade is possible if :
+\begin{enumerate}
+	\item  $$ q_g^o >= w_g^o $$
+	\item  $$ q_g^r <= w_g^o $$
+	\item  $$ q_k^r >= w_k^o $$
+	\item  $$w_g^o>=(q_g^r+w_g^r)$$
+	\item  $$w_k^o<=w_k^r$$
+	\item  $$w_g^o<=w_g^r$$
+\end{enumerate}
+
+The conditions 1-3 insure that both agents have enough goods in their inventory and the conditions 4-5 insure that the quantities of each good fit the will of both agents.
+
+
+
+If a trade is possible the two agents will exchange the agreed quantities. If the trade is not possible, the agent will continue to look at random partners for this good until either a good is found or $TradeThreshold$ ($\frac{Number of agent}{2}$) agents have been tried. At this point the agent will try to trade with agents producing another good. The process goes on until all goods have been tried. This trading process is described in algorithm~\ref{algo:trade}.
+%faire tableau parametre et y integrer Tradethreshold
 
 \begin{algorithm}
 \caption{Trading Process}
@@ -266,9 +269,10 @@ If a trade is possible the two agents will exchange the agreed quantities. If th
 \end{algorithmic}
 \end{algorithm}
 
+%%deplacer et integrer dans 4.3
 The trading process is performed at every iteration while the imitation and innovation processes are executed only every $CulturalStep$. The idea behind this is to perform the imitation based on a score that reflects the performance of the agent and not only one lucky or unlucky trading round.
 
-\paragraph{Innovation} In a trading environment it seems unlikely that a price will change radically to a very different value. Therefore, a new and more realistic mechanism is proposed. The innovation process is still triggered with a probability $\mu$ 
+\paragraph{Innovation} In a trading environment it seems unlikely that a price will change radically to a very different value. Therefore, a new and more realistic mechanism is proposed. The innovation process, termed ``self referenced'', is still triggered with a probability $\mu$ 
 but modify the previous price by adding or subtracting a small amount taken randomly from a uniform  distribution between $0 .. \beta$.
 
 
@@ -276,15 +280,17 @@ but modify the previous price by adding or subtracting a small amount taken rand
 
 \todo{complete the equation}
 
-With such a setup it is expected that the prices will converge to a ratio allowing each agent to obtain a number of resources equivalent to the needs. Knowing that,  the best possible price of a good should satisfy the equations :
+With such a setup it is expected that the prices will converge to a ratio allowing each agent to obtain a number of resources equivalent to the needs. The best possible price of a good satisfies the equations :
 
 $$\frac{v^o_k}{v^o_g} = n_k $$
 $$\frac{v^r_g}{v^r_k} = n_g $$
-$$v^r_k = \frac{1}{n_k} $$
-$$v^r_g = \frac{1}{n_g} $$
-with g the produced good of the agent j and i another good which is not the one which is produced.
+$$v^r_k = n_k $$
+$$v^o_g = n_g $$
+$$=>v^r_g = v^o_k = n_k * n_g$$
 
-If such a price is reached to score of all agents should be equal to : $$ CulturalStep\times1\times ngoods $$
+With as earlier, $o$ and $r$ the agents that respectively produces $g$ and $k$, $v_j^i$ the estimated value of the good $j$ for the agent $i$ and $n_j$ the needed value of the good $j$ for all agents.
+
+If such prices are reached, all exchange can be done leading to a score of each agent of the population : $$ CulturalStep\times S^i(\tilde{Q}^i) \times ngoods $$ with $S^i(\tilde{Q}^i) = S_{max}$, the score for the optimal inventory $\tilde{Q}^i$ for the agent $i$ which is $S_{max}=1$.
 
 
 \subsection{Complete model}
@@ -328,16 +334,16 @@ With trade, experiments will last longer than the firsts one because this time t
 \section{RESULTS}
 \subsection{Random cultural transmission and random innovation process}
 
-We first analyse the result obtained in the ``neutral model" as presented in section~\ref{sec:}. The figure~\ref{fig:} presents an analysis of the value vectors obtained across the 100 runs performed with a $\mu$ value equal to XXXX. In this graph it is not the exact values that are analysed but their relative frequencies. The y-axis of the graph shows the frequencies of the variants of the vector values, the x-axis shows how many variant achieves such frequencies and the line represents the average of the frequencies obtained across all runs. Both axes are in a logarithmic scale
+We first analyse the result obtained in the ``neutral model" as presented in section~\ref{sec:}. The figure~\ref{fig:allMutation} presents an analysis of the value vectors obtained across the 100 runs performed with a $\mu$ value equal to XXXX. In this graph it is not the exact values that are analysed but their relative frequencies. The y-axis of the graph shows the frequencies of the variants of the vector values, the x-axis shows how many variant achieves such frequencies and the line represents the average of the frequencies obtained across all runs. Both axes are in a logarithmic scale
 
 On this graphic one can observe a straight line which shows that a few of the variants are very frequent and a majority of them are not. Please note, that here the specific variant achieving high frequency is not studied, only the number of variants achieving such frequencies is presented. This line corresponds to the ``power law" distribution mentioned in section~\ref{sec:} and is typical of the result obtained under the ``neutral model". 
 
 In order to further validate our model, we perform such study under various $\mu$ values as it has been done in previous works. The $\mu$ innovation rates studied vary $\in {.004,.008,.016,.064}$ and two population sizes are studied: 250 and 500 agents. The distribution of variants obtained is shown in figure~\ref{fig:allMutation}.
 
-\begin{figure}[hbp]
+\begin{figure}[!hbp]
 	\begin{center}
-		\includegraphics[width=7cm]{img/allmuRandMaxN250.pdf}
-		\includegraphics[width=7cm]{img/allmuRandMaxN500.pdf}
+		\includegraphics[width=6cm]{img/allmuRandMaxN250.pdf}
+		\includegraphics[width=6cm]{img/allmuRandMaxN500.pdf}
 	\end{center}
 	\caption{Distribution of frequencies depending on the $\mu$ parameter with 250 agents (left) and 500 agents (right)}
 	\label{fig:allMutation }
@@ -348,50 +354,26 @@ Under all parameters tested the value vectors exhibit power law like distributio
 
 \begin{table}[h]
 	\centering
-	\begin{tabular}{l|cc}
-		Agents Number & Our result & Bentley et al 2004\\\hline
-		N = 250 &
-		\begin{tabular}{l|cc}
-			$\mu$ & $\alpha$ & SD\\\hline
-			0.004&1.53&0.03\\
-			0.008&1.55&0.03\\
-			0.016&1.57&0.02\\
-			0.064&1.66&0.01\\
-		\end{tabular}
-		&
-		\begin{tabular}{cc}
-		$\alpha$&SD\\\hline
-		1.50&0.02 \\
-		1.52&0.02\\
-		1.55&0.03\\
-		1.78&0.08\\
-		\end{tabular} \\
-		N= 500&
-		\begin{tabular}{l|cc}
-			$\mu$ & $\alpha$ & SD\\\hline
-			0.004&1.54&0.02\\
-			0.008&1.55&0.01\\
-			0.016&1.57&0.01\\
-			0.064&1.67&0.01\\
-		\end{tabular}
-		&
-		\begin{tabular}{cc}
-			$\alpha$&(SD)\\\hline
-			1.53&0.03\\
-			1.57&0.01\\
-			1.61&0.04\\
-			1.81&0.10\\
-		\end{tabular}
+	\begin{tabular}{ll|lllll}
+		Agents Number & & Our result& & Bentley et al 2004\\
+			&$\mu$ & $\alpha$ & SD&$\alpha$&SD\\\hline
+
+		N = 250 
+			&0.004&1.53&0.03&1.54&0.02\\
+			&0.008&1.55&0.03&1.55&0.01\\
+			&0.016&1.57&0.02&1.57&0.01\\
+			&0.064&1.66&0.01&1.67&0.01\\\hline
+		N= 500
+		&0.004&1.50&0.02&1.53&0.03\\
+		&0.008&1.52&0.02&1.57&0.01\\
+		&0.016&1.55&0.03&1.61&0.04\\
+		&0.064&1.78&0.08&1.81&0.10\\
 	\end{tabular}
 	\caption{Mean \& SD are calculate on 100 run.}
 	\label{tab:mualpha}
 \end{table}
 
 \jm{Simon, do you have a comment on the table ? Like does it fit what is found in other articles ?}
-
-\simon{What do you think about puting  the bentley et al resutlts cf table~\ref{tab:Bmualpha} below?\\ 
-By the way, doing t.test on the different value of alpha I have gives me statistically differences between 250 and 500 agents ONLY for $\mu=.064$  }
-
 
 
 \subsection{ Economical  process}
@@ -403,9 +385,9 @@ In order to study a trading model two new innovation and imitation mechanisms ha
 	\centering
 	\begin{tabular}{l|cc}
 					&Imitation  Process \\
-		Inovation Mechanism	& Rand & Success \\\hline  
+		Innovation Mechanism	& Rand & Success \\\hline  
 		Unbounded 		&A & B \\
-		Local Modification	& C & D \\
+		Self Referenced	& C & D \\
 	\end{tabular}
 	\caption{Experimental Setup}
 	\label{tab:exp}
