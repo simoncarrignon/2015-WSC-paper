@@ -391,11 +391,11 @@ In our experiment one has to take in account that agents modifies their prices o
 \toprule
 Parameter & Value \\
 \midrule
-Mutation probability & \\
-Innovation probability & \\
+Mutation probability & .004 \\
+Innovation probability & .001\\
 CulturalStep &  10 \\
-TradeThreshold & $\frac{Number of agent}{2}$ \\
-TimeSteps & \\
+TradeThreshold & 100  \\
+TimeSteps & 200000 \\
 \bottomrule
 \end{tabular}
 \caption{Table of parameters}\label{tab:parameters}
@@ -426,20 +426,17 @@ Under all parameters tested the value vectors exhibit power law like distributio
 
 \begin{table}[h]
 	\centering
-	\begin{tabular}{ll|lllll}
-		Agents Number & & Our result& & Bentley et al 2004\\
+	\begin{tabular}{ll|llll}
+		\multicolumn{2}{r}{Agents Number}&\multicolumn{2}{c}{Our result}&\multicolumn{2}{c}{Bentley et al 2004}\\
 			&$\mu$ & $\alpha$ & SD&$\alpha$&SD\\\hline
-
-		N = 250 
-			&0.004&1.53&0.03&1.54&0.02\\
+		N = 250	&0.004&1.53&0.03&1.54&0.02\\
 			&0.008&1.55&0.03&1.55&0.01\\
 			&0.016&1.57&0.02&1.57&0.01\\
 			&0.064&1.66&0.01&1.67&0.01\\\hline
-		N= 500
-		&0.004&1.50&0.02&1.53&0.03\\
-		&0.008&1.52&0.02&1.57&0.01\\
-		&0.016&1.55&0.03&1.61&0.04\\
-		&0.064&1.78&0.08&1.81&0.10\\
+		N= 500	&0.004&1.50&0.02&1.53&0.03\\
+			&0.008&1.52&0.02&1.57&0.01\\
+			&0.016&1.55&0.03&1.61&0.04\\
+			&0.064&1.78&0.08&1.81&0.10\\
 	\end{tabular}
 	\caption{Mean \& SD are calculate on 100 run.}
 	\label{tab:mualpha}
@@ -450,7 +447,7 @@ Under all parameters tested the value vectors exhibit power law like distributio
 
 \subsection{ Economical  process}
 
-In order to study a trading model two new innovation and imitation mechanisms have been introduced as explained in section~\ref{sec:}. These mechanisms are summarized in the table~\ref{tab:exp}. Each couple of innovation/imitation mechanism form one setup that is labelled with one later. Note that the ``neutral model" studied in the previous section corresponds to the setup A. All the runs presented in this section are done for 100000 steps with a innovation rate $\mu=.004$ and $\beta=.001$.
+In order to study a trading model two new innovation and imitation mechanisms have been introduced as explained in section~\ref{sec:}. These mechanisms are summarized in the table~\ref{tab:exp}. Each couple of innovation/imitation mechanism form one setup that is labelled with one letter. Note that the ``neutral model" studied in the previous section corresponds to the setup A. All the runs presented in this section are done for 200000 steps with a innovation rate $\mu=.004$ and $\beta=.001$.
 
 \todo{add innovation and imitation}
 \begin{table}[h]
@@ -508,7 +505,7 @@ We now study the setup in more detail by investigating the ability of the popula
 	\begin{tabular}{l c c}
 		& Random Transmission & Eco Transmission \\
 		$\mu$ & \specialcell{\raisebox{-.5\height}{\includegraphics[width=5cm]{img/ScoreEvolutionForA-G2N250.pdf}}\\Setup A}&\specialcell{\raisebox{-.5\height}{\includegraphics[width=5cm]{img/ScoreEvolutionForB-G2N250.pdf}} \\ Setup B} \\
-		$\mu + \alpha$& \specialcell{\raisebox{-.5\height}{\includegraphics[width=5cm]{img/ScoreEvolutionForC-G2N250.pdf}} \\ Setup C}&\specialcell{\raisebox{-.5\height}{\includegraphics[width=5cm]{img/ScoreEvolutionForD-G2N250.pdf}} \\ Setup D}
+		$\mu + \alpha$& \specialcell{\raisebox{-.5\height}{\includegraphics[width=5cm]{img/ScoreEvolutionForC-G2N250.pdf}} \\ Setup C}&\specialcell{\raisebox{-.5\height}{\includegraphics[width=5cm]{img/ScoreEvolutionForD-G3N500.pdf}} \\ Setup D}
 
 	\end{tabular}
 	\caption{Evolution of the score in the different setup for typical run of each setup.}%%
@@ -528,7 +525,7 @@ We pursue the analysis of the economical aspect by observing the prices reached 
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=7cm]{img/ratioEvol.png}
+		\includegraphics[width=7cm]{img/ClearingPriceDistanceEvolutionForD-G3N500.pdf}
 	\end{center}
 	\caption{Evolution of the difference $\dfrac{p(g_w)}{p(g_p)}-n(g_p)$ where $p(x_i)$ is the price for a good $i$, $n(x_i)$ its need, $g$ the produced good and $w$ the wanted}
 	\label{fig:ratioEvol}
