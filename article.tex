@@ -255,8 +255,8 @@ This function ensures that each good count for the same proportion \xrc{weight?}
 	\caption{The fitness depending on price and needs}
 	\label{fig:fit}
 \end{figure}
+We can see in the figure~\ref{fig:fit} the score with regards to the quantity of one good traded by an agent and that given different value for the need of its good. We can see that even if the need for a good is small (for instance when $need = .01$) one can have a high score as soon as he manage to get a quantity closed to the needed quantity. It insure that one need to have all of each good in the good proportion and that none could reach a better score just managing to get the right amount of a good with a high need.
 
-\todo{put a little description of what is in the figure}
 The agents will choose the agent from whom the price vector should be copied among the agents that produce the same good and have the highest score. In practice, a fixed proportion of the less successful agents will copy the prices of the most successful agent. 
 
 \xrc{so no random copy? It should be clear that agents copy values based on random copy, and copy strategy based on payoff biased transmission (if i'm not mistaken).}
@@ -269,8 +269,11 @@ On top of producing goods, the agents have the ability to exchange them. During 
 In more details, the trading phase starts by the agent looking at a first random agent producing another product. 
 Let $o$ be an agent producing $g$ that proposes a trade and $r$ an agent producing $k$ that receives the proposition. As explained earlier, each has a quantity of good $Q^o$ and $Q^r$. On the one side, $o$ wants to exchange a quantity $w_g^o$ of the good $g$ for a quantity $w_k^o$ of the good $k$. On the other side, $r$ wants to exchange a quantity $w_g^r$ of the good $g$ for a quantity $w_k^r$. The tuples $W^o$ and $W^r$ describe the quantities of goods wanted by agent $o$ and $r$ for one trade proposition and are defined by:  
 
- $$ W^o=(w_g^o = v_g^o,w_k^o= \frac{v_k^o}{v_g^o}) $$ 
- $$ W^r=(w_k^r = v_k^r,w_g^r= \frac{v_g^r}{v_k^r}) $$
+\begin{equation}
+	 W^o=(w_g^o = v_g^o,w_k^o= \frac{v_k^o}{v_g^o}) 
+	 W^r=(w_k^r = v_k^r,w_g^r= \frac{v_g^r}{v_k^r}) 
+	 \label{eq:trade}
+\end{equation}
 
  Where $v_j^i$ are the estimated value of the good $j$ by the agent $i$ as defined earlier. 
 The requested quantity of the non produced good is simply the ratio between the estimated value of the good requested and the estimated value of the produced good.
@@ -278,21 +281,21 @@ The requested quantity of the non produced good is simply the ratio between the 
 
 Once de quantities are defined, the agents declare that the trade is possible if :
 \begin{align}
-q_g^o >= w_g^o \\
+q_g^o >= w_g^o \label{eq:constraintFirst}\\
 q_g^r <= w_g^o \\
-q_k^r >= w_k^o \\
-w_g^o>=(q_g^r+w_g^r) \\
+q_k^r >= w_k^o \label{eq:constraintLastInv}\\
+w_g^o>=(q_g^r+w_g^r)\label{eq:constraintFirstWill} \\
 w_k^o<=w_k^r \\
 w_g^o<=w_g^r
+\label{eq:constraintLast}
 \end{align}
 
 
-The conditions 2-4 insure that both agents have enough goods in their inventory to realise the trade and the conditions 5-7 insure that the quantities of each good fit the will of both agents.
+The conditions \ref{eq:constraintFirst}-\ref{eq:constraintLastInv} insure that both agents have enough goods in their inventory to realise the trade and the conditions \ref{eq:constraintFirstWill}-\ref{eq:constraintLast} insure that the quantities of each good fit the will of both agents.
 
 
 
 If a trade is possible the two agents will exchange the agreed quantities. If the trade is not possible, the agent will continue to look at random partners for this good until either a good is found or $TradeThreshold$ agents have been tried. At this point the agent will try to trade with agents producing another good. The process goes on until all goods have been tried. This trading process is described in algorithm~\ref{algo:trade}.
-%faire tableau parametre et y integrer Tradethreshold
 
 \begin{algorithm}
 \caption{Trading Process for agent $o$}
@@ -312,7 +315,6 @@ If a trade is possible the two agents will exchange the agreed quantities. If th
 \end{algorithmic}
 \end{algorithm}
 
-%%deplacer et integrer dans 4.3
 The trading process is performed at every iteration while the imitation and innovation processes are executed only every $CulturalStep$. The idea behind this is to perform the imitation based on a score that reflects the performance of the agent and not only one lucky or unlucky trading round.
 
 \xrc{Add some 'scheduling' definition where this is shown. Also it should be justified (market is faster than cultural change?)}
@@ -325,18 +327,27 @@ but modify the previous price by adding or subtracting a small amount taken rand
 
 \todo{complete the equation}
 
-With such a setup it is expected that the prices will converge to a ratio allowing each agent to obtain a number of resources equivalent to the needs. The best possible price of a good satisfies the equations :
-\begin{align}
-\frac{v^o_k}{v^o_g} = n_k \\
-\frac{v^r_g}{v^r_k} = n_g \\
-v^r_k = n_k \\
-v^o_g = n_g \\
-=>v^r_g = v^o_k = n_k * n_g \\
-\end{align}
+With such a setup and given (\ref{eq:score}) and (\ref{eq:trade}), it is expected that the prices will converge to value allowing each agent to obtain quantities of resources exactly equivalent to the needs. The best possible price of all good satisfies the equations :
+\begin{equation}
+	\begin{cases}
+		\frac{v^o_k}{v^o_g} = n_k \\
+		v^o_g = n_g 
+	\end{cases} =>v^o_k = n_k \times n_g, \quad \forall k \in Goods, \forall o \in Pop, g = produced^o, k \not= g 
+\end{equation}
 
-With as earlier, $o$ and $r$ the agents that respectively produces $g$ and $k$, $v_j^i$ the estimated value of the good $j$ for the agent $i$ and $n_j$ the needed value of the good $j$ for all agents.
+Which mean that 
 
-If such prices are reached, all exchange can be done leading to a total score $S$ for each agent of the population : 
+\begin{equation}
+	\quad \forall j \in Goods, \forall i \in Pop \quad \tilde{V}^i = 
+	\begin{cases}
+		\tilde{v}^i_j = n_j & \text{if $ j=produced^i$}\\
+		 \tilde{v}^i_j = n_j \times n_{produced^i} & \text{else}
+	\end{cases}\label{eq:optimum}
+\end{equation}
+
+
+
+If such prices are reached, given the exchange rules defined in (\ref{eq:trade}) and the exchange constraints (\ref{eq:constraintFirst}) to (\ref{eq:constraintLast}) all exchanges will be optimally achieved, leading to a total score $S$ for each agent of the population : 
 $$ S = \sum_{i=0}^{CulturalStep}  s^i(\tilde{Q}^i) \times ngoods $$ 
 where $\tilde{Q}^i$ is the optimal quantity vector, i.e. the one for which $s^i(\tilde{Q}^i) = s_{max}$. Remember that from equation~\ref{eq:score}, $s_{max}=1$.
 
@@ -527,7 +538,7 @@ We pursue the analysis of the economical aspect by observing the prices reached 
 	\begin{center}
 		\includegraphics[width=7cm]{img/ClearingPriceDistanceEvolutionForD-G3N500.pdf}
 	\end{center}
-	\caption{Evolution of the difference $\dfrac{p(g_w)}{p(g_p)}-n(g_p)$ where $p(x_i)$ is the price for a good $i$, $n(x_i)$ its need, $g$ the produced good and $w$ the wanted}
+	\caption{Evolution of the mean difference for each good of the estimated value $v_g$ and its optimal value as given by \ref{eq:optimum}. Means computed for 100 run adn 2 goods. }
 	\label{fig:ratioEvol}
 \end{figure}
 
@@ -539,13 +550,25 @@ Finally, a more careful analysis of the price structure reveals the presence of 
 
 \begin{figure}[htp]
 	\begin{center}
-		\includegraphics[width=7cm]{img/suboptimal.png}
+		\includegraphics[width=7cm]{img/evolutionGlobalScoreG4N800.pdf}
 	\end{center}
-	\caption{Evolution of the Score for the three types of agents of the simulation}
+	\caption{Evolution of global score for a run with 800 agents and 4 goods.}
+	\label{fig:G4N500}
+\end{figure}
+
+\begin{figure}[htp]
+	\begin{center}
+		\includegraphics[width=7cm]{img/scatterPlotGood1.pdf}
+		\includegraphics[width=7cm]{img/scatterPlotGood2.pdf}
+		\includegraphics[width=7cm]{img/scatterPlotGood3.pdf}
+		\includegraphics[width=7cm]{img/scatterPlotGood4.pdf}
+	\end{center}
+	\caption{Evolution of the Score for the four types of agents of a simulation with 4 differents good and 800 agents}
 	\label{fig:suboptimal}
 \end{figure}
 
 \xrc{these boxplots are confusing because they are small and contain a huge amount of information. What if we do a scatterplot with a given alpha, and on top of this a loess regression? It always works better to me when you have this kind of data; also, I would provide a figure for each type of score.}
+\simon{What do you mean by ``a given alpha''? does something like those new ones is better?}
 
 In this graphic we can observe that the product displayed in green is blocked to a non-optimal value until iteration XXXX, and decreasing after. The prices for the blue product, on the other side, decrease steadily until the median reaches the uptimum at iteration XXXX. This illustrate the complexity of finding the right prices in the market. Indeed all prices are strongly linked together and until one has reach its optimum value, the other price can not evolve. 
 
