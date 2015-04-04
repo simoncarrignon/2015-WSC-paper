@@ -20,6 +20,7 @@
 \usepackage{algorithm,algorithmicx,algpseudocode}
 \usepackage{float}
 \usepackage{booktabs}
+ \usepackage{multirow}
 
 
 
@@ -108,6 +109,12 @@ As it has been stated before, trades influence cultural transmission by modifyin
 %XRC we propose a model of coevolution to explore the deep links between trade and cultural transmission in the ancient Mediterranean
 We propose in this article a framework to study the interaction between cultural transmission and trade. This framework should be able first to reproduce well known dynamics of both cultural transmission and trading. Second, to be useful, this framework should be able to compare results obtained by taking cultural or trade into consideration. In order to build this framework we view trade events as part of the culture. The price of a good are then viewed as a cultural trait. This traits can be transmitted and modified along different rules. By this mean, traditional works previously expressed in a trading framework, can be expressed in a cultural evolution framework. Therefore, the dynamics observed on various cultural transmission mechanisms can be straightforwardly compared to dynamics obtained by trading mechanisms. In order to demonstrate the feasibility of this approach we propose a minimal implementation able to reproduce both cultural transmission dynamics and trade dynamics. Additionally we will analyse the results obtained with tools from both economy and cultural evolution.
 
+\jm{to integrate}
+Ultimately, we aim to create a model to study the relation between cultural change and trade networks within the Roman Empire. Examples of questions that could be asked to our model are: What is the relation between distances in the trade network and cultural changes ? Did anti-conformism promote the adaptation of new products coming from remote provinces ? In order to answer these questions the model used has to take into account both cultural effects and trade influence. More precisely, the variations in these two aspects should be modelled and should influence each other.  Therefore, in order to answer the questions targeted we need a co-evolutionary model able to take into account both trade and cultural changes. 
+
+To the best of our knowledge two works have previously proposed frameworks that could be used to model the co-evolution of trade and culture~\cite{bentley_specialisation_2005,macmillan_agent-based_2008}. The first proposes a relatively simple model which is limited by 2 products, a fixed behaviour of the agents and a limited variation of cultural mechanisms. The second proposes a more complete model including a large number of goods (certain being essential and the others non-essential), but suffer from a greater complexity and the absence of the notion of trade networks. Moreover, these works do not compare the dynamics obtained to the previous studies on cultural change and trading mechanisms.
+
+The model presented in this work aims to offer a framework for the co-evolution of culture and trades which relies on a low number of parameters. It is not within the scope of this article to answer the questions asked at the beginning of this section as they require specific implementations of the model proposed. However, the article will focus on the presentation of the framework, its justification and more importantly its validation by reproducing previous results obtained on cultural change and trade mechanisms.
 
 
 
@@ -140,11 +147,6 @@ Based on these conclusions, further works have attempt to define more exactly wh
 
 \xrc{close or remote in terms of what?}
 
-Among the various works done with this objective, few are studying the interactions between economy and cultural change in the Roman empire~\cite{terpstra_trade_2011,kessler_organization_2007,scheidel_model_2007}. 
-An analysis based on historical documents has revealed the importance of economical and social institutions for the efficiency of trades of grains in the early Roman Empire~\cite{kessler_organization_2007}. The same type of analysis has also revealed the importance of a number of key factors (such as commercial development, population growth and geographical mobility) for the growth of income and population in the Roman Italy~\cite{scheidel_model_2007}. Finally, a micro-economic model has determined the importance of reputation and threat of expulsion from a trade network as mechanisms to maintain the overall efficiency of the trade network~\cite{terpstra_trade_2011}. These works therefore reveal the strong relation between trade and cultural change in the Roman empire.
-
-\xrc{I would move this discussion to the coevolution section? Besides, I would ass something such as "a large percentage of datasets used for this purpose are material objects found in archaeological contexts (i.e. pottery). Most of them are usually represented following a neutral model, but how this affects its weight inside the market system?"}
-
 However, a limitation of the previous works is the impossibility to test the conclusions reached by the authors. The models proposed reflects only the view of the authors on the data analysed. A new type of model would be necessary to go beyond the interpretation, and allow the verification of the conclusions reached. These models should be able to generate data which is then qualitatively compared to the real historical data. 
 
 \xrc{what data is being used?}
@@ -159,28 +161,23 @@ Based on this tool a relatively complex and exact modelisation of the prehispani
 
 \xrc{Didn't Brughmans have a model of roman trade?}
 
+\jm{to integrate}
+Among the various works done with this objective, few are studying the interactions between economy and cultural change in the Roman empire~\cite{terpstra_trade_2011,kessler_organization_2007,scheidel_model_2007}. An analysis based on historical documents has revealed the importance of economical and social institutions for the efficiency of trades of grains in the early Roman Empire~\cite{kessler_organization_2007}. The same type of analysis has also revealed the importance of a number of key factors (such as commercial development, population growth and geographical mobility) for the growth of income and population in the Roman Italy~\cite{scheidel_model_2007}. Finally, a micro-economic model has determined the importance of reputation and threat of expulsion from a trade network as mechanisms to maintain the overall efficiency of the trade network~\cite{terpstra_trade_2011}. These works therefore reveal the strong relation between trade and cultural change in the Roman empire.
+\xrc{I would move this discussion to the coevolution section? Besides, I would ask something such as "a large percentage of datasets used for this purpose are material objects found in archaeological contexts (i.e. pottery). Most of them are usually represented following a neutral model, but how this affects its weight inside the market system?"}
+
 %kobti 2012 la meme que kobti 2006 ?
 %	pour 2006: etude de l'apparition d'inegalite
 
-\subsection{Models of Trade and Culture}
-
-\jm{tried a justification of co-evolutionary framework but I find it too light. ideas ?}
-
-\xrc{What if we move the text to the intro and remove this subsection?}
-
-Ultimately, we aim to create a model to study the relation between cultural change and trade networks within the Roman Empire. Examples of questions that could be asked to our model are: What is the relation between distances in the trade network and cultural changes ? Did anti-conformism promote the adaptation of new products coming from remote provinces ? In order to answer these questions the model used has to take into account both cultural effects and trade influence. More precisely, the variations in these two aspects should be modelled and should influence each other.  Therefore, in order to answer the questions targeted we need a co-evolutionary model able to take into account both trade and cultural changes. 
-
-To the best of our knowledge two works have previously proposed frameworks that could be used to model the co-evolution of trade and culture~\cite{bentley_specialisation_2005,macmillan_agent-based_2008}. The first proposes a relatively simple model which is limited by 2 products, a fixed behaviour of the agents and a limited variation of cultural mechanisms. The second proposes a more complete model including a large number of goods (certain being essential and the others non-essential), but suffer from a greater complexity and the absence of the notion of trade networks. Moreover, these works do not compare the dynamics obtained to the previous studies on cultural change and trading mechanisms.
-
-The model presented in this work aims to offer a framework for the co-evolution of culture and trades which relies on a low number of parameters. It is not within the scope of this article to answer the questions asked at the beginning of this section as they require specific implementations of the model proposed. However, the article will focus on the presentation of the framework, its justification and more importantly its validation by reproducing previous results obtained on cultural change and trade mechanisms.
 
 
 
 \section{MODEL DESCRIPTION}
 
-The model proposed is a Multi-Agent Based model including agents and products. It revolves around the value that agents associate to products through cultural change mechanisms, trade mechanisms or both. Depending on the question studied, the value can reflect the interest of the agent for the good or it can be the price at which the agent evaluate this good. The agents are also endowed with limited storage abilities for each good that can be produced. 
+The model proposed is a Multi-Agent Based model based on agents and goods. The interactions between agents and goods are modelled thanks to the four processes (production, cultural transmission, innovation and trade) which will be explained in further details later. The flexibility of the models comes from the possibility to implement these processes differently depending on the hypothesis tested. However, since all experiments are performed with the same four processes, the effect of the various implementations of one process can be studied easily. Moreover, the operating of the model revolves around the value that agents associate to products. Depending on the question studied, the value can reflect the interest of the agent for the good or it can be the price at which the agent evaluate this good. Since this vector is common to all experiments performed with this model, it is extremely useful for the comparisons of results obtained with different implementation of the key processes.
 
 \xrc{This first paragraph should briefly explain the trade component?}
+
+\subsection{Overview of the model}
 
 More formally the model is composed of a population $Pop$ of $m$ agents, each defined by 2 vectors of size $n$. The first corresponds to the quantity of each good that the agent $i$ possesses: 
 $$\forall i \in Pop, \quad Q^i = (q^i_1,\cdots,q^i_n) $$
@@ -191,45 +188,67 @@ The second vector reflects the estimation of the value of a product that an agen
 $$\forall i \in Pop, \quad V^i = (v^i_1,\cdots,v^i_n) $$
 where $V^i$ is the total list of estimated values of agent $i$, and $v^i_j$ is the value that agent $i$ associates to the goods of type $j$.
 
-On top of these elements three processes are included : \textit{production}, \textit{imitation} and \textit{innovation}. The \textit{production} process describe the creation of goods by the agent. Once a good is produced by an agent $i$ it is added its quantity vector ($Q^i$). Within the \textit{imitation} process an agent $i$ can copy the value vector ($V^j$) of an agent $j$, where $j \neq i$. Finally, the \textit{innovation} process also modifies the value vector $V^i$ of an agent, but it differs from the \emph{imitation} process in that the modification is done without reference to the other agents. 
+On top of these elements four processes are used: \emph{production}, \emph{cultural transmission}, \emph{innovation} and \emph{trade}. The \textit{production} process describes the creation of goods by the agent. Once a good is produced by an agent $i$ it is added its quantity vector ($Q^i$). The \emph{trade} process models the exchange of goods between the agents which results in a modification of the quantity vectors ($Q^i$). The amount of goods exchanged is computed by the agents concerned by the trade, within the \emph{trade} process, based on their value vectors ($V^i$). Within the \textit{cultural transmission} process an agent $i$ can copy the value vector ($V^j$) of an agent $j$, where $j \neq i$. The \textit{innovation} process also modifies the value vector $V^i$ of an agent, but it differs from the \emph{cultrual transmission} process in that the modification is done without reference to the other agents. Finally, .
 
-\xrc{I would use cultural transmission instead of imitation?}
+This scheme allow us to have a model achieving the two main goals listed in section~\ref{sec:intro}. The first goal is to be able to implement and compare various cultural transmission mechanisms as well as trade mechanisms within the same framework. We argue that this is possible in our framework by modifying only these four key processes i.e. production, trade, imitation and innovation. Moreover, thanks to the use of a unique $V^i$ vector, it is possible to compare the outcomes of different combinations of production, imitation and innovation mechanisms. The second goal is to produce a model composed of a low number of parameter. Our model is composed of only four processes and two vectors which is significantly less complex than previous models.
 
-This scheme allow us to have a model achieving the two main goals listed in section~\ref{sec:intro}. The first goal is to be able to implement and compare various cultural transmission mechanisms as well as trade mechanisms within the same framework. We argue that this is possible in our framework by modifying only the three key processes i.e. production, imitation and innovation. Moreover, thanks to the use of a unique $V^i$ vector, it is possible to compare the outcomes of different combinations of production, imitation and innovation mechanisms. The second goal is to produce a model composed of a low number of parameter. Our model is composed of only three processes and two vectors which is significantly less complex than previous models.
+The scheduling of the four processes (production, trade, cultural transmission and innovation) is described in algorithm~\ref{algo:complete} along with the vectors modified by each of these processes. Between line 2 and 7 all agents of the population are initialised with empty quantity vectors and random values. Between the lines 11 and 19 is presented the part of the pseudo-code describing the instructions that will be repeated for each iteration of the simulation. 
+\jm{what about saying that we just count the iterations at the ``imitation, innovation step" ?}
+\xrc{It should be justified (market is faster than cultural change?)}
+One can note that the trading process is performed at every iteration while the imitation and innovation processes are executed only every $CulturalStep$. The idea behind this is to perform the imitation based on a score that reflects the performance of the agent and not only one lucky or unlucky trading round. 
 
-\xrc{how do agents trade?}
+\begin{algorithm}
+\caption{Model}
+\label{algo:complete}
+	\begin{algorithmic}[1]
+	\scriptsize
+	\State INITIALIZATION: 
+		\For{$j \in Goods$}
+			\For{$i \in \#Pop/\#Goods$} \Comment{Initialize the agent with no products and a random value vector}
+				\State $Q^i = (0, \cdots, 0)$
+				\State $V^i = (v^i_0, \cdots, v^i_n)$ \Comment{The values of $v^i_j$ are selected randomly}
+			\EndFor
+		\EndFor
 
-\section{EXPERIMENTAL SETUP}
+	\State SIMULATION:
+		\Loop{$~step \in TimeSteps$}
+			\For{$i \in Pop$}
+				\State $Production(Q^i)$
+				\For{$j \in Pop$}
+					\State $TradeProcess(V^i,Q^i,V^j,Q^j)$
+				\EndFor				
+				\If{$ (step \mod CulturalStep) = 0$}	
+					\State $CulturalTransmission(V)$
+					\State $Innovation(V^i)$
+				\EndIf
+			\EndFor
+		\EndLoop
+\end{algorithmic}
+\end{algorithm}
 
 
-\xrc{Not sure about the name...the sections below are describing the model so why are they in different section?}
+In order to validate our model we first reproduce common results from the literature on cultural transmission. We then show that it is possible to transform our model to fit processes that are economically sound. To achieve these two goals, we have design for each one specific set of implementations of the four core processes (production, imitation and innovation). 
 
-In order to validate our model we first reproduce common results from the literature on cultural transmission. We then show that it is possible to transform our model to fit processes that are economically sound. In the following, we present the two set of implementations of the three core processes (production, imitation and innovation) that were used in our experiments.
+\subsection{Cultural Transmission}\label{sec:culturalTrans}
 
-\subsection{Cultural Transmission}
-
-The first mechanism of the model aims at reproducing a scenario of unbiased transmission, where each product is a cultural trait without intrinsic positive or negative weight \cite{bentley_random_2004,bentley_specialisation_2005,mesoudi_random_2009}. 
-Under this hypothesis, the process of \emph{production} is not relevant, and as a consequence, it does not modify the content of the quantity vector of the agents.
+The first set of implementations is designed to reproduce a scenario of unbiased transmission, where each product is a cultural trait without intrinsic positive or negative weight \cite{bentley_random_2004,bentley_specialisation_2005,mesoudi_random_2009}. 
+Under this hypothesis, the processes of \emph{production} and \emph{trade} are not relevant, and as a consequence, they do not modify the content of the quantity vectors of the agents.
 
 Unbiased transmission is implemented using ``random copy'': each agent has a low probability to pick randomly one agent among all and copy its vector of values. The \emph{innovation} process, termed ``unbounded'', is triggered with a low probability and draw a new random value to replace an element $v^i_j$. The imitation and innovation probabilities are presented with other parameters in table~\ref{tab:parameters}.
 
-The neutral hypothesis states that the ``random copy'' transmission and the ``unbounded'' innovation process used under a fixed population size leads to a \emph{power law} distribution of the frequency for the different cultural variants. This distribution is characterized by a small number of very frequent traits and a large number of very rare traits. Since this hypothesis has been verified in previous works implementing similar \emph{imitation} and \emph{innovation} mechanisms, we expect in this work the observation of a similar ``power law' distribution. 
-
-\xrc{I would remove the previous sentence: it is obvious that it works right?}
-
-More formally, this distribution is formalised as : $$P(v)=C/v^\alpha $$, where $v$ is the number of time a variant has been repeated, $P(v)$ the probability to find that variant, $C$ a constant, $\alpha$ a variable. 
+The neutral hypothesis states that the ``random copy'' transmission and the ``unbounded'' innovation process used under a fixed population size leads to a \emph{power law} distribution of the frequency for the different cultural variants. This distribution is characterized by a small number of very frequent traits and a large number of very rare traits. 
+%Since this hypothesis has been verified in previous works implementing similar \emph{imitation} and \emph{innovation} mechanisms, we expect in this work the observation of a similar ``power law' distribution. 
+More formally, this distribution is formalised as : $$P(v)=C/v^\alpha $$, where $v$ is the number of time a variant has been repeated, $P(v)$ the probability to find that variant, $C$ a constant, $\alpha$ a variable describing the slope of the curve obtained. 
 
 \subsection{Trading Model}\label{sec:trade}
 
-The second set of implementations of the core processes aims at producing economical dynamics. We are interested in the exchange of products between agents when they can modify the prices at which they sell and buy products. We want to implement simple processes leading to the convergence of prices to values acceptable by all agents.
-
-\xrc{What do you mean by convergence? Equilibrium?}
+The second set of implementations of the core processes aims at producing economical dynamics. We are interested in the exchange of products between agents when they can modify the prices at which they sell and buy products. We want to implement simple processes leading to the convergence of all prices to values acceptable by all agents, i.e. we would like to observe, at the end of an experiment, all the agents using the same set of prices which allow them to trade efficiently.
 
 \paragraph{Production}
-In this set of implementations, each agent is producing only one type of good. The type good produced by an agent is assigned to it at the beginning of the simulation and does not change. 
+In this set of implementations, each agent is producing only one type of good. The type good produced by an agent $i$ is assigned to it at the beginning of the simulation, does not change through the simulation and is referred as $produced^i$. 
 
-\paragraph{Imitation}
-Within this set of implementations, the key ideas behind the imitation mechanism is to copy the agents which are the best at trading. To do so, the imitation mechanism used takes into account the value vector of the other agents and relies on two new notions: \emph{need} and \emph{score}. 
+\paragraph{Cultural transmission}
+Within this set of implementations, the cultural transmission process is not random but biased toward the agents which are the best at trading, and is therefore termed ``success bias''. To achieve this bias, the cultural transmission mechanism used takes into account the value vector of the other agents and relies on two new notions: \emph{need} and \emph{score}. 
 
 The \emph{need} is a quantity of product that each agent tries to obtain. This quantity is different for each product but the need for a product is the same for all agents:
 $$ N = (n_1, \cdots, n_r) $$ 
@@ -245,7 +264,7 @@ s^i = \begin{cases}
 \end{equation}
 
 
-This function ensures that each good count for the same proportion \xrc{weight?} in the final score (i.e.: managing to get only the right amount of a good with a high ``need'' value will not give a better score to the agent). The values of $s^i$ obtained for different need values are depicted in figure~\ref{fig:fit}.
+This function ensures that each good has the same weight in the final score (i.e.: managing to get only the right amount of a good with a high ``need'' value will not give a better score to the agent).
 
 
 \begin{figure}[htp]
@@ -255,16 +274,13 @@ This function ensures that each good count for the same proportion \xrc{weight?}
 	\caption{The fitness depending on price and needs}
 	\label{fig:fit}
 \end{figure}
-We can see in the figure~\ref{fig:fit} the score with regards to the quantity of one good traded by an agent and that given different value for the need of its good. We can see that even if the need for a good is small (for instance when $need = .01$) one can have a high score as soon as he manage to get a quantity closed to the needed quantity. It insure that one need to have all of each good in the good proportion and that none could reach a better score just managing to get the right amount of a good with a high need.
+The figure~\ref{fig:fit} depicts the score of an agent, for different need value of one good, with regards to the quantity of the good possessed by the agent. We can see that even if the need for a good is small (for instance when $need(x) = .01$) an agent can have a high score as soon as it manages to get a quantity close to the need. This insures that an agent needs to have for each of the good a quantity equal to the need and that no agent could reach a better score just by getting the right quantity for a good with a high need.
 
 The agents will choose the agent from whom the price vector should be copied among the agents that produce the same good and have the highest score. In practice, a fixed proportion of the less successful agents will copy the prices of the most successful agent. 
 
-\xrc{so no random copy? It should be clear that agents copy values based on random copy, and copy strategy based on payoff biased transmission (if i'm not mistaken).}
 
 \paragraph{Trading} 
-
-
-On top of producing goods, the agents have the ability to exchange them. During the trading phase \xrc{we should explain the phases of the model before mentioning the trading phase} the value associated to a good by an agent corresponds to the subjective price of the good for this agent. Briefly summarised, for each good that it does not produce, an agent will trade with the first parter that offer an acceptable trade, i.e. the agent that proposes a satisfiable ratio between the other product and the product produced by the agent. 
+During the trading phase the value associated to a good by an agent corresponds to the subjective price of the good for this agent. Briefly summarised, for each good that it does not produce, an agent will trade with the first parter that offer an acceptable trade, i.e. the agent that proposes a satisfiable ratio between the other product and the product produced by the agent. 
 
 In more details, the trading phase starts by the agent looking at a first random agent producing another product. 
 Let $o$ be an agent producing $g$ that proposes a trade and $r$ an agent producing $k$ that receives the proposition. As explained earlier, each has a quantity of good $Q^o$ and $Q^r$. On the one side, $o$ wants to exchange a quantity $w_g^o$ of the good $g$ for a quantity $w_k^o$ of the good $k$. On the other side, $r$ wants to exchange a quantity $w_g^r$ of the good $g$ for a quantity $w_k^r$. The tuples $W^o$ and $W^r$ describe the quantities of goods wanted by agent $o$ and $r$ for one trade proposition and are defined by:  
@@ -315,9 +331,6 @@ If a trade is possible the two agents will exchange the agreed quantities. If th
 \end{algorithmic}
 \end{algorithm}
 
-The trading process is performed at every iteration while the imitation and innovation processes are executed only every $CulturalStep$. The idea behind this is to perform the imitation based on a score that reflects the performance of the agent and not only one lucky or unlucky trading round.
-
-\xrc{Add some 'scheduling' definition where this is shown. Also it should be justified (market is faster than cultural change?)}
 
 \paragraph{Innovation} In a trading environment it seems unlikely that a price will change radically to a very different value. Therefore, a new and more realistic mechanism is proposed. The innovation process, termed ``self referenced'', is still triggered with a probability $\mu$ 
 but modify the previous price by adding or subtracting a small amount taken randomly from a uniform  distribution between $0 .. \beta$.
@@ -325,9 +338,7 @@ but modify the previous price by adding or subtracting a small amount taken rand
 
 \paragraph{Expected outcome} 
 
-\todo{complete the equation}
-
-With such a setup and given (\ref{eq:score}) and (\ref{eq:trade}), it is expected that the prices will converge to value allowing each agent to obtain quantities of resources exactly equivalent to the needs. The best possible price of all good satisfies the equations :
+Based on the set of implementations presented and given the equations (\ref{eq:score}) and (\ref{eq:trade}), it is expected that the prices will converge to value allowing each agent to obtain quantities of resources exactly equivalent to the needs. The best possible price of all good satisfies the equations :
 \begin{equation}
 	\begin{cases}
 		\frac{v^o_k}{v^o_g} = n_k \\
@@ -335,7 +346,7 @@ With such a setup and given (\ref{eq:score}) and (\ref{eq:trade}), it is expecte
 	\end{cases} =>v^o_k = n_k \times n_g, \quad \forall k \in Goods, \forall o \in Pop, g = produced^o, k \not= g 
 \end{equation}
 
-Which mean that 
+Which means that 
 
 \begin{equation}
 	\quad \forall j \in Goods, \forall i \in Pop \quad \tilde{V}^i = 
@@ -346,55 +357,26 @@ Which mean that
 \end{equation}
 
 
-
 If such prices are reached, given the exchange rules defined in (\ref{eq:trade}) and the exchange constraints (\ref{eq:constraintFirst}) to (\ref{eq:constraintLast}) all exchanges will be optimally achieved, leading to a total score $S$ for each agent of the population : 
 $$ S = \sum_{i=0}^{CulturalStep}  s^i(\tilde{Q}^i) \times ngoods $$ 
 where $\tilde{Q}^i$ is the optimal quantity vector, i.e. the one for which $s^i(\tilde{Q}^i) = s_{max}$. Remember that from equation~\ref{eq:score}, $s_{max}=1$.
 
+\section{Experimental setup}
+In order to study the cultural transmission and the trading model two sets of implementation of the four processes of our model have been presented. Remember that during the definition of these two sets of implementation, two cultural transmission mechanisms have been defined () along with two innovation mechanisms (). Therefore, on top of exploring the results offered by the two set of implementations, it would be also interesting to understand which of the process is responsible for the variation in results. The four implementations proposed are summarized in the table~\ref{tab:exp}. Each couple of innovation/imitation mechanism form one setup that is labelled with one letter. Note that the ``neutral model" presented in section~\ref{sec:culturalTrans} corresponds to the setup A, and the trading model presented in section~\ref{sec:trade} corresponds to the setup D.
 
-\subsection{Complete model}
+\begin{table}[h]
+	\centering
+	\begin{tabular}{ll|cc}
+				&	&\multicolumn{2}{c}{\textbf{Cultural transmission}} \\
+		\multirow{2}[20]{*}{\rotatebox[origin=c]{90}{\textbf{Innovation}}}&  & Random & Success biased \\\hline  
+		& \rule[-0.45cm]{0pt}{1cm} Unbounded 		&A & B \\
+		& \rule[-0.45cm]{0pt}{1cm} Self Referenced	& C & D \\
+	\end{tabular}
+	\caption{Experimental Setup}
+	\label{tab:exp}
+\end{table}
 
-The model used in these experiments, including the cultural transmission and trading mechanisms, is described in algorithms~\ref{algo:complete}
-
-\begin{algorithm}
-\caption{Model}
-\label{algo:complete}
-	\begin{algorithmic}[1]
-	\scriptsize
-	\State INITIALIZATION: 
-		\For{$j \in Goods$}
-			\For{$i \in \#Pop/\#Goods$} \Comment{Initialize the agent for the good it has to produce and a random value vector}
-				\State $produced^i = j$
-				\State $Q^i = (0, \cdots, 0)$
-				\State $V^i = (v^i_0, \cdots, v^i_n)$ \Comment{The values of $v^i_j$ are selected randomly}
-			\EndFor
-		\EndFor
-
-	\State SIMULATION:
-		\Loop{$~step \in TimeSteps$}
-			\For{$i \in Pop$}
-				\State $Production()$
-				\For{$j \in Pop$}
-					\State $TradeProcess(i,j)$
-				\EndFor				
-				\If{$ (step \mod CulturalStep) = 0$}	
-					\State $Imitation()$
-					\State $Innovation()$
-				\EndIf
-			\EndFor
-		\EndLoop
-\end{algorithmic}
-\end{algorithm}
-
-\todo{upload and put an url, complete cite mare nostrum, put nb of hours per run (or the total)}
-All experiments are performed with the Pandora open source framework ~\cite{rubiocampillo_2014}. We have make the source code of our project available online~\footnote{put ulr}. \xrc{I always put this in the acknowledgements to avoid the technical details while describing the experiments}
-
-All simulations presented are performed in the MareNostrumIII super computer~\cite{}, and took XXXh per run.
-
-\jm{what about saying that we just count the iterations at the ``imitation, innovation step" ?}
-In our experiment one has to take in account that agents modifies their prices or exchange their price only every $culturalStep$ steps. Between, twos such steps, the agent exchange goods given their own prices. Therefore we choose to run our simulation during 10000 step which correspond the 1000 time steps used by \cite{bentley_random_2004,mesoudi_random_2009}.
-
-\todo{put the values in the table}
+For each of the setup 100 runs of 200000 timestep is performed. The parameters used are presented in table~\ref{tab:parameters}. Finally, remember that in our experiment one has to take in account that agents modifies their prices or exchange their price only every $culturalStep$ steps. Between, twos such steps, the agent exchange goods given their own prices. Therefore we choose to run our simulation during 10000 step which correspond the 1000 time steps used by \cite{bentley_random_2004,mesoudi_random_2009}.
 
 \begin{table}
 \begin{center}
@@ -402,6 +384,8 @@ In our experiment one has to take in account that agents modifies their prices o
 \toprule
 Parameter & Value \\
 \midrule
+Number of goods & 4 \\
+Number of agents & 800 \\
 Mutation probability & .004 \\
 Innovation probability & .001\\
 CulturalStep &  10 \\
@@ -414,26 +398,26 @@ TimeSteps & 200000 \\
 \end{table}
 
 
+
+
+
+
 \section{RESULTS}
 \subsection{Random cultural transmission and random innovation process}
 
-We first analyse the result obtained in the ``neutral model" as presented in section~\ref{sec:}. The figure~\ref{fig:allMutation} presents an analysis of the value vectors obtained across the 100 runs performed with a $\mu$ value equal to XXXX. In this graph it is not the exact values that are analysed but their relative frequencies. The y-axis of the graph shows the frequencies of the variants of the vector values, the x-axis shows how many variant achieves such frequencies and the line represents the average of the frequencies obtained across all runs. Both axes are in a logarithmic scale
-
-On this graphic one can observe a straight line which shows that a few of the variants are very frequent and a majority of them are not. Please note, that here the specific variant achieving high frequency is not studied, only the number of variants achieving such frequencies is presented. This line corresponds to the ``power law" distribution mentioned in section~\ref{sec:} and is typical of the result obtained under the ``neutral model". 
-
-In order to further validate our model, we perform such study under various $\mu$ values as it has been done in previous works. The $\mu$ innovation rates studied vary $\in {.004,.008,.016,.064}$ and two population sizes are studied: 250 and 500 agents. The distribution of variants obtained is shown in figure~\ref{fig:allMutation}.
+We first analyse the result obtained in the ``neutral model" as presented in section~\ref{sec:culturalTrans} and labelled as setup A in table~\ref{tab:exp}. The figure~\ref{fig:allMutation} present the results obtained with $\mu$ varying $\in {.004,.008,.016,.064}$ and two population sizes: 250 and 500 agents. The distribution of variants obtained is shown in figure~\ref{fig:allMutation}. In this graph the relative frequencies of the values obtained is analysed. The y-axis of the graph shows the frequencies of the variants of the vector values, the x-axis shows how many variant achieves such frequencies and the line represents the average of the frequencies obtained across all runs. Both axes are in a logarithmic scale.
 
 \begin{figure}[!hbp]
 	\begin{center}
 		\includegraphics[width=6cm]{img/allmuRandMaxN250.pdf}
 		\includegraphics[width=6cm]{img/allmuRandMaxN500.pdf}
 	\end{center}
-	\caption{Distribution of frequencies depending on the $\mu$ parameter with 250 agents (left) and 500 agents (right)}
-	\label{fig:allMutation }
+	\caption{Distribution of frequencies depending on the $\mu$ parameter with 250 agents (left) and 500 agents (right)\label{fig:allMutation}}
 \end{figure}
 
-\jm{yes say the R package}
-Under all parameters tested the value vectors exhibit power law like distribution. It would then be interesting to analyse the shape of such distribution. In order to perform this study a linear regression is used to fit the curve obtained to a function of the form $formul powerlaw$. The mean value of the $\alpha$ parameters obtained and their standard deviation is presented in table~\ref{tab:mualpha}. The computations of the linear regression is done thanks to PACKAGE
+In the figure~\ref{fig:allMutation} one can observe that the lower the mutation rate, the closer from a line the result is. This line corresponds to the ``power law" distribution explained in section~\ref{sec:culturalTrans} and is typical of the result obtained under the ``neutral model". Please note, that here the specific variant achieving high frequency is not studied, only the number of variants achieving such frequencies is presented.  
+
+Under all parameters tested the value vectors exhibit power law like distribution. It would then be interesting to analyse the shape of such distribution. In order to perform this study a linear regression is used to fit the curve obtained to a function of the form $P(v)=C/v^\alpha $. The mean value of the $\alpha$ parameters obtained and their standard deviation is presented in table~\ref{tab:mualpha}.
 
 \begin{table}[h]
 	\centering
@@ -455,30 +439,9 @@ Under all parameters tested the value vectors exhibit power law like distributio
 
 \jm{Simon, do you have a comment on the table ? Like does it fit what is found in other articles ?}
 
+\subsection{Distribution}
 
-\subsection{ Economical  process}
-
-In order to study a trading model two new innovation and imitation mechanisms have been introduced as explained in section~\ref{sec:}. These mechanisms are summarized in the table~\ref{tab:exp}. Each couple of innovation/imitation mechanism form one setup that is labelled with one letter. Note that the ``neutral model" studied in the previous section corresponds to the setup A. All the runs presented in this section are done for 200000 steps with a innovation rate $\mu=.004$ and $\beta=.001$.
-
-\todo{add innovation and imitation}
-\begin{table}[h]
-	\centering
-	\begin{tabular}{l|cc}
-					&Imitation  Process \\
-		Innovation Mechanism	& Rand & Success \\\hline  
-		Unbounded 		&A & B \\
-		Self Referenced	& C & D \\
-	\end{tabular}
-	\caption{Experimental Setup}
-	\label{tab:exp}
-\end{table}
-
-\xrc{ok but this is the experiment design right??}
-
-\subsubsection{Distribution}
-
-
-Our first step is to study the distribution of values in order to compare them to the distribution previous obtained. The distribution of values in the 4 setups is presented in figure~\ref{fig:4setDi}. 
+In order to understand the effect of the other cultural transmission and innovation mechanisms, we study first the distribution of values obtained in the different setups. The distribution of values in the four setups is presented in figure~\ref{fig:4setDi}. 
 
 \begin{figure}[H]
 	\begin{center}
@@ -487,6 +450,7 @@ Our first step is to study the distribution of values in order to compare them t
 	\caption{Frequency distribution for the 4 setup}
 	\label{fig:4setDi}
 \end{figure}
+
 
 \begin{table}[h]
 	\centering
@@ -500,39 +464,34 @@ C & X& X & X &\includegraphics[width=5cm]{img/C-D.pdf}\\
 	\label{tab:allRes}
 \end{table}
 
-\todo{update once all graphs are there}
-\jm{is exponential law characteristic of prestige bias ?}
-
-The results studied in the previous section is reproduce here in the by the setup A, it is therefore no surprise that this setup follow a power law. We observe that the setup D is also following a power law. However, setups B and C are following an exponential law. We therefore observe that the innovation process has a negligeable influence on the shape distribution. However, the use of a biased imitation process has a major effect on the shape of the distribution.
-
+The results studied in the previous section is reproduced here by the line labelled ``setup A''. 
+\jm{this sounds wrong what would be a valid analysis ?}
+We observe that the setup D is also following a power law. However, setups B and C are following an exponential law. We therefore observe that the innovation process has a negligeable influence on the shape distribution. However, the use of a biased imitation process has a major effect on the shape of the distribution.
 
 
-\subsubsection{Score}
 
-We now study the setup in more detail by investigating the ability of the population of agents to find the good price to perform exchanges between each other. This is done by observing the score of all agents in each of the 4 setups. The results obtained are presented in figure~\ref{tab:scoreEvol}.
+\subsection{Values}
+
+We now study the results obtained in more detail by investigating the ability of the population of agents to find the good price to perform exchanges between each other. This is done by observing the score of all agents in each of the four setups. The results obtained are presented in figure~\ref{tab:scoreEvol}.
 
 \begin{table}[H]
 	\centering
 	\begin{tabular}{l c c}
-		& Random Transmission & Eco Transmission \\
-		$\mu$ & \specialcell{\raisebox{-.5\height}{\includegraphics[width=5cm]{img/ScoreEvolutionForA-G2N250.pdf}}\\Setup A}&\specialcell{\raisebox{-.5\height}{\includegraphics[width=5cm]{img/ScoreEvolutionForB-G2N250.pdf}} \\ Setup B} \\
-		$\mu + \alpha$& \specialcell{\raisebox{-.5\height}{\includegraphics[width=5cm]{img/ScoreEvolutionForC-G2N250.pdf}} \\ Setup C}&\specialcell{\raisebox{-.5\height}{\includegraphics[width=5cm]{img/ScoreEvolutionForD-G3N500.pdf}} \\ Setup D}
+		& Random Transmission & Biased Transmission \\
+		Unbounded & \specialcell{\raisebox{-.5\height}{\includegraphics[width=5cm]{img/ScoreEvolutionForA-G2N250.pdf}}\\Setup A}&\specialcell{\raisebox{-.5\height}{\includegraphics[width=5cm]{img/ScoreEvolutionForB-G2N250.pdf}} \\ Setup B} \\
+		Self-referenced & \specialcell{\raisebox{-.5\height}{\includegraphics[width=5cm]{img/ScoreEvolutionForC-G2N250.pdf}} \\ Setup C}&\specialcell{\raisebox{-.5\height}{\includegraphics[width=5cm]{img/ScoreEvolutionForD-G3N500.pdf}} \\ Setup D}
 
 	\end{tabular}
 	\caption{Evolution of the score in the different setup for typical run of each setup.}%%
 	\label{tab:scoreEvol}
 \end{table}
 
-\todo{simon you have put A and S, I guess it's C and D ?}
-\simon{It's A and C, the setup where their is no selection. But those two graph (A and B) are not good, don't take them in account. }
-\todo{update explanation with new graphs}
-\todo{get clear names for innovation and imitaiton mechanisms}
- 
-In the setups A and C, the score evolves randomly. In the two other setups however the score is increasing. Moreover, we observe that the XXXX innovation process used in the setups A and B leads to higher convergences. Since only the ``prestige imitation" takes the score into account it is normal that only this mechanism leads higher scores. The XXXX innovation mechanism leads to lower convergences as it select prices randomly in the complete range available.
+\todo{redo the explanations nicer} 
+In the setups A and C, the score evolves randomly. In the two other setups however the score is increasing. Moreover, we observe that the Self-referenced innovation process used in the setups C and D leads to higher convergences. Since only the ``biased transmission" takes the score into account it is normal that only this mechanism leads higher scores. The ``unbounded'' mechanism leads to lower convergences as it select prices randomly in the complete range available.
 
-\subsubsection{Prices}
+\subsection{Prices}
 
-We pursue the analysis of the economical aspect by observing the prices reached in setup D. As explained in the section~\ref{sec:} we expect that the trade imitation and innovation processes will produce a convergence toward a set of price for each good that will allow agents to exchange optimally the good they produce with the other goods. To verify this assumption we analyse the prices reached. These are presented in figure~\ref{fig:ratioEvol} as a deviation from the optimal price. Record that the optimal price is the ratio between the need of the needed good and the produced good.
+We pursue the analysis of the economical aspect by observing the prices reached in setup D. As explained in the section~\ref{sec:trade} we expect that the trade imitation and innovation processes will produce a convergence toward a set of price for each good that will allow agents to exchange optimally the good they produce with the other goods. To verify this assumption we analyse the prices reached. These are presented in figure~\ref{fig:ratioEvol} as a deviation from the optimal price. Record that the optimal price is the ratio between the need of the needed good and the produced good.
 
 \begin{figure}[H]
 	\begin{center}
@@ -544,24 +503,27 @@ We pursue the analysis of the economical aspect by observing the prices reached 
 
 We observe that prices are indeed converging to the optimal prices which means that our innovation and imitation process are valid trade mechanisms. Notably, they produce results similar to the ones obtained in~\cite{gintis_emergence_2006}.
 
-\subsubsection{Suboptimal markets}
+\subsection{Suboptimal markets}
 
-Finally, a more careful analysis of the price structure reveals the presence of suboptimal markets. In figure~\ref{fig:suboptimal} the price structure of one run of setup C is presented. The x-axis represents the number of iteration, the y-axis the prices. The green boxplot represents the price of good X for an agent producing Y. And the blue boxplot represents the price of good X for agent producince Y 
+Finally, a more careful analysis of the price structure reveals the presence of suboptimal markets. 
+\jm{it was written setup C, it's not setup D?}
+\jm{is it the mean in blue ?}
+In figure~\ref{fig:suboptimal} the price structure of one run of setup D is presented. The x-axis represents the number of iteration, the y-axis the prices. Each of the four figures represents the score of all agents producing one of the four goods used. In blue is presented the mean of the score of the figures.
 
-\begin{figure}[htp]
-	\begin{center}
-		\includegraphics[width=7cm]{img/evolutionGlobalScoreG4N800.pdf}
-	\end{center}
-	\caption{Evolution of global score for a run with 800 agents and 4 goods.}
-	\label{fig:G4N500}
-\end{figure}
-\begin{figure}[htp]
-	\begin{center}
-		\includegraphics[width=7cm]{img/evolutionToClearningPricesG4N800.pdf}
-	\end{center}
-	\caption{Evolution of prices for a run with 800 agents and 4 goods.}
-	\label{fig:G4N500Clearing}
-\end{figure}
+%\begin{figure}[htp]
+%	\begin{center}
+%		\includegraphics[width=7cm]{img/evolutionGlobalScoreG4N800.pdf}
+%	\end{center}
+%	\caption{Evolution of global score for a run with 800 agents and 4 goods.}
+%	\label{fig:G4N500}
+%\end{figure}
+%\begin{figure}[htp]
+%	\begin{center}
+%		\includegraphics[width=7cm]{img/evolutionToClearningPricesG4N800.pdf}
+%	\end{center}
+%	\caption{Evolution of prices for a run with 800 agents and 4 goods.}
+%	\label{fig:G4N500Clearing}
+%\end{figure}
 
 \begin{figure}[htp]
 	\begin{center}
@@ -570,26 +532,26 @@ Finally, a more careful analysis of the price structure reveals the presence of 
 		\includegraphics[width=7cm]{img/scatterPlotGood3.pdf}
 		\includegraphics[width=7cm]{img/scatterPlotGood4.pdf}
 	\end{center}
-	\caption{Evolution of the Score for the four types of agents of a simulation with 4 differents good and 800 agents}
+	\caption{Evolution of the Score for the four types of agents of a simulation with four differents good and 800 agents}
 	\label{fig:suboptimal}
 \end{figure}
 
 \xrc{these boxplots are confusing because they are small and contain a huge amount of information. What if we do a scatterplot with a given alpha, and on top of this a loess regression? It always works better to me when you have this kind of data; also, I would provide a figure for each type of score.}
 \simon{What do you mean by ``a given alpha''? does something like those new ones is better?}
 
-In this graphic we can observe that the product displayed in green is blocked to a non-optimal value until iteration XXXX, and decreasing after. The prices for the blue product, on the other side, decrease steadily until the median reaches the uptimum at iteration XXXX. This illustrate the complexity of finding the right prices in the market. Indeed all prices are strongly linked together and until one has reach its optimum value, the other price can not evolve. 
+For the agents producing the goods 1,2 and 3 we observe a long stagnation of the mean score until timestep 750,000. Further investigations have revealed that during this period a few of the prices used by the agents are far from the optimal. After a relatively long search, the correct prices are finally found and the score of all agents improve. This example illustrates well the complexity of finding the right prices in the market. This situation is due to the fact that all prices are strongly linked together and until one has reach its optimum value, the other price can not evolve. 
+
+
+\section{DISCUSSION}
+\xrc{what is the model explaining in terms of what was mentioned in the intro?}
+
+\todo{write better}
+In the experiments conducted multiple implementations of the cultural transmission and innovation mechanisms have been proposed. Notably, one set of implementation aimed at reproducing trade mechanisms. The sections XXXX have shown that this set of implementation is producing results expected from a trade mechanism and therefore that trade is plainly a cultural factor. The modifications needed in our framework were relative to the proposition of new imitation and innovation mechanisms which are typical of the study of the cultural transmission. This proximity between trade mechanisms and cultural transmission allows for the comparisons of the results obtained. For example, it has been possible here to compare the distribution of values obtained and highlight that the divergence from a power law actually is coming mainly from the imitation mechanism used in trade. Moreover this imitation mechanism can further be interpreted as a ``prestige bias" imitation already studied in cultural transmission.
+
 
 \section{CONCLUSION}
 
 This article has propose a framework to study both cultural transmission mechanisms and trade mechanisms. Our framework is based on a central element, the value vector, which is interpreted differently depending on the mechanisms studied. We have shown the validity of this approach by reproducing expected results on both the cultural and trade side. On the cultural transmission side we have shown that the implementation of the ``neutral model" leads to the expected observations on the variants of the vector value: a power law. When implementing trading mechanisms we observe the convergence of prices to the expected values and the improvement of the scores of the agents.
-
-On top of these results, by the implementation of trade mechanisms as cultural mechanisms, we show that trade is plainly a cultural factor. The modifications needed in our framework where relative to the proposition of new imitation and innovation mechanisms which are typical of the study of the cultural transmission. This proximity between trade mechanisms and cultural transmission allows for the comparisons of the results obtained. For example, it has been possible here to compare the distribution of values obtained and highlight that the divergence from a power law actually is coming mainly from the imitation mechanism used in trade. Moreover this imitation mechanism can further be interpreted as a ``prestige bias" imitation already studied in cultural transmission.
-
-\section{DISCUSSION}
-
-
-\xrc{discussion should go before conclusion. Also, this is not a disucussion but some comments on future stuff that could be done: what is the model explaining in terms of what was mentioned in the intro?}
-%The questions we would like to ultimately study are for example: how does the hierarchical structure changes the adoption of a new product ? How delays and interruptions in the trade network change the culture of a society ?
 
 In future works numerous, more realistic and complex dynamics can be studied in the same model. First the constraints on the production could be relaxed so that each agent can choose the products it wishes to produce at the current time step. Moreover, meterological factors can modify the quality of the production (noisy outcome of the process) thus making the process more realistic and more complex~\cite{bentley_specialisation_2005}.
 
@@ -597,10 +559,11 @@ The goods themselves can be of different type: ``vital'' or ``common''. The abse
 
 The trading theories studied also can be extended to the \emph{Prospect Theory}~\cite{kahneman_prospect_1979} which proposes to study more realistic trade mechanisms taking into account the biases of humans. Another economical framework we envision is the Agent based Computational Economy, ACE, which is  addressing economical problems raising from the interactions of a large number of agents~\cite{tesfatsion_introduction_2001}. On top of these trading theories the influence of the network of trades by itself can be studied. Various networks can be envisioned ranging from fully connected to small world, and taking into account possible delays or the sudden rupture of a link.
 
-
 On the cultural transmission side, the vector value could be learned using any mechanism of ``social learning'' (as defined by \cite{lycett_cultural_2015}) known in the literature (teaching, different kind of copying mechanisms,\ldots) and/or integrate any cognitive/environmental bias that could be studied (see again \cite{lycett_cultural_2015} for some kind of bias that could be implemented). Agents could be also endowed with self-adaptation abilities implemented thanks to Reinforcement Learning or Developmental Learning. Another possible track to implement the self-adaptation abilities is to rely on the cognitive approaches that propose to model the complexity of the human behaviour in general representations such as BDI.
 
 \section{Acknowledgements}
+
+\todo{upload and put an url, complete cite mare nostrum, put nb of hours per run (or the total)}
 
 Funding for this work was provided by the ERC Advanced Grant EPNet (\todo{look for code}) and the SimulPast Consolider Ingenio project (CSD2010-00034) of the former Ministry for Science and Innovation of the Spanish Government. 
 
