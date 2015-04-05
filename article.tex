@@ -144,10 +144,10 @@ Few works have attempt to model the interactions between economy and cultural ch
 
 An additional limitation of the previous works is the impossibility to test the conclusions reached by the authors. The models proposed reflects only the view of the authors on the historical and archaeological data analysed. A new type of model would be necessary to go beyond the interpretation, and allow the verification of the conclusions reached. These models should be able to generate data relative to trade which are then qualitatively compared to results of analysis of archaeological data such as amphorae or other container used to carry goods. By this mean, if a factor is really important in the economical network, its removal from the model will lead to data qualitatively different from the historical data. 
 
-\todo{check that paragraph}
-The Agent Based Models (ABM) methodology offers a way to produce this kind of model within a computer~\cite{lake_trends_2014}. An ABM is composed of a group of agents performing actions within a virtual environment. The environment and the behaviour of the agents, despite being an simpler than the real world, are designed to be analogous to their real-world counterpart. The experimenter hand designs the agents, the environment and their interaction, and observes the outcome of all interactions through time in order to compare it to the archaelogical data obtained from the real world. The goal of the experimenter is therefore to find a plausible set of assumptions used during the creation of the ABM produce results close to what is observed in reality.
 
-A first example of its potential is given through a model of the trade network of tableware in the roman east~\cite{brughmans_roman_2014}. Among the parameters tested, preliminary results of this model show that number of links between production site has a strong influence on the results obtained. A second more complete example proposes a detailed model of the prehispanic Pueblo societies~\cite{kohler_modelling_2012}. This work offers an ABM integrating numerous effects such as food consumption, production and landscape. The questions studied are  numerous and some works are performed on the economical system and its ties with social transmissions~\cite{kobti_emergence_2006,cockburn_simulating_2013}. However the work done in this project consider a pre-market society in a specific village which makes it difficult to reach more general conclusions, notably applicable to the Roman Empire.
+The Agent Based Models (ABM) methodology offers a way to produce this kind of model within a computer~\cite{lake_trends_2014}. An ABM is composed of a group of agents performing actions within a virtual environment. The environment and the behaviour of the agents, despite being an simpler than the real world, are designed to be analogous to their real-world counterpart. The experimenter hand designs the agents, the environment and their interaction, and observes the outcome of all interactions through time in order to compare it to the archaelogical data obtained from the real world. The goal of the experimenter is therefore to find a plausible set of assumptions used during the creation of the ABM to produce results close to what is observed in reality.
+
+A first example of its potential is given through a model of the trade network of tableware in the roman east~\cite{brughmans_roman_2014}. Among the parameters tested, preliminary results of this model, show that the number of links between production site has a strong influence on the results obtained. A second more complete example proposes a detailed model of the prehispanic Pueblo societies~\cite{kohler_modelling_2012}. This project proposes an ABM integrating numerous effects such as food consumption, production and landscape. The questions studied are  numerous and some works are performed on the economical system and its ties with social transmissions~\cite{kobti_emergence_2006,cockburn_simulating_2013}. However the work done in this project consider a pre-market society in a specific village which makes it difficult to reach more general conclusions, notably applicable to the Roman Empire.
 
 
 %kobti 2012 la meme que kobti 2006 ?
@@ -437,17 +437,17 @@ In order to understand the effect of the other cultural transmission and innovat
 \end{figure}
 
 
-\begin{table}[h]
-	\centering
-	\begin{tabular}{lcccc}
-		& A & B & C & D\\
-A & X& \includegraphics[width=5cm]{img/A-B.pdf}&\includegraphics[width=5cm]{img/A-C.pdf}&\includegraphics[width=5cm]{img/A-D.pdf}\\
-B & X& X &\includegraphics[width=5cm]{img/B-C.pdf}&\includegraphics[width=5cm]{img/B-D.pdf}\\
-C & X& X & X &\includegraphics[width=5cm]{img/C-D.pdf}\\
-	\end{tabular}
-	\caption{Experimental Setup}
-	\label{tab:allRes}
-\end{table}
+%\begin{table}[h]
+%	\centering
+%	\begin{tabular}{lcccc}
+%		& A & B & C & D\\
+%A & X& \includegraphics[width=5cm]{img/A-B.pdf}&\includegraphics[width=5cm]{img/A-C.pdf}&\includegraphics[width=5cm]{img/A-D.pdf}\\
+%B & X& X &\includegraphics[width=5cm]{img/B-C.pdf}&\includegraphics[width=5cm]{img/B-D.pdf}\\
+%C & X& X & X &\includegraphics[width=5cm]{img/C-D.pdf}\\
+%	\end{tabular}
+%	\caption{Experimental Setup}
+%	\label{tab:allRes}
+%\end{table}
 
 The results studied in the previous section is reproduced here by the line labelled ``setup A''. 
 \jm{this sounds wrong what would be a valid analysis ?}
@@ -528,10 +528,12 @@ For the agents producing the goods 1,2 and 3 we observe a long stagnation of the
 
 
 \section{DISCUSSION}
-\xrc{what is the model explaining in terms of what was mentioned in the intro?}
 
-\todo{write better}
-In the experiments conducted multiple implementations of the cultural transmission and innovation mechanisms have been proposed. Notably, one set of implementation aimed at reproducing trade mechanisms. The sections XXXX have shown that this set of implementation is producing results expected from a trade mechanism and therefore that trade is plainly a cultural factor. The modifications needed in our framework were relative to the proposition of new imitation and innovation mechanisms which are typical of the study of the cultural transmission. This proximity between trade mechanisms and cultural transmission allows for the comparisons of the results obtained. For example, it has been possible here to compare the distribution of values obtained and highlight that the divergence from a power law actually is coming mainly from the imitation mechanism used in trade. Moreover this imitation mechanism can further be interpreted as a ``prestige bias" imitation already studied in cultural transmission.
+In this paper, and thanks to the model developed, we have shown that it is the possible to implement trade mechanisms within a cultural evolutionary framework. In the end, it appears that the key aspects of trade are just different implementations of the key elements of cultural evolutionary framework, i.e. cultural transmission and innovation. Moreover, we have ensure that such an implementation is valid in the sense that it leads the prices of goods to converges to the values expected under economical theories. This aspect which has not been studied before, opens a new line of thinking on the weight of trade mechanisms within cultural change.
+
+Within this line of thought, we have shown that the implementation of trade mechanisms as cultural transmission and innovation mechanisms leads to results departing from the neutral hypothesis largely studied to understand cultural changes. Interesting additional work could be, for example, the comparison between trade mechanisms and prestige biased cultural transmission.
+
+
 
 
 \section{CONCLUSION}
