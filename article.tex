@@ -75,11 +75,6 @@ Carrer de Jordi Girona, 29, \\
 \end{figure*}
 
 
-
-
-
-
-
 \section*{ABSTRACT}
 
 \todo{Rewrite later}
@@ -120,12 +115,12 @@ This section will provide a brief review of the previous approaches to model tra
 
 \subsection{Neutral models of cultural change}
 
-The first aspect of our model is focused on the dynamics of cultural change. They comprise the collection of processes that promotes or inhibits the spread of information by social interaction within a population \cite[3]{boyd_origin_2005}. An increasing number of social scientists are using an evolutionary framework to model these dynamics, thus fostering the development of transdisciplinary efforts designed to understand cultural evolution \cite{henrich_evolution_2003}. Archaeology has a rich tradition of evolutionary studies \cite{lycett_cultural_2015}, exploring concepts such as gene-culture coevolution \cite{burger_absence_2007}, diffusion processes \cite{fort_synthesis_2012}, phylogenetic analysis of material culture \cite{obrien_cladistics_2001} or detection of rates of change in the archaeological record \cite{premo_cultural_2014}.
+The first aspect of our model is focused on the dynamics of cultural change. They comprise the collection of processes that promotes or inhibits the spread of information by social interaction within a population~\cite[3]{boyd_origin_2005}. An increasing number of social scientists are using an evolutionary framework to model these dynamics, thus fostering the development of transdisciplinary efforts designed to understand cultural evolution~\cite{henrich_evolution_2003}. Archaeology has a rich tradition of evolutionary studies~\cite{lycett_cultural_2015}, exploring concepts such as gene-culture coevolution~\cite{burger_absence_2007}, diffusion processes~\cite{fort_synthesis_2012}, phylogenetic analysis of material culture~\cite{obrien_cladistics_2001} or detection of rates of change in the archaeological record~\cite{premo_cultural_2014}.
 
 A large percentage of these studies focus on the biases that affect the transmission of cultural traits, including the relevance of intrinsic traits and frequency dependence (e.g. conformism and anti-conformism). 
-These analysis are often based on the theory of neutral evolution \cite{neiman_stylistic_1995}, which explains variation in the distribution of traits as a function of their frequency distribution in the population. Thus, a trait is assumed to lack any selective bias and its transmission will depend on its popularity amongst the rest of individuals. The comparison of a given frequency distribution found in data against this unbiased transmission model is traditionally used as a null-hypothesis testing for selection. There exist a large number of works using this approach as the starting point to analyse patterns of cultural change in past societies \cite{lipo_neutralitystyle_2001,shennan_ceramic_2001,steele_ceramic_2010,kandler_nonequilibrium_2013,porcic_exploring_2014,crema_approximate_2014}.
+These analysis are often based on the theory of neutral evolution~\cite{neiman_stylistic_1995}, which explains variation in the distribution of traits as a function of their frequency distribution in the population. Thus, a trait is assumed to lack any selective bias and its transmission will depend on its popularity amongst the rest of individuals. The comparison of a given frequency distribution found in data against this unbiased transmission model is traditionally used as a null-hypothesis testing for selection. There exist a large number of works using this approach as the starting point to analyse patterns of cultural change in past societies~\cite{lipo_neutralitystyle_2001,shennan_ceramic_2001,steele_ceramic_2010,kandler_nonequilibrium_2013,porcic_exploring_2014,crema_approximate_2014}.
 
-Unbiased transmission generates a clear pattern of power law distributions that can be replicated with a simple random copying transmission mechanism \cite{bentley_random_2004}. Within this framework, an individual will copy the traits of a randomly chosen individual with a given probability. This copy can potentially introduce some errors in the acquired trait, which account for innovation processes. The individual will in turn continue to spread these cultural traits which will be further adopted by other individuals. This basic model can be enriched by several additional processes both in the innovation \cite{schillinger_copying_2014,sole_evolutionary_2013,ziman_technological_2003} and the transmission \cite{heyes_social_1994,henrich_evolution_2003}.
+Unbiased transmission generates a clear pattern of power law distributions that can be replicated with a simple random copying transmission mechanism~\cite{bentley_random_2004}. Within this framework, an individual will copy the traits of a randomly chosen individual with a given probability. This copy can potentially introduce some errors in the acquired trait, which account for innovation processes. The individual will in turn continue to spread these cultural traits which will be further adopted by other individuals. This basic model can be enriched by several additional processes both in the innovation~\cite{schillinger_copying_2014,sole_evolutionary_2013,ziman_technological_2003} and the transmissio~\cite{heyes_social_1994,henrich_evolution_2003}.
 
 In particular, trade within a market system can potentially introduce a complex dynamic bias to the neutral model. Trasmission will be linked to the price of the different products. This would also affect the frequency of the product within the population, which in turn would modify its price following a co-evolutionary dynamic.
 
@@ -133,7 +128,7 @@ In particular, trade within a market system can potentially introduce a complex 
 
 %Hopkins 1980: structure of tax system. two hypothesis. 1)taxation increased volume of trade in the empire? 2) tax-exporting province (recently integrated province) had to export to pay tax. roman supported by many small taxes. Not sure to cite it
 
-Previous historical and archaeological studies to model trade in the ancient Mediterranean societies have focus on descriptive approaches ~\cite{hopkins_taxes_1980,temin_market_2001,terpstra_trade_2011,temin_economy_2006,wilson_approaches_2009,scheidel_model_2007,kessler_organization_2007}. 
+Previous historical and archaeological studies to model trade in the ancient Mediterranean societies have focus on descriptive approaches~\cite{hopkins_taxes_1980,temin_market_2001,terpstra_trade_2011,temin_economy_2006,wilson_approaches_2009,scheidel_model_2007,kessler_organization_2007}. 
 These works have conclude that the Roman economy was a type of market economy where a variety of small tightly connected markets had loose connections between them~\cite{temin_market_2001,temin_economy_2006}. 
 Based on these conclusions, further works have attempt to define more exactly the characteristics of this market such, e.g. level of intervention of the state and its impact, or the relation-ship between local and long-distance trade~\cite{wilson_approaches_2009}.
 
@@ -155,13 +150,16 @@ A first example of its potential is given through a model of the trade network o
 
 \section{MODEL DESCRIPTION}
 
-The model proposed is an ABM based on agents and goods. The interactions between agents and goods are modelled thanks to the four processes (production, cultural transmission, innovation and trade) which will be explained in further details later. The flexibility of the models comes from the possibility to implement these processes differently depending on the hypothesis tested. However, since all experiments are performed with the same four processes, the effect of the various implementations of one process can be studied easily. Moreover, the operating of the model revolves around the value that agents associate to products. Depending on the question studied, the value can reflect the interest of the agent for the good or it can be the price at which the agent evaluate this good. Since this vector is common to all experiments performed with this model, it is extremely useful for the comparisons of results obtained with different implementation of the key processes.
+To explore this coevolution between trade and cultural change we have developed an ABM where the different agents trade goods with variable prices. 
+
+\xrc{we can totally remove this paragraph and move the entire next subsection here:\\
+These dynamics are modelled after processes (production, cultural transmission, innovation and trade) which will be explained in further details later. The flexibility of the models comes from the possibility to implement these processes differently depending on the hypothesis tested. However, since all experiments are performed with the same four processes, the effect of the various implementations of one process can be studied easily. Moreover, the operating of the model revolves around the value that agents associate to products. Depending on the question studied, the value can reflect the interest of the agent for the good or it can be the price at which the agent evaluate this good. Since this vector is common to all experiments performed with this model, it is extremely useful for the comparisons of results obtained with different implementation of the key processes.}
 
 \xrc{This first paragraph should briefly explain the trade component?}
 
 \subsection{Overview of the model}
 
-More formally the model is composed of a population $Pop$ of $m$ agents, each defined by 2 vectors of size $n$. The first corresponds to the quantity of each good that the agent $i$ possesses: 
+The model is composed of a population $Pop$ of $m$ agents, each defined by 2 vectors of size $n$. The first corresponds to the quantity of each good that the agent $i$ possesses: 
 $$\forall i \in Pop, \quad Q^i = (q^i_1,\cdots,q^i_n) $$
 
 where $Q^i$ is the total list of possessions of agent $i$, and $q^i_j$ is the number of goods of type $j$ that agent $i$ posses.
@@ -172,7 +170,9 @@ where $V^i$ is the total list of estimated values of agent $i$, and $v^i_j$ is t
 
 On top of these elements four processes are used: \emph{production}, \emph{cultural transmission}, \emph{innovation} and \emph{trade}. The \textit{production} process describes the creation of goods by the agent. Once a good is produced by an agent $i$ it is added its quantity vector ($Q^i$). The \emph{trade} process models the exchange of goods between the agents which results in a modification of the quantity vectors ($Q^i$). The amount of goods exchanged is computed by the agents concerned by the trade, within the \emph{trade} process, based on their value vectors ($V^i$). Within the \textit{cultural transmission} process an agent $i$ can copy the value vector ($V^j$) of an agent $j$, where $j \neq i$. The \textit{innovation} process also modifies the value vector $V^i$ of an agent, but it differs from the \emph{cultrual transmission} process in that the modification is done without reference to the other agents. Finally, .
 
-This scheme allow us to have a model achieving the two main goals listed in section~\ref{sec:intro}. The first goal is to be able to implement and compare various cultural transmission mechanisms as well as trade mechanisms within the same framework. We argue that this is possible in our framework by modifying only these four key processes i.e. production, trade, imitation and innovation. Moreover, thanks to the use of a unique $V^i$ vector, it is possible to compare the outcomes of different combinations of production, imitation and innovation mechanisms. The second goal is to produce a model composed of a low number of parameter. Our model is composed of only four processes and two vectors which is significantly less complex than previous models.
+This scheme achieves the two main goals listed in section~\ref{sec:intro}. The first goal is to be able to implement and compare various cultural transmission mechanisms as well as trade mechanisms within the same framework. We argue that this is possible in our framework by modifying only these four key processes i.e. production, trade, imitation and innovation. Moreover, thanks to the use of a unique $V^i$ vector, it is possible to compare the outcomes of different combinations of production, imitation and innovation mechanisms. The second goal is to produce a model composed of a low number of parameter. Our model is composed of only four processes and two vectors which is significantly less complex than previous models.
+
+\xrc{I would remove the previous paragraph, because it is implied that we want few parameters and compare mechanisms}
 
 The scheduling of the four processes (production, trade, cultural transmission and innovation) is described in algorithm~\ref{algo:complete} along with the vectors modified by each of these processes. Between line 2 and 7 all agents of the population are initialised with empty quantity vectors and random values. Between the lines 11 and 19 is presented the part of the pseudo-code describing the instructions that will be repeated for each iteration of the simulation. 
 \jm{what about saying that we just count the iterations at the ``imitation, innovation step" ?}
@@ -256,7 +256,7 @@ This function ensures that each good has the same weight in the final score (i.e
 	\caption{The fitness depending on price and needs}
 	\label{fig:fit}
 \end{figure}
-The figure~\ref{fig:fit} depicts the score of an agent, for different need value of one good, with regards to the quantity of the good possessed by the agent. We can see that even if the need for a good is small (for instance when $need(x) = .01$) an agent can have a high score as soon as it manages to get a quantity close to the need. This insures that an agent needs to have for each of the good a quantity equal to the need and that no agent could reach a better score just by getting the right quantity for a good with a high need.
+The figure~\ref{fig:fit} depicts the score of an agent, for different need value of one good, with regards to the quantity of the good possessed by the agent. We can see that even if the need for a good is small (for instance when $need(x) = 0.01$) an agent can have a high score as soon as it manages to get a quantity close to the need. This insures that an agent needs to have for each of the good a quantity equal to the need and that no agent could reach a better score just by getting the right quantity for a good with a high need.
 
 The agents will choose the agent from whom the price vector should be copied among the agents that produce the same good and have the highest score. In practice, a fixed proportion of the less successful agents will copy the prices of the most successful agent. 
 
@@ -277,7 +277,7 @@ Let $o$ be an agent producing $g$ that proposes a trade and $r$ an agent produci
 The requested quantity of the non produced good is simply the ratio between the estimated value of the good requested and the estimated value of the produced good.
 
 
-Once de quantities are defined, the agents declare that the trade is possible if :
+Once the quantities are defined, the agents declare that the trade is possible if :
 \begin{align}
 q_g^o >= w_g^o \label{eq:constraintFirst}\\
 q_g^r <= w_g^o \\
@@ -289,7 +289,7 @@ w_g^o<=w_g^r
 \end{align}
 
 
-The conditions \ref{eq:constraintFirst}-\ref{eq:constraintLastInv} insure that both agents have enough goods in their inventory to realise the trade and the conditions \ref{eq:constraintFirstWill}-\ref{eq:constraintLast} insure that the quantities of each good fit the will of both agents.
+The conditions \ref{eq:constraintFirst}-\ref{eq:constraintLastInv} insure that both agents have enough goods in their inventory to realise the trade while the conditions \ref{eq:constraintFirstWill}-\ref{eq:constraintLast} insure that the quantities of each good fit the will of both agents.
 
 
 
@@ -549,7 +549,7 @@ On the cultural transmission side, the vector value could be learned using any m
 
 \todo{upload and put an url, complete cite mare nostrum, put nb of hours per run (or the total)}
 
-Funding for this work was provided by the ERC Advanced Grant EPNet (\todo{look for code}) and the SimulPast Consolider Ingenio project (CSD2010-00034) of the former Ministry for Science and Innovation of the Spanish Government. 
+Funding for this work was provided by the ERC Advanced Grant EPNet (340828) and the SimulPast Consolider Ingenio project (CSD2010-00034) of the former Ministry for Science and Innovation of the Spanish Government. 
 
 The model was created using Pandora \cite{rubiocampillo_2014}. R was used for figures and statistical analysis \cite{rdev_2012}. The source code of the model is licensed under a GNU General Public License and will be available for download at publication.
 
