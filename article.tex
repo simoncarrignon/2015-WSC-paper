@@ -172,7 +172,6 @@ Within this set of implementations, the cultural transmission process is not ran
 The \emph{need} is a quantity of product that each agent tries to obtain. This quantity is different for each product but the need for a product is the same for all agents:
 $$ N = (n_1, \cdots, n_r) $$ 
 
-\xrc{score is fitness? Not sure if we should use fitness here, as we are already using an evolutionary framework. Also, we could use payoff.}
 The \emph{score} $s^i$ of an agent $i$ reflects the ability of this agent to obtain the products it needs. It is maximum when the quantity vector of an agent is equal to its need vector and lower proportionally to the distance between the need vector and the quantity vector.  It is formally computed as follow for agent $i$:
 
 \begin{equation}\label{eq:score}
@@ -188,12 +187,12 @@ This function ensures that each good has the same weight in the final score (i.e
 
 \begin{figure}[htp]
 	\begin{center}
-		\includegraphics[width=7cm]{img/fitness.png}
+		\includegraphics[width=7cm]{img/fitness.pdf}
 	\end{center}
-	\caption{The fitness depending on price and needs}
+	\caption{The payoff depending on the estimated value and the effective needs $n(g)$ of a good.}
 	\label{fig:fit}
 \end{figure}
-The figure~\ref{fig:fit} depicts the score of an agent, for different need value of one good, with regards to the quantity of the good possessed by the agent. We can see that even if the need for a good is small (for instance when $need(x) = 0.01$) an agent can have a high score as soon as it manages to get a quantity close to the need. This insures that an agent needs to have for each of the good a quantity equal to the need and that no agent could reach a better score just by getting the right quantity for a good with a high need.
+The figure~\ref{fig:fit} depicts the score of an agent, for different need value of one good, with regards to the quantity of the good possessed by the agent. We can see that even if the need for a good is small (for instance when $n(g) = 0.01$) an agent can have a high score as soon as it manages to get a quantity close to the need. This insures that an agent needs to have for each of the good a quantity equal to the need and that no agent could reach a better score just by getting the right quantity for a good with a high need.
 
 The agents will choose the agent from whom the price vector should be copied among the agents that produce the same good and have the highest score. In practice, a fixed proportion of the less successful agents will copy the prices of the most successful agent. 
 
@@ -216,17 +215,12 @@ The requested quantity of the non produced good is simply the ratio between the 
 
 Once the quantities are defined, the agents declare that the trade is possible if :
 \begin{align}
-q_g^o >= w_g^o \label{eq:constraintFirst}\\
-q_g^r <= w_g^o \\
-q_k^r >= w_k^o \label{eq:constraintLastInv}\\
-w_g^o>=(q_g^r+w_g^r)\label{eq:constraintFirstWill} \\
-w_k^o<=w_k^r \\
-w_g^o<=w_g^r
-\label{eq:constraintLast}
+q_g^o >= w_g^o,\quad q_g^r <= w_g^o,\quad q_k^r >= w_k^o \label{eq:constraintQty}\\
+w_g^o>=(q_g^r+w_g^r),\quad w_k^o<=w_k^r,\quad w_g^o<=w_g^r \label{eq:constraintWill}
 \end{align}
 
 
-The conditions \ref{eq:constraintFirst}-\ref{eq:constraintLastInv} insure that both agents have enough goods in their inventory to realise the trade while the conditions \ref{eq:constraintFirstWill}-\ref{eq:constraintLast} insure that the quantities of each good fit the will of both agents.
+The conditions \ref{eq:constraintQty} insure that both agents have enough goods in their inventory to realise the trade while the conditions \ref{eq:constraintWill} insure that the quantities of each good fit the will of both agents.
 
 
 
@@ -276,26 +270,32 @@ Which means that
 \end{equation}
 
 
-If such prices are reached, given the exchange rules defined in (\ref{eq:trade}) and the exchange constraints (\ref{eq:constraintFirst}) to (\ref{eq:constraintLast}) all exchanges will be optimally achieved, leading to a total score $S$ for each agent of the population : 
+If such prices are reached, given the exchange rules defined in (\ref{eq:trade}) and the exchange constraints (\ref{eq:constraintQty}) and (\ref{eq:constraintWill}) all exchanges will be optimally achieved, leading to a total score $S$ for each agent of the population : 
 $$ S = \sum_{i=0}^{CulturalStep}  s^i(\tilde{Q}^i) \times ngoods $$ 
 where $\tilde{Q}^i$ is the optimal quantity vector, i.e. the one for which $s^i(\tilde{Q}^i) = s_{max}$. Remember that from equation~\ref{eq:score}, $s_{max}=1$.
 
 \section{Experimental setup}
-In order to study the cultural transmission and the trading model two sets of implementation of the four processes of our model have been presented. Remember that during the definition of these two sets of implementation, two cultural transmission mechanisms have been defined () along with two innovation mechanisms (). Therefore, on top of exploring the results offered by the two set of implementations, it would be also interesting to understand which of the process is responsible for the variation in results. The four implementations proposed are summarized in the table~\ref{tab:exp}. Each couple of innovation/imitation mechanism form one setup that is labelled with one letter. Note that the ``neutral model" presented in section~\ref{sec:culturalTrans} corresponds to the setup A, and the trading model presented in section~\ref{sec:trade} corresponds to the setup D.
+%In order to study the cultural transmission and the trading model two sets of implementation of the four processes of our model have been presented. Remember that during the definition of these two sets of implementation, two cultural transmission mechanisms have been defined () along with two innovation mechanisms (). Therefore, on top of exploring the results offered by the two set of implementations, it would be also interesting to understand which of the process is responsible for the variation in results. The four implementations proposed are summarized in the table~\ref{tab:exp}. Each couple of innovation/imitation mechanism form one setup that is labelled with one letter. Note that the ``neutral model" presented in section~\ref{sec:culturalTrans} corresponds to the setup A, and the trading model presented in section~\ref{sec:trade} corresponds to the setup D.
+%
+%\begin{table}[h]
+%	\centering
+%	\begin{tabular}{ll|cc}
+%				&	&\multicolumn{2}{c}{\textbf{Cultural transmission}} \\
+%		\multirow{2}[20]{*}{\rotatebox[origin=c]{90}{\textbf{Innovation}}}&  & Random & Success biased \\\hline  
+%		& \rule[-0.45cm]{0pt}{1cm} Unbounded 		&A & B \\
+%		& \rule[-0.45cm]{0pt}{1cm} Self Referenced	& C & D \\
+%	\end{tabular}
+%	\caption{Experimental Setup}
+%	\label{tab:exp}
+%\end{table}
 
-\begin{table}[h]
-	\centering
-	\begin{tabular}{ll|cc}
-				&	&\multicolumn{2}{c}{\textbf{Cultural transmission}} \\
-		\multirow{2}[20]{*}{\rotatebox[origin=c]{90}{\textbf{Innovation}}}&  & Random & Success biased \\\hline  
-		& \rule[-0.45cm]{0pt}{1cm} Unbounded 		&A & B \\
-		& \rule[-0.45cm]{0pt}{1cm} Self Referenced	& C & D \\
-	\end{tabular}
-	\caption{Experimental Setup}
-	\label{tab:exp}
-\end{table}
+For the cultural transmission setup we run two set of experiments with 250 and 500 agents in which we vary $\alpha \in \{0.004,0.016,0.064\}$. For each combination of parameters we did 100 runs of 10000 timestep is performed. 
 
-For each of the setup 100 runs of 200000 timestep is performed. The parameters used are presented in table~\ref{tab:parameters}. Finally, remember that in our experiment one has to take in account that agents modifies their prices or exchange their price only every $culturalStep$ steps. Between, twos such steps, the agent exchange goods given their own prices. Therefore we choose to run our simulation during 10000 step which correspond the 1000 time steps used by \shortcite{bentley_random_2004,mesoudi_random_2009}.
+For the trading model we run  again two set of experiment, one with 2 goods and 500 agents, the other with 4 goods and 800 agents. The length of the simulations is always 10000 timestep but this time one timestep is made of $CulturalStep$ trade action as described in the previous section~\ref{sec:trade}. Again for each combination 100 runs are done.
+
+The whole set of parameters used are presented in table~\ref{tab:parameters}. 
+
+%Finally, remember that in our experiment one has to take in account that agents modifies their prices or exchange their price only every $culturalStep$ steps. Between, twos such steps, the agent exchange goods given their own prices. Therefore we choose to run our simulation during 10000 step which correspond the 1000 time steps used by \shortcite{bentley_random_2004,mesoudi_random_2009}.
 
 \begin{table}
 \begin{center}
@@ -324,7 +324,7 @@ TimeSteps & 200000 \\
 \section{RESULTS}
 \subsection{Random cultural transmission and random innovation process}
 
-We first analyse the result obtained in the ``neutral model" as presented in section~\ref{sec:culturalTrans} and labelled as setup A in table~\ref{tab:exp}. The figure~\ref{fig:allMutation} present the results obtained with $\mu$ varying $\in {.004,.008,.016,.064}$ and two population sizes: 250 and 500 agents. The distribution of variants obtained is shown in figure~\ref{fig:allMutation}. In this graph the relative frequencies of the values obtained is analysed. The y-axis of the graph shows the frequencies of the variants of the vector values, the x-axis shows how many variant achieves such frequencies and the line represents the average of the frequencies obtained across all runs. Both axes are in a logarithmic scale.
+We first analyse the result obtained in the ``neutral model" as presented in section~\ref{sec:culturalTrans}.  The figure~\ref{fig:allMutation} present the results obtained with $\mu$ varying $\in {.004,.008,.016,.064}$ and two population sizes: 250 and 500 agents. The distribution of variants obtained is shown in figure~\ref{fig:allMutation}. In this graph the relative frequencies of the values obtained is analysed. The y-axis of the graph shows the frequencies of the variants of the vector values, the x-axis shows how many variant achieves such frequencies and the line represents the average of the frequencies obtained across all runs. Both axes are in a logarithmic scale.
 
 \begin{figure}[!hbp]
 	\begin{center}
@@ -344,11 +344,9 @@ Under all parameters tested the value vectors exhibit power law like distributio
 		\multicolumn{2}{r}{Agents Number}&\multicolumn{2}{c}{Our result}&\multicolumn{2}{c}{Bentley et al 2004}\\
 			&$\mu$ & $\alpha$ & SD&$\alpha$&SD\\\hline
 		N = 250	&0.004&1.53&0.03&1.54&0.02\\
-			&0.008&1.55&0.03&1.55&0.01\\
 			&0.016&1.57&0.02&1.57&0.01\\
 			&0.064&1.66&0.01&1.67&0.01\\\hline
 		N= 500	&0.004&1.50&0.02&1.53&0.03\\
-			&0.008&1.52&0.02&1.57&0.01\\
 			&0.016&1.55&0.03&1.61&0.04\\
 			&0.064&1.78&0.08&1.81&0.10\\
 	\end{tabular}
@@ -360,14 +358,14 @@ Under all parameters tested the value vectors exhibit power law like distributio
 
 \subsection{Distribution}
 
-In order to understand the effect of the other cultural transmission and innovation mechanisms, we study first the distribution of values obtained in the different setups. The distribution of values in the four setups is presented in figure~\ref{fig:4setDi}. 
+In order to understand the effect of introduction of trading mechanisms we compare first the distribution of values obtained in the two models. The result of this comparison is in the figure~\ref{fig:2setDi}. 
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=7cm]{img/frequenciesABCD.pdf}
+		\includegraphics[width=6cm]{img/2SetupDistrib.pdf}
 	\end{center}
-	\caption{Frequency distribution for the 4 setup}
-	\label{fig:4setDi}
+	\caption{Frequency distribution for the neutral and the trade models}
+	\label{fig:2setDi}
 \end{figure}
 
 
@@ -383,83 +381,87 @@ In order to understand the effect of the other cultural transmission and innovat
 %	\label{tab:allRes}
 %\end{table}
 
-The results studied in the previous section is reproduced here by the line labelled ``setup A''. 
-\jm{this sounds wrong what would be a valid analysis ?}
-We observe that the setup D is also following a power law. However, setups B and C are following an exponential law. We therefore observe that the innovation process has a negligeable influence on the shape distribution. However, the use of a biased imitation process has a major effect on the shape of the distribution.
 
+%The results studied in the previous section is reproduced here by the line labelled ``setup A''. 
+\jm{this sounds wrong what would be a valid analysis ?}
+%We observe that the setup D is also following a power law. However, setups B and C are following an exponential law. We therefore observe that the innovation process has a negligeable influence on the shape distribution. However, the use of a biased imitation process has a major effect on the shape of the distribution.
+
+We can observe the action of our new analysis : the new innovation process prevents the creation of totally random new price and lead to a fewer proportion of prices that appear rarely in the population.
 
 
 \subsection{Values}
 
-We now study the results obtained in more detail by investigating the ability of the population of agents to find the good price to perform exchanges between each other. This is done by observing the score of all agents in each of the four setups. The results obtained are presented in figure~\ref{tab:scoreEvol}.
+We now study the results obtained in more detail by investigating the ability of the population of agents to find the good price to perform exchanges between each other. This is done by observing the score of all agents in each of the two different models. The results obtained are presented in figure~\ref{fig:scoreEvol}.
 
-\begin{table}[H]
+\begin{figure}[h]
 	\centering
-	\begin{tabular}{l c c}
-		& Random Transmission & Biased Transmission \\
-		Unbounded & \specialcell{\raisebox{-.5\height}{\includegraphics[width=5cm]{img/ScoreEvolutionForA-G2N250.pdf}}\\Setup A}&\specialcell{\raisebox{-.5\height}{\includegraphics[width=5cm]{img/ScoreEvolutionForB-G2N250.pdf}} \\ Setup B} \\
-		Self-referenced & \specialcell{\raisebox{-.5\height}{\includegraphics[width=5cm]{img/ScoreEvolutionForC-G2N250.pdf}} \\ Setup C}&\specialcell{\raisebox{-.5\height}{\includegraphics[width=5cm]{img/ScoreEvolutionForD-G3N500.pdf}} \\ Setup D}
+	\begin{tabular}{ c c}
+		 Neutral Model & Trade Model \\
+		 \includegraphics[width=5cm]{img/ScoreEvolutionForRandom-G2N500.pdf}
+		 & \includegraphics[width=5cm]{img/ScoreEvolutionForTrade-G2N500.pdf}
 
 	\end{tabular}
-	\caption{Evolution of the score in the different setup for typical run of each setup.}%%
-	\label{tab:scoreEvol}
-\end{table}
+	\caption{Evolution of the score within the two different models.}%%
+	\label{fig:scoreEvol}
+\end{figure}
 
 \todo{redo the explanations nicer} 
-In the setups A and C, the score evolves randomly. In the two other setups however the score is increasing. Moreover, we observe that the Self-referenced innovation process used in the setups C and D leads to higher convergences. Since only the ``biased transmission" takes the score into account it is normal that only this mechanism leads higher scores. The ``unbounded'' mechanism leads to lower convergences as it select prices randomly in the complete range available.
+%In the setups A and C, the score evolves randomly. In the two other setups however the score is increasing. Moreover, we observe that the Self-referenced innovation process used in the setups C and D leads to higher convergences. Since only the ``biased transmission" takes the score into account it is normal that only this mechanism leads higher scores. The ``unbounded'' mechanism leads to lower convergences as it select prices randomly in the complete range available.
+
+As expected, the neutral model scores vary randomly. Sometimes ``trends'' appear, where a bigger proportion of individuals adopt a better price that allow agents to reach better score (such as between \simon{adapt to last graph}), but such good score fall back as soon as another trend appears. In the other hand, with in the trade model, the score of all the agents increase. As the selection mechanism allow them to know who find better vectors of prices, they will slightly adopt prices vector that allow all of them to reach better scores. 
 
 \subsection{Prices}
 
-We pursue the analysis of the economical aspect by observing the prices reached in setup D. As explained in the section~\ref{sec:trade} we expect that the trade imitation and innovation processes will produce a convergence toward a set of price for each good that will allow agents to exchange optimally the good they produce with the other goods. To verify this assumption we analyse the prices reached. These are presented in figure~\ref{fig:ratioEvol} as a deviation from the optimal price. Record that the optimal price is the ratio between the need of the needed good and the produced good.
+We pursue the analysis of the economical aspect by observing the prices reached within the trade model. As explained in the section~\ref{sec:trade} we expect that the trade imitation and innovation processes will produce a convergence toward a set of price for each good that will allow agents to exchange optimally the good they produce with the other goods. To verify this assumption we analyse the prices reached. These are presented in figure~\ref{fig:ratioEvol} as a deviation from the optimal price. Record that the optimal price is the ratio between the need of the needed good and the produced good.
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=7cm]{img/ClearingPriceDistanceEvolutionForD-G3N500.pdf}
+		\includegraphics[width=7cm]{img/ClearingPriceDistanceEvolutionForTrade-G2N500.pdf}
 	\end{center}
-	\caption{Evolution of the mean difference for each good of the estimated value $v_g$ and its optimal value as given by \ref{eq:optimum}. Means computed for 100 run adn 2 goods. }
+	\caption{Evolution of the mean difference for each good of the estimated value $v_g$ and its optimal value as given by \ref{eq:optimum}. Means computed for 100 run and 2 goods. }
 	\label{fig:ratioEvol}
 \end{figure}
 
 We observe that prices are indeed converging to the optimal prices which means that our innovation and imitation process are valid trade mechanisms. Notably, they produce results similar to the ones obtained in~\shortcite{gintis_emergence_2006}.
 
 \subsection{Suboptimal markets}
-
-Finally, a more careful analysis of the price structure reveals the presence of suboptimal markets. 
-\jm{it was written setup C, it's not setup D?}
-\jm{is it the mean in blue ?}
-In figure~\ref{fig:suboptimal} the price structure of one run of setup D is presented. The x-axis represents the number of iteration, the y-axis the prices. Each of the four figures represents the score of all agents producing one of the four goods used. In blue is presented the mean of the score of the figures.
-
+%
+%Finally, a more careful analysis of the price structure reveals the presence of suboptimal markets. 
+%\jm{it was written setup C, it's not setup D?}
+%\jm{is it the mean in blue ?}
+%In figure~\ref{fig:suboptimal} the price structure of one run of setup D is presented. The x-axis represents the number of iteration, the y-axis the prices. Each of the four figures represents the score of all agents producing one of the four goods used. In blue is presented the mean of the score of the figures.
+%
+%%\begin{figure}[htp]
+%%	\begin{center}
+%%		\includegraphics[width=7cm]{img/evolutionGlobalScoreG4N800.pdf}
+%%	\end{center}
+%%	\caption{Evolution of global score for a run with 800 agents and 4 goods.}
+%%	\label{fig:G4N500}
+%%\end{figure}
+%%\begin{figure}[htp]
+%%	\begin{center}
+%%		\includegraphics[width=7cm]{img/evolutionToClearningPricesG4N800.pdf}
+%%	\end{center}
+%%	\caption{Evolution of prices for a run with 800 agents and 4 goods.}
+%%	\label{fig:G4N500Clearing}
+%%\end{figure}
+%
 %\begin{figure}[htp]
 %	\begin{center}
-%		\includegraphics[width=7cm]{img/evolutionGlobalScoreG4N800.pdf}
+%		\includegraphics[width=7cm]{img/scatterPlotGood1.pdf}
+%		\includegraphics[width=7cm]{img/scatterPlotGood2.pdf}
+%		\includegraphics[width=7cm]{img/scatterPlotGood3.pdf}
+%		\includegraphics[width=7cm]{img/scatterPlotGood4.pdf}
 %	\end{center}
-%	\caption{Evolution of global score for a run with 800 agents and 4 goods.}
-%	\label{fig:G4N500}
+%	\caption{Evolution of the Score for the four types of agents of a simulation with four differents good and 800 agents}
+%	\label{fig:suboptimal}
 %\end{figure}
-%\begin{figure}[htp]
-%	\begin{center}
-%		\includegraphics[width=7cm]{img/evolutionToClearningPricesG4N800.pdf}
-%	\end{center}
-%	\caption{Evolution of prices for a run with 800 agents and 4 goods.}
-%	\label{fig:G4N500Clearing}
-%\end{figure}
-
-\begin{figure}[htp]
-	\begin{center}
-		\includegraphics[width=7cm]{img/scatterPlotGood1.pdf}
-		\includegraphics[width=7cm]{img/scatterPlotGood2.pdf}
-		\includegraphics[width=7cm]{img/scatterPlotGood3.pdf}
-		\includegraphics[width=7cm]{img/scatterPlotGood4.pdf}
-	\end{center}
-	\caption{Evolution of the Score for the four types of agents of a simulation with four differents good and 800 agents}
-	\label{fig:suboptimal}
-\end{figure}
-
-\xrc{these boxplots are confusing because they are small and contain a huge amount of information. What if we do a scatterplot with a given alpha, and on top of this a loess regression? It always works better to me when you have this kind of data; also, I would provide a figure for each type of score.}
-\simon{What do you mean by ``a given alpha''? does something like those new ones is better?}
-
-For the agents producing the goods 1,2 and 3 we observe a long stagnation of the mean score until timestep 750,000. Further investigations have revealed that during this period a few of the prices used by the agents are far from the optimal. After a relatively long search, the correct prices are finally found and the score of all agents improve. This example illustrates well the complexity of finding the right prices in the market. This situation is due to the fact that all prices are strongly linked together and until one has reach its optimum value, the other price can not evolve. 
-
+%
+%\xrc{these boxplots are confusing because they are small and contain a huge amount of information. What if we do a scatterplot with a given alpha, and on top of this a loess regression? It always works better to me when you have this kind of data; also, I would provide a figure for each type of score.}
+%\simon{What do you mean by ``a given alpha''? does something like those new ones is better?}
+%
+%For the agents producing the goods 1,2 and 3 we observe a long stagnation of the mean score until timestep 750,000. Further investigations have revealed that during this period a few of the prices used by the agents are far from the optimal. After a relatively long search, the correct prices are finally found and the score of all agents improve. This example illustrates well the complexity of finding the right prices in the market. This situation is due to the fact that all prices are strongly linked together and until one has reach its optimum value, the other price can not evolve. 
+%
 
 \section{CONCLUDING REMARKS}
 
