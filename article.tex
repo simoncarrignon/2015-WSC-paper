@@ -184,7 +184,7 @@ This function ensures that each good has the same weight in the final score (i.e
 	\begin{center}
 		\includegraphics[width=7cm]{img/fitness.pdf}
 	\end{center}
-	\caption{The payoff depending on the estimated value and the effective needs $n(g)$ of a good.}
+	\caption{The payoff depending on the quantity owned of a given good and the effective needs $n(g)$ for this good.}
 	\label{fig:fit}
 \end{figure}
 The figure~\ref{fig:fit} depicts the score of an agent, for different need value of one good, with regards to the quantity of the good possessed by the agent. We can see that even if the need for a good is small (for instance when $n(g) = 0.01$) an agent can have a high score as soon as it manages to get a quantity close to the need. This insures that an agent needs to have for each of the good a quantity equal to the need and that no agent could reach a better score just by getting the right quantity for a good with a high need.
@@ -301,6 +301,7 @@ Parameter & Value \\
 Number of goods & $\{1,3\}$ \\
 Number of agents & $\{250,500\}$ \\
 Innovation probability ($\mu$) & $\{0.004,0.016,0.064\}$ \\
+Innovation range ($\beta$) & 0.005\\
 Cultural transmission probability & .001\\
 CulturalStep &  10 \\
 TradeThreshold & 100  \\
@@ -392,7 +393,7 @@ We now study the results obtained in more detail by investigating the ability of
 		 & \includegraphics[width=5cm]{img/ScoreEvolutionForTrade-G3N500.pdf}
 
 	\end{tabular}
-	\caption{Evolution of the score within the two different models for two typical run with 500 agents and 3 goods evolving during 10000 timestep}%%
+	\caption{Evolution of the score within the two different models for two typical run with 500 agents and 3 goods evolving during 10000 timestep.}%%
 	\label{fig:scoreEvol}
 \end{figure}
 
@@ -406,7 +407,7 @@ The previous figure showed the capacity for the ``trade'' model to increase its 
 	\begin{center}
 		\includegraphics[width=7cm]{img/ClearingPriceDistanceEvolutionForTrade-G3N500.pdf}
 	\end{center}
-	\caption{Evolution of the mean of the difference between the estimated value $v_g$ and the optimal value $\tilde{v}_g$ (as calculated with the equations~\ref{eq:optimum}) of the good $g$. This mean is plotted for 100 runs with 3 goods and 500 agents.}
+	\caption{Evolution of the mean of the difference between the estimated value $v^i_g$ and the optimal value $\tilde{v}^i_g$ (as calculated with the equations~\ref{eq:optimum}) for a good $g$. As the optimal value $\tilde{v}^i_g$ depend on which goods is produced by $i$, the mean is computed within all the agents that produce the same good. }
 	\label{fig:ratioEvol}
 \end{figure}
 
@@ -463,10 +464,9 @@ In future works more realistic and complex dynamics can be studied in the same m
 
 Funding for this work was provided by the ERC Advanced Grant EPNet (340828) and the SimulPast Consolider Ingenio project (CSD2010-00034) of the former Ministry for Science and Innovation of the Spanish Government. 
 
-The model was created using Pandora \cite{rubiocampillo_2014}. R was used for figures and statistical analysis \cite{rdev_2012}. The simulations have been done in the supercomputer MareNostrum at Barcelona Supercomputing
-Center - Centro Nacional de Supercomputación (The Spanish National Supercomputing Center). The source code of the model is licensed under a GNU General Public License and will be available for download at publication.
+The model was created using Pandora \cite{rubiocampillo_2014}. R was used for figures and statistical analysis \cite{rdev_2012}. The estimation of the $\alpha$ parameters have been computed with the R package poweRlaw \cite{gillespie_fitting_2015}. The simulations have been done in the supercomputer MareNostrum at Barcelona Supercomputing Center - Centro Nacional de Supercomputación (The Spanish National Supercomputing Center). The source code of the model is licensed under a GNU General Public License and will be available for download at publication.
 
 \bibliographystyle{wsc}
 \bibliography{wsc.bib}  
 \end{document}
-
+][s[s
