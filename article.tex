@@ -204,7 +204,7 @@ In more details, the trading phase starts by the agent looking at a first random
 Let $o$ be an agent producing $g$ that proposes a trade and $r$ an agent producing $k$ that receives the proposition. As explained earlier, each has a quantity of good $Q^o$ and $Q^r$. On the one side, $o$ wants to exchange a quantity $w_g^o$ of the good $g$ for a quantity $w_k^o$ of the good $k$. On the other side, $r$ wants to exchange a quantity $w_g^r$ of the good $g$ for a quantity $w_k^r$. The tuples $W^o$ and $W^r$ describe the quantities of goods wanted by agent $o$ and $r$ for one trade proposition and are defined by:  
 
 \begin{equation}
-	 W^o=(w_g^o = v_g^o,w_k^o= \frac{v_k^o}{v_g^o}) 
+	 W^o=(w_g^o = v_g^o,w_k^o= \frac{v_k^o}{v_g^o}), \quad
 	 W^r=(w_k^r = v_k^r,w_g^r= \frac{v_g^r}{v_k^r}) 
 	 \label{eq:trade}
 \end{equation}
@@ -303,13 +303,13 @@ The whole set of parameters used are presented in table~\ref{tab:parameters}.
 \toprule
 Parameter & Value \\
 \midrule
-Number of goods & 4 \\
-Number of agents & 800 \\
+Number of goods & 3 \\
+Number of agents & 500 \\
 Mutation probability & .004 \\
 Innovation probability & .001\\
 CulturalStep &  10 \\
 TradeThreshold & 100  \\
-TimeSteps & 200000 \\
+TimeSteps & 10000 \\
 \bottomrule
 \end{tabular}
 \caption{Table of parameters}\label{tab:parameters}
@@ -331,7 +331,7 @@ We first analyse the result obtained in the ``neutral model" as presented in sec
 		\includegraphics[width=6cm]{img/allmuRandMaxN250.pdf}
 		\includegraphics[width=6cm]{img/allmuRandMaxN500.pdf}
 	\end{center}
-	\caption{Distribution of frequencies depending on the $\mu$ parameter with 250 agents (left) and 500 agents (right)\label{fig:allMutation}}
+	\caption{Distribution of frequencies depending on the $\mu$ parameter with 250 agents (left) and 500 agents (right). Each plot is the mean obtenaid for 100 runs.\label{fig:allMutation}}
 \end{figure}
 
 In the figure~\ref{fig:allMutation} one can observe that the lower the mutation rate, the closer from a line the result is. This line corresponds to the ``power law" distribution explained in section~\ref{sec:culturalTrans} and is typical of the result obtained under the ``neutral model". Please note, that here the specific variant achieving high frequency is not studied, only the number of variants achieving such frequencies is presented.  
@@ -364,7 +364,7 @@ In order to understand the effect of introduction of trading mechanisms we compa
 	\begin{center}
 		\includegraphics[width=6cm]{img/2SetupDistrib.pdf}
 	\end{center}
-	\caption{Frequency distribution for the neutral and the trade models}
+	\caption{Frequency distribution for the neutral and the trade models. Each points represent the mean for 100 runs.}
 	\label{fig:2setDi}
 \end{figure}
 
@@ -397,11 +397,11 @@ We now study the results obtained in more detail by investigating the ability of
 	\centering
 	\begin{tabular}{ c c}
 		 Neutral Model & Trade Model \\
-		 \includegraphics[width=5cm]{img/ScoreEvolutionForRandom-G2N500.pdf}
-		 & \includegraphics[width=5cm]{img/ScoreEvolutionForTrade-G2N500.pdf}
+		 \includegraphics[width=5cm]{img/ScoreEvolutionForRandom-G3N500.pdf}
+		 & \includegraphics[width=5cm]{img/ScoreEvolutionForTrade-G3N500.pdf}
 
 	\end{tabular}
-	\caption{Evolution of the score within the two different models.}%%
+	\caption{Evolution of the score within the two different models for two typical run with 500 agents and 3 goods evolving during 10000 timestep}%%
 	\label{fig:scoreEvol}
 \end{figure}
 
@@ -416,9 +416,9 @@ We pursue the analysis of the economical aspect by observing the prices reached 
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[width=7cm]{img/ClearingPriceDistanceEvolutionForTrade-G2N500.pdf}
+		\includegraphics[width=7cm]{img/ClearingPriceDistanceEvolutionForTrade-G3N500.pdf}
 	\end{center}
-	\caption{Evolution of the mean difference for each good of the estimated value $v_g$ and its optimal value as given by \ref{eq:optimum}. Means computed for 100 run and 2 goods. }
+	\caption{Evolution of the mean of the difference between the estimated value $v_g$ and the optimal value $\tilde{v}_g$ (as calculated with the equations~\ref{eq:optimum}) of the good $g$. This mean is plotted for 100 runs with 3 goods and 500 agents.}
 	\label{fig:ratioEvol}
 \end{figure}
 
