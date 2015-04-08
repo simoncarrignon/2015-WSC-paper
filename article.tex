@@ -57,7 +57,7 @@
 
 \WSCpagesetup{Montanier, Carrignon and Rubio}
 
-\title{Modelling the Co-evolution of Trade and Culture in the Roman Market}
+\title{Modelling the Co-evolution of Trade and Culture in Past Societies}
 
 \maketitle
 
@@ -138,7 +138,7 @@ The scheduling of the four processes is described in algorithm~\ref{algo:complet
 \end{algorithm}
 
 
-In order to validate our model we first reproduce common results from the literature on cultural transmission. We then show that it is possible to transform our model to fit processes that are economically sound, i.e. . To achieve these two goals, we have design for each one a specific set of implementations of the four core processes (production, trade, cultural transmission and innovation). 
+In order to validate our model we first reproduce common results from the literature on cultural transmission. We then show that it is possible to transform our model to fit processes that are economically sound, i.e. the model should show the convergence optimal values such as shown in~\cite{gintis_emergence_2006}. To achieve these two goals, we have design for each one a specific set of implementations of the four core processes (production, trade, cultural transmission and innovation). 
 
 %These dynamics are modelled after processes (production, cultural transmission, innovation and trade) which will be explained in further details later. The flexibility of the models comes from the possibility to implement these processes differently depending on the hypothesis tested. However, since all experiments are performed with the same four processes, the effect of the various implementations of one process can be studied easily. Moreover, the operating of the model revolves around the value that agents associate to goods. Depending on the question studied, the value can reflect the interest of the agent for the good or it can be the price at which the agent evaluate this good. Since this vector is common to all experiments performed with this model, it is extremely useful for the comparisons of results obtained with different implementation of the key processes.
 
@@ -286,7 +286,7 @@ where $\tilde{Q}^i$ is the optimal quantity vector, i.e. the one for which $s^i(
 %	\label{tab:exp}
 %\end{table}
 
-The neutral model is tested through ten experimental setups. The first six experimental setups are using 1 good, two population sizes (250 and 500 agents) and three values of $\mu$ (0.004,0.016 and 0.064). The remaining four experimental setups are using 3 goods, 500 agents and the same four values of $\mu$ (0.004,0.016 and 0.064). For each setup we have performed 100 runs of 10000 timestep each. 
+The neutral model is tested through seven experimental setups. The first six experimental setups are using 1 good, two population sizes (250 and 500 agents) and three values of $\mu$ (0.004,0.016 and 0.064). The remaining experimental setup is using 3 goods, 500 agents and $\mu$ equal to 0.004. For each setup we have performed 100 runs of 10000 timestep each. 
 
 The trading model is tested through four experimental setups using 3 goods, 500 agents and the same four values of $\mu$ (0.004,0.016 and 0.064). Again 100 runs of 10000 timesteps are performed.
 
@@ -355,6 +355,8 @@ It is interesting to analyse the slope of these distributions, to compare them t
 \end{table}
 
 We can see in this table that our results are close to those obtained by \cite{bentley_random_2004}. With a similar methodology and parameters~\cite{mesoudi_random_2009} find similar values of $\alpha$. However, it is difficult to know if the slight differences observed between our work and those previous studies are statistically significant as the two previous studies rely on only five runs for the computation of the mean of $\alpha$ (against 100 in our case).
+
+Additional experiments not presented in this article have shown that the neutral model behaves in the exact same way for two, three and four goods. The value of each good evolves independently and the distribution of values for each good is distributed following the same power law with the same properties than for the experiments performed with one good.
 
 \subsection{Distribution of variants}
 
