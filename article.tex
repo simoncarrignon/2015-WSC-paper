@@ -98,7 +98,6 @@ This work explores these co-evolutionary dynamics using a theoretical Agent-Base
 
 To explore the co-evolution between trade and cultural change we have developed an ABM where the different agents produce and trade goods to which they associate variable values. The model is composed of a population $Pop$ of $m$ agents, each defined by 2 vectors of size $n$. The first corresponds to the quantity of each good that the agent $i$ possesses: 
 $$\forall i \in Pop, \quad Q^i = (q^i_1,\cdots,q^i_n) $$
-
 where $Q^i$ is the total list of possessions of agent $i$, and $q^i_j$ is the number of goods of type $j$ that agent $i$ posses.
 
 The second vector reflects the estimation of the value of a good that an agent $i$ makes.
@@ -147,19 +146,22 @@ In order to validate our model we first reproduce common results from the litera
 
 The first set of implementations is designed to reproduce a scenario of unbiased transmission, where each good is a cultural trait without intrinsic positive or negative weight \cite{bentley_random_2004,bentley_specialisation_2005,mesoudi_random_2009}. 
 Under this hypothesis, the processes of \emph{production} and \emph{trade} are not relevant, and as a consequence, they do not modify the content of the quantity vectors of the agents.
+%%simon: I would rather say  something like :
+%%Under this hypothesis, the processes of \emph{production} and \emph{trade} are not relevant as their results will not affect in any way the evolution of the system.
+%% but we could alos simply remove the sentence?
 
 Unbiased \emph{cultural transmission} is implemented using ``random copy'': each agent has a low probability to pick randomly one agent among all and copy its vector of values. The \emph{innovation} process, termed ``unbounded'', is triggered with a low probability ($\mu$) and draw a new random value to replace an element $v^i_j$. The probabilities to trigger \emph{cultural transmission} and \emph{innovation} are presented with other parameters in table~\ref{tab:parameters}.
 
 The neutral hypothesis states that the ``random copy'' transmission and the ``unbounded'' innovation process used under a fixed population size leads to a distribution of frequency of cultural variants termed \emph{power law}. This distribution is characterized by a small number of very frequent traits and a large number of very rare traits. 
 %Since this hypothesis has been verified in previous works implementing similar \emph{imitation} and \emph{innovation} mechanisms, we expect in this work the observation of a similar ``power law' distribution. 
-More formally, this distribution is formalised as : $$P(v)=C/v^\alpha $$, where $v$ is the number of time a variant has been repeated, $P(v)$ the probability to find that variant, $C$ a constant, $\alpha$ a variable describing the slope of the curve obtained. We will therefore attempt to fit as well as possible the results obtained with this set of implementations to the ``power law'' distribution by modifying the $\alpha$ parameter.
+More formally, this distribution is formalised as : $$P(v)=C/v^\alpha $$ where $v$ is the number of time a variant has been repeated, $P(v)$ the probability to find that variant, $C$ a constant, $\alpha$ a variable describing the slope of the curve obtained. We will therefore attempt to fit as well as possible the results obtained with this set of implementations to the ``power law'' distribution by modifying the $\alpha$ parameter.
 
 \subsection{Trading Model}\label{sec:trade}
 
 The second set of implementations of the four processes of the framework aims at producing economical dynamics. We are interested in the exchange of goods between agents in a barter process where each agent can choose its prices of exchange. We want to implement simple processes leading to the convergence of all prices to values acceptable by all agents, i.e. we would like to observe, at the end of an experiment, all the agents using a set of prices which allow them to trade efficiently.
 
 \paragraph{Production}
-In this set of implementations, each agent is producing only one type of good. The type good produced by an agent $i$ is assigned to it at the beginning of the simulation, does not change through the simulation and is referred as $produced^i$. 
+In this set of implementations, each agent is producing only one type of good. The type of good produced by an agent $i$ is assigned to it at the beginning of the simulation, does not change through the simulation and is referred as $produced^i$. 
 
 \paragraph{Cultural transmission}
 Within this set of implementations, the cultural transmission process is not random but biased toward the agents which are the best at trading, and is therefore termed ``success bias''. To achieve this bias, the cultural transmission mechanism used takes into account the value vector of the other agents and relies on two new notions: \emph{need} and \emph{score}. 
@@ -167,7 +169,7 @@ Within this set of implementations, the cultural transmission process is not ran
 The \emph{need} is a quantity of good that each agent tries to obtain. This quantity is different for each good but the need for a good is the same for all agents:
 $$ N = (n_1, \cdots, n_r) $$ 
 
-The \emph{score} $s^i_j$ of an agent $i$ reflects the ability of this agent to obtain the quantity of good $j$ it needs. It is maximum when the quantity $q^i_j$ of an agent is equal to its need vector $n^i_j$ and lower proportionally to the distance between the need vector and the quantity vector.  It is formally computed as follow for agent $i$:
+The \emph{score} $s^i_j$ of an agent $i$ reflects the ability of this agent to obtain the quantity of good $j$ it needs. It is maximum when the quantity $q^i_j$ that an agent $i$ own of the good $j$ is equal to the need $n_j$ for the good $j$ and lowers proportionally to the distance between the need vector and the quantity vector.  It is formally computed as follow for agent $i$ and the good $j$:
 
 \begin{equation}\label{eq:score}
 s^i_j = \begin{cases}
@@ -193,7 +195,7 @@ The complete score of an agent $i$ is termed $s^i$ and corresponds to the sum of
 
 
 \paragraph{Trading} 
-During the trading phase the value associated to a good by an agent corresponds to the subjective price of the good for this agent. Briefly summarised, for each good that it does not produce, an agent will trade with the first parter that offer an acceptable trade, i.e. an agent that proposes a satisfiable ratio between the other good and the good produced by the agent. 
+During the trading phase the value associated to a good by an agent corresponds to the subjective price of the good for this agent. Briefly summarised, for each good that it does not produce, an agent will trade with the first partner that offers an acceptable trade, i.e. an agent that proposes a satisfiable ratio between the other good and the good produced by the agent. 
 
 In more details, the trading phase starts by the agent looking at a first random agent producing another good. 
 Let $o$ be an agent producing $g$ who proposes a trade and $r$ an agent producing $k$ that receives the proposition. As explained earlier, each has a quantity of good $Q^o$ and $Q^r$. On the one side, $o$ wants to exchange a quantity $w_g^o$ of the good $g$ for a quantity $w_k^o$ of the good $k$. On the other side, $r$ wants to exchange a quantity $w_g^r$ of the good $g$ for a quantity $w_k^r$. The tuples $W^o$ and $W^r$ describe the quantities of goods wanted by agent $o$ and $r$ for one trade proposition and are defined by:  
@@ -284,7 +286,7 @@ where $\tilde{Q}^i$ is the optimal quantity vector, i.e. the one for which $s^i(
 %	\label{tab:exp}
 %\end{table}
 
-The cultural transmission model is tested through ten experimental setups. The first six experimental setups are using 1 good, two population sizes (250 and 500 agents) and four values of $\mu$ (0.004,0.016 and 0.064). The remaining four experimental setups are using 3 goods, 500 agents and the same four values of $\mu$ (0.004,0.016 and 0.064). For each setup we have performed 100 runs of 10000 timestep each. 
+The neutral model is tested through ten experimental setups. The first six experimental setups are using 1 good, two population sizes (250 and 500 agents) and three values of $\mu$ (0.004,0.016 and 0.064). The remaining four experimental setups are using 3 goods, 500 agents and the same four values of $\mu$ (0.004,0.016 and 0.064). For each setup we have performed 100 runs of 10000 timestep each. 
 
 The trading model is tested through four experimental setups using 3 goods, 500 agents and the same four values of $\mu$ (0.004,0.016 and 0.064). Again 100 runs of 10000 timesteps are performed.
 
@@ -318,9 +320,9 @@ TimeSteps & 10000 \\
 
 
 \section{RESULTS}
-\subsection{Random cultural transmission and random innovation process}
+\subsection{Neutral Model}
 
-We first analyse the result obtained in the ``cultural transmission model". Figure~\ref{fig:allMutation} presents the results obtained in the setups using 1 good, two population sizes (250 and 500 agents) and $\mu$ varying through three values (0.004,0.016,0.064). The figure represents the average (across all the runs) of the distribution of variants obtained through all experiments. The y-axis shows the frequencies of the variants of the vector values, the x-axis shows how many variant achieves such frequencies. Both axes are in a logarithmic scale. Please note, that here the specific variant achieving high frequency is not studied, only the number of variants achieving such frequencies is presented.
+We first analyse the result obtained in the ``neutral model". Figure~\ref{fig:allMutation} presents the results obtained in the setups using 1 good, two population sizes (250 and 500 agents) and $\mu$ varying through three values (0.004,0.016,0.064). The figure represents the average (across all the runs) of the distribution of variants obtained through all experiments. The y-axis shows the frequencies of the variants of the vector values, the x-axis shows how many variant achieves such frequencies. Both axes are in a logarithmic scale. Please note, that here the specific variant achieving high frequency is not studied, only the number of variants achieving such frequencies is presented.
 
 \begin{figure}[h]
 	\begin{center}
@@ -354,7 +356,7 @@ We can see in this table that our results are close to those obtained by \cite{b
 
 \subsection{Distribution of variants}
 
-In order to understand the effect of introduction of trading mechanisms we compare first the distribution of values obtained in the ``trading model'' against the values obtained in the ``cultural transmission model''. The figure~\ref{fig:2setDi} presents the results obtained from 100 runs for each model. All runs rely on the same experimental setup using 3 goods, 500 agents and $\mu$ equal to 0.004. 
+In order to understand the effect of introducing trading mechanisms, we compare first the distribution of values obtained in the ``trading model'' against the values obtained in the ``cultural transmission model''. The figure~\ref{fig:2setDi} presents the results obtained from 100 runs for each model. All runs rely on the same experimental setup using 3 goods, 500 agents and $\mu$ equal to 0.004. 
 
 \begin{figure}[H]
 	\begin{center}
@@ -363,19 +365,6 @@ In order to understand the effect of introduction of trading mechanisms we compa
 	\caption{Frequency distribution for the neutral and the trade models. Each points represent the mean for 100 runs.}
 	\label{fig:2setDi}
 \end{figure}
-
-
-%\begin{table}[h]
-%	\centering
-%	\begin{tabular}{lcccc}
-%		& A & B & C & D\\
-%A & X& \includegraphics[width=5cm]{img/A-B.pdf}&\includegraphics[width=5cm]{img/A-C.pdf}&\includegraphics[width=5cm]{img/A-D.pdf}\\
-%B & X& X &\includegraphics[width=5cm]{img/B-C.pdf}&\includegraphics[width=5cm]{img/B-D.pdf}\\
-%C & X& X & X &\includegraphics[width=5cm]{img/C-D.pdf}\\
-%	\end{tabular}
-%	\caption{Experimental Setup}
-%	\label{tab:allRes}
-%\end{table}
 
 On this figure it appears that the implementation of trade mechanisms leads to a distribution of prices departing from the neutral hypothesis. In more details, the frequency distribution has a plateau of common prices (a number of prices share similar and high frequency), which shows that, when trade is taken into account, the most common variants are more diverse. Additional investigations (not presented here) have shown that this is due to the \emph{innovation} process used in the trade model which prevents the creation of totally random new price and therefore leads to the creation of few similar prices obtaining high scores.
 
@@ -401,13 +390,13 @@ We now study the results obtained in more detail by investigating the ability of
 
 As expected, the scores within the neutral model vary randomly. ``Trends'' may appear, where a bigger proportion of individuals adopt a better price that allow agents to reach better score (such as around iteration 8000), but such good score fall back as soon as another trend appears. However, with the trade model, the score of all the agents increase. As the selection mechanism allow them to know who has found better vectors of prices, they will progressively adopt prices vector that allow all of them to reach better scores. 
 
-The previous figure showed the capacity for the ``trade'' model to increase its score but did not analyse the exact prices used. As explained in the section~\ref{sec:trade} we expect that the trade \emph{cultural transmission} and \emph{innovation} processes will produce a convergence toward a set of price for each good that will allow agents to exchange optimally the good they produce with the other goods. To verify this assumption we analyse the prices reached during the simulations. These are presented in figure~\ref{fig:ratioEvol} for the 100 runs relying the experimental setup using 3 goods, 500 agents and $\mu$ equal to 0.004. For all runs, all agents and at each iteration we compute the difference between the price used by the agent $V_g$ and the the optimal price $\tilde{V}_g$. Record that the optimal price for a good is the product between the need for the good and the need for the produced good. All the measures performed are presented as boxplots.
+The previous figure showed the capacity for the ``trade'' model to increase its score but did not analyse the exact prices used. As explained in the section~\ref{sec:trade} we expect that the trade \emph{cultural transmission} and \emph{innovation} processes will produce a convergence toward a set of price for each good that will allow agents to exchange optimally the good they produce with the other goods. To verify this assumption we analyse the prices reached during the simulations. These are presented in figure~\ref{fig:ratioEvol} for the 100 runs relying the experimental setup using 3 goods, 500 agents and $\mu$ equal to 0.004. For all runs, all agents and at each iteration we compute the difference between the price used by the agent $V_g$ and the optimal price $\tilde{V}_g$. Record that the optimal price for a good that an agent does not produce is the product between the need for this good and the need for the produced good, while the optimal price for the produced good is simply the need for it. All the measures performed are presented as boxplots where the results for 100 runs are condensed.
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[width=7cm]{img/ClearingPriceDistanceEvolutionForTrade-G3N500.pdf}
 	\end{center}
-	\caption{Evolution of the mean of the difference between the estimated value $v^i_g$ and the optimal value $\tilde{v}^i_g$ (as calculated with the equations~\ref{eq:optimum}) for a good $g$. As the optimal value $\tilde{v}^i_g$ depend on which goods is produced by $i$, the mean is computed within all the agents that produce the same good. }
+	\caption{Evolution of the mean of the difference between the estimated value $v^i_g$ and the optimal value $\tilde{v}^i_g$ (as calculated with the equations~\ref{eq:optimum}) for a good $g$ and an agent $i$. As the optimal value $\tilde{v}^i_g$ depends on which good is produced by $i$, the mean of the difference between the estimated price and the optimal one is computed between all the agents that produce the same good. The figure represents this mean computed at each timestep for each goods, for each groups of agents and for 100 runs in a setup with 500 agents and 3 goods. }
 	\label{fig:ratioEvol}
 \end{figure}
 
@@ -469,4 +458,3 @@ The model was created using Pandora \cite{rubiocampillo_2014}. R was used for fi
 \bibliographystyle{wsc}
 \bibliography{wsc.bib}  
 \end{document}
-][s[s
