@@ -46,8 +46,8 @@
 
 \newcommand{\memo}[2]{\textcolor{#1}{#2}}
 \newcommand{\added}[2]{\textcolor{#1}{#2}}
-%\renewcommand{\memo}[2]{} % uncomment in the final version
-%\renewcommand{\added}[2]{#2} % uncomment in the final version
+\renewcommand{\memo}[2]{} % uncomment in the final version
+\renewcommand{\added}[2]{#2} % uncomment in the final version
 \newcommand{\todo}[1]{\memo{red}{TODO: #1\\}}
 \newcommand{\simon}[1]{\memo{green}{Simon: #1\\}}
 \newcommand{\jm}[1]{\memo{blue}{JM: #1\\}}
@@ -58,7 +58,7 @@
 
 \WSCpagesetup{Montanier, Carrignon and Rubio}
 
-\title{Modelling the co-evolution of trade and culture in the Roman market}
+\title{Modelling the Co-evolution of Trade and Culture in the Roman market}
 
 \maketitle
 
@@ -93,7 +93,7 @@ This approach can be used as the starting point to analyse patterns of cultural 
 
 This work explores the impact of a crucial element on the transmission of material culture: trade. Networks of good exchanges are being increasingly recognised as key elements that structured ancient societies~\shortcite{temin_market_2001,remesal_epnet_2014,brughmans_connecting_2010}. The scenarios where this process emerge suggest a complex bias in the selection of cultural traits, which at the same time are also identified as economic goods~\shortcite{bentley_specialisation_2005,macmillan_agent-based_2008}. Trasmission is not neutral anymore, as different prices for each good will introduce a dynamic content bias. This affects the frequency of the good within the population, which in turn would modifies its price following a co-evolutionary dynamic.
 
-This work explores these co-evolutionary dynamics using a theoretical Agent-Based Model (ABM), a type of simulation particularly useful for studying non-linear dynamics in heterogeneous environments within an evolutionary perspective~\cite{lake_trends_2014}. Next section defines the model, which is based on unbiased transmission mechanisms and simple exchange dynamics. Next, we define different experiments to explore the dynamics of the created model. Finally, the concluding remarks interpret the results and discuss further possibilities of the pesented model.
+This work explores these co-evolutionary dynamics using a theoretical Agent-Based Model (ABM), a type of simulation particularly useful for studying non-linear dynamics in heterogeneous environments within an evolutionary perspective~\shortcite[3]{lake_trends_2014}. Next section defines the model, which is based on unbiased transmission mechanisms and simple exchange dynamics. Next, we define different experiments to explore the dynamics of the created model. Finally, the concluding remarks interpret the results and discuss further possibilities of the pesented model.
 
 \section{MODEL DESCRIPTION}
 
@@ -337,7 +337,7 @@ Under all parameters tested the value vectors exhibit power law like distributio
 \begin{table}[h]
 	\centering
 	\begin{tabular}{ll|llll}
-		\multicolumn{2}{r}{Agents Number}&\multicolumn{2}{c}{Our result}&\multicolumn{2}{c}{Bentley et al 2004}\\
+		\multicolumn{2}{r}{Agents Number}&\multicolumn{2}{c}{Our result}&\multicolumn{2}{c}{Bentley et. al. 2004}\\
 			&$\mu$ & $\alpha$ & SD&$\alpha$&SD\\\hline
 		N = 250	&0.004&1.53&0.03&1.54&0.02\\
 			&0.016&1.57&0.02&1.57&0.01\\
@@ -346,11 +346,11 @@ Under all parameters tested the value vectors exhibit power law like distributio
 			&0.016&1.55&0.03&1.61&0.04\\
 			&0.064&1.78&0.08&1.81&0.10\\
 	\end{tabular}
-	\caption{Mean \& SD are calculate on 100 run.}
+	\caption{Mean \& SD are calculate on 100 runs for our results, and 5 runs for Bentley et. al. 2004.}
 	\label{tab:mualpha}
 \end{table}
 
-\jm{Simon, do you have a comment on the table ? Like does it fit what is found in other articles ?}
+We can see in this table that our results are close to those obtained by \shortcite[3]{bentley_random_2004}. In the same way \shortcite[3]{mesoudi_random_2009} also find similar value of $\alpha$ for similar values of $\mu$ and for the same number of agents. In the other hand it is difficult to know if the slight difference between those study are statistically significant as for the two previous studies the mean of $\alpha$ are computed using only between five runs, against 100 in our case.
 
 \subsection{Distribution of variants}
 
@@ -411,7 +411,7 @@ We pursue the analysis of the economical aspect by observing the prices reached 
 	\label{fig:ratioEvol}
 \end{figure}
 
-We observe that prices are indeed converging to the optimal prices which means that our innovation and imitation process are valid trade mechanisms. Notably, they produce results similar to the ones obtained in~\shortcite{gintis_emergence_2006}.
+We observe that prices are indeed converging to the optimal prices which means that our innovation and imitation process are valid trade mechanisms. Notably, they produce results similar to the ones obtained in~\shortcite[3]{gintis_emergence_2006}.
 
 %\subsection{Suboptimal markets}
 %
