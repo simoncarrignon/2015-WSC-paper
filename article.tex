@@ -56,7 +56,7 @@
 
 \begin{document}
 
-\WSCpagesetup{Montanier, Carrignon, Rubio and Zerr}
+\WSCpagesetup{Montanier, Carrignon and Rubio}
 
 \title{Modelling the co-evolution of trade and culture in the Roman market}
 
@@ -78,10 +78,7 @@ Carrer de Jordi Girona, 29, \\
 
 \section*{ABSTRACT}
 
-\todo{Rewrite later}
-In this article our aim is to present a model suitable to test various hypotheses on economic and cultural co-evolution during the Roman Empire. The ultimate goal is to address debates from history of economy such as the type of economical market found in early empires. Agent based modelling is a good way to understand social self-organisation resulting from a large number of interactions. It is used in a wide range of fields of research, from economical market mechanisms to social dynamics. We therefore apply this type of framework to our study.
-
-Here we present a model able it reproduces well known economical and cultural mechanism. Moreover this model can be envisioned to test hypothesis on those mechanisms. Given the appropriate match between the simulations and archaeological and historical data, the results of the model can be validated.
+This papers presents a new framework to study the co-evolution of cultural transmission and trade. The design aims for a trade-off between the flexibility necessary for the implementation of multiple models and the structure necessary for the comparison between the models implemented. To create this framework we propose an Agent-Based Model relying on agents producing, exchanging and associating values to a list of goods. We first present the key concepts of the framework and two examples of its implementation which allow us to show the flexibility of our framework. We then compare the results obtained by the two models, thus validating the structure of the framework. Finally, to validate our trade model we study the price structure obtained.
 
 
 \section{INTRODUCTION}\label{sec:intro}
@@ -94,27 +91,24 @@ Several studies focus on the biases that affect the transmission of cultural tra
 
 This approach can be used as the starting point to analyse patterns of cultural change to explore frequency-dependance in archaeological contexts~\shortcite{lipo_neutralitystyle_2001,shennan_ceramic_2001,steele_ceramic_2010}. However, the fact that archaeology records fragmented material culture presents some challenges on the validity of the method~\shortcite{kandler_nonequilibrium_2013,porcic_exploring_2014,crema_approximate_2014}.
 
-This work explores the impact of a crucial element on the transmission of material culture: trade. Networks of good exchanges are being increasingly recognised as key elements that structured ancient societies~\shortcite{temin_market_2001,remesal_epnet_2014,brughmans_connecting_2010}. The scenarios where this process emerge suggest a complex bias in the selection of cultural traits, which at the same time are also identified as economic products~\shortcite{bentley_specialisation_2005,macmillan_agent-based_2008}. Trasmission is not neutral anymore, as different prices for each product will introduce a dynamic content bias. This affects the frequency of the product within the population, which in turn would modifies its price following a co-evolutionary dynamic.
+This work explores the impact of a crucial element on the transmission of material culture: trade. Networks of good exchanges are being increasingly recognised as key elements that structured ancient societies~\shortcite{temin_market_2001,remesal_epnet_2014,brughmans_connecting_2010}. The scenarios where this process emerge suggest a complex bias in the selection of cultural traits, which at the same time are also identified as economic goods~\shortcite{bentley_specialisation_2005,macmillan_agent-based_2008}. Trasmission is not neutral anymore, as different prices for each good will introduce a dynamic content bias. This affects the frequency of the good within the population, which in turn would modifies its price following a co-evolutionary dynamic.
 
 This work explores these co-evolutionary dynamics using a theoretical Agent-Based Model (ABM), a type of simulation particularly useful for studying non-linear dynamics in heterogeneous environments within an evolutionary perspective~\cite{lake_trends_2014}. Next section defines the model, which is based on unbiased transmission mechanisms and simple exchange dynamics. Next, we define different experiments to explore the dynamics of the created model. Finally, the concluding remarks interpret the results and discuss further possibilities of the pesented model.
 
 \section{MODEL DESCRIPTION}
 
-The model is composed of a population $Pop$ of $m$ agents, each defined by 2 vectors of size $n$. The first corresponds to the quantity of each good that the agent $i$ possesses: 
+To explore the co-evolution between trade and cultural change we have developed an ABM where the different agents produce and trade goods to which they associate variable values. The model is composed of a population $Pop$ of $m$ agents, each defined by 2 vectors of size $n$. The first corresponds to the quantity of each good that the agent $i$ possesses: 
 $$\forall i \in Pop, \quad Q^i = (q^i_1,\cdots,q^i_n) $$
 
 where $Q^i$ is the total list of possessions of agent $i$, and $q^i_j$ is the number of goods of type $j$ that agent $i$ posses.
 
-The second vector reflects the estimation of the value of a product that an agent $i$ makes.
+The second vector reflects the estimation of the value of a good that an agent $i$ makes.
 $$\forall i \in Pop, \quad V^i = (v^i_1,\cdots,v^i_n) $$
 where $V^i$ is the total list of estimated values of agent $i$, and $v^i_j$ is the value that agent $i$ associates to the goods of type $j$.
 
 On top of these elements four processes are used: \emph{production}, \emph{cultural transmission}, \emph{innovation} and \emph{trade}. The \textit{production} process describes the creation of goods by the agent. Once a good is produced by an agent $i$ it is added its quantity vector ($Q^i$). The \emph{trade} process models the exchange of goods between the agents which results in a modification of the quantity vectors ($Q^i$). The amount of goods exchanged is computed by the agents concerned by the trade, within the \emph{trade} process, based on their value vectors ($V^i$). Within the \textit{cultural transmission} process an agent $i$ can copy the value vector ($V^j$) of an agent $j$, where $j \neq i$. The \textit{innovation} process also modifies the value vector $V^i$ of an agent, but it differs from the \emph{cultural transmission} process in that the modification is done without reference to the other agents. Finally, .
 
-The scheduling of the four processes is described in algorithm~\ref{algo:complete} along with the vectors modified by each of these processes. Between line 2 and 7 all agents of the population are initialised with empty quantity vectors and random values. Between the lines 11 and 19 is presented the part of the pseudo-code describing the instructions that will be repeated for each iteration of the simulation. 
-\jm{what about saying that we just count the iterations at the ``imitation, innovation step" ?}
-\xrc{It should be justified (market is faster than cultural change?)}
-One can note that the trading process is performed at every iteration while the imitation and innovation processes are executed only every $CulturalStep$. The idea behind this is to perform the imitation based on a score that reflects the performance of the agent and not only one lucky or unlucky trading round. 
+The scheduling of the four processes is described in algorithm~\ref{algo:complete} along with the vectors modified by each of these processes. Between line 2 and 7 all agents of the population are initialised with empty quantity vectors and random values. Between the lines 11 and 19 is presented the part of the pseudo-code describing the instructions that will be repeated for each iteration of the simulation. One can note that the trading process is performed at every iteration while the imitation and innovation processes are executed only every $CulturalStep$. The idea behind this is to perform the imitation based on a score that reflects the performance of the agent and not only one lucky or unlucky trading round. The timestep number used in the figures of this article refers to the number of times the \emph{cultural transmission} and \emph{innovation} processes have been called.
 
 \begin{algorithm}
 \caption{Model}
@@ -123,7 +117,7 @@ One can note that the trading process is performed at every iteration while the 
 	\scriptsize
 	\State INITIALIZATION: 
 		\For{$j \in Goods$}
-			\For{$i \in \#Pop/\#Goods$} \Comment{Initialize the agent with no products and a random value vector}
+			\For{$i \in \#Pop/\#Goods$} \Comment{Initialize the agent with no goods and a random value vector}
 				\State $Q^i = (0, \cdots, 0)$
 				\State $V^i = (v^i_0, \cdots, v^i_n)$ \Comment{The values of $v^i_j$ are selected randomly}
 			\EndFor
@@ -146,22 +140,24 @@ One can note that the trading process is performed at every iteration while the 
 \end{algorithm}
 
 
-In order to validate our model we first reproduce common results from the literature on cultural transmission. We then show that it is possible to transform our model to fit processes that are economically sound. To achieve these two goals, we have design for each one specific set of implementations of the four core processes (production, imitation and innovation). 
+In order to validate our model we first reproduce common results from the literature on cultural transmission. We then show that it is possible to transform our model to fit processes that are economically sound. To achieve these two goals, we have design for each one a specific set of implementations of the four core processes (production, trade, cultural transmission and innovation). 
+
+%These dynamics are modelled after processes (production, cultural transmission, innovation and trade) which will be explained in further details later. The flexibility of the models comes from the possibility to implement these processes differently depending on the hypothesis tested. However, since all experiments are performed with the same four processes, the effect of the various implementations of one process can be studied easily. Moreover, the operating of the model revolves around the value that agents associate to goods. Depending on the question studied, the value can reflect the interest of the agent for the good or it can be the price at which the agent evaluate this good. Since this vector is common to all experiments performed with this model, it is extremely useful for the comparisons of results obtained with different implementation of the key processes.
 
 \subsection{Cultural Transmission}\label{sec:culturalTrans}
 
-The first set of implementations is designed to reproduce a scenario of unbiased transmission, where each product is a cultural trait without intrinsic positive or negative weight \shortcite{bentley_random_2004,bentley_specialisation_2005,mesoudi_random_2009}. 
+The first set of implementations is designed to reproduce a scenario of unbiased transmission, where each good is a cultural trait without intrinsic positive or negative weight \shortcite{bentley_random_2004,bentley_specialisation_2005,mesoudi_random_2009}. 
 Under this hypothesis, the processes of \emph{production} and \emph{trade} are not relevant, and as a consequence, they do not modify the content of the quantity vectors of the agents.
 
 Unbiased transmission is implemented using ``random copy'': each agent has a low probability to pick randomly one agent among all and copy its vector of values. The \emph{innovation} process, termed ``unbounded'', is triggered with a low probability and draw a new random value to replace an element $v^i_j$. The imitation and innovation probabilities are presented with other parameters in table~\ref{tab:parameters}.
 
 The neutral hypothesis states that the ``random copy'' transmission and the ``unbounded'' innovation process used under a fixed population size leads to a \emph{power law} distribution of the frequency for the different cultural variants. This distribution is characterized by a small number of very frequent traits and a large number of very rare traits. 
 %Since this hypothesis has been verified in previous works implementing similar \emph{imitation} and \emph{innovation} mechanisms, we expect in this work the observation of a similar ``power law' distribution. 
-More formally, this distribution is formalised as : $$P(v)=C/v^\alpha $$, where $v$ is the number of time a variant has been repeated, $P(v)$ the probability to find that variant, $C$ a constant, $\alpha$ a variable describing the slope of the curve obtained. 
+More formally, this distribution is formalised as : $$P(v)=C/v^\alpha $$, where $v$ is the number of time a variant has been repeated, $P(v)$ the probability to find that variant, $C$ a constant, $\alpha$ a variable describing the slope of the curve obtained. We will therefore attempt to fit as good as possible the results obtained with this set of implementations to the ``power law'' distribution by modifying the $\alpha$ parameter.
 
 \subsection{Trading Model}\label{sec:trade}
 
-The second set of implementations of the core processes aims at producing economical dynamics. We are interested in the exchange of products between agents when they can modify the prices at which they sell and buy products. We want to implement simple processes leading to the convergence of all prices to values acceptable by all agents, i.e. we would like to observe, at the end of an experiment, all the agents using the same set of prices which allow them to trade efficiently.
+The second set of implementations of the core processes aims at producing economical dynamics. We are interested in the exchange of goods between agents when they can modify the prices at which they sell and buy goods. We want to implement simple processes leading to the convergence of all prices to values acceptable by all agents, i.e. we would like to observe, at the end of an experiment, all the agents using the same set of prices which allow them to trade efficiently.
 
 \paragraph{Production}
 In this set of implementations, each agent is producing only one type of good. The type good produced by an agent $i$ is assigned to it at the beginning of the simulation, does not change through the simulation and is referred as $produced^i$. 
@@ -169,10 +165,10 @@ In this set of implementations, each agent is producing only one type of good. T
 \paragraph{Cultural transmission}
 Within this set of implementations, the cultural transmission process is not random but biased toward the agents which are the best at trading, and is therefore termed ``success bias''. To achieve this bias, the cultural transmission mechanism used takes into account the value vector of the other agents and relies on two new notions: \emph{need} and \emph{score}. 
 
-The \emph{need} is a quantity of product that each agent tries to obtain. This quantity is different for each product but the need for a product is the same for all agents:
+The \emph{need} is a quantity of good that each agent tries to obtain. This quantity is different for each good but the need for a good is the same for all agents:
 $$ N = (n_1, \cdots, n_r) $$ 
 
-The \emph{score} $s^i$ of an agent $i$ reflects the ability of this agent to obtain the products it needs. It is maximum when the quantity vector of an agent is equal to its need vector and lower proportionally to the distance between the need vector and the quantity vector.  It is formally computed as follow for agent $i$:
+The \emph{score} $s^i$ of an agent $i$ reflects the ability of this agent to obtain the goods it needs. It is maximum when the quantity vector of an agent is equal to its need vector and lower proportionally to the distance between the need vector and the quantity vector.  It is formally computed as follow for agent $i$:
 
 \begin{equation}\label{eq:score}
 s^i = \begin{cases}
@@ -198,9 +194,9 @@ The agents will choose the agent from whom the price vector should be copied amo
 
 
 \paragraph{Trading} 
-During the trading phase the value associated to a good by an agent corresponds to the subjective price of the good for this agent. Briefly summarised, for each good that it does not produce, an agent will trade with the first parter that offer an acceptable trade, i.e. the agent that proposes a satisfiable ratio between the other product and the product produced by the agent. 
+During the trading phase the value associated to a good by an agent corresponds to the subjective price of the good for this agent. Briefly summarised, for each good that it does not produce, an agent will trade with the first parter that offer an acceptable trade, i.e. the agent that proposes a satisfiable ratio between the other good and the good produced by the agent. 
 
-In more details, the trading phase starts by the agent looking at a first random agent producing another product. 
+In more details, the trading phase starts by the agent looking at a first random agent producing another good. 
 Let $o$ be an agent producing $g$ that proposes a trade and $r$ an agent producing $k$ that receives the proposition. As explained earlier, each has a quantity of good $Q^o$ and $Q^r$. On the one side, $o$ wants to exchange a quantity $w_g^o$ of the good $g$ for a quantity $w_k^o$ of the good $k$. On the other side, $r$ wants to exchange a quantity $w_g^r$ of the good $g$ for a quantity $w_k^r$. The tuples $W^o$ and $W^r$ describe the quantities of goods wanted by agent $o$ and $r$ for one trade proposition and are defined by:  
 
 \begin{equation}
@@ -289,9 +285,9 @@ where $\tilde{Q}^i$ is the optimal quantity vector, i.e. the one for which $s^i(
 %	\label{tab:exp}
 %\end{table}
 
-For the cultural transmission setup we run two set of experiments with 250 and 500 agents in which we vary $\alpha \in \{0.004,0.016,0.064\}$. For each combination of parameters we did 100 runs of 10000 timestep is performed. 
+For the cultural transmission model we run experiments with two setups. The first is composed of 1 good and two population sizes: 250 and 500 agents ; the second is composed of 3 goods and 500 agents. For both of these setups 4 different values of $\alpha$ are studied: $\{0.004,0.016,0.064\}$. For each $\alpha$ we present the results obtained with 100 runs of 10000 timestep each. 
 
-For the trading model we run  again two set of experiment, one with 2 goods and 500 agents, the other with 4 goods and 800 agents. The length of the simulations is always 10000 timestep but this time one timestep is made of $CulturalStep$ trade action as described in the previous section~\ref{sec:trade}. Again for each combination 100 runs are done.
+For the trading model we run also all experiments with 3 goods and 500 agents. Again 100 runs of 10000 timesteps are performed. As described in section~\ref{sec:trade}, one timestep is corresponds to the call of the \emph{cultural transmission} and \emph{innovation} processes. 
 
 The whole set of parameters used are presented in table~\ref{tab:parameters}. 
 
@@ -324,7 +320,7 @@ TimeSteps & 200000 \\
 \section{RESULTS}
 \subsection{Random cultural transmission and random innovation process}
 
-We first analyse the result obtained in the ``neutral model" as presented in section~\ref{sec:culturalTrans}.  The figure~\ref{fig:allMutation} present the results obtained with $\mu$ varying $\in {.004,.008,.016,.064}$ and two population sizes: 250 and 500 agents. The distribution of variants obtained is shown in figure~\ref{fig:allMutation}. In this graph the relative frequencies of the values obtained is analysed. The y-axis of the graph shows the frequencies of the variants of the vector values, the x-axis shows how many variant achieves such frequencies and the line represents the average of the frequencies obtained across all runs. Both axes are in a logarithmic scale.
+We first analyse the result obtained in the ``neutral model" as presented in section~\ref{sec:culturalTrans}. Figure~\ref{fig:allMutation} presents the results obtained with $\mu$ varying $\in {.004,.008,.016,.064}$, 1 good and two population sizes: 250 and 500 agents. The distribution of variants obtained is shown in figure~\ref{fig:allMutation}. In this graph the relative frequencies of the values obtained is analysed. The y-axis of the graph shows the frequencies of the variants of the vector values, the x-axis shows how many variant achieves such frequencies and the line represents the average of the frequencies obtained across all runs. Both axes are in a logarithmic scale.
 
 \begin{figure}[!hbp]
 	\begin{center}
@@ -356,7 +352,7 @@ Under all parameters tested the value vectors exhibit power law like distributio
 
 \jm{Simon, do you have a comment on the table ? Like does it fit what is found in other articles ?}
 
-\subsection{Distribution}
+\subsection{Distribution of variants}
 
 In order to understand the effect of introduction of trading mechanisms we compare first the distribution of values obtained in the two models. The result of this comparison is in the figure~\ref{fig:2setDi}. 
 
@@ -381,15 +377,10 @@ In order to understand the effect of introduction of trading mechanisms we compa
 %	\label{tab:allRes}
 %\end{table}
 
-
-%The results studied in the previous section is reproduced here by the line labelled ``setup A''. 
-\jm{this sounds wrong what would be a valid analysis ?}
-%We observe that the setup D is also following a power law. However, setups B and C are following an exponential law. We therefore observe that the innovation process has a negligeable influence on the shape distribution. However, the use of a biased imitation process has a major effect on the shape of the distribution.
-
-We can observe the action of our new analysis : the new innovation process prevents the creation of totally random new price and lead to a fewer proportion of prices that appear rarely in the population.
+On this figure it appears that the implementation of trade mechanisms leads to a distribution of prices departing from the neutral hypothesis. In more details, the frequency distribution has a plateau of common prices (a number of prices share similar and high frequency), which shows that, when trade is taken into account, the most common variants are more diverse. Additional investigation have shown us that this is due to the \emph{innovation} process used in the trade model which prevents the creation of totally random new price and lead to a fewer proportion of prices that appear rarely in the population.
 
 
-\subsection{Values}
+\subsection{Study of scores}
 
 We now study the results obtained in more detail by investigating the ability of the population of agents to find the good price to perform exchanges between each other. This is done by observing the score of all agents in each of the two different models. The results obtained are presented in figure~\ref{fig:scoreEvol}.
 
@@ -405,12 +396,10 @@ We now study the results obtained in more detail by investigating the ability of
 	\label{fig:scoreEvol}
 \end{figure}
 
-\todo{redo the explanations nicer} 
 %In the setups A and C, the score evolves randomly. In the two other setups however the score is increasing. Moreover, we observe that the Self-referenced innovation process used in the setups C and D leads to higher convergences. Since only the ``biased transmission" takes the score into account it is normal that only this mechanism leads higher scores. The ``unbounded'' mechanism leads to lower convergences as it select prices randomly in the complete range available.
 
-As expected, the neutral model scores vary randomly. Sometimes ``trends'' appear, where a bigger proportion of individuals adopt a better price that allow agents to reach better score (such as between \simon{adapt to last graph}), but such good score fall back as soon as another trend appears. In the other hand, with in the trade model, the score of all the agents increase. As the selection mechanism allow them to know who find better vectors of prices, they will slightly adopt prices vector that allow all of them to reach better scores. 
+As expected, the neutral model scores vary randomly. Sometimes ``trends'' appear, where a bigger proportion of individuals adopt a better price that allow agents to reach better score (such as between \simon{adapt to last graph}), but such good score fall back as soon as another trend appears. In the other hand, with the trade model, the score of all the agents increase. As the selection mechanism allow them to know who find better vectors of prices, they will slightly adopt prices vector that allow all of them to reach better scores. 
 
-\subsection{Prices}
 
 We pursue the analysis of the economical aspect by observing the prices reached within the trade model. As explained in the section~\ref{sec:trade} we expect that the trade imitation and innovation processes will produce a convergence toward a set of price for each good that will allow agents to exchange optimally the good they produce with the other goods. To verify this assumption we analyse the prices reached. These are presented in figure~\ref{fig:ratioEvol} as a deviation from the optimal price. Record that the optimal price is the ratio between the need of the needed good and the produced good.
 
@@ -424,7 +413,7 @@ We pursue the analysis of the economical aspect by observing the prices reached 
 
 We observe that prices are indeed converging to the optimal prices which means that our innovation and imitation process are valid trade mechanisms. Notably, they produce results similar to the ones obtained in~\shortcite{gintis_emergence_2006}.
 
-\subsection{Suboptimal markets}
+%\subsection{Suboptimal markets}
 %
 %Finally, a more careful analysis of the price structure reveals the presence of suboptimal markets. 
 %\jm{it was written setup C, it's not setup D?}
@@ -465,29 +454,18 @@ We observe that prices are indeed converging to the optimal prices which means t
 
 \section{CONCLUDING REMARKS}
 
-The results of this model show that the key aspects of trade are just different implementations of the key elements of cultural evolutionary framework, i.e. cultural transmission and innovation. Moreover, we have ensure that such an implementation is valid in the sense that it leads the prices of goods to converges to the values expected under economical theories. This aspect which has not been studied before, opens a new line of thinking on the weight of trade mechanisms within cultural change.
-
-Within this line of thought, we have shown that the implementation of trade mechanisms as cultural transmission and innovation mechanisms leads to results departing from the neutral hypothesis largely studied to understand cultural changes. Interesting additional work could be, for example, the comparison between trade mechanisms and prestige biased cultural transmission.
-
 This article has proposed a framework to study both cultural change mechanisms and trade mechanisms. The development of our framework was first aimed at simplicity which is achieved by the use of two vectors (quantity and value) and four processes (production, trade, cultural transmission and innovation). The second aim of the work conducted was to obtain a flexible framework which is possible since each of the processes can be implemented accordingly to the question studied. We have shown the validity of this approach by reproducing expected results on both the cultural and trade side. On the cultural transmission side we have shown that the implementation of a ``neutral model" leads to the expected observations on the variants of the vector value: a power law. When implementing trading mechanisms we observe the convergence of prices to the expected values and the improvement of the scores of the agents.
 
-In future works numerous, more realistic and complex dynamics can be studied in the same model. First the constraints on the production could be relaxed so that each agent can choose the products it wishes to produce at the current time step. Moreover, meterological factors can modify the quality of the production (noisy outcome of the process) thus making the process more realistic and more complex~\shortcite{bentley_specialisation_2005}.
+The successful implementation of a trade model within our framework shows that trade models can be viewed as a particular implementation of the cultural evolutionary framework. This aspect which has not been studied before, opens a new line of thinking on the weight of trade mechanisms within cultural change. Notably, we have shown that the implementation of trade mechanisms leads to a distribution of prices departing from the neutral hypothesis, which is the reference in the study of cultural changes. Within the trade model, the frequency distribution has a plateau of common prices (a number of prices share similar and high frequency), which shows that, when trade is taken into account, the most common variants are more diverse. Interestingly, we have not find references pointing at the ability of trade mechanisms to keep a relatively large diversity in the frequency distribution. We suspect that this is mainly because it is not common to compare results of trade models to other cultural evolution models. It would therefore be interesting to compare the frequency distributions obtained by our model and the ones observed in current or past economies. On the side of cultural transmission, the results obtained can also be compared to the ones obtained when prestige biased cultural transmission is used. The idea behind this last comparison, is that trade could be interpreted as a particular prestige biased cultural transmission and therefore be fully integrated within the cultural evolutionary frameworks.
 
-The goods themselves can be of different type: ``vital'' or ``common''. The absence of a ``vital'' good would then lead to the death of the agent. Thus making the need to trade at the best price even stronger for the agent. The ``common'' goods on the other sides would be interesting to observe the evolution of a culture out of the necessity of survival. The mechanisms behind the strong use of a non-essential product can then be studied. Naturally in the study of these questions the consumption function would change trough time for the agent.
-
-The trading theories studied also can be extended to the \emph{Prospect Theory}~\shortcite{kahneman_prospect_1979} which proposes to study more realistic trade mechanisms taking into account the biases of humans. Another economical framework we envision is the Agent based Computational Economy, ACE, which is  addressing economical problems raising from the interactions of a large number of agents~\shortcite{tesfatsion_introduction_2001}. On top of these trading theories the influence of the network of trades by itself can be studied. Various networks can be envisioned ranging from fully connected to small world, and taking into account possible delays or the sudden rupture of a link.
-
-On the cultural transmission side, the vector value could be learned using any mechanism of ``social learning'' (as defined by \shortcite{lycett_cultural_2015}) known in the literature (teaching, different kind of copying mechanisms,\ldots) and/or integrate any cognitive/environmental bias that could be studied (see again \shortcite{lycett_cultural_2015} for some kind of bias that could be implemented). Agents could be also endowed with self-adaptation abilities implemented thanks to Reinforcement Learning or Developmental Learning. Another possible track to implement the self-adaptation abilities is to rely on the cognitive approaches that propose to model the complexity of the human behaviour in general representations such as BDI.
-
-\xrc{I think that this section can be revised once we get the results (e.g. less future work, more interpretation of results)}
+In future works more realistic and complex dynamics can be studied in the same model. First, multiple implementations of the production mechanism can be studied so as to increase the number of goods per agent and include factors such as the meteorology or the various type of goods. Moreover, the introduction of the distinction between ``vital'' and ``common'' goods will be useful for the creation of models studying in further details the interaction between trade and cultural transmission. The trading mechanism itself can be naturally implemented in different ways, each reflecting a specific theory, and thus allowing the comparison of the different theories. Moreover, the trade network (which in this work can be interpreted as fully connected) can be modified to study the effect of slow connections or the rupture of certain connections. Finally, the agent themselves could become more complex and be endowed with the ability to learn behaviours which would again produce more realistic simulations.
 
 \section{Acknowledgements}
 
-\todo{upload and put an url, complete cite mare nostrum, put nb of hours per run (or the total)}
-
 Funding for this work was provided by the ERC Advanced Grant EPNet (340828) and the SimulPast Consolider Ingenio project (CSD2010-00034) of the former Ministry for Science and Innovation of the Spanish Government. 
 
-The model was created using Pandora \shortcite{rubiocampillo_2014}. R was used for figures and statistical analysis \shortcite{rdev_2012}. The source code of the model is licensed under a GNU General Public License and will be available for download at publication.
+The model was created using Pandora \shortcite{rubiocampillo_2014}. R was used for figures and statistical analysis \shortcite{rdev_2012}. The simulations have been done in the supercomputer MareNostrum at Barcelona Supercomputing
+Center - Centro Nacional de Supercomputación (The Spanish National Supercomputing Center). The source code of the model is licensed under a GNU General Public License and will be available for download at publication.
 
 \bibliographystyle{wsc}
 \bibliography{wsc.bib}  
