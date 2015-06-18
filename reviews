@@ -1,0 +1,50 @@
+Review of con279s1 by Reviewer 1 	top
+Originality
+	There is still a contribution in linking the two fields (Genetic Algorithms and Archeology) but I feel the authors ought to make the link more explicit.
+
+Impact
+I am not sure how to judge the power-law fits and differences between this paper and the rest of the literature cited, but as an economics model there are a lot of avenues for expansion.
+    For example, what happens if there are two populations with distinct tastes (and separate replicators)? How reactive are prices to shifts in production/needs? (innovation will become useful to remedy the lack of genetic diversity needed to deal with shifts)
+    If replication and imitation were to happen on a social network rather than at random, how much slower would the the correct prices emerge?
+
+
+Please explain in detail your evaluation of the paper.
+    1) Power-law should be tested through Clauset methods:
+    http://arxiv.org/abs/0706.1062
+    Or at least the authors should explain why they weren't used
+    2) It is unclear what of the model is the "variant" that gets plotted in the power-law plots. Is it value vector?
+    3) Is there any consumption in the paper? There is no mention anywhere but it must be present or trivially at some point everybody will reach the highest fitness
+    4) How dependent are the results to the fact that the score is capped at 1 (that is, over consumption has no utility)?
+    5) Is it always assumed that the amount produced equal the amount needed each day?
+    6) Would the plateau of common prices disappear if you were to add single-crossover replication of the value vector in the cultural transmission algorithm?
+
+
+
+Review of con279s1 by Reviewer 2 	top
+Please explain in detail your evaluation of the paper.
+    In the Introduction, it would be nice to have a more complete definition of what "bias" means.
+    Framework description: are the 'values' in the V^i vector measured in "per-unit" value?
+    In the "cultural transmission" process, it says that agent i "copies the value vector" of an agent j where i≠j. Does it really copy the entire vector, or just one component?
+    In Algorithm 1, what does "#Pop/#Goods" mean?
+    You say that "a power law distribution is characterized by a small number of very frequent traits and a large number of very rare traits." This is true, but it's also true for (say) exponential distributions. The important thing about power law distributions is that the very rare traits AREN'T quite so rare, when compared with exponential; i.e., the tails are fat.
+    Explain this more fully: "In practice, the worst two percent of the agents will copy the prices of the best two percent." How does this work?
+    When testing the neutral model (or any of your models) it seems important to test with more than 1 good. If you only have a single good, it seems that could be a degenerate case with atypical results. The last paragraph of 4.1 indicates that you have conducted such experiments -- I would prefer those results to be reported instead of the one-good trials reported in the paper.
+    How do you know that the curves in Figure 2 are truly good fits for power law distributions? Have you validated this? Perhaps they are lognormal, or negative exponential instead? See, for instance, https://en.wikipedia.org/wiki/Power_law#Validating_power_laws
+    You state that the reason Figure 3 shows Trade model deviating from Neutral model is that the trade model includes the Innovation process. Why not turn off the Innovation process, and test only the Trade model, to verify this supposition?
+
+
+    Stylistic:
+    "one of the implemented model" => "models"
+    "are more transmitted" => "are transmitted more readily"
+    "trait do not" => "trait does not"
+    "is is known" => "it is known"
+    "record allow" => "record allows"
+    "dependance" => "dependence"
+    "process emerge" => "process emerges"
+    "depending of" => "depending on"
+    "basics processes" => "basic processes"
+    "concerned by the trade" -- this isn't the phrase you want. Perhaps "involved in the trade"?
+    "number of time" => "number of times"
+    "agent i own" => "agent i owns"
+    "insure" => "ensure"
+    "closer from a line" => "closer to a line"
