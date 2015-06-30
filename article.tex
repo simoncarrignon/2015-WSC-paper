@@ -201,13 +201,32 @@ Figure~\ref{fig:fit} depicts the score of an agent, for different need values of
 
 The complete score of an agent $i$ is termed $s^i$ and corresponds to the sum of the $s^i_j$. The agents will choose the model from whom the price vector should be copied among the agents that produce the same good and have the highest score. In practice, the worst two percent of the agents (in terms of score) will copy the prices of the best two percent. This selection process is detailed in algorithm~\ref{algo:selectionCulture}.
 
-\todo{complete algo}
+\todo{Arreglar : how to say ``we choose a random number and if it's less that (or more than) the relative score we continue}
 \begin{algorithm}
-\caption{Copy of culture}
+\caption{Selection Process}
 \label{algo:selectionCulture}
 	\begin{algorithmic}[1]
 	\scriptsize
-	\State TO COMPLETE
+	\State	$toGet = 0.2 \times \#Pop$
+	\For{$g \in Good$}
+		\State	$toChange = \{\}$
+                \While{$\#toChange < toGet$}
+			\State $ j = rand(Pop,g) $ 
+			\If{$P(X<ComputeScore(j))$}
+				\State $toChange = \{toChange,j\}$
+			\EndIf
+		\EndWhile
+
+                \While{$\#toChange > 0 $}
+			\State $ j = rand(toChange) $ 
+			\State $ i = rand(Pop,g) $ 
+			\If{$P(X>ComputeScore(j)>ComputeScore(i))$}
+				\State copyPrice(i,j)	
+				\State $toChange = toChange - i$
+			\EndIf
+
+		\EndWhile\
+	\EndFor
 \end{algorithmic}
 \end{algorithm}
 
@@ -317,7 +336,7 @@ The complete set of parameters tested on both models is presented in table~\ref{
 \toprule
 Parameter & Value \\
 \midrule
-Number of goods & $\{1,2,5\}$ \\
+Number of goods & $\{1,3,6,9\}$ \\
 Number of agents & $\{250,500\}$ \\
 Innovation probability ($\mu$) & $\{0.004,0.016,0.064\}$ \\
 Innovation range ($\beta$) & 0.005\\
@@ -340,7 +359,8 @@ TimeSteps & 10000 \\
 \subsection{Neutral Model}
 
 \todo{check the numbers}
-We first analyse the result obtained in the ``neutral model". Experiments have been performed for one, two and five goods. Unfortunately the presentation of the results for more than one good and multiple innovation probability would require a large space to be clear. For this reason, the figure~\ref{fig:allMutation} presents the results obtained in the setups using 1 good, two population sizes (250 and 500 agents) and $\mu$ varying through three values (0.004,0.016,0.064). The figure represents the average (across all the runs) of the distribution of variants obtained through all experiments. The y-axis shows the frequencies of the variants of the vector values, the x-axis shows how many variant achieves such frequencies. Both axes are in a logarithmic scale. Please note, that here the specific variant achieving high frequency is not studied, only the number of variants achieving such frequencies is presented.
+We first analyse the result obtained in the ``neutral model". Experiments have been performed for one, two and five goods. Unfortunately the presentation of the results for more than one good and multiple innovation probability would require a large space to be clear. For this reason, the figure~\ref{fig:allMutation} presents the results obtained in the setups using 1 good, two population sizes (250 and 500 agents) and $\mu$ varying through three values (0.004,0.016,0.064). The figure represents the average (across all the runs) of the distribution of variants obtained through all experiments. The y-axis shows the frequencies of the variants of the prices used during the simulation, the x-axis shows how many variant achieves such frequencies. Both axes are in a logarithmic scale. Please note, that here the specific variant achieving high frequency is not studied, only the number of variants achieving such frequencies is presented.
+\simon{Didn't get why there is mention of ``high frequency'' in the last sentence. I found this sentence a bit confusing }
 
 \begin{figure}[h]
 	\centering
@@ -352,27 +372,35 @@ We first analyse the result obtained in the ``neutral model". Experiments have b
 	\caption{Distribution of frequencies depending on the $\mu$ parameter with 250 agents (left) and 500 agents (right). Each plot is the mean obtenaid for 100 runs.\label{fig:allMutation}}
 \end{figure}
 
-We observe that the lower the mutation rate, the closer to a line the result is. This line corresponds to the ``power law" distribution explained in section~\ref{sec:culturalTrans} and is typical of the result obtained under the ``neutral hypothesis". Nevertheless, under all parameters tested, the value vectors exhibit power law like distribution. The number of agents however has no influence on the distributions obtained.
+We observe that the lower the mutation rate, the closer to a line the result is when plotted in to a log-log axis. This line corresponds to the ``power law" distribution explained in section~\ref{sec:culturalTrans} and is typical of the result obtained under the ``neutral hypothesis". 
 
-\todo{complete the cite for the method}
-In order to verify if the distribution is in fact a power-law, a method is proposed in~\cite{}. Within this method a linear regression is first used, for each run, to fit the curve obtained to a function of the form $P(v)=C/v^\alpha $. A number of fictive data points are then generated based on this slope. The final step assess the validity of the regression by comparing the real distribution and the fictive distribution. The table ~\ref{tab:powerLawFit} summarizes the results obtained by this method on all setups used for this work. The first number of each cell represents the mean value of all $\alpha$ parameters obtained (across the 100 runs of one setup). The second number (in parenthesis) represents the mean value of all statistical tests performed.
+%Nevertheless, under all parameters tested, the value vectors exhibit power law like distribution. The number of agents however has no influence on the distributions obtained.
+
+In order to verify if the distribution is in fact a power-law, we will follow the method proposed by~\cite{clauset2009powerlawdistributionsinempiricaldat} and its R implementation done by~\cite{gillespie_fitting_2015}.
+
+Within this method we fist fit a power law to the data of one simulation by estimating the parameters of the function of power law equation $P(v)=C/v^\alpha $.
+To estimate them we use maximum likelihood estimator and Kolmogorof-Smirnov approach. This method gives use an estimated $\alpha$ parameter that one can see in the table~\ref{tab:mualpha}.
+
+In a second step we check if the estimated parameters define effectively a power law that statistically describe the data obtained during the simulation. Using again Kolmogorof-Smirnov statistic we run A number of fictive data points are then generated based on this slope. The final step assess the validity of the regression by comparing the real distribution and the fictive distribution. The table ~\ref{tab:powerLawFit} summarizes the results obtained by this method on all setups used for this work. The first number of each cell represents the mean value of all $\alpha$ parameters obtained (across the 100 runs of one setup). The second number (in parenthesis) represents the mean value of all statistical tests performed on each simulation.
 
 \todo{complete table}
 \begin{table}[h]
 	\centering
-	\begin{tabular}{l|lll}
-		Innovation rate &\multicolumn{3}{c}{Number of goods}\\
-			& 1 & 2 &  5  \\\hline
-		0.004 & ??  & ??  & ?? \\
-		0.016 & ??  & ??  & ?? \\
-		0.064 & ??  & ??  & ?? \\\hline
+	\begin{tabular}{l|llll}
+		Innovation rate &\multicolumn{4}{c}{Number of goods}\\
+		      & 1   & 3   &  6 & 9  \\\hline
+		0.004 & ??  & ??  & ?? & \\
+		0.016 & ??  & ??  & ?? & \\
+		0.064 & ??  & ??  & ?? & \\\hline
 	\end{tabular}
 	\caption{Mean $\alpha$ and p-value for all innovation rate and number of goods studied.}
 	\label{tab:powerLawFit}
 \end{table}
 
+\todo{Change that to say that we test for differents number of good and it doesn't change}
 Additional experiments not presented in this article have shown that the neutral model behaves in the exact same way for two, three and four goods. The value of each good evolves independently and the distribution of values for each good is distributed following the same power law with the same properties than for the experiments performed with one good.
 
+\todo{Change her to says that it's interesting to see that they say it's Power Law for .064 fit correlation test but our KS goodness of fit says no}
 It is interesting to analyse the slope of these distributions, to compare them to previous experiments testing the ``neutral hypothesis''.  and their standard deviation is presented in table~\ref{tab:mualpha}. We also present side-by-side the results obtained with the same methodology and for the same parameters in~\cite{bentley_random_2004}.
 
 \begin{table}[h]
