@@ -398,29 +398,26 @@ We can see in this table that our results are close to those obtained by \cite{b
 
 In order to understand the effect of introducing trading mechanisms, we compare first the distribution of values obtained in the ``trading model'' against the values obtained in the ``neutral model''. The figure~\ref{fig:2setDi}.a) presents the results obtained from 100 runs for each model. All runs rely on the same experimental setup using 3 goods, 500 agents and $\mu$ equal to 0.004. 
 
-\todo{make the figure and comment the line}
-\begin{figure}[h]
+\begin{figure}[!h]
 	\begin{center}
-		\begin{tabular}{cc}
-		a) & b)  \\
-		\includegraphics[width=6cm]{img/2SetupDistribA.pdf} &
-		\includegraphics[width=6cm]{img/2SetupDistribB.pdf} \\
-		\includegraphics[width=6cm]{img/2SetupDistribC.pdf} &
-		\includegraphics[width=6cm]{img/2SetupDistribD.pdf} \\
-		c) & d)  \\
+		\begin{tabular}{ccc}
+%		a) & b)  \\
+		\includegraphics[width=5.2cm]{img/2SetupDistribA.pdf} &
+		\includegraphics[width=5.2cm]{img/2SetupDistribB.pdf} &
+		\includegraphics[width=5.2cm]{img/2SetupDistribD.pdf} \\
+		a) & b) & c)  \\
 		\end{tabular}
 
 	\end{center}
-	\caption{Frequency distribution, where each points represent the mean for 100 runs, for: a) the neutral and the trading models.  b) the neutral model and the trading model without the trading innovation process. c) the trading model and the random model with an innovation process similar than the one used in the trade model. d) the trade model and the trade model without the trading innovation process.}
+	\caption{Frequency distribution, where each points represent the mean for 100 runs, for: a) the neutral and the trading models.  b) the neutral model and the trading model without the trading innovation process. c) the trade model and the trade model without the trading innovation process.}
 	\label{fig:2setDi}
 \end{figure}
 
 On figure~\ref{fig:2setDi}.a) it appears that the implementation of trade mechanisms leads to a distribution of prices departing from the neutral hypothesis. In more details, the frequency distribution has a plateau of common prices (a number of prices share similar and high frequency), which shows that, when trade is taken into account, the most common variants are more diverse. 
 
-In order to investigate which mechanism is responsible for this deviation from the neutral model, additional investigation have been performed. The one presented here consisted in creating a new model composed of the cultural transmission of the ``neutral model'' and the innovation of the ``trade model''. This new model is termed ``composed model''. The figure~\ref{fig:2setDi}.b) presents the results obtained from 100 runs for the ``composed model'' and the ``neutral model''. All runs rely on the same experimental setup as for figure~\ref{fig:2setDi}.a). 
+In order to investigate which mechanism influences this departure from the neutral model, additional investigations have been performed. Here is presented the results of the analysis on the effect of the \emph{innovation} process of the trade model. To conduct this analysis the \emph{innovation} process of the trade model has been replaced by the \emph{innovation} process of the neutral model. 100 runs have been performed with this model on the same experimental setup. The results obtained are compared to the neutral model in figure~\ref{fig:2setDi}.b) and to the trade model in figure~\ref{fig:2setDi}.c). 
 
-On figure~\ref{fig:2setDi}.b) it appears that the same plateau in the common prices is observed with the ``composed model'' than with the ``trade model''.
-We can therefore trace the presence of this plateau to the \emph{innovation} process used in the trading model. This mechanism prevents the creation of totally random new price and therefore leads to the creation of few similar prices obtaining high scores.
+On figure~\ref{fig:2setDi}.b) it appears that the replacement of the innovation process leads to the creation of a distribution close to the one obtained with the neural model. On figure~\ref{fig:2setDi}.c) we observe a strong reduction in the size of the plateau and an important difference between the two distributions. This analysis highlights the importance of the \emph{innovation} process in the distribution of prices created by the trading model. This mechanism, by preventing the creation of totally random new price, leads to the creation of few similar prices obtaining high scores.
 
 
 \subsection{Study of scores}
