@@ -207,22 +207,24 @@ The complete score of an agent $i$ is termed $s^i$ and corresponds to the sum of
 \label{algo:selectionCulture}
 	\begin{algorithmic}[1]
 	\scriptsize
-	\State	$toGet = 0.2 \times \#Pop$
+	\State	$ToGet = 0.2 \times \#Pop$
 	\For{$g \in Good$}
-		\State	$toChange = \{\}$
-                \While{$\#toChange < toGet$}
-			\State $ j = rand(Pop,g) $ 
-			\If{$P(X<ComputeScore(j))$}
-				\State $toChange = \{toChange,j\}$
+		\State	$ToChange = \{\}$
+                \While{$\#ToChange < ToGet$}
+			\State $ j = SelectRand(Pop,g) $ 
+			\State $X \sim U([0,1])$ 
+			\If{$X>ComputeScore(j)$}
+				\State $ToChange = \{ToChange,j\}$
 			\EndIf
 		\EndWhile
 
-                \While{$\#toChange > 0 $}
-			\State $ j = rand(toChange) $ 
-			\State $ i = rand(Pop,g) $ 
-			\If{$P(X>ComputeScore(j)>ComputeScore(i))$}
-				\State copyPrice(i,j)	
-				\State $toChange = toChange - i$
+                \While{$\#ToChange > 0 $}
+			\State $ j = SelectRand(ToChange) $ 
+			\State $ i = SelectRand(Pop,g) $ 
+			\State $X \sim U([0,1])$ 
+			\If{$X<ComputeScore(j) \& ComputeScore(j)>ComputeScore(i))$}
+				\State $CopyPrice(i,j)$
+				\State $ToChange = ToChange - i$
 			\EndIf
 
 		\EndWhile\
