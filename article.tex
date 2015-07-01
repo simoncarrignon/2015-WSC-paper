@@ -45,8 +45,8 @@
 
 \newcommand{\memo}[2]{\textcolor{#1}{#2}}
 \newcommand{\added}[2]{\textcolor{#1}{#2}}
-%\renewcommand{\memo}[2]{} % uncomment in the final version
-%\renewcommand{\added}[2]{#2} % uncomment in the final version
+\renewcommand{\memo}[2]{} % uncomment in the final version
+\renewcommand{\added}[2]{#2} % uncomment in the final version
 \newcommand{\todo}[1]{\memo{red}{TODO: #1\\}}
 \newcommand{\simon}[1]{\memo{green}{Simon: #1\\}}
 \newcommand{\jm}[1]{\memo{blue}{JM: #1\\}}
@@ -190,18 +190,18 @@ s^i_j = \begin{cases}
 This function ensures that each good has the same weight in the final score (i.e.: managing to get only the right amount of a good with a high ``need'' value will not give a better score to the agent).
 
 
-\begin{figure}[htp]
-	\begin{center}
-		\includegraphics[width=7cm]{img/fitness.pdf}
-	\end{center}
-	\caption{The payoff depending on the quantity owned of a given good and the effective needs $n(g)$ for this good.}
-	\label{fig:fit}
-\end{figure}
-Figure~\ref{fig:fit} depicts the score of an agent, for different need values of one good, with regards to the quantity of the good possessed by the agent. We can see that even if the need for a good is small (for instance when $n(g) = 0.01$) an agent can have a high score as soon as it manages to get a quantity close to the need. This ensures that an agent needs to have for each of the good a quantity equal to the need and that no agent could reach a better score just by getting the right quantity for a good with a high need.
+%\begin{figure}[htp]
+%	\begin{center}
+%		\includegraphics[width=7cm]{img/fitness.pdf}
+%	\end{center}
+%	\caption{The payoff depending on the quantity owned of a given good and the effective needs $n(g)$ for this good.}
+%	\label{fig:fit}
+%\end{figure}
+%Figure~\ref{fig:fit} depicts the score of an agent, for different need values of one good, with regards to the quantity of the good possessed by the agent. We can see that even if the need for a good is small (for instance when $n(g) = 0.01$) an agent can have a high score as soon as it manages to get a quantity close to the need. This ensures that an agent needs to have for each of the good a quantity equal to the need and that no agent could reach a better score just by getting the right quantity for a good with a high need.
 
 The complete score of an agent $i$ is termed $s^i$ and corresponds to the sum of the $s^i_j$. The agents will choose the model from whom the price vector should be copied among the agents that produce the same good and have the highest score. In practice, the worst two percent of the agents (in terms of score) will copy the prices of the best two percent. This selection process is detailed in algorithm~\ref{algo:selectionCulture}.
 
-\todo{Arreglar : how to say ``we choose a random number and if it's less that (or more than) the relative score we continue}
+
 \begin{algorithm}
 \caption{Selection Process}
 \label{algo:selectionCulture}
@@ -209,22 +209,24 @@ The complete score of an agent $i$ is termed $s^i$ and corresponds to the sum of
 	\scriptsize
 	\State	$ToGet = 0.2 \times \#Pop$
 	\For{$g \in Good$}
-		\State	$ToChange = \{\}$
-                \While{$\#ToChange < ToGet$}
-			\State $ j = SelectRand(Pop,g) $ 
-			\State $X \sim U([0,1])$ 
-			\If{$X>ComputeScore(j)$}
-				\State $ToChange = \{ToChange,j\}$
+		\State	$ToReplace = \{\}$
+                \While{$\#ToReplace < ToGet$} 
+			\State $ j = SelectRand(Pop,g) $ \Comment{Select randomly an agent $j$ among the agents producing $g$}
+			\State $X \sim U([0,1])$ \Comment{Draw a random number from the uniform distribution between 0 and 1}
+			\If{$X>ComputeScore(j)$} \Comment{Select preferably the agents with the lowest scores}
+				\State $ToReplace = \{ToReplace,j\}$
 			\EndIf
 		\EndWhile
 
-                \While{$\#ToChange > 0 $}
-			\State $ j = SelectRand(ToChange) $ 
-			\State $ i = SelectRand(Pop,g) $ 
+                \While{$\#ToReplace > 0 $}
+			\State $ j = SelectRand(ToReplace) $ 
+			\State $ i = SelectRand(Pop,g) $  \Comment{Select randomly an agent $i$ among the agents producing $g$}
 			\State $X \sim U([0,1])$ 
-			\If{$X<ComputeScore(j) \& ComputeScore(j)>ComputeScore(i))$}
-				\State $CopyPrice(i,j)$
-				\State $ToChange = ToChange - i$
+			\If{$ (X<ComputeScore(i))$} \Comment{Select preferably an agent $i$ with a high score}
+				\If {$ (ComputeScore(i)>ComputeScore(j))$} \Comment{Verify that agent $i$ has a higher score than agent $j$}
+					\State $CopyPrice(i,j)$
+					\State $ToReplace = ToReplace - i$
+				\EndIf
 			\EndIf
 
 		\EndWhile\
