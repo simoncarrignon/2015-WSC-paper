@@ -379,7 +379,7 @@ We observe that the lower the mutation rate, the closer to a line the result is 
 In order to verify if the distribution is in fact a power-law, we follow the method proposed by~\cite{clauset2009powerlawdistributionsinempiricaldat} and the R implementation of this method done by~\cite{gillespie_fitting_2015}.
 
 Within this method we fist fit a power law to the data of one simulation by estimating the parameters of the power law equation $P(v)=C/v^\alpha $.
-To estimate this the method uses maximum likelihood estimator and Kolmogorof-Smirnov approach. It gives use an estimated $\alpha$ parameter that are summarized in the table~\ref{tab:mualpha}.
+To estimate this, the method uses maximum likelihood estimator and Kolmogorof-Smirnov approach that gives use an estimated $\alpha$. The means of the $\alpha$ estimated for all our simulation are summarized in the table~\ref{tab:mualpha}.
 
 In a second step we check if the estimated parameters define effectively a power law that statistically describe the data obtained during the simulation. Using again Kolmogorof-Smirnov statistic a number of fictive data points are generated based on the estimated power law. From this bootstrapping method we can then calculate a $p$-value to reject or not the hypothesis $H_0$ that our data can indeed be generated from a power law distribution. 
 
