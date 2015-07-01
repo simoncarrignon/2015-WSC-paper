@@ -170,7 +170,7 @@ In the second scenario, we are interested in the exchange of goods between agent
 
 \paragraph{Production}
 \todo{what is some, what is n}
-Each agent produces one good. The type of good produced by an agent $i$ is assigned to it at the beginning of the simulation, does not change through the simulation and is referred as $produced^i$. At each time step each agent produces $n$ units of its production good, which ensure that it own theoretically enough of it to trade it with every other goods. Moreover, when an agent consumes its own production good, it doesn't not impact its inventory, meaning that he can produced for free the quantity he consume for itself.
+Each agent produces one good. The type of good produced by an agent $i$ is assigned to it at the beginning of the simulation, does not change through the simulation and is referred as $produced^i$. At each time step, each agent, produces $n$ units of its production good, which ensures that enough is owned to be traded for other goods. Moreover, when an agent consumes its own production good, it does not impact its inventory.
 
 \paragraph{Cultural transmission}
 Social learning is here biased towards the agents which are the best at trading, and is therefore termed ``success bias''. To achieve this bias, the cultural transmission mechanism used takes into account the value vector of the other agents and relies on two new notions: \emph{need} and \emph{score}. 
@@ -189,8 +189,6 @@ s^i_j = \begin{cases}
 
 
 This function ensures that each good has the same weight in the final score (i.e.: managing to get only the right amount of a good with a high ``need'' value will not give a better score to the agent).
-
-
 %\begin{figure}[htp]
 %	\begin{center}
 %		\includegraphics[width=7cm]{img/fitness.pdf}
@@ -199,7 +197,6 @@ This function ensures that each good has the same weight in the final score (i.e
 %	\label{fig:fit}
 %\end{figure}
 %Figure~\ref{fig:fit} depicts the score of an agent, for different need values of one good, with regards to the quantity of the good possessed by the agent. We can see that even if the need for a good is small (for instance when $n(g) = 0.01$) an agent can have a high score as soon as it manages to get a quantity close to the need. This ensures that an agent needs to have for each of the good a quantity equal to the need and that no agent could reach a better score just by getting the right quantity for a good with a high need.
-
 The complete score of an agent $i$ is termed $s^i$ and corresponds to the sum of the $s^i_j$. The agents will choose the model from whom the price vector should be copied among the agents that produce the same good and have the highest score. In practice, the worst two percent of the agents (in terms of score) will copy the prices of the best two percent. This selection process is detailed in algorithm~\ref{algo:selectionCulture}.
 
 
@@ -329,7 +326,7 @@ where $\tilde{Q}^i$ is the optimal quantity vector, i.e. the one for which $s^i(
 %	\label{tab:exp}
 %\end{table}
 
-The neutral model is tested through seven experimental setups. The first six experimental setups are using 1 good, two population sizes (250 and 500 agents) and three values of $\mu$ (0.004,0.016 and 0.064). The remaining experimental setup is using 3 goods, 500 agents and $\mu$ equal to 0.004. For each setup we have performed 100 runs of 10000 timestep each. 
+The neutral model is tested through 15 experimental setups. The first six experimental setups are using 1 good, two population sizes (250 and 500 agents) and three values of $\mu$ (0.004,0.016 and 0.064). The remaining experimental setups are using 500 agents, 3 number of goods (3,6 and 9) and three values of $\mu$ (0.004,0.016 and 0.064). For each setup we have performed 100 runs of 10000 timestep each. 
 
 The trading model is tested through four experimental setups using 3 goods, 500 agents and the same four values of $\mu$ (0.004,0.016 and 0.064). Again 100 runs of 10000 timesteps are performed.
 
@@ -382,7 +379,7 @@ We observe that the lower the mutation rate, the closer to a line the result is.
 %Within this method we fist fit a power law to the data of one simulation by estimating the parameters of the power law equation $P(v)=C/v^\alpha $. To estimate this, the method uses maximum likelihood estimator and Kolmogorof-Smirnov approach that gives use an estimated $\alpha$. The means of those $\alpha$ estimated for all simulations are summarized in the table~\ref{tab:mualpha}.
 %In a second step we check if the estimated parameters define effectively a power law that statistically describe the data obtained during the simulation. Using again Kolmogorof-Smirnov statistic, a number of fictive data points are generated based on the estimated power law. From this bootstrapping method we can then calculate a  
 
-The table~\ref{tab:mualpha} summarizes the results obtained on all setups. Each value shown in the table is the mean values of 100 simulations. We see that in almost every case the null hypothesis cannot be rejected, which means that indeed the repartition of the price follows a power law. The only exception is for $mu$ equal to $0.064$, where the $p$-value is less than $0.05$. In this last case the null hypothesis is rejected, and we therefore assume that the distribution does not follow a power law.
+The table~\ref{tab:mualpha} summarizes the results obtained on all setups. Each value shown in the table is the mean values of 100 simulations. We see that in almost every case the null hypothesis cannot be rejected, which means that indeed the repartition of the price follows a power law. The only exception is for $\mu$ equal to $0.064$, where the $p$-value is less than $0.05$. In this last case the null hypothesis is rejected, and we therefore assume that the distribution does not follow a power law.
 
 \todo{complete table with final result (here it's just false exemple)}
 \begin{table}[!h]
@@ -401,27 +398,25 @@ The table~\ref{tab:mualpha} summarizes the results obtained on all setups. Each 
 	\label{tab:mualpha}
 \end{table}
 
-For comparison purposes the results obtained by~\cite{bentley_random_2004} (which tested the ``neutral hypothesis'' with the same methodology) are added in the last column of table~\ref{tab:mualpha}. It appears that these results are highly similar to ours. We note also that our results match the ones presented in~\cite{mesoudi_random_2009} where only one value of $\mu$ was tested ($mu = 0.008$). However, it is difficult to know if the slight differences observed between our work and those previous studies are statistically significant as the two previous studies rely on only five runs for the computation of the mean of $\alpha$ (against 100 in our case).
+For comparison purposes the results obtained by~\cite{bentley_random_2004} (which tested the ``neutral hypothesis'' with the same methodology) are added in the last column of table~\ref{tab:mualpha}. It appears that these results are highly similar to ours. We note also that our results match the ones presented in~\cite{mesoudi_random_2009} where only one value of $\mu$ was tested ($\mu = 0.008$). However, it is difficult to know if the slight differences observed between our work and those previous studies are statistically significant as the two previous studies rely on only five runs for the computation of the mean of $\alpha$ (against 100 in our case).
 
 Nonetheless, for high value of $\mu$, previous works report that the distribution of variant follow a power law~\cite{bentley_random_2004}. This claim is based on the fact that the estimated $\alpha$ (estimation based on linear regression on the log-log curve) has a high correlation coefficient. Recent works have shown that the use of correlation coefficient should be avoided~\cite{clauset2009powerlawdistributionsinempiricaldat}. Following these recent findings, our results preclude us to assume that the distribution of variant when $\mu$ is up to $0.064$ follow a power law . 
 
-An additional series of experiments is done to see how the system reacts when multiple goods are present. We report in table~\ref{tab:multiGoods} the mean values of $\alpha$ and $p$-value obtained for 3 innovation rates (0.004, 0.016, 0.064), 4 number of goods (1, 3, 6, 9), and 250 agents. 
-
-\todo{complete table with final result (here it's just false exemple)}
-\begin{table}[!h]
-	\centering
-	\begin{tabular}{l|llll}
-		Innovation rate &\multicolumn{4}{c}{Number of goods}\\
-		      & 1   & 3   &  6 & 9  \\\hline
-		0.004 &1.53 (0.03)  &1.53 (0.03)&1.53 (0.03)&1.53 (0.03) \\
-		0.016 &1.57 (0.02)  &1.57 (0.02)&1.56 (0.017)&1.57 (0.02) \\
-		0.064 &1.66 (0.01)  &1.66 (0.01)&1.66 (0.01)&1.66 (0.01) \\\hline
-	\end{tabular}
-	\caption{Mean $\alpha$ and standard deviation for all innovation rate and different  of goods. The $\alpha$ given here is the mean $\alpha$ among all goods taken separately and computed over 100 runs with 250 agents.}
-	\label{tab:multiGoods}
-\end{table}
-
-From the results shown in table~\ref{tab:multiGoods}, it appears that for each innovation rate, the properties of the distribution of prices does not depend of the number of goods. Additional analysis (not shown here) reveals that when the distribution of prices of every goods in a simulation with 9 goods is plotted, the 9 curves are superposed. Moreover these 9 curves are also superposed with the distribution shown in figure~\ref{fig:allMutation} for one good.
+An additional series of experiments is done to analyse how the system reacts when multiple goods are present. The mean values of $\alpha$ and $p$-value have been analysed for 3 innovation rates (0.004, 0.016, 0.064), 4 number of goods (1, 3, 6, 9), and 250 agents. However, due to the simplicity of the results and the space restriction we only report the analysis of the results here. 
+%\todo{complete table with final result (here it's just false exemple)}
+%\begin{table}[!h]
+%	\centering
+%	\begin{tabular}{l|llll}
+%		Innovation rate &\multicolumn{4}{c}{Number of goods}\\
+%		      & 1   & 3   &  6 & 9  \\\hline
+%		0.004 &1.53 (0.03)  &1.53 (0.03)&1.53 (0.03)&1.53 (0.03) \\
+%		0.016 &1.57 (0.02)  &1.57 (0.02)&1.56 (0.017)&1.57 (0.02) \\
+%		0.064 &1.66 (0.01)  &1.66 (0.01)&1.66 (0.01)&1.66 (0.01) \\\hline
+%	\end{tabular}
+%	\caption{Mean $\alpha$ and standard deviation for all innovation rate and different  of goods. The $\alpha$ given here is the mean $\alpha$ among all goods taken separately and computed over 100 runs with 250 agents.}
+%	\label{tab:multiGoods}
+%\end{table}
+Visual analysis reveals that independently of the number of goods, the distributions obtained are exactly the same. Therefore it is no surprise that, for each innovation rate, the properties of the distribution of prices does not depend of the number of goods.
 
 
 \subsection{Distribution of variants}
@@ -471,7 +466,7 @@ We now study the results obtained in more detail by investigating the ability of
 
 As expected, the scores within the neutral model vary randomly. ``Trends'' may appear, where a bigger proportion of individuals adopt a better price that allow agents to reach better score (such as around iteration 8000), but such good score fall back as soon as another trend appears. However, with the trading model, the score of all the agents increase. As the selection mechanism allow them to know who has found better vectors of prices, they will progressively adopt prices vector that allow all of them to reach better scores. 
 
-The previous figure showed the capacity for the trading model to increase its score but did not analyse the exact prices used. As explained in the section~\ref{sec:trade} we expect that the trade \emph{cultural transmission} and \emph{innovation} processes will produce a convergence toward a set of price for each good that will allow agents to exchange optimally the good they produce with the other goods. To verify this assumption we analyse the prices reached during the simulations. These are presented in figure~\ref{fig:ratioEvol} for the 100 runs relying the experimental setup using 3 goods, 500 agents and $\mu$ equal to 0.004. For all runs, all agents and at each iteration we compute the difference between the price used by the agent $V_g$ and the optimal price $\tilde{V}_g$. Record that the optimal price for a good that an agent does not produce is the product between the need for this good and the need for the produced good, while the optimal price for the produced good is simply the need for it. All the measures performed are presented as boxplots where the results for 100 runs are condensed.
+The previous figure showed the capacity for the trading model to increase its score but did not analyse the exact prices used. As explained in the section~\ref{sec:trade} we expect that the trade \emph{cultural transmission} and \emph{innovation} processes will produce a convergence toward a set of price for each good that will allow agents to exchange optimally the good they produce with the other goods. To verify this assumption we analyse the prices reached during the simulations. These are presented in figure~\ref{fig:ratioEvol} for the 100 runs relying the experimental setup using 3 goods, 500 agents and $\mu$ equal to 0.004. For all runs, all agents and at each iteration we compute the difference between the price used by the agent $V_g$ and the optimal price $\tilde{V}_g$. Record that the optimal price for a good is given in equation~\ref{eq:optimum}. All the measures performed are presented as boxplots where the results for 100 runs are condensed.
 
 \begin{figure}[!h]
 	\begin{center}
@@ -533,9 +528,9 @@ The successful implementation of a trading model within our framework shows that
 %    If replication and imitation were to happen on a social network rather than at random, how much slower would the the correct prices emerge?
 %    Would the plateau of common prices disappear if you were to add single-crossover replication of the value vector in the cultural transmission algorithm?
 
-In future works more realistic can be studied in the same model. Multiple implementations of the production mechanism can be studied so as to increase the number of goods per agent and include factors such as the meteorology or the various type of goods. Moreover, the introduction of the distinction between ``vital'' and ``common'' goods will be useful for the creation of models studying in further details the interaction between trade and cultural transmission. 
+In future works more realistic scenarios can be studied in the same framework. Multiple implementations of the production mechanism can be studied so as to increase the number of goods per agent and include factors such as the meteorology or the various type of goods. Moreover, the introduction of the distinction between ``vital'' and ``common'' goods will be useful for the creation of models studying in further details the interaction between trade and cultural transmission. 
 
-Additionally, more complex dynamics can be looked for. The trading mechanism can be naturally implemented in different ways, each reflecting a specific theory, and thus allowing the comparison of the different theories. The cultural transmission mechanism also can be modified by including for example the a crossover between the cultural trait of multiple agents. The trade network (which in this work can be interpreted as fully connected) can also be modified to study the effect of slow connections or the rupture of certain connections. The agent themselves could become more complex and be endowed with the ability to learn behaviours which would again produce more realistic simulations. Moreover, various populations can be envisioned, each with their distinctive characteristics regarding cultural transmission and trade. 
+Additionally, more complex dynamics can be looked for. The trading mechanism can be naturally implemented in different ways, each reflecting a specific theory, and thus allowing their comparisons. The cultural transmission mechanism also can be modified by including for example the a crossover between the cultural trait of multiple agents. The trade network (which in this work can be interpreted as fully connected) can also be modified to study the effect of slow connections or the rupture of certain connections. The agent themselves could become more complex and be endowed with the ability to learn behaviours which would again produce more realistic simulations. Moreover, various populations can be envisioned, each with their distinctive characteristics regarding cultural transmission and trade. 
 
 Finally, in terms of analysis of the results, multiple factor could be taken into account. The rapidity of the fluctuation of prices is a good starting point for the establishment of economical studies. For the study of a population of agent in general, it can be interesting to analyse the number of agents active and the composition of the population.
 
