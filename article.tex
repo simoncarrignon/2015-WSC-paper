@@ -170,7 +170,7 @@ In the second scenario, we are interested in the exchange of goods between agent
 
 \paragraph{Production}
 \todo{what is some, what is n}
-Each agent produces one good. The type of good produced by an agent $i$ is assigned to it at the beginning of the simulation, does not change through the simulation and is referred as $produced^i$. At each time step each agent produces $n$ units of its production good, which ensure that he could theoretically trade its production good with every other goods. When an agent consumes its own production good he will automatically reproduce some, so that the consumption does not impact its inventory.
+Each agent produces one good. The type of good produced by an agent $i$ is assigned to it at the beginning of the simulation, does not change through the simulation and is referred as $produced^i$. At each time step each agent produces $n$ units of its production good, which ensure that it own theoretically enough of it to trade it with every other goods. Moreover, when an agent consumes its own production good, it doesn't not impact its inventory, meaning that he can produced for free the quantity he consume for itself.
 
 \paragraph{Cultural transmission}
 Social learning is here biased towards the agents which are the best at trading, and is therefore termed ``success bias''. To achieve this bias, the cultural transmission mechanism used takes into account the value vector of the other agents and relies on two new notions: \emph{need} and \emph{score}. 
@@ -283,7 +283,9 @@ If a trade is possible the two agents will exchange the agreed quantities. If th
 \end{algorithm}
 
 
-\paragraph{Innovation} In a trading environment it seems unlikely that a price will change radically to a very different value. Therefore, a new and more realistic mechanism is proposed. The innovation process, coined ``self referenced'', is still triggered with probability $\mu$ 
+\paragraph{Innovation} 
+
+In a trading environment it seems unlikely that a price will change radically to a very different value. Therefore, a new and more realistic mechanism is proposed. The innovation process, coined ``self referenced'', is still triggered with probability $\mu$ 
 but modifies the previous price by adding or subtracting a small amount taken randomly from a uniform  distribution between $0 .. \beta$.
 
 
