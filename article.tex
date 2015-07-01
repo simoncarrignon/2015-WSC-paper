@@ -109,7 +109,7 @@ The second vector reflects the estimation of the value of a good made by an agen
 $$\forall i \in Pop, \quad V^i = (v^i_1,\cdots,v^i_n) $$
 where $V^i$ is the total list of estimated values of agent $i$, and $v^i_j$ is the value that agent $i$ associates to one unit of a good of type $j$.
 
-On top of these elements five processes are used: \emph{production}, \emph{consumption} \emph{cultural transmission}, \emph{innovation} and \emph{trade}. The \emph{production} process describes the creation of goods by the agent. Once a good is produced by an agent $i$ it is added to its quantity vector ($Q^i$). The consumption strategy of these goods is defined in the \emph{consumption} process. In this article, all goods are completely consumed at each iteration for all the models tested. The \emph{trade} process models the exchange of goods between the agents which results in a modification of the quantity vectors ($Q^i$). The amount of goods exchanged is computed by the agents involved in the trade, within the \emph{trade} process, based on their value vectors ($V^i$). Within the \emph{cultural transmission} process an agent $i$ can copy the entire value vector ($V^j$) of an agent $j$, where $j \neq i$. Finally, the \textit{innovation} process also modifies the value vector $V^i$ of an agent, but it differs from the \emph{cultural transmission} process in that the modification is done without reference to the other agents.
+On top of these elements five processes are used: \emph{production}, \emph{consumption}, \emph{cultural transmission}, \emph{innovation} and \emph{trade}. The \emph{production} process describes the creation of goods by the agent. Once a good is produced by an agent $i$ it is added to its quantity vector ($Q^i$). The consumption strategy of these goods is defined in the \emph{consumption} process. In this article, all goods are completely consumed at each iteration for all the models tested. The \emph{trade} process models the exchange of goods between the agents which results in a modification of the quantity vectors ($Q^i$). The amount of goods exchanged is computed by the agents involved in the trade, within the \emph{trade} process, based on their value vectors ($V^i$). Within the \emph{cultural transmission} process an agent $i$ can copy the entire value vector ($V^j$) of an agent $j$, where $j \neq i$. Finally, the \textit{innovation} process also modifies the value vector $V^i$ of an agent, but it differs from the \emph{cultural transmission} process in that the modification is done without reference to the other agents.
 
 The scheduling of the four processes is described in algorithm~\ref{algo:complete} along with the vectors modified by each of these processes. Between line 2 and 7 all agents of the population are initialised with empty quantity vectors and random values. Between the lines 11 and 19 is presented the part of the pseudo-code describing the instructions that will be repeated for each iteration of the simulation. One can note that each of the four processes is executed synchronously by all agents. Moreover, the \emph{trade} process is called at each iteration while the \emph{cultural transmission} and \emph{innovation} processes are executed only every $CulturalStep$. The idea behind this is to perform the \emph{cultural transmission} based on a score that reflects the performance of the agent and not only one lucky or unlucky trading round. The timestep number used in the figures of this article refers to the number of times the \emph{cultural transmission} and \emph{innovation} processes are called.
 
@@ -169,7 +169,7 @@ More formally, this distribution is formalised as : $$P(v)=C/v^\alpha $$ where $
 The second scenario of the four processes of the framework aims at producing economical dynamics. We are interested in the exchange of goods between agents in a barter process where each agent can choose its prices of exchange. We want to implement simple processes leading to the convergence of all prices to values acceptable by all agents, i.e. we would like to observe, at the end of an experiment, all the agents using a set of prices which allow them to trade efficiently.
 
 \paragraph{Production}
-Each agent produces one good. The type of good produced by an agent $i$ is assigned to it at the beginning of the simulation, does not change through the simulation and is referred as $produced^i$. 
+Each agent produces one good. The type of good produced by an agent $i$ is assigned to it at the beginning of the simulation, does not change through the simulation and is referred as $produced^i$. At each time step each agent produces $n$ units of its production good, which ensure that he could theoretically trade its production good with every other goods, with the particularity that when the agent consume is own production good he will automatically reproduce some in order that it won't impact is inventory.
 
 \paragraph{Cultural transmission}
 Social learning is here biased towards the agents which are the best at trading, and is therefore termed ``success bias''. To achieve this bias, the cultural transmission mechanism used takes into account the value vector of the other agents and relies on two new notions: \emph{need} and \emph{score}. 
@@ -359,7 +359,7 @@ TimeSteps & 10000 \\
 \subsection{Neutral Model}
 
 \todo{check the numbers}
-We first analyse the result obtained in the ``neutral model". Experiments have been performed for one, two and five goods. Unfortunately the presentation of the results for more than one good and multiple innovation probability would require a large space to be clear. For this reason, the figure~\ref{fig:allMutation} presents the results obtained in the setups using 1 good, two population sizes (250 and 500 agents) and $\mu$ varying through three values (0.004,0.016,0.064). The figure represents the average (across all the runs) of the distribution of variants obtained through all experiments. The y-axis shows the frequencies of the variants of the prices used during the simulation, the x-axis shows how many variant achieves such frequencies. Both axes are in a logarithmic scale. Please note, that here the specific variant achieving high frequency is not studied, only the number of variants achieving such frequencies is presented.
+We first analyse the result obtained in the ``neutral model". Following the literature, experiments have been performed for one good. The figure~\ref{fig:allMutation} presents the results obtained in for two population sizes (250 and 500 agents) and $\mu$ varying through three values (0.004,0.016,0.064). The figure represents the average (across all the runs) of the distribution of variants obtained through all experiments. The y-axis shows the frequencies of the variants of the prices used during the simulation, the x-axis shows how many variant achieves such frequencies. Both axes are in a logarithmic scale. Please note, that here the specific variant achieving high frequency is not studied, only the number of variants achieving such frequencies is presented.
 \simon{Didn't get why there is mention of ``high frequency'' in the last sentence. I found this sentence a bit confusing }
 
 \begin{figure}[h]
@@ -376,10 +376,10 @@ We observe that the lower the mutation rate, the closer to a line the result is 
 
 %Nevertheless, under all parameters tested, the value vectors exhibit power law like distribution. The number of agents however has no influence on the distributions obtained.
 
-In order to verify if the distribution is in fact a power-law, we will follow the method proposed by~\cite{clauset2009powerlawdistributionsinempiricaldat} and its R implementation done by~\cite{gillespie_fitting_2015}.
+In order to verify if the distribution is in fact a power-law, we follow the method proposed by~\cite{clauset2009powerlawdistributionsinempiricaldat} and the R implementation of this method done by~\cite{gillespie_fitting_2015}.
 
-Within this method we fist fit a power law to the data of one simulation by estimating the parameters of the function of power law equation $P(v)=C/v^\alpha $.
-To estimate them we use maximum likelihood estimator and Kolmogorof-Smirnov approach. This method gives use an estimated $\alpha$ parameter that one can see in the table~\ref{tab:mualpha}.
+Within this method we fist fit a power law to the data of one simulation by estimating the parameters of the power law equation $P(v)=C/v^\alpha $.
+To estimate this the method uses maximum likelihood estimator and Kolmogorof-Smirnov approach. It gives use an estimated $\alpha$ parameter that are summarized in the table~\ref{tab:mualpha}.
 
 In a second step we check if the estimated parameters define effectively a power law that statistically describe the data obtained during the simulation. Using again Kolmogorof-Smirnov statistic a number of fictive data points are generated based on the estimated power law. From this bootstrapping method we can then calculate a $p$-value to reject or not the hypothesis $H_0$ that our data can indeed be generated from a power law distribution. 
 
@@ -425,16 +425,18 @@ It means that if we plot the repartition of the price of every goods in a simula
 		Innovation rate &\multicolumn{4}{c}{Number of goods}\\
 		      & 1   & 3   &  6 & 9  \\\hline
 		0.004 &1.53 (0.03)  &1.53 (0.03)&1.53 (0.03)&1.53 (0.03) \\
-		0.016 &1.57 (0.02)  &1.57 (0.02)&1.57 (0.02)&1.57 (0.02) \\
+		0.016 &1.57 (0.02)  &1.57 (0.02)&1.56 (0.017)&1.57 (0.02) \\
 		0.064 &1.66 (0.01)  &1.66 (0.01)&1.66 (0.01)&1.66 (0.01) \\\hline
 	\end{tabular}
 	\caption{Mean $\alpha$ and standard deviation for all innovation rate and different  of goods. The $\alpha$ given here is the mean $\alpha$ among all goods taken separately and computed over 100 runs with 250 agents.}
 	\label{tab:multiGoods}
 \end{table}
 
+\simon{Remainder here : we have a problem here as it's true that the number of goods does not impact the repartition of the price when vector are randomly exchange, \emph{it is not true} when the vector are  }
+
 \subsection{Distribution of variants}
 
-In order to understand the effect of introducing trading mechanisms, we compare first the distribution of values obtained in the ``trading model'' against the values obtained in the ``neutral model''. The figure~\ref{fig:2setDi}.a) presents the results obtained from 100 runs for each model. All runs rely on the same experimental setup using 3 goods, 500 agents and $\mu$ equal to 0.004. 
+In order to understand the effect of introducing trading mechanisms, we compare first the distribution of values obtained in the ``trading model'' against the values obtained in the ``neutral model''. The figure~\ref{fig:2setDi}.a) presents the results obtained from 100 runs for each model. All runs rely on the same experimental setup using 3 goods, 500 agents and $\mu$ equal to 0.004. In all following graph  a variant is one price for one given good. All goods are thus studied independently. 
 
 \begin{figure}[!h]
 	\begin{center}
