@@ -358,11 +358,9 @@ TimeSteps & 10000 \\
 \section{RESULTS}
 \subsection{Neutral Model}
 
-\todo{check the numbers}
-We first analyse the result obtained in the ``neutral model". Following the literature, experiments have been performed for one good. The figure~\ref{fig:allMutation} presents the results obtained in for two population sizes (250 and 500 agents) and $\mu$ varying through three values (0.004,0.016,0.064). The figure represents the average (across all the runs) of the distribution of variants obtained through all experiments. The y-axis shows the frequencies of the variants of the prices used during the simulation, the x-axis shows how many variant achieves such frequencies. Both axes are in a logarithmic scale. Please note, that here the specific variant achieving high frequency is not studied, only the number of variants achieving such frequencies is presented.
-\simon{Didn't get why there is mention of ``high frequency'' in the last sentence. I found this sentence a bit confusing }
+We first analyse the result obtained in the ``neutral model" with one good. The figure~\ref{fig:allMutation} presents the results obtained for two population sizes $N$	 (250 and 500 agents) and $\mu$ varying through three values (0.004,0.016,0.064). The figure is a log-log plot of the average (across all the runs) of the distribution of variants obtained through all experiments. The y-axis shows the frequencies of the variants of the prices used during the simulation, the x-axis shows how many variant achieves such frequencies.
 
-\begin{figure}[h]
+\begin{figure}[!h]
 	\centering
 	\begin{tabular}{ c c}
 		 $N=250$ & $N=500$ \\
@@ -372,27 +370,15 @@ We first analyse the result obtained in the ``neutral model". Following the lite
 	\caption{Distribution of frequencies depending on the $\mu$ parameter with 250 agents (left) and 500 agents (right). Each plot is the mean obtenaid for 100 runs.\label{fig:allMutation}}
 \end{figure}
 
-We observe that the lower the mutation rate, the closer to a line the result is when plotted in to a log-log axis. This line corresponds to the ``power law" distribution explained in section~\ref{sec:culturalTrans} and is typical of the result obtained under the ``neutral hypothesis". 
+We observe that the lower the mutation rate, the closer to a line the result is. This line corresponds to the ``power law" distribution explained in section~\ref{sec:culturalTrans}, and is typical of the result obtained under the ``neutral hypothesis". In order to verify if the distribution is in fact a power-law, we follow the method proposed by~\cite{clauset2009powerlawdistributionsinempiricaldat} and the R implementation proposed by~\cite{gillespie_fitting_2015}. Briefly, two values are returned: a) the estimation of the $\alpha$ parameter of the power law equation $P(v)=C/v^\alpha $; b) a $p$-value rejecting or not the hypothesis $H_0$ that indeed our data could have been generated from a power law distribution.
 
-%Nevertheless, under all parameters tested, the value vectors exhibit power law like distribution. The number of agents however has no influence on the distributions obtained.
+%Within this method we fist fit a power law to the data of one simulation by estimating the parameters of the power law equation $P(v)=C/v^\alpha $. To estimate this, the method uses maximum likelihood estimator and Kolmogorof-Smirnov approach that gives use an estimated $\alpha$. The means of those $\alpha$ estimated for all simulations are summarized in the table~\ref{tab:mualpha}.
+%In a second step we check if the estimated parameters define effectively a power law that statistically describe the data obtained during the simulation. Using again Kolmogorof-Smirnov statistic, a number of fictive data points are generated based on the estimated power law. From this bootstrapping method we can then calculate a  
 
-In order to verify if the distribution is in fact a power-law, we follow the method proposed by~\cite{clauset2009powerlawdistributionsinempiricaldat} and the R implementation of this method done by~\cite{gillespie_fitting_2015}.
-
-Within this method we fist fit a power law to the data of one simulation by estimating the parameters of the power law equation $P(v)=C/v^\alpha $.
-To estimate this, the method uses maximum likelihood estimator and Kolmogorof-Smirnov approach that gives use an estimated $\alpha$. The means of those $\alpha$ estimated for all simulations are summarized in the table~\ref{tab:mualpha}.
-
-In a second step we check if the estimated parameters define effectively a power law that statistically describe the data obtained during the simulation. Using again Kolmogorof-Smirnov statistic, a number of fictive data points are generated based on the estimated power law. From this bootstrapping method we can then calculate a $p$-value to reject or not the hypothesis $H_0$ that indeed our data could have been generated from a power law distribution. 
-
-The table~\ref{tab:mualpha} summarizes the results obtained by this method on all setups used for this work with $p$-value computed by bootstrapping 100 fictive power law out of each simulation. The value shown in the table are the mean $p$-value computed across 100 simulations. We see that in almost every case the null hypothesis cannot be rejected, which mean that indeed the repartition of the price follows a power law, except for $mu$ value of $0.064$, where the $p$-value of zero indicate that in those case we have to reject the null hypothesis.
-
-%The first number of each cell represents the mean value of all $\alpha$ parameters obtained (across the 100 runs of one setup). The second number (in parenthesis) represents the mean value of all statistical tests performed on each simulation.
-
-
-\todo{Change the transition here to says that it's interesting to see that they say it's Power Law for .064 fit correlation test but our KS goodness of fit says no}
-When analysing the slope of these distributions, it is interesting to compare them to previous experiments testing the ``neutral hypothesis''.  That's why we add int table~\ref{mualpha} the results obtained with the same methodology and for the same parameters in~\cite{bentley_random_2004}. 
+The table~\ref{tab:mualpha} summarizes the results obtained on all setups. Each value shown in the table is the mean values of 100 simulations. We see that in almost every case the null hypothesis cannot be rejected, which means that indeed the repartition of the price follows a power law. The only exception is for $mu$ equal to $0.064$, where the $p$-value is less than $0.05$. In this last case the null hypothesis is rejected which means that the distribution is not a power-law.
 
 \todo{complete table with final result (here it's just false exemple)}
-\begin{table}[h]
+\begin{table}[!h]
 	\centering
 	\begin{tabular}{ll|ccc}
 		\multicolumn{2}{r}{Agents Number}&\multicolumn{2}{c}{Our result}&\multicolumn{1}{c}{Bentley et. al. 2004}\\
@@ -408,18 +394,11 @@ When analysing the slope of these distributions, it is interesting to compare th
 	\label{tab:mualpha}
 \end{table}
 
-We can see in this table that our results are close to those obtained by \cite{bentley_random_2004}. With a similar methodology and parameters~\cite{mesoudi_random_2009} find similar values of $\alpha$. However, it is difficult to know if the slight differences observed between our work and those previous studies are statistically significant as the two previous studies rely on only five runs for the computation of the mean of $\alpha$ (against 100 in our case).
+For comparison purposes the results obtained by~\cite{bentley_random_2004} (which tested the ``neutral hypothesis'' with the same methodology) are added in the last column of table~\ref{tab:mualpha}. It appears that our results are highly similar to those obtained by~\cite{bentley_random_2004}. We note also that these results match the ones shown in~\cite{mesoudi_random_2009} where only one value of $\mu$ was tested ($mu = 0.008$). However, it is difficult to know if the slight differences observed between our work and those previous studies are statistically significant as the two previous studies rely on only five runs for the computation of the mean of $\alpha$ (against 100 in our case).
 
-\simon{I try something there but not sure at all if it is well done}
-Nonetheless, for high value of $\mu$ \cite{bentley_random_2004} say that the distribution of variant follow a power law. They justify this by saying that the estimated $\alpha$ (estimated using linear regression on the log-log curve) has a high correlation coefficient. \cite{clauset2009powerlawdistributionsinempiricaldat} say that this method should be avoided and indeed, using bootstrapping and goodness of fit method preclude us to assume that the distribution of variant when $\mu$ is up to $0.064$ follow a power law. 
+Nonetheless, for high value of $\mu$, previous works report that the distribution of variant follow a power law~\cite{bentley_random_2004}. This claim is justified based on the fact that the estimated $\alpha$ (estimated using linear regression on the log-log curve) has a high correlation coefficient. More recent works have shown that this method should be avoided~\cite{clauset2009powerlawdistributionsinempiricaldat}. Following these recent findings, our results preclude us to assume that the distribution of variant when $\mu$ is up to $0.064$ follow a power law . 
 
-%\todo{Change that to say that we test for differents number of good and it doesn't change}
-%Additional experiments not presented in this article have shown that the neutral model behaves in the exact same way for two, three and four goods. The value of each good evolves independently and the distribution of values for each good is distributed following the same power law with the same properties than for the experiments performed with one good.
-
-Before introducing trading mechanism we run a series of experiment to see how react the system when agents are dealing not only with one good but with many. For all simulation and with all mutation rate the results are the same : when more than one good are exchange the repartition of the prices for each good taken separately are the same and this repartition is in turn the same regardless the number of good exchange. 
-
-It means that if we plot the repartition of the price of every goods in a simulation with 9 goods, the 9 curves for each good will be superposed, and if we plot on the same graph the repartition for a simulation with one good, the curve of this simulation will again be superposed with the previous. As the graph is not meaningful, we resume this situation with the table~\ref{tab:multiGoods} where are shown the mean of estimated $\alpha$ between each good for different possible configuration.
-
+A series of experiments are performed to see how the system reacts when multiple goods are present. We report in table~\ref{tab:multiGoods} the mean values of $\alpha$ and $p$-value obtained for 3 innovation rates (0.004, 0.016, 0.064) 4 number of goods (1, 3, 6, 9) and 250 agents. 
 
 \todo{complete table with final result (here it's just false exemple)}
 \begin{table}[h]
@@ -435,7 +414,8 @@ It means that if we plot the repartition of the price of every goods in a simula
 	\label{tab:multiGoods}
 \end{table}
 
-\simon{Remainder here : we have a problem here as it's true that the number of goods does not impact the repartition of the price when vector are randomly exchange, \emph{it is not true} when the vector are  }
+From the results shown in table~\ref{tab:multiGoods} it appears that for each innovation rate the distribution of variants has the same properties regardless of the number of goods. Additional analysis (not shown here) reveals that when the repartition of the price of every goods in a simulation with 9 goods is plotted, the 9 curves are superposed. Moreover these 9 curves are also superposed with the distribution shown in figure~\ref{fig:allMutation} for one good.
+
 
 \subsection{Distribution of variants}
 
