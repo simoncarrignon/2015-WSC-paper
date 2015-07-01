@@ -379,17 +379,17 @@ We observe that the lower the mutation rate, the closer to a line the result is 
 In order to verify if the distribution is in fact a power-law, we follow the method proposed by~\cite{clauset2009powerlawdistributionsinempiricaldat} and the R implementation of this method done by~\cite{gillespie_fitting_2015}.
 
 Within this method we fist fit a power law to the data of one simulation by estimating the parameters of the power law equation $P(v)=C/v^\alpha $.
-To estimate this, the method uses maximum likelihood estimator and Kolmogorof-Smirnov approach that gives use an estimated $\alpha$. The means of the $\alpha$ estimated for all our simulation are summarized in the table~\ref{tab:mualpha}.
+To estimate this, the method uses maximum likelihood estimator and Kolmogorof-Smirnov approach that gives use an estimated $\alpha$. The means of those $\alpha$ estimated for all simulations are summarized in the table~\ref{tab:mualpha}.
 
-In a second step we check if the estimated parameters define effectively a power law that statistically describe the data obtained during the simulation. Using again Kolmogorof-Smirnov statistic a number of fictive data points are generated based on the estimated power law. From this bootstrapping method we can then calculate a $p$-value to reject or not the hypothesis $H_0$ that our data can indeed be generated from a power law distribution. 
+In a second step we check if the estimated parameters define effectively a power law that statistically describe the data obtained during the simulation. Using again Kolmogorof-Smirnov statistic, a number of fictive data points are generated based on the estimated power law. From this bootstrapping method we can then calculate a $p$-value to reject or not the hypothesis $H_0$ that indeed our data could have been generated from a power law distribution. 
 
-The table~\ref{tab:mualpha} summarizes the results obtained by this method on all setups used for this work with $p$-value computed by bootstrapping 100 fictive power law on each simulation. The value shown in the table are the mean $p$-value computed across 100 simulations. We see that in almost every case the null hypothesis cannot be rejected, which mean that indeed the repartition of the price indeed follows a power law.
+The table~\ref{tab:mualpha} summarizes the results obtained by this method on all setups used for this work with $p$-value computed by bootstrapping 100 fictive power law out of each simulation. The value shown in the table are the mean $p$-value computed across 100 simulations. We see that in almost every case the null hypothesis cannot be rejected, which mean that indeed the repartition of the price follows a power law, except for $mu$ value of $0.064$, where the $p$-value of zero indicate that in those case we have to reject the null hypothesis.
 
 %The first number of each cell represents the mean value of all $\alpha$ parameters obtained (across the 100 runs of one setup). The second number (in parenthesis) represents the mean value of all statistical tests performed on each simulation.
 
 
 \todo{Change the transition here to says that it's interesting to see that they say it's Power Law for .064 fit correlation test but our KS goodness of fit says no}
-It is interesting to analyse the slope of these distributions, to compare them to previous experiments testing the ``neutral hypothesis''.  and their standard deviation is presented in table~\ref{tab:mualpha}. We also present side-by-side the results obtained with the same methodology and for the same parameters in~\cite{bentley_random_2004}.
+When analysing the slope of these distributions, it is interesting to compare them to previous experiments testing the ``neutral hypothesis''.  That's why we add int table~\ref{mualpha} the results obtained with the same methodology and for the same parameters in~\cite{bentley_random_2004}. 
 
 \todo{complete table with final result (here it's just false exemple)}
 \begin{table}[h]
@@ -409,6 +409,9 @@ It is interesting to analyse the slope of these distributions, to compare them t
 \end{table}
 
 We can see in this table that our results are close to those obtained by \cite{bentley_random_2004}. With a similar methodology and parameters~\cite{mesoudi_random_2009} find similar values of $\alpha$. However, it is difficult to know if the slight differences observed between our work and those previous studies are statistically significant as the two previous studies rely on only five runs for the computation of the mean of $\alpha$ (against 100 in our case).
+
+\simon{I try something there but not sure at all if it is well done}
+Nonetheless, for high value of $\mu$ \cite{bentley_random_2004} say that the distribution of variant follow a power law. They justify this by saying that the estimated $\alpha$ (estimated using linear regression on the log-log curve) has a high correlation coefficient. \cite{clauset2009powerlawdistributionsinempiricaldat} say that this method should be avoided and indeed, using bootstrapping and goodness of fit method preclude us to assume that the distribution of variant when $\mu$ is up to $0.064$ follow a power law. 
 
 %\todo{Change that to say that we test for differents number of good and it doesn't change}
 %Additional experiments not presented in this article have shown that the neutral model behaves in the exact same way for two, three and four goods. The value of each good evolves independently and the distribution of values for each good is distributed following the same power law with the same properties than for the experiments performed with one good.
