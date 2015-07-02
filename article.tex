@@ -169,8 +169,8 @@ This distribution is formalised as : $$P(v)=C/v^\alpha $$ where $v$ is the numbe
 In the second scenario, we are interested in the exchange of goods between agents in a barter process where each agent can choose its prices of exchange. We want to implement simple processes leading to the convergence of all prices to values acceptable by all agents, i.e. we would like to observe, at the end of an experiment, all the agents using a set of prices which allow them to trade efficiently.
 
 \paragraph{Production}
-\todo{what is some, what is n}
-Each agent produces one good. The type of good produced by an agent $i$ is assigned to it at the beginning of the simulation, does not change through the simulation and is referred as $produced^i$. At each time step, each agent, produces $n$ units of its production good, which ensures that enough is owned to be traded for other goods. Moreover, when an agent consumes its own production good, it does not impact its inventory.
+
+Each agent produces one good. The type of good produced by an agent $i$ is assigned to it at the beginning of the simulation, does not change through the simulation and is referred as $produced^i$. At each time step, each agent, produces a number of units (of its production good) equal to the number of goods, which ensures that enough is owned to be traded for other goods. Moreover, when an agent consumes its own production good, it does not impact its inventory.
 
 \paragraph{Cultural transmission}
 Social learning is here biased towards the agents which are the best at trading, and is therefore termed ``success bias''. To achieve this bias, the cultural transmission mechanism used takes into account the value vector of the other agents and relies on two new notions: \emph{need} and \emph{score}. 
@@ -326,11 +326,7 @@ where $\tilde{Q}^i$ is the optimal quantity vector, i.e. the one for which $s^i(
 %	\label{tab:exp}
 %\end{table}
 
-The neutral model is tested through 15 experimental setups. The first six experimental setups are using 1 good, two population sizes (250 and 500 agents) and three values of $\mu$ (0.004,0.016 and 0.064). The remaining experimental setups are using 500 agents, 3 number of goods (3,6 and 9) and three values of $\mu$ (0.004,0.016 and 0.064). For each setup we have performed 100 runs of 10000 timestep each. 
-
-The trading model is tested through four experimental setups using 3 goods, 500 agents and the same four values of $\mu$ (0.004,0.016 and 0.064). Again 100 runs of 10000 timesteps are performed.
-
-The complete set of parameters tested on both models is presented in table~\ref{tab:parameters}. 
+The neutral model is tested through 15 experimental setups. The first six experimental setups are using 1 good, two population sizes (250 and 500 agents) and three values of $\mu$ (0.004,0.016 and 0.064). The remaining experimental setups are using 500 agents, 3 number of goods (3,6 and 9) and three values of $\mu$ (0.004,0.016 and 0.064). For each setup we have performed 100 runs of 10000 timestep each. The trading model is tested on an experimental setups using 3 goods, 500 agents and $\mu$ equal to 0.004. Again 100 runs of 10000 timesteps are performed. The complete set of parameters tested on both models is presented in table~\ref{tab:parameters}. 
 
 %Finally, remember that in our experiment one has to take in account that agents modifies their prices or exchange their price only every $culturalStep$ steps. Between, twos such steps, the agent exchange goods given their own prices. Therefore we choose to run our simulation during 10000 step which correspond the 1000 time steps used by \cite{bentley_random_2004,mesoudi_random_2009}.
 
@@ -421,7 +417,7 @@ Visual analysis reveals that independently of the number of goods, the distribut
 
 \subsection{Distribution of variants}
 
-In order to understand the effect of introducing trading mechanisms, we compare first the distribution of values obtained in the ``trading model'' against the values obtained in the ``neutral model''. The figure~\ref{fig:2setDi}.a) presents the results obtained from 100 runs for each model. All runs rely on the same experimental setup using 3 goods, 500 agents and $\mu$ equal to 0.004. In all following graph  a variant is one price for one given good. All goods are thus studied independently. 
+In order to understand the effect of introducing trading mechanisms, we compare first the distribution of values obtained in the ``trading model'' against the values obtained in the ``neutral model''. The figure~\ref{fig:2setDi}.a) presents the results obtained from 100 runs for each model. All runs rely on the same experimental setup using 3 goods, 500 agents and $\mu$ equal to 0.004. In all following graph  a variant is one price for one given good. The distributions are first computed for each good independently and then averaged together.
 
 \begin{figure}[!h]
 	\begin{center}
