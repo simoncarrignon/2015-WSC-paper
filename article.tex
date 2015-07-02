@@ -20,6 +20,32 @@
 \usepackage{float}
 \usepackage{booktabs}
  \usepackage{multirow}
+  \usepackage[a4paper,pagebackref,hyperindex=true]{hyperref}
+\usepackage{color}
+\definecolor{linkcol}{rgb}{0,0,0.4} 
+\definecolor{citecol}{rgb}{0.5,0,0} 
+\definecolor{pylabgreen}{RGB}{0,128,0}
+\definecolor{pylabpink}{RGB}{255,192,203}
+\definecolor{pylabblue}{RGB}{36,36,255}
+\definecolor{pylabgrey}{RGB}{128,128,128}
+\hypersetup
+{
+bookmarksopen=false,
+pdftitle=Modelling the Co-evolution of Trade and Culture in Past Societies,
+pdfauthor="Carrignon Montanier Rubio-Campillo", %auteur du document
+pdfsubject="", %sujet du document
+%pdftoolbar=false, %barre d'outils non visible
+pdfmenubar=true, %barre de menu visible
+pdfhighlight=/O, %effet d'un clic sur un lien hypertexte
+colorlinks=true, %couleurs sur les liens hypertextes
+pdfpagemode=None, %aucun mode de page
+pdfpagelayout=SinglePage, %ouverture en simple page
+pdffitwindow=true, %pages ouvertes entierement dans toute la fenetre
+linkcolor=linkcol, %couleur des liens hypertextes internes
+citecolor=citecol, %couleur des liens pour les citations
+urlcolor=linkcol %couleur des liens pour les url
+}
+
 
 
 \algnewcommand\And{\textbf{and}}
@@ -55,7 +81,7 @@
 
 \begin{document}
 
-\WSCpagesetup{Carrignon, Montanier, and Rubio}
+\WSCpagesetup{Carrignon, Montanier, and Rubio-Campillo}
 
 \title{Modelling the Co-evolution of Trade and Culture in Past Societies}
 
@@ -320,7 +346,7 @@ where $\tilde{Q}^i$ is the optimal quantity vector, i.e. the one for which $s^i(
 %	\label{tab:exp}
 %\end{table}
 
-The neutral model is tested through 15 experimental setups. The first six experimental setups are using 1 good, two population sizes (250 and 500 agents) and three values of $\mu$ (0.004,0.016 and 0.064). The remaining experimental setups are using 500 agents, 3 number of goods (3,6 and 9) and three values of $\mu$ (0.004,0.016 and 0.064). For each setup, we have performed 100 runs of 10000 timestep each. The trading model is tested on an experimental setups using 3 goods, 500 agents and $\mu$ equal to 0.004. Again 100 runs of 10000 timesteps are performed. The complete set of parameters tested on both models is presented in table~\ref{tab:parameters}. 
+The neutral model is tested through 15 experimental setups. The first six experimental setups are using 1 good, two population sizes (250 and 500 agents) and three values of $\mu$ (0.004,0.016 and 0.064). The remaining experimental setups are using 500 agents, 3 number of goods (3,6 and 9) and three values of $\mu$ (0.004,0.016 and 0.064). For each setup, we have performed 100 runs of 10000 timestep each. The trading model is tested on an experimental setups using 3 goods, 500 agents and $\mu$ equal to 0.004. Again 100 runs of 10000 timesteps are performed. The complete set of parameters tested on both models is presented in table~\ref{tab:parameters}. The experiments are available online\footnote{\href{https://github.com/montanier/CMR-WSC-CoEvolutionTradeCulture}{https://github.com/montanier/CMR-WSC-CoEvolutionTradeCulture}} for the Pandora simulator~\cite{rubiocampillo_2014}.
 
 %Finally, remember that in our experiment one has to take in account that agents modifies their prices or exchange their price only every $culturalStep$ steps. Between, twos such steps, the agent exchange goods given their own prices. Therefore we choose to run our simulation during 10000 step which correspond the 1000 time steps used by \cite{bentley_random_2004,mesoudi_random_2009}.
 
@@ -528,7 +554,7 @@ Finally, in terms of analysis of the results, multiple factor could be taken int
 
 Funding for this work was provided by the ERC Advanced Grant EPNet (340828) and the SimulPast Consolider Ingenio project (CSD2010-00034) of the former Ministry for Science and Innovation of the Spanish Government. 
 
-The model was created using Pandora \cite{rubiocampillo_2014}. R was used for figures and statistical analysis \cite{rdev_2012}. The estimation of the $\alpha$ parameters have been computed with the R package poweRlaw \cite{gillespie_fitting_2015}. The simulations have been done in the supercomputer MareNostrum at Barcelona Supercomputing Center - Centro Nacional de Supercomputación (The Spanish National Supercomputing Center). The source code of the model is licensed under a GNU General Public License and will be available for download at publication.
+The model was created using Pandora \cite{rubiocampillo_2014}. R was used for figures and statistical analysis \cite{rdev_2012}. The estimation of the $\alpha$ parameters have been computed with the R package poweRlaw \cite{gillespie_fitting_2015}. The simulations have been done in the supercomputer MareNostrum at Barcelona Supercomputing Center - Centro Nacional de Supercomputación (The Spanish National Supercomputing Center). The source code of the model is licensed under a GNU General Public License.
 
 \bibliographystyle{wsc}
 \bibliography{wsc.bib}  
