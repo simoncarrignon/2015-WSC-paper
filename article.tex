@@ -221,7 +221,7 @@ This function ensures that each good has the same weight in the final score, i.e
 %	\label{fig:fit}
 %\end{figure}
 %Figure~\ref{fig:fit} depicts the score of an agent, for different need values of one good, with regards to the quantity of the good possessed by the agent. We can see that even if the need for a good is small (for instance when $n(g) = 0.01$) an agent can have a high score as soon as it manages to get a quantity close to the need. This ensures that an agent needs to have for each of the good a quantity equal to the need and that no agent could reach a better score just by getting the right quantity for a good with a high need.
-The complete score of an agent $i$ is termed $s^i$ and corresponds to the sum of the $s^i_j$. An agent will choose from whom the price vector should be copied among the agents that produce the same good and have the highest score. In practice, the worst two percent of the agents (in terms of score) will copy the prices of the best two percent. This selection process is detailed in algorithm~\ref{algo:selectionCulture}.
+The complete score of an agent $i$ is termed $s^i$ and corresponds to the sum of the $s^i_j$. An agent will choose from whom the price vector should be copied among the agents that produce the same good and have the highest score. In practice, the worst (in terms of score) 20 percent of the agents producing the same good will copy the prices of the best twenty percent producing the same good. This selection process is detailed in algorithm~\ref{algo:selectionCulture}.
 
 
 \begin{algorithm}
@@ -229,7 +229,7 @@ The complete score of an agent $i$ is termed $s^i$ and corresponds to the sum of
 \label{algo:selectionCulture}
 	\begin{algorithmic}[1]
 	\scriptsize
-	\State	$ToGet = 0.2 \times \#Pop$
+	\State	$ToGet = 0.2 \times \frac{\#Pop}{\#Good}$
 	\For{$g \in Good$}
 		\State	$ToReplace = \{\}$
                 \While{$\#ToReplace < ToGet$} 
@@ -404,11 +404,11 @@ The table~\ref{tab:mualpha} summarizes the results obtained on all setups. Each 
 		\multicolumn{2}{r}{}&\multicolumn{2}{c}{Our result}&\multicolumn{1}{c}{Bentley et. al. 2004}\\
 			N&$\mu$ & $\alpha$ ($sd$) & $p$-value ($sd$ - $pr$) &$\alpha$ ($sd$)\\\hline
 		250	&0.004&1.53 (0.03)&0.58 (0.24 - .01)&1.54 (0.02)\\
-			&0.016&1.57 (0.02)&0.35 (0.26 - .05)&1.57 (0.01)\\
+			&0.016&1.57 (0.02)&0.35 (0.28 - .05)&1.57 (0.01)\\
 			&0.064&1.66 (0.01)&0.0 (0.00 - 1)&1.67 (0.01)\\\hline
-		500	&0.004&1.50 (0.02)&0.6 (0.05)&1.53 (0.03)\\
-			&0.016&1.55 (0.03)&0.3 (0.05)&1.61 (0.04)\\
-			&0.064&1.78 (0.08)&0.0 (0.00)&1.81 (0.10)\\
+		500	&0.004&1.50 (0.02)&0.59 (0.28 - .02 )&1.53 (0.03)\\
+			&0.016&1.55 (0.03)&0.15 (0.17 - .10 )&1.61 (0.04)\\
+			&0.064&1.78 (0.08)&0.0 (0.00 - 1)&1.81 (0.10)\\
 	\end{tabular}
 	\caption{Mean $\alpha$ \& $sd$ are calculated on 100 runs for our results, and 5 runs for Bentley et. al. 2004. $pr$ is the percentage of run for which the $p$-value is less than 0.05, i.e. the percentage of runs for which we rejected the null-hypotheses stating that the distribution follow a power law.}
 	\label{tab:mualpha}
@@ -450,11 +450,11 @@ In order to understand the effect of introducing trading mechanisms, we compare 
 		\end{tabular}
 
 	\end{center}
-	\caption{Proportions distribution, where each points represent the mean for 100 runs, for: a) the neutral and the trading models.  b) the neutral model and the trading model without the trading innovation process. c) the trade model and the trade model without the trading innovation process.}
+	\caption{Frequencies distribution, where each points represent the mean for 100 runs, for: a) the neutral and the trading models.  b) the neutral model and the trading model without the trading innovation process. c) the trade model and the trade model without the trading innovation process.}
 	\label{fig:2setDi}
 \end{figure}
 
-On figure~\ref{fig:2setDi}.a) it appears that the implementation of trade mechanisms leads to a distribution of prices departing from the neutral hypothesis. In more details, the proportion distribution has a plateau of common prices (a number of prices share similar and high proportions), which shows that, when trade is taken into account, the most common variants are more diverse. 
+On figure~\ref{fig:2setDi}.a) it appears that the implementation of trade mechanisms leads to a distribution of prices departing from the neutral hypothesis. In more details, the frequencies distribution has a plateau of common prices (a number of prices share similar and high proportions), which shows that, when trade is taken into account, the most common variants are more diverse. 
 
 In order to investigate which mechanism influences this departure from the neutral model, additional investigations have been performed. Here is presented the results of the analysis on the effect of the \emph{innovation} process of the trade model. To conduct this analysis the \emph{innovation} process of the trade model has been replaced by the \emph{innovation} process of the neutral model. 100 runs have been performed with this model on the same experimental setup. The results obtained are compared to the neutral model in figure~\ref{fig:2setDi}.b) and to the trade model in figure~\ref{fig:2setDi}.c). 
 
