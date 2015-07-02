@@ -14,14 +14,18 @@ Please explain in detail your evaluation of the paper.
     1) Power-law should be tested through Clauset methods: 
     http://arxiv.org/abs/0706.1062
     Or at least the authors should explain why they weren't used
-			Simon faire les test. stats en cour
+	We did statistical analysis following the Clauset methods and add the p-value to our table
+
+
     2) It is unclear what of the model is the "variant" that gets plotted in the power-law plots. Is it value vector? 
-			Simon + power law : rajouté dans la section 4.2
+	We add a sentance to explain it
+
     3) Is there any consumption in the paper? There is no mention anywhere but it must be present or trivially at some point everybody will reach the highest fitness 
-			JM a reformuler?
-			ca manquait, ajouté à la description
+	We add a sentence to explain the consumption process.
+
     4) How dependent are the results to the fact that the score is capped at 1 (that is, over consumption has no utility)? 
-			Simon verifier veracité
+		It would be a matter of a whole other article
+
     5) Is it always assumed that the amount produced equal the amount needed each day? 
 			JM ccl
 
@@ -32,24 +36,27 @@ Please explain in detail your evaluation of the paper.
     In the Introduction, it would be nice to have a more complete definition of what "bias" means. 
 			JM : proposition d'une nouvelle phrase, à vérifier par xavi
     Framework description: are the 'values' in the V^i vector measured in "per-unit" value? 
-			JM : modifié
+	We modify our text to clarify this point
     In the "cultural transmission" process, it says that agent i "copies the value vector" of an agent j where i≠j. Does it really copy the entire vector, or just one component? 
-			JM : rajouté "entire"
+	We clarify this point 
     In Algorithm 1, what does "#Pop/#Goods" mean? 
-			JM : nettoyé algo
+	It was a problem in the algorithm. We modify it and this problem does not appear anymore
     You say that "a power law distribution is characterized by a small number of very frequent traits and a large number of very rare traits." This is true, but it's also true for (say) exponential distributions. The important thing about power law distributions is that the very rare traits AREN'T quite so rare, when compared with exponential; i.e., the tails are fat. 
-			JM change the sentence
+	We change the sentance to put the emphasis on this property
+
     Explain this more fully: "In practice, the worst two percent of the agents will copy the prices of the best two percent." How does this work? 
-			Simon faire l'algo A peaufiner
-			Integration algo prete
+			We added an algorithm that precise the details of the mechanism. 
+
     When testing the neutral model (or any of your models) it seems important to test with more than 1 good. If you only have a single good, it seems that could be a degenerate case with atypical results. The last paragraph of 4.1 indicates that you have conducted such experiments -- I would prefer those results to be reported instead of the one-good trials reported in the paper. 
-			Simon faire expe pour calculer alpha pour (1) (3 6 9) en cour 
-			JM : integration prete
+			
+			We don't find that it worth to do so as all result are the same, it would be to add a graph with supperposed line or table with series of similar values.
+
     How do you know that the curves in Figure 2 are truly good fits for power law distributions? Have you validated this? Perhaps they are lognormal, or negative exponential instead? See, for instance, https://en.wikipedia.org/wiki/Power_law#Validating_power_laws 
-			cf ci-dessus
+			cf previous review
+	
+
     You state that the reason Figure 3 shows Trade model deviating from Neutral model is that the trade model includes the Innovation process. Why not turn off the Innovation process, and test only the Trade model, to verify this supposition? 
-			Simon Ajouter graph avec Trade with neutral innovation. Done
-			JM : texte et espace pour la figure pret
+			We run experiment without the innovation process and add graph and a paragraph to analyze it.
 
 
     Stylistic:
