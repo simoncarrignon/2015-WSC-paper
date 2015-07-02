@@ -358,7 +358,7 @@ TimeSteps & 10000 \\
 \section{RESULTS}
 \subsection{Neutral Model}
 
-We first analyse the result obtained in the ``neutral model" with one good. The figure~\ref{fig:allMutation} presents the results obtained for two population sizes $N$	 (250 and 500 agents) and $\mu$ varying through three values (0.004,0.016,0.064). The figure is a log-log plot of the average (across all the runs) of the distribution of variants obtained through all experiments. The y-axis shows the frequencies of the variants of the prices used during the simulation, the x-axis shows how many variant achieves such frequencies.
+We first analyse the result obtained in the ``neutral model" with one good. The figure~\ref{fig:allMutation} presents the results obtained for two population sizes $N$	 (250 and 500 agents) and $\mu$ varying through three values (0.004,0.016,0.064). The figure is a log-log plot of the average (across all the runs) of the distribution of variants obtained through all experiments. The y-axis shows the proportions of the variants of the prices used during the simulation, the x-axis shows how many variant achieves such proportions.
 
 \begin{figure}[!h]
 	\centering
@@ -367,7 +367,7 @@ We first analyse the result obtained in the ``neutral model" with one good. The 
 		\includegraphics[width=6cm]{img/allmuRandMaxN250.pdf}&
 		\includegraphics[width=6cm]{img/allmuRandMaxN500.pdf}
 	\end{tabular}
-	\caption{Distribution of frequencies depending on the $\mu$ parameter with 250 agents (left) and 500 agents (right). Each plot is the mean obtenaid for 100 runs.\label{fig:allMutation}}
+	\caption{Distribution of proportions depending on the $\mu$ parameter with 250 agents (left) and 500 agents (right). Each plot is the mean obtenaid for 100 runs.\label{fig:allMutation}}
 \end{figure}
 
 We observe that the lower the mutation rate, the closer to a line the result is. This line corresponds to the ``power law" distribution explained in section~\ref{sec:culturalTrans}, and is typical of the result obtained under the ``neutral hypothesis". In order to verify if the distribution is in fact a power-law, we follow the method proposed by~\cite{clauset2009powerlawdistributionsinempiricaldat} and the R implementation proposed by~\cite{gillespie_fitting_2015}. Briefly, two values are returned: a) the estimation of the $\alpha$ parameter of the power law equation $P(v)=C/v^\alpha $; b) a $p$-value testing the null-hypothesis that our data could have been generated from a power law distribution.
@@ -382,15 +382,15 @@ The table~\ref{tab:mualpha} summarizes the results obtained on all setups. Each 
 	\centering
 	\begin{tabular}{cc|ccc}
 		\multicolumn{2}{r}{}&\multicolumn{2}{c}{Our result}&\multicolumn{1}{c}{Bentley et. al. 2004}\\
-			N&$\mu$ & $\alpha$ (sd) & $p$-value (sd) - r &$\alpha$ (sd)\\\hline
-		250	&0.004&1.53 (0.03)&0.58 (0.24) - 0 &1.54 (0.02)\\
-			&0.016&1.57 (0.02)&0.35 (0.26) - 3 &1.57 (0.01)\\
-			&0.064&1.66 (0.01)&0.0 (0.00) - 1 &1.67 (0.01)\\\hline
+			N&$\mu$ & $\alpha$ (sd) & $p$-value (sd - pr) &$\alpha$ (sd)\\\hline
+		250	&0.004&1.53 (0.03)&0.58 (0.24 - .01)&1.54 (0.02)\\
+			&0.016&1.57 (0.02)&0.35 (0.26 - .05)&1.57 (0.01)\\
+			&0.064&1.66 (0.01)&0.0 (0.00 - 1)&1.67 (0.01)\\\hline
 		500	&0.004&1.50 (0.02)&0.6 (0.05)&1.53 (0.03)\\
 			&0.016&1.55 (0.03)&0.3 (0.05)&1.61 (0.04)\\
 			&0.064&1.78 (0.08)&0.0 (0.00)&1.81 (0.10)\\
 	\end{tabular}
-	\caption{Mean $\alpha$ \& SD are calculate on 100 runs for our results, and 5 runs for Bentley et. al. 2004.}
+	\caption{Mean $\alpha$ \& sd are calculate on 100 runs for our results, and 5 runs for Bentley et. al. 2004, pr is the percent of run for which the $p$-value<0.05 (we reject the hypothese that the distribution follow a power law).}
 	\label{tab:mualpha}
 \end{table}
 
@@ -430,11 +430,11 @@ In order to understand the effect of introducing trading mechanisms, we compare 
 		\end{tabular}
 
 	\end{center}
-	\caption{Frequency distribution, where each points represent the mean for 100 runs, for: a) the neutral and the trading models.  b) the neutral model and the trading model without the trading innovation process. c) the trade model and the trade model without the trading innovation process.}
+	\caption{Proportions distribution, where each points represent the mean for 100 runs, for: a) the neutral and the trading models.  b) the neutral model and the trading model without the trading innovation process. c) the trade model and the trade model without the trading innovation process.}
 	\label{fig:2setDi}
 \end{figure}
 
-On figure~\ref{fig:2setDi}.a) it appears that the implementation of trade mechanisms leads to a distribution of prices departing from the neutral hypothesis. In more details, the frequency distribution has a plateau of common prices (a number of prices share similar and high frequency), which shows that, when trade is taken into account, the most common variants are more diverse. 
+On figure~\ref{fig:2setDi}.a) it appears that the implementation of trade mechanisms leads to a distribution of prices departing from the neutral hypothesis. In more details, the proportion distribution has a plateau of common prices (a number of prices share similar and high proportion), which shows that, when trade is taken into account, the most common variants are more diverse. 
 
 In order to investigate which mechanism influences this departure from the neutral model, additional investigations have been performed. Here is presented the results of the analysis on the effect of the \emph{innovation} process of the trade model. To conduct this analysis the \emph{innovation} process of the trade model has been replaced by the \emph{innovation} process of the neutral model. 100 runs have been performed with this model on the same experimental setup. The results obtained are compared to the neutral model in figure~\ref{fig:2setDi}.b) and to the trade model in figure~\ref{fig:2setDi}.c). 
 
@@ -517,7 +517,7 @@ We observe that prices are indeed converging to the optimal prices which means t
 
 This article has proposed a framework to simultaneously study cultural change and trade dynamics. The development of our framework was first aimed at simplicity which is achieved by the use of two vectors (quantity and value) and five processes (production, consumption, trade, cultural transmission and innovation). The second aim of the work conducted was to obtain a flexible framework which is possible since each of the processes can be implemented accordingly to the question studied. We have shown the validity of this approach by reproducing expected results on both the cultural and trade side. On the cultural transmission side we have shown that the implementation of a ``neutral model" leads to the expected observations on the variants of the vector value: a power law. When implementing trading mechanisms we observe the convergence of prices to the expected values and the improvement of the scores of the agents.
 
-The successful implementation of a trading model within our framework shows that trading models can be viewed as a particular implementation of the cultural evolutionary framework. This aspect which has not been studied before, opens a new line of thinking on the weight of trade mechanisms within cultural change. Notably, we have shown that the implementation of trade mechanisms leads to a distribution of prices departing from the neutral hypothesis, which is the reference in the study of cultural changes. Within the trading model, the frequency distribution has a plateau of common prices (a number of prices share similar and high frequency), which shows that, when trade is taken into account, the most common variants are more diverse. Interestingly, we have not find references pointing at the ability of trade mechanisms to keep a relatively large diversity in the frequency distribution. We suspect that this is mainly because it is not common to compare results of trading models to other cultural evolution models. It would therefore be interesting to compare the frequency distributions obtained by our model and the ones observed in current or past economies. On the side of cultural transmission, the results obtained can also be compared to the ones obtained when prestige biased cultural transmission is used. The idea behind this last comparison, is that trade could be interpreted as a particular prestige biased cultural transmission and therefore be fully integrated within the cultural evolutionary frameworks.
+The successful implementation of a trading model within our framework shows that trading models can be viewed as a particular implementation of the cultural evolutionary framework. This aspect which has not been studied before, opens a new line of thinking on the weight of trade mechanisms within cultural change. Notably, we have shown that the implementation of trade mechanisms leads to a distribution of prices departing from the neutral hypothesis, which is the reference in the study of cultural changes. Within the trading model, the frequency distribution has a plateau of common prices (a number of prices share similar and high proportion), which shows that, when trade is taken into account, the most common variants are more diverse. Interestingly, we have not find references pointing at the ability of trade mechanisms to keep a relatively large diversity in the frequency distribution. We suspect that this is mainly because it is not common to compare results of trading models to other cultural evolution models. It would therefore be interesting to compare the frequency distributions obtained by our model and the ones observed in current or past economies. On the side of cultural transmission, the results obtained can also be compared to the ones obtained when prestige biased cultural transmission is used. The idea behind this last comparison, is that trade could be interpreted as a particular prestige biased cultural transmission and therefore be fully integrated within the cultural evolutionary frameworks.
 
 %%% proposition extention authors
 %    For example, what happens if there are two populations with distinct tastes (and separate replicators)? How reactive are prices to shifts in production/needs? (innovation will become useful to remedy the lack of genetic diversity needed to deal with shifts)
